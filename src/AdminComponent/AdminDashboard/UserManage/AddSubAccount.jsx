@@ -707,7 +707,7 @@ const AddSubAccount = () => {
                             },
 
                             minLength: {
-                              value: 5,
+                              value: 4,
                               message:
                                 "Minimium 4 letters Should be in Company Name", // JS only: <p>error message</p> TS only support string
                             },

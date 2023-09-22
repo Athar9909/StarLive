@@ -1096,7 +1096,7 @@ const ViewSubAcc = () => {
                         </div>
                       </div>
 
-                      {/* <div className="col-md-4 mb-4 d-flex align-items-stretch">
+                      <div className="col-md-4 mb-4 d-flex align-items-stretch">
                         <div className="row view-inner-box border mx-0 w-100">
                           <span className="fw-bold fs-6">Tobacco License:</span>
                           <div className="col">
@@ -1130,7 +1130,7 @@ const ViewSubAcc = () => {
                             </div>
                           </div>
                         </div>
-                      </div> */}
+                      </div>
 
                       <div className="col-12 text-center">
                         <Link

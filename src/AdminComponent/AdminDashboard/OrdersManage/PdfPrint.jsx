@@ -138,7 +138,7 @@ const PdfPrint = () => {
                                 <th className="border">ORDER TYPE</th>
                                 <th className="border">ITEMS</th>
                               </tr>
-                              <tr>
+                              <tr className="mb-4">
                                 <td className="border">
                                   {orders?.userId?.companyName}
                                 </td>
@@ -167,6 +167,43 @@ const PdfPrint = () => {
                                   {orders?.products?.length}
                                 </td>
                               </tr>
+                              <>
+                                <tr className="mt-4">
+                                  <th className="border">
+                                    SUB-ACCOUNT COMPANY NAME
+                                  </th>
+                                  <th className="border">
+                                    SUB-ACCOUNT BUSINESS NUMBER
+                                  </th>
+                                  <th className="border">
+                                    SUB-ACCOUNT DELIVERY LOCATION
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <td className="border">
+                                    {
+                                      orders?.userId?.subAccounts[0]
+                                        ?.companyName
+                                    }
+                                  </td>
+                                  <td className="border">
+                                    {
+                                      orders?.userId?.subAccounts[0]
+                                        ?.businessPhoneNumber
+                                    }
+                                  </td>
+                                  <td className="border">
+                                    {orders?.userId?.subAccounts[0]
+                                      ?.addressLine1 +
+                                      "-" +
+                                      orders?.userId?.subAccounts[0]?.city +
+                                      "-" +
+                                      orders?.userId?.subAccounts[0]?.state +
+                                      "-" +
+                                      orders?.userId?.subAccounts[0]?.zipcode}
+                                  </td>{" "}
+                                </tr>
+                              </>
                             </table>
                           </tbody>
                         </table>
@@ -361,14 +398,15 @@ const PdfPrint = () => {
                                             {item?.flavour?._id
                                               ? item?.productId?.unitName +
                                                 "-" +
-                                                item?.flavour?.flavour +"-" + 
+                                                item?.flavour?.flavour +
                                                 "-" +
-                                                (item?.productId?.category
-                                                  ?.categoryName)
+                                                "-" +
+                                                item?.productId?.category
+                                                  ?.categoryName
                                               : item?.productId?.unitName +
                                                 "-" +
-                                                (item?.productId?.category
-                                                  ?.categoryName)}
+                                                item?.productId?.category
+                                                  ?.categoryName}
                                           </td>
                                           <td
                                             style={{

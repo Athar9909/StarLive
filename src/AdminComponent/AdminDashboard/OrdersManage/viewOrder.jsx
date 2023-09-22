@@ -786,9 +786,7 @@ const ViewOrder = () => {
                               <span>Customer Name:</span>
                               <div className="col">
                                 <strong>
-                                  {orders?.userId?.subAccounts?.firstName +
-                                    " " +
-                                    orders?.userId?.subAccounts?.lastName}
+                                  {orders?.userId?.subAccounts?.firstName}
                                 </strong>
                               </div>
                             </div>
@@ -798,7 +796,12 @@ const ViewOrder = () => {
                             <div className="row view-inner-box border mx-0 w-100">
                               <span>Business Number:</span>
                               <div className="col">
-                                <strong>{orders?.userId?.subAccounts?.businessPhoneNumber}</strong>
+                                <strong>
+                                  {
+                                    orders?.userId?.subAccounts
+                                      ?.businessPhoneNumber
+                                  }
+                                </strong>
                               </div>
                             </div>
                           </div>
@@ -807,7 +810,9 @@ const ViewOrder = () => {
                             <div className="row view-inner-box border mx-0 w-100">
                               <span>Company Name:</span>
                               <div className="col">
-                                <strong>{orders?.userId?.subAccounts?.companyName}</strong>
+                                <strong>
+                                  {orders?.userId?.subAccounts?.companyName}
+                                </strong>
                               </div>
                             </div>
                           </div>

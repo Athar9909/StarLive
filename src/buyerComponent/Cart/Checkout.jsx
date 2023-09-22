@@ -19,7 +19,7 @@ const Checkout = () => {
   };
   const [userType, setUserType] = useState({ type: "ParentAcc" });
   const [subAccList, setSubAccList] = useState([]);
-
+ const [multipleUsers,setMultipleUsers] = useState(false)
   let MainId = localStorage.getItem("objectId");
   useEffect(() => {
     getUser();
@@ -29,6 +29,7 @@ const Checkout = () => {
     await axios.get(userApi).then((res) => {
       console.log(res);
       setUsers(res?.data.results);
+      setMultipleUsers(res?.data.results?.multipleUsers)
       setSubAccList(res?.data.results?.subAccounts);
     });
   };
@@ -237,25 +238,27 @@ const Checkout = () => {
                       style={{
                         width: "20rem",
                       }}>
-                      <select
-                        className={
-                          "form-select border border-secondary signup_fields fw-bolder"
-                        }
-                        id="floatingSelect1"
-                        aria-label="Floating label select example"
-                        name="city"
-                        onChange={(e) => {
-                          newAddress(e.target.value);
-                        }}>
-                        {/* <option value="">Select Another Account....</option> */}
-                        <option value={MainId}>Main Account</option>
+                      {multipleUsers && (
+                        <select
+                          className={
+                            "form-select border border-secondary signup_fields fw-bolder"
+                          }
+                          id="floatingSelect1"
+                          aria-label="Floating label select example"
+                          name="city"
+                          onChange={(e) => {
+                            newAddress(e.target.value);
+                          }}>
+                          {/* <option value="">Select Another Account....</option> */}
+                          <option value={MainId}>Main Account</option>
 
-                        {subAccList?.map((itm, id) => (
-                          <option value={itm?._id}>
-                            Sub-Account : {itm?.companyName}
-                          </option>
-                        ))}
-                      </select>
+                          {subAccList?.map((itm, id) => (
+                            <option value={itm?._id}>
+                              Sub-Account : {itm?.companyName}
+                            </option>
+                          ))}
+                        </select>
+                      )}
                       {console.log(users)}
 
                       {/* <Select
