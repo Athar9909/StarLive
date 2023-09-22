@@ -31,7 +31,8 @@ import { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import AppClosingOut from "./appClosingOut";
 import AppHotDeals from "./appHotDeal";
-
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, Navigation, FreeMode, Grid } from "swiper";
 function AppHome() {
   const [banner, setBanner] = useState([]);
   const [category, setCategory] = useState([]);
@@ -755,14 +756,14 @@ function AppHome() {
                         </div>
                       </div>
 
-                      <div className="product-catagories-wrapper py-1 pb-3  mt-4"
+                      <div
+                        className="product-catagories-wrapper py-1 pb-3  mt-4"
                         style={{
                           backgroundImage: `url(${image})`,
                           opacity: "unset",
-                        }}
-                      >
+                        }}>
                         <div className="container">
-                        <div className=" d-flex align-items-center justify-content-between dir-rtl mt-3 mb-2">
+                          <div className=" d-flex align-items-center justify-content-between dir-rtl mt-3 mb-2">
                             <h2 className="fs-5 fw-bold text-white">
                               Top Categories
                             </h2>
@@ -835,7 +836,6 @@ function AppHome() {
                         }}>
                         <TopProduct />
                       </div>
-
 
                       <div className="flash-sale-wrapper mt-3">
                         <div className="container">
@@ -1091,8 +1091,6 @@ function AppHome() {
                         <TopProduct />
                       </div>
 
-                     
-
                       <div className="flash-sale-wrapper py-2  pb-3 shadow">
                         <div className="container">
                           <div className="d-flex align-items-center justify-content-between rtl-flex-d-row-r mt-2 mb-3">
@@ -1102,41 +1100,52 @@ function AppHome() {
                               <i className="ms-1 fa-solid fa-arrow-right-long"></i>
                             </Link>
                           </div>
+
                           {brand.length ? (
-                            <OwlCarousel
-                              className="flash-sale-slide"
-                              autoplay={true}
-                              autoplayHoverPause={false}
-                              autoplayTimeout={5000}
-                              dots={false}
+                            <Swiper
+                              slidesPerView={3}
+                              spaceBetween={6}
+                              autoplay={{
+                                delay: 3000,
+                                disableOnInteraction: true,
+                                reverseDirection: true,
+                                waitForTransition: true,
+                              }}
                               loop={true}
-                              nav={false}
-                              fade={false}
-                              items={3}
-                              margin={10}>
-                              {brand.map((item, index) => {
-                                return (
-                                  <div
-                                    className="card flash-sale-card item"
-                                    key={index}>
-                                    <div className="card-body py-4">
-                                      <Link to="/app/brands">
-                                        <img
-                                          width={40}
-                                          className="brandPic"
-                                          src={
-                                            item?.brandImage
-                                              ? item?.brandImage
-                                              : require("../../assets/img/product.jpg")
-                                          }
-                                          alt=""
-                                        />
-                                      </Link>
+                              modules={[
+                                FreeMode,
+                                Pagination,
+                                Autoplay,
+                                Navigation,
+                              ]}
+                              className="mySwiper">
+                              {(brand || []).map((item, index) => (
+                                <SwiperSlide key={index} className="main_hot">
+                                  <div class="">
+                                    <div class="card product-card w-100">
+                                      <div class="card-body">
+                                        <Link
+                                          class="product-thumbnail d-block"
+                                          to="/app/brands">
+                                          <img
+                                            class="mb-2"
+                                            style={{
+                                              height: "4rem",
+                                            }}
+                                            src={
+                                              item?.brandImage
+                                                ? item?.brandImage
+                                                : require("../../assets/img/product.jpg")
+                                            }
+                                            alt="Product Image not updated"
+                                          />
+                                        </Link>
+                                      </div>
                                     </div>
                                   </div>
-                                );
-                              })}
-                            </OwlCarousel>
+                                </SwiperSlide>
+                              ))}
+                            </Swiper>
                           ) : (
                             ""
                           )}

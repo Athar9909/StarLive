@@ -61,6 +61,18 @@ function AppOrderDetail() {
                   <div className="col-12 mb-1">
                     <div className="row">
                       <div className="col-6">
+                        <span className="data_main">Ordered By :</span>
+                      </div>
+                      <div className="col-6">
+                        <span className="data_submain">
+                          {orders?.orderedBy === "SubAcc" && "Sub-Acccount"}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-12 mb-1">
+                    <div className="row">
+                      <div className="col-6">
                         <span className="data_main">Order Type:</span>
                       </div>
                       <div className="col-6">
@@ -320,6 +332,10 @@ function AppOrderDetail() {
                 </div>
               </div>
 
+{
+
+  
+}
               <div className="col-12 mb-3">
                 <div className="row mx-0 border rounded py-3 px-1 position-relative bg-white shadow">
                   <span className="small_header">Shipment Details:</span>

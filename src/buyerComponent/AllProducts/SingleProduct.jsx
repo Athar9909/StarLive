@@ -173,6 +173,15 @@ const SingleProduct = () => {
                 });
                 setNState(!NState);
               }
+              if (res.data?.message === "Flavour is not available!") {
+                setLoader(false);
+                Swal.fire({
+                  title: "Please Select Any Flavour!",
+                  icon: "warning",
+                  focusConfirm: false,
+                  timer: 1000,
+                });
+              }
             })
             .catch((err) => {
               if (
@@ -248,6 +257,15 @@ const SingleProduct = () => {
                 if (res.isConfirmed) {
                   navigate("/app/cart");
                 }
+              });
+            }
+            if (res.data?.message === "Flavour is not available!") {
+              setLoader(false);
+              Swal.fire({
+                title: "Please Select Any Flavour!",
+                icon: "warning",
+                focusConfirm: false,
+                timer: 1000,
               });
             }
             if (res.data?.message === "Product modified") {
@@ -619,7 +637,11 @@ const SingleProduct = () => {
                               href="javascript:;"
                               className="text-decoration-none fw-bolder">
                               {" "}
-                              {errMsg ? errMsg : flavour?.caseQty ? flavour?.caseQty : product?.caseSize || "Not Set" }
+                              {errMsg
+                                ? errMsg
+                                : flavour?.caseQty
+                                ? flavour?.caseQty
+                                : product?.caseSize || "Not Set"}
                             </a>
                           </div>
                         </div>

@@ -127,6 +127,8 @@ import AddSubAccount from "./AdminComponent/AdminDashboard/UserManage/AddSubAcco
 import ViewSubAcc from "./AdminComponent/AdminDashboard/UserManage/ViewSubAcc";
 import EditSubAccount from "./AdminComponent/AdminDashboard/UserManage/EditSubAccount";
 import ViewStore from "./buyerComponent/MyAccount/ViewStore";
+import AppSubAcc from "./pwaComponents/homeComponent/appSubAcc";
+import AppViewSub from "./pwaComponents/homeComponent/appViewSubAcc";
 
 function App() {
   const [apiData, setApiData] = useState([]);
@@ -220,14 +222,23 @@ function App() {
             <Route path="/UserManage/PendingView" element={<PendingView />} />
             <Route path="/UserManage/ReturnedView" element={<ReturnedView />} />
             <Route path="/UserManage/ApprovedView" element={<ApprovedView />} />
-            <Route path="/UserManage/User/Sub-account/:id" element={<ViewSubAcc />} />
-            <Route path="/UserManage/User/Sub-account/Edit/:id" element={<EditSubAccount />} />
+            <Route
+              path="/UserManage/User/Sub-account/:id"
+              element={<ViewSubAcc />}
+            />
+            <Route
+              path="/UserManage/User/Sub-account/Edit/:id"
+              element={<EditSubAccount />}
+            />
             <Route
               path="/UserManage/ApprovedView-editUser"
               element={<EditUser />}
             />
             <Route path="/UserManage/AddUser" element={<AddUser />} />
-            <Route path="/UserManage/AddSubAccount/:id" element={<AddSubAccount />} />
+            <Route
+              path="/UserManage/AddSubAccount/:id"
+              element={<AddSubAccount />}
+            />
             <Route path="/CategorySub" element={<CategorySub />} />
             <Route path="/Inventory" element={<Inventory />} />
             <Route path="/Puller-Management" element={<PullerManagement />} />
@@ -426,6 +437,15 @@ function App() {
               path="/app/order-detail/:id"
               element={width < 999 ? <AppOrderDetail /> : <OrderDetails />}
             />
+
+            <Route
+              path="/app/profile/sub-account"
+              element={width < 999 ? <AppSubAcc /> : <Homepage />}
+            />
+            <Route
+              path="/app/profile/sub-account/view/:id"
+              element={width < 999 ? <AppViewSub /> : <Homepage />}
+            />
             <Route
               path="/app/product-category/:id"
               element={<AppProductCategory />}
@@ -455,7 +475,7 @@ function App() {
               path="/app/events/catelog&flyer/All-Flyers"
               element={<AllFlyers />}
             />
-             <Route
+            <Route
               path="/app/events/catelog&flyer/View"
               element={<ViewCatalog />}
             />

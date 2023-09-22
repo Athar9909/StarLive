@@ -94,8 +94,7 @@ function AppProfile() {
                       <Link
                         className="btn  btn-sm"
                         style={{ backgroundColor: "#3e4093", color: "#fff" }}
-                        to="/app/my-order"
-                      >
+                        to="/app/my-order">
                         View Status
                       </Link>
                     </div>
@@ -110,13 +109,27 @@ function AppProfile() {
                       <Link
                         className="btn  btn-sm"
                         style={{ backgroundColor: "#3e4093", color: "#fff" }}
-                        to="/app/profile/docs"
-                      >
+                        to="/app/profile/docs">
                         View Documents
                       </Link>
                     </div>
                   </div>
-
+                  {detail?.multipleUsers && (
+                    <div className="single-profile-data d-flex align-items-center justify-content-between">
+                      <div className="title d-flex align-items-center">
+                        <i class="fa fa-store"></i>
+                        <span>Sub-Accounts</span>
+                      </div>
+                      <div className="data-content">
+                        <Link
+                          className="btn  btn-sm"
+                          style={{ backgroundColor: "#3e4093", color: "#fff" }}
+                          to="/app/profile/sub-account">
+                          View
+                        </Link>
+                      </div>
+                    </div>
+                  )}
                   <div className="edit-profile-btn mt-3">
                     <Link className="comman_btn" to="/app/edit-profile">
                       <i className="fa-solid fa-pen me-2"></i>Edit Profile

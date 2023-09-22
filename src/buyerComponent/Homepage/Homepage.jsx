@@ -651,7 +651,7 @@ const Homepage = () => {
             </div>
           </OwlCarousel>
 
-          <section className="p-4 container">
+          <section className="p-4 container mt-4">
             <div className=" ">
               <div className="row featuredproduct_slider">
                 <div className="col-12 mb-2 mt-4">
@@ -659,11 +659,11 @@ const Homepage = () => {
                     <h2>Hot selling products</h2>
 
                     <a
-                      className="view_all "
+                      className="view_all mb-5"
                       onClick={() =>
                         navigate("/app/HotSelling-products", { state: "hii" })
                       }>
-                      View All{" "}
+                      View All
                       <img
                         class="ms-2"
                         src={require("../../assets/img/arrow_colr.png")}
@@ -690,9 +690,7 @@ const Homepage = () => {
                       <SwiperSlide key={index} className="px-3 main_hot">
                         <div className="col-md-12 col-lg-12 px-2">
                           <div className="card_hot shadow">
-                            <span className="offer2">
-                              Hot Deals-Buy now.
-                            </span>{" "}
+                            <span className="offer2">Hot Deals-Buy now.</span>{" "}
                             <div
                               className="item-image p-4 mt-2 pt-5"
                               onClick={() => {
@@ -856,7 +854,8 @@ const Homepage = () => {
                                   src={
                                     item?.productId?.type?.flavourImage
                                       ? item?.productId?.type?.flavourImage
-                                      : require("../../assets/img/product.jpg")
+                                      : item?.productId?.productImage ||
+                                        require("../../assets/img/product.jpg")
                                   }
                                 />
                               </a>
@@ -925,7 +924,9 @@ const Homepage = () => {
                                   );
                                 }}>
                                 <strong className="fs-6">
-                                  {item?.productId?.type?.flavour}
+                                  {item?.productId?.type?.flavour
+                                    ? item?.productId?.type?.flavour
+                                    : item?.productId?.unitName?.slice(0, 30)}
                                   ..
                                 </strong>
                               </a>
