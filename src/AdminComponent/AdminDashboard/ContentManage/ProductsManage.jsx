@@ -37,7 +37,7 @@ const ProductsManage = () => {
     });
 
     if (!data.error) {
-      setHotSell(data?.results.promotion?.products);
+      setHotSell(data?.results.promotion);
     }
   };
   const getPromotionsFeatured = async () => {
@@ -46,7 +46,7 @@ const ProductsManage = () => {
     });
 
     if (!data.error) {
-      setFeatured(data?.results.promotion?.products);
+      setFeatured(data?.results.promotion);
     }
   };
   const getPromotionsClose = async () => {
@@ -55,7 +55,7 @@ const ProductsManage = () => {
     });
 
     if (!data.error) {
-      setCloseOut(data?.results.promotion?.products);
+      setCloseOut(data?.results.promotion);
     }
   };
 
@@ -225,20 +225,6 @@ const ProductsManage = () => {
                         HOT DEALS PRODUCTS
                       </button>
                       <button
-                        className="nav-link labels"
-                        id="nav-homeBann-tab"
-                        data-bs-toggle="tab"
-                        data-bs-target="#nav-homeBann"
-                        type="button"
-                        role="tab"
-                        aria-controls="nav-homeBann"
-                        aria-selected="true"
-                        onClick={() => {
-                          setPrice("");
-                        }}>
-                        FEATURED PRODUCTS
-                      </button>
-                      <button
                         className="nav-link  labels"
                         id="nav-age-tab"
                         data-bs-toggle="tab"
@@ -251,6 +237,20 @@ const ProductsManage = () => {
                           setPrice("");
                         }}>
                         CLOSING OUT DEALS
+                      </button>
+                      <button
+                        className="nav-link labels"
+                        id="nav-homeBann-tab"
+                        data-bs-toggle="tab"
+                        data-bs-target="#nav-homeBann"
+                        type="button"
+                        role="tab"
+                        aria-controls="nav-homeBann"
+                        aria-selected="true"
+                        onClick={() => {
+                          setPrice("");
+                        }}>
+                        FEATURED PRODUCTS
                       </button>
                     </div>
                   </nav>
@@ -342,7 +342,9 @@ const ProductsManage = () => {
                                                 ?.flavourImage
                                                 ? User?.productId?.type
                                                     ?.flavourImage
-                                                : require("../../../assets/img/product.jpg")
+                                                : User?.productId
+                                                    ?.productImage ||
+                                                  require("../../../assets/img/product.jpg")
                                             }
                                           />
                                         </td>
@@ -469,7 +471,9 @@ const ProductsManage = () => {
                                                 ?.flavourImage
                                                 ? User?.productId?.type
                                                     ?.flavourImage
-                                                : require("../../../assets/img/product.jpg")
+                                                : User?.productId
+                                                    ?.productImage ||
+                                                  require("../../../assets/img/product.jpg")
                                             }
                                           />
                                         </td>
@@ -550,7 +554,7 @@ const ProductsManage = () => {
                               </select>
                             </div>
                             <div className="form-group col-5">
-                              <label htmlFor="">Select Expiry Date </label>
+                              <label htmlFor="">Select Deal End Date </label>
                               <input
                                 type="date"
                                 className="form-select"
@@ -608,7 +612,9 @@ const ProductsManage = () => {
                                                 ?.flavourImage
                                                 ? User?.productId?.type
                                                     ?.flavourImage
-                                                : require("../../../assets/img/product.jpg")
+                                                : User?.productId
+                                                    ?.productImage ||
+                                                  require("../../../assets/img/product.jpg")
                                             }
                                           />
                                         </td>

@@ -732,7 +732,7 @@ const GalleryMain = () => {
                                 </div>
                                 <div className="form-group mb-0 col-3 choose_fileAdmin position-relative">
                                   <span>Cover Image</span>{" "}
-                                  <label htmlFor="upload_video">
+                                  <label htmlFor="uploadCover">
                                     <i class="fa fa-camera me-1"></i>
                                     Choose File
                                   </label>{" "}
@@ -740,6 +740,7 @@ const GalleryMain = () => {
                                     type="file"
                                     className="form-control shadow-none"
                                     defaultValue=""
+                                    id="uploadCover"
                                     accept="image/*"
                                     name="coverImage"
                                     onChange={(e) =>
@@ -749,7 +750,7 @@ const GalleryMain = () => {
                                 </div>
                                 <div className="form-group mb-0 col-3 choose_fileAdmin position-relative">
                                   <span>Gallery Images</span>{" "}
-                                  <label htmlFor="upload_video">
+                                  <label htmlFor="uploadImage">
                                     <i class="fa fa-camera me-1"></i>
                                     Choose File
                                   </label>
@@ -757,6 +758,7 @@ const GalleryMain = () => {
                                     type="file"
                                     className="form-control shadow-none"
                                     defaultValue=""
+                                    id="uploadImage"
                                     accept="image/*"
                                     name="images"
                                     onChange={(e) =>
@@ -776,6 +778,7 @@ const GalleryMain = () => {
                                     type="file"
                                     className="form-control shadow-none"
                                     defaultValue=""
+                                    id="upload_video"
                                     accept="video/*"
                                     name="images"
                                     onChange={(e) =>
@@ -963,7 +966,7 @@ const GalleryMain = () => {
                   </div>
                   <div className="form-group mb-0 col choose_fileAdmin position-relative mt-2">
                     <span>Add Gallery Images</span>{" "}
-                    <label htmlFor="upload_video">
+                    <label htmlFor="uploadImg">
                       <i class="fa fa-camera me-1"></i>
                       Choose File
                     </label>{" "}
@@ -971,6 +974,7 @@ const GalleryMain = () => {
                       type="file"
                       className="form-control shadow-none"
                       defaultValue=""
+                      id="uploadImg"
                       accept="image/*"
                       name="gallery_images"
                       onChange={(e) => onFileSelection2(e, "gallery_images")}
@@ -980,7 +984,7 @@ const GalleryMain = () => {
 
                   <div className="form-group mb-0 col choose_fileAdmin position-relative mt-2">
                     <span>Add Video</span>{" "}
-                    <label htmlFor="upload_video">
+                    <label htmlFor="upload_videoEdit">
                       <i class="fa fa-camera me-1"></i>
                       Choose File
                     </label>
@@ -988,6 +992,7 @@ const GalleryMain = () => {
                       type="file"
                       className="form-control shadow-none"
                       defaultValue=""
+                      id="upload_videoEdit"
                       accept="video/*"
                       name="videoEdit"
                       onChange={(e) => onFileSelectionVideo(e, "videoEdit")}

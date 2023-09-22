@@ -294,8 +294,11 @@ const Navbar = ({ NState, LoginState }) => {
                       </a>
                     </li>
                     {(category || [])
-                      ?.filter((itm, ind) =>
-                        width <= 1400 ? ind < 6 : ind < 11
+                      ?.filter(
+                        (itm, ind) =>
+                          (width <= 1400 && ind < 6) ||
+                          (width < 1600 && ind < 9) ||
+                          (width > 1600 && ind < 11)
                       )
                       .map((item, index) => (
                         <li
@@ -406,9 +409,7 @@ const Navbar = ({ NState, LoginState }) => {
                       ))}
                     </div>
                     {(products || [])?.map((item, index) => (
-                      <Fade
-                      
-                      >
+                      <Fade>
                         <div className="col-xl-2 col-lg-2 col-md-3" key={index}>
                           <a className="featuredproduct_box p-2">
                             <div className="featuredproduct_img ">
