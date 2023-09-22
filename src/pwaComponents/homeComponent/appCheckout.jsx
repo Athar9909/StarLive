@@ -434,6 +434,7 @@ function AppCheckout() {
                         </ul>
                       )}
                     </div>
+
                   </div>
                 </div>
               </div>
@@ -456,6 +457,7 @@ function AppCheckout() {
                     />
                   </div>
                 </div>
+                
               </div>
               {delevryChoice == "Delivery" ? (
                 <div className="col-12 text-start">

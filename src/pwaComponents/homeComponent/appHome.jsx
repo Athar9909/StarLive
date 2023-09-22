@@ -846,42 +846,53 @@ function AppHome() {
                               <i className="ms-1 fa-solid fa-arrow-right-long"></i>
                             </Link>
                           </div>
-                          {brand.length ? (
-                            <OwlCarousel
-                              className="flash-sale-slide"
-                              autoplay={true}
-                              autoplayHoverPause={false}
-                              autoplayTimeout={5000}
-                              dots={false}
+                          {brand?.length ? (
+                            <Swiper
+                              slidesPerView={3}
+                              spaceBetween={6}
+                              autoplay={{
+                                delay: 3000,
+                                disableOnInteraction: true,
+                                reverseDirection: true,
+                                waitForTransition: true,
+                              }}
                               loop={true}
-                              nav={false}
-                              fade={false}
-                              items={3}
-                              margin={10}>
-                              {brand
+                              modules={[
+                                FreeMode,
+                                Pagination,
+                                Autoplay,
+                                Navigation,
+                              ]}
+                              className="mySwiper">
+                              {(brand || [])
                                 ?.filter((itm, idx) => itm.isTobacco != true)
-                                .map((item, index) => {
-                                  return (
-                                    <div
-                                      className="card flash-sale-card item"
-                                      key={index}>
-                                      <div className="card-body">
-                                        <Link to="/app/brands">
-                                          <img
-                                            width={40}
-                                            src={
-                                              item?.brandImage
-                                                ? item?.brandImage
-                                                : require("../../assets/img/product.jpg")
-                                            }
-                                            alt=""
-                                          />
-                                        </Link>
+                                .map((item, index) => (
+                                  <SwiperSlide key={index} className="main_hot">
+                                    <div class="">
+                                      <div class="card product-card w-100">
+                                        <div class="card-body">
+                                          <Link
+                                            class="product-thumbnail d-block"
+                                            to="/app/brands">
+                                            <img
+                                              class="mb-2"
+                                              style={{
+                                                height: "4rem",
+                                              }}
+                                              src={
+                                                item?.brandImage
+                                                  ? item?.brandImage
+                                                  : require("../../assets/img/product.jpg")
+                                              }
+                                              alt="Product Image not updated"
+                                            />
+                                          </Link>
+                                        </div>
                                       </div>
                                     </div>
-                                  );
-                                })}
-                            </OwlCarousel>
+                                  </SwiperSlide>
+                                ))}
+                            </Swiper>
                           ) : (
                             ""
                           )}
@@ -1101,7 +1112,7 @@ function AppHome() {
                             </Link>
                           </div>
 
-                          {brand.length ? (
+                          {brand?.length ? (
                             <Swiper
                               slidesPerView={3}
                               spaceBetween={6}
@@ -1119,7 +1130,7 @@ function AppHome() {
                                 Navigation,
                               ]}
                               className="mySwiper">
-                              {(brand || []).map((item, index) => (
+                              {(brand || [])?.map((item, index) => (
                                 <SwiperSlide key={index} className="main_hot">
                                   <div class="">
                                     <div class="card product-card w-100">
