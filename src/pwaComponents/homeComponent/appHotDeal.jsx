@@ -168,7 +168,8 @@ function AppHotDeals() {
                   .filter(
                     (itm, idx) =>
                       itm.category != "639a042ff2f72167b43774de" &&
-                      itm.category != "639a7617f2f72167b4377754"
+                      itm.category != "639a7617f2f72167b4377754" &&
+                      itm?.productId?.isTobaccoProduct != true
                   )
                   .map((item, index) => (
                     <SwiperSlide key={index} className="main_hot">
