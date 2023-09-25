@@ -212,11 +212,7 @@ function TopProduct() {
                                 item?.productId?.slug
                               )
                             }></i>
-                          <i
-                            class="fa-solid fa-heart"
-                            onClick={() => {
-                              addToFav(index, item);
-                            }}></i>
+                          
                         </a>
                       </div>
                     </div>
@@ -280,11 +276,7 @@ function TopProduct() {
                                 item?.productId?.slug
                               )
                             }></i>
-                          <i
-                            class="fa-solid fa-heart"
-                            onClick={() => {
-                              addToFav(index, item);
-                            }}></i>
+                         
                         </a>
                       </div>
                     </div>

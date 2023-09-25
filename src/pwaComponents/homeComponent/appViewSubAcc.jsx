@@ -7,16 +7,19 @@ import moment from "moment";
 import { getUserProfile } from "../httpServices/homeHttpService/homeHttpService";
 
 const AppViewSub = () => {
-  const [detail, setDetail] = useState("");
+  const [detail, setDetail] = useState([]);
+
   useEffect(() => {
     getUserDetail();
   }, []);
+
   const getUserDetail = async () => {
     const { data } = await getUserProfile();
     if (!data.error) {
-      setDetail(data.results);
+      setDetail(data?.results?.subAccounts[0]);
     }
   };
+  console.log(detail);
 
   return (
     <div className="star_imp_app">
@@ -32,9 +35,9 @@ const AppViewSub = () => {
                     <div className="col-12 d-flex">
                       <span className="data_main">Buyer Name :</span>
                       <span className="data_submain mx-2">
-                        {detail?.subAccounts[0]?.firstName}
+                        {detail?.firstName}
                       </span>
-                    </div>
+                    </div>  
                   </div>
                 </div>
 
@@ -43,7 +46,7 @@ const AppViewSub = () => {
                     <div className="col-12 d-flex">
                       <span className="data_main">Copmany Name: </span>
                       <span className="data_submain mx-2">
-                        {detail?.subAccounts[0]?.companyName}
+                        {detail?.companyName}
                       </span>
                     </div>
                   </div>
@@ -54,7 +57,7 @@ const AppViewSub = () => {
                     <div className="col-12 d-flex">
                       <span className="data_main">Business Phone Number:</span>
                       <span className="data_submain mx-2  ">
-                        {detail?.subAccounts[0]?.businessPhoneNumber}
+                        {detail?.businessPhoneNumber}
                       </span>
                     </div>
                   </div>
@@ -65,13 +68,13 @@ const AppViewSub = () => {
                     <div className="col-12 d-flex">
                       <span className="data_main">Shipment Location:</span>
                       <span className="data_submain mx-2">
-                        {detail?.subAccounts[0]?.addressLine1 +
+                        {detail?.addressLine1 +
                           "-" +
-                          detail?.subAccounts[0]?.state +
+                          detail?.state +
                           "-" +
-                          detail?.subAccounts[0]?.city +
+                          detail?.city +
                           "-" +
-                          detail?.subAccounts[0]?.zipcode}
+                          detail?.zipcode}
                       </span>
                     </div>
                   </div>
