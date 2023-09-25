@@ -164,7 +164,7 @@ function TopProduct() {
                   <div class="col-6 mb-3">
                     <div class="cardTp">
                       <span className="product-feat-label px-2">
-                        HOT{item?.price ? "-" : ""}
+                        Deal{item?.price ? "-" : ""}
                         <span className=" mx-1  fs-5 fw-bold">
                           {item?.price ? "$" + item.price : ""}
                         </span>
