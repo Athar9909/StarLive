@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import AppFooter from "./appFooter";
 import AppHeader from "./appHeader";
 
@@ -17,6 +17,7 @@ function AppCheckout() {
   let MainId = localStorage.getItem("objectId");
   const [userType, setUserType] = useState({ type: "ParentAcc" });
   const [subUser, setSubUser] = useState();
+  const navigate = useNavigate();
   useEffect(() => {
     getUser();
   }, []);
@@ -52,7 +53,11 @@ function AppCheckout() {
         })
         .then((res) => {
           if (!res.error) {
-            console.log(res?.data.message);
+            if (
+              res?.data.message === "Your account has been disabled by admin"
+            ) {
+              navigate("/app/logout");
+            }
           }
         });
     } else if (delevryChoice == "Delivery") {
@@ -67,6 +72,13 @@ function AppCheckout() {
         .then((res) => {
           if (!res.error) {
             console.log(res?.data.message);
+            if (
+              res?.data.message === "Your account has been disabled by admin"
+            ) {
+              navigate("/app/logout");
+            } else {
+              navigate("/app/thankyou");
+            }
           }
         });
     } else if (delevryChoice == "In-Store Pickup") {
@@ -81,6 +93,13 @@ function AppCheckout() {
         .then((res) => {
           if (!res.error) {
             console.log(res?.data.message);
+            if (
+              res?.data.message === "Your account has been disabled by admin"
+            ) {
+              navigate("/app/logout");
+            } else {
+              navigate("/app/thankyou");
+            }
           }
         });
     }
@@ -434,7 +453,6 @@ function AppCheckout() {
                         </ul>
                       )}
                     </div>
-
                   </div>
                 </div>
               </div>
@@ -457,7 +475,6 @@ function AppCheckout() {
                     />
                   </div>
                 </div>
-                
               </div>
               {delevryChoice == "Delivery" ? (
                 <div className="col-12 text-start">
@@ -487,7 +504,6 @@ function AppCheckout() {
                 <div className="col-12 text-start">
                   <Link
                     class="comman_btn mt-3 d-flex text-center"
-                    to="/app/thankyou"
                     onClick={
                       location?.state?.type === "quote"
                         ? createQuoteOrder

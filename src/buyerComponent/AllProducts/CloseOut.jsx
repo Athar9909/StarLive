@@ -38,7 +38,6 @@ const CloseOut = () => {
     }
   };
 
-
   useEffect(() => {
     GetProducts();
   }, [activePage, heart]);
@@ -239,7 +238,8 @@ const CloseOut = () => {
                                   src={
                                     item?.productId?.type?.flavourImage
                                       ? item?.productId?.type?.flavourImage
-                                      : require("../../assets/img/product.jpg")
+                                      : item?.productId?.productImage ||
+                                        require("../../assets/img/product.jpg")
                                   }
                                 />
                               </a>

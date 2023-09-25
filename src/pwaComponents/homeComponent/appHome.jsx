@@ -281,20 +281,7 @@ function AppHome() {
                     <div className="container ">
                       <div className=" pt-3 ">
                         <Skeleton height={28} />
-                        {/* <form className="" style={{ width: "100%" }}>
-                        <input
-                          className="form-control"
-                          type="search"
-                          placeholder="   Search in Star Importers"
-                          defaultValue=""
-                        />
-                        <button className="me-5">
-                          <i className="fa-solid fa-magnifying-glass" />
-                        </button>
-                        <button type="reset" id="resetBtn" className="d-none">
-                          reset
-                        </button>
-                      </form> */}
+                        
                         <div className="alternative-search-options" />
                       </div>
                       {browserName === "WebKit" ||
@@ -311,157 +298,7 @@ function AppHome() {
                             <div className="pt-3">
                               <Skeleton height={130} />
 
-                              {/* <div className="owl-carousel  hero-slides owl-loaded owl-drag">
-                              <div className="owl-stage-outer">
-                                <div
-                                  className="owl-stage"
-                                  style={{
-                                    transform: "translate3d(-1152px, 0px, 0px)",
-                                    transition: "all 0.25s ease 0s",
-                                    width: 3168,
-                                  }}>
-                                  <div
-                                    className="owl-item cloned"
-                                    style={{ width: 288 }}>
-                                    <div className="single-hero-slide item">
-                                      <img src="https://starimporters-media.s3.amazonaws.com/1678971067134--05.png" />
-                                      <div className="slide-content h-100 d-flex align-items-center">
-                                        <div className="slide-text" />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    className="owl-item cloned"
-                                    style={{ width: 288 }}>
-                                    <div className="single-hero-slide item">
-                                      <img src="https://starimporters-media.s3.amazonaws.com/1678344277591--02.png" />
-                                      <div className="slide-content h-100 d-flex align-items-center">
-                                        <div className="slide-text" />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    className="owl-item cloned"
-                                    style={{ width: 288 }}>
-                                    <div className="single-hero-slide item">
-                                      <img src="https://starimporters-media.s3.amazonaws.com/1679390489573--1677133364742--STAR%2BTRADE%2BSHOW.png" />
-                                      <div className="slide-content h-100 d-flex align-items-center">
-                                        <div className="slide-text" />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    className="owl-item"
-                                    style={{ width: 288 }}>
-                                    <div className="single-hero-slide item">
-                                      <img src="https://starimporters-media.s3.amazonaws.com/1689269561889--Untitled-1.png" />
-                                      <div className="slide-content h-100 d-flex align-items-center" />
-                                    </div>
-                                  </div>
-                                  <div
-                                    className="owl-item active"
-                                    style={{ width: 288 }}>
-                                    <div className="single-hero-slide item">
-                                      <img src="https://starimporters-media.s3.amazonaws.com/1678344255627--01.png" />
-                                      <div className="slide-content h-100 d-flex align-items-center">
-                                        <div className="slide-text" />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    className="owl-item"
-                                    style={{ width: 288 }}>
-                                    <div className="single-hero-slide item">
-                                      <img src="https://starimporters-media.s3.amazonaws.com/1678971067134--05.png" />
-                                      <div className="slide-content h-100 d-flex align-items-center">
-                                        <div className="slide-text" />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    className="owl-item"
-                                    style={{ width: 288 }}>
-                                    <div className="single-hero-slide item">
-                                      <img src="https://starimporters-media.s3.amazonaws.com/1678344277591--02.png" />
-                                      <div className="slide-content h-100 d-flex align-items-center">
-                                        <div className="slide-text" />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    className="owl-item"
-                                    style={{ width: 288 }}>
-                                    <div className="single-hero-slide item">
-                                      <img src="https://starimporters-media.s3.amazonaws.com/1679390489573--1677133364742--STAR%2BTRADE%2BSHOW.png" />
-                                      <div className="slide-content h-100 d-flex align-items-center">
-                                        <div className="slide-text" />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    className="owl-item cloned"
-                                    style={{ width: 288 }}>
-                                    <div className="single-hero-slide item">
-                                      <img src="https://starimporters-media.s3.amazonaws.com/1689269561889--Untitled-1.png" />
-                                      <div className="slide-content h-100 d-flex align-items-center" />
-                                    </div>
-                                  </div>
-                                  <div
-                                    className="owl-item cloned"
-                                    style={{ width: 288 }}>
-                                    <div className="single-hero-slide item">
-                                      <img src="https://starimporters-media.s3.amazonaws.com/1678344255627--01.png" />
-                                      <div className="slide-content h-100 d-flex align-items-center">
-                                        <div className="slide-text" />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    className="owl-item cloned"
-                                    style={{ width: 288 }}>
-                                    <div className="single-hero-slide item">
-                                      <img src="https://starimporters-media.s3.amazonaws.com/1678971067134--05.png" />
-                                      <div className="slide-content h-100 d-flex align-items-center">
-                                        <div className="slide-text" />
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="owl-nav disabled">
-                                <button
-                                  type="button"
-                                  role="presentation"
-                                  className="owl-prev">
-                                  <span aria-label="Previous">‹</span>
-                                </button>
-                                <button
-                                  type="button"
-                                  role="presentation"
-                                  className="owl-next">
-                                  <span aria-label="Next">›</span>
-                                </button>
-                              </div>
-                              <div className="owl-dots">
-                                <button role="button" className="owl-dot">
-                                  <span />
-                                </button>
-                                <button
-                                  role="button"
-                                  className="owl-dot active">
-                                  <span />
-                                </button>
-                                <button role="button" className="owl-dot">
-                                  <span />
-                                </button>
-                                <button role="button" className="owl-dot">
-                                  <span />
-                                </button>
-                                <button role="button" className="owl-dot">
-                                  <span />
-                                </button>
-                              </div>
-                            </div> */}
+                            
                             </div>
                           </div>
                         </div>
@@ -548,17 +385,7 @@ function AppHome() {
                     </div>
                   ) : (
                     <div className="alternative-search-options">
-                      {/* <a className="comman_btn2 ms-1">
-                      <i className="fa fa-qrcode">
-                        <input
-                          className="barScanner"
-                          id="p-1"
-                          type="file"
-                          placeholder=""
-                          onChange={(e) => onFileSelection(e.target.files)}
-                        />
-                      </i>
-                    </a> */}
+                     
                     </div>
                   )}
                 </div>

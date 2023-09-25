@@ -163,46 +163,6 @@ const FeaturedProducts = () => {
             <div className="row">
               <div className="col singleproduct_divvision mx-0">
                 <div className="product_single_right row p-3">
-                  {/* {products?.length ? (
-                    <div className="col-12 py-2 rounded Paginate ">
-                      <div class="col-6 mb-2 ps-lg-3">
-                        <div class="singleproducttop---left ps-lg-2">
-                          Total Pages: <span>{maxPage}</span>
-                        </div>
-                      </div>
-                      <div class="col-6 mb-2 text-end">
-                        <div class="singleproduct---paginationss">
-                          <a
-                            onClick={() => {
-                              // window.scrollTo({ top: 0, behavior: "smooth" });
-                              activePage <= 1
-                                ? setActivePage(1)
-                                : setActivePage(activePage - 1);
-                            }}>
-                            <img
-                              src={require("../../assets/img/arrow.png")}
-                              alt=""
-                            />{" "}
-                            Previous
-                          </a>
-                          <span>{activePage}</span>
-                          <a
-                            onClick={() => {
-                              // window.scrollTo({ top: 0, behavior: "smooth" });
-                              activePage === maxPage
-                                ? setActivePage(maxPage)
-                                : setActivePage(activePage + 1);
-                            }}>
-                            Next{" "}
-                            <img
-                              src={require("../../assets/img/arrow.png")}
-                              alt=""
-                            />
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  ) : null} */}
                   <div class="col-12">
                     <div class="row singleproduct---show">
                       {(products || [{}])?.map((item, index) => (
@@ -238,7 +198,8 @@ const FeaturedProducts = () => {
                                   src={
                                     item?.productId?.type?.flavourImage
                                       ? item?.productId?.type?.flavourImage
-                                      : require("../../assets/img/product.jpg")
+                                      : item?.productId?.productImage ||
+                                        require("../../assets/img/product.jpg")
                                   }
                                 />
                               </a>

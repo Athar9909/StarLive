@@ -11,7 +11,6 @@ import "swiper/css/navigation";
 import "swiper/css/grid";
 import "../../assets/css/main.css";
 import AgeVerification from "../AgeVerification";
-import Countdown from "react-countdown";
 import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
@@ -28,7 +27,6 @@ import {
   pageSubCategory,
   pageSubCategoryData,
 } from "../../atom";
-import { height } from "@mui/system";
 import Swal from "sweetalert2";
 import { Modal, ButtonToolbar, Button, Loader, Placeholder } from "rsuite";
 import LoginPOP from "./loginPOP";
@@ -707,9 +705,10 @@ const Homepage = () => {
                                 src={
                                   item?.productId?.type?.flavourImage
                                     ? item?.productId?.type?.flavourImage
-                                    : require("../../assets/img/product.jpg")
+                                    : item?.productId?.productImage ||
+                                      require("../../assets/img/product.jpg")
                                 }
-                              />{" "}
+                              />
                             </div>
                             <div className="item-content text-center mt-2">
                               <h3>
@@ -1008,7 +1007,8 @@ const Homepage = () => {
                                 src={
                                   item?.productId?.type?.flavourImage
                                     ? item?.productId?.type?.flavourImage
-                                    : require("../../assets/img/product.jpg")
+                                    : item?.productId?.productImage ||
+                                      require("../../assets/img/product.jpg")
                                 }
                               />{" "}
                             </div>

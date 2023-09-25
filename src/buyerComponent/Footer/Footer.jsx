@@ -20,6 +20,7 @@ const Footer = () => {
     localStorage.setItem("letter", state);
     window.location.reload(false);
   };
+  
   return (
     <div>
       {Nstate ? null : (

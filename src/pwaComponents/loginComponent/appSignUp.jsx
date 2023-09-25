@@ -773,7 +773,7 @@ function AppSignUp() {
                         Cancel
                       </button>
                       <button
-                        className="comman_btn2 bg-white text-dark ms-1"
+                        className="comman_btn  text-white ms-1"
                         type="submit">
                         {loader ? (
                           <RotatingLines

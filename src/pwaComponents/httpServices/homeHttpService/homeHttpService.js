@@ -393,13 +393,7 @@ export async function addToCart(formData) {
       formData
     );
     console.log(data);
-    if (!data.error) {
-    } else
-      Swal.fire({
-        title: data.message,
-        icon: "error",
-        button: "ok",
-      });
+    
     return { data };
   } catch (error) {
     if (error.response) console.log(error.response.data.message);

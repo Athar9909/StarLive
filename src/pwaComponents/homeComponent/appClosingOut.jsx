@@ -46,7 +46,7 @@ function AppClosingOut() {
     }
   };
 
-  const addToCartt = async (id, index, itm) => {
+  const addToCartt = async (id, index, itm, slug) => {
     if (itm?.category?.isTobacco || itm?.subCategory?.isTobacco) {
       if (!userDetail?.istobaccoLicenceExpired) {
         const formData = {
@@ -58,9 +58,19 @@ function AppClosingOut() {
         if (!data.error) {
           navigate("/app/cart");
         }
-        if (data?.error) {
-          navigate("/app/login");
+        if (data?.message === "Flavour is not available!") {
+          Swal.fire({
+            title: "Please Select a Flavour!",
+            text: "Click view to all flavours.",
+            icon: "warning",
+            confirmButtonText: "Okay",
+          }).then((res) => {
+            navigate(`/app/product-detail/${slug}`, { state: "hii" });
+          });
         }
+        // if (data?.error) {
+        //   navigate("/app/login");
+        // }
       } else {
         Swal.fire({
           title: "Your Tobacco licence is Expired/Invalid!",
@@ -79,9 +89,19 @@ function AppClosingOut() {
       if (!data.error) {
         navigate("/app/cart");
       }
-      if (data?.error) {
-        navigate("/app/login");
+      if (data?.message === "Flavour is not available!") {
+        Swal.fire({
+          title: "Please Select a Flavour!",
+          text: "Click view to all flavours.",
+          icon: "warning",
+          confirmButtonText: "Okay",
+        }).then((res) => {
+          navigate(`/app/product-detail/${slug}`, { state: "hii" });
+        });
       }
+      // if (data?.error) {
+      //   navigate("/app/login");
+      // }
     }
   };
 
@@ -160,7 +180,12 @@ function AppClosingOut() {
                                 class="cart_bttn text-decoration-none"
                                 to=""
                                 onClick={() =>
-                                  addToCartt(item?.productId?._id, index, item)
+                                  addToCartt(
+                                    item?.productId?._id,
+                                    index,
+                                    item,
+                                    item?.productId?.slug
+                                  )
                                 }>
                                 <i class="fa-light fa-plus "></i>
                               </Link>
@@ -196,7 +221,8 @@ function AppClosingOut() {
                                 src={
                                   item?.productId.type?.flavourImage
                                     ? item?.productId.type?.flavourImage
-                                    : require("../../assets/img/product.jpg")
+                                    : item?.productId?.productImage ||
+                                      require("../../assets/img/product.jpg")
                                 }
                                 alt="Product Image not updated"
                               />
@@ -244,7 +270,12 @@ function AppClosingOut() {
                               class="cart_bttn text-decoration-none"
                               to=""
                               onClick={() =>
-                                addToCartt(item?.productId?._id, index, item)
+                                addToCartt(
+                                  item?.productId?._id,
+                                  index,
+                                  item,
+                                  item?.productId?.slug
+                                )
                               }>
                               <i class="fa-light fa-plus "></i>
                             </Link>
@@ -280,11 +311,13 @@ function AppClosingOut() {
                               src={
                                 item?.productId.type?.flavourImage
                                   ? item?.productId.type?.flavourImage
-                                  : require("../../assets/img/product.jpg")
+                                  : item?.productId?.productImage ||
+                                    require("../../assets/img/product.jpg")
                               }
                               alt="Product Image not updated"
                             />
                           </Link>
+
                           <div class="row mt-1 d-flex align-items-center justify-content-between">
                             <div class="col-auto">
                               <Link

@@ -53,7 +53,7 @@ function AppProductList() {
     }
   };
 
-  const addToCartt = async (id, index, itm) => {
+  const addToCartt = async (id, index, itm, slug) => {
     if (itm?.category?.isTobacco || itm?.subCategory?.isTobacco) {
       if (!userDetail?.istobaccoLicenceExpired) {
         const formData = {
@@ -65,9 +65,19 @@ function AppProductList() {
         if (!data.error) {
           navigate("/app/cart");
         }
-        if (data?.error) {
-          navigate("/app/login");
+        if (data?.message === "Flavour is not available!") {
+          Swal.fire({
+            title: "Please Select a Flavour!",
+            text: "Click view to all flavours.",
+            icon: "warning",
+            confirmButtonText: "Okay",
+          }).then((res) => {
+            navigate(`/app/product-detail/${slug}`, { state: "hii" });
+          });
         }
+        // if (data?.error) {
+        //   navigate("/app/login");
+        // }
       } else {
         Swal.fire({
           title: "Your Tobacco licence is Expired/Invalid!",
@@ -86,9 +96,19 @@ function AppProductList() {
       if (!data.error) {
         navigate("/app/cart");
       }
-      if (data?.error) {
-        navigate("/app/login");
+      if (data?.message === "Flavour is not available!") {
+        Swal.fire({
+          title: "Please Select a Flavour!",
+          text: "Click view to all flavours.",
+          icon: "warning",
+          confirmButtonText: "Okay",
+        }).then((res) => {
+          navigate(`/app/product-detail/${slug}`, { state: "hii" });
+        });
       }
+      // if (data?.error) {
+      //   navigate("/app/login");
+      // }
     }
   };
 
@@ -140,10 +160,7 @@ function AppProductList() {
         <div class="header-area" id="headerArea" ref={ref}>
           <div class="container h-100 d-flex align-items-center justify-content-between rtl-flex-d-row-r">
             <div class="back-button me-2">
-              <Link
-                to="/app/home"
-               
-              >
+              <Link to="/app/home">
                 <i className="fa-solid fa-house"></i>
               </Link>
             </div>
@@ -156,8 +173,7 @@ function AppProductList() {
               class="suha-navbar-toggler ms-2"
               data-bs-toggle="offcanvas"
               data-bs-target="#suhaOffcanvas"
-              aria-controls="suhaOffcanvas"
-            >
+              aria-controls="suhaOffcanvas">
               <div>
                 <span></span>
                 <span></span>
@@ -193,7 +209,8 @@ function AppProductList() {
                                     addToCartt(
                                       item?.productId?._id,
                                       index,
-                                      item
+                                      item,
+                                      item?.productId?.slug
                                     )
                                   }>
                                   <i class="fa-light fa-plus "></i>
@@ -230,7 +247,8 @@ function AppProductList() {
                                   src={
                                     item?.productId.type?.flavourImage
                                       ? item?.productId.type?.flavourImage
-                                      : require("../../assets/img/product.jpg")
+                                      : item?.productId?.productImage ||
+                                        require("../../assets/img/product.jpg")
                                   }
                                   alt="Product Image not updated"
                                 />
@@ -241,9 +259,10 @@ function AppProductList() {
                                     class="product-title"
                                     to={`/app/product-detail/${item?.productId?.slug}`}
                                     state={{ type: item?.productId?.type }}>
-                                    {item?.productId?.unitName +
-                                      "-" +
-                                      item?.productId.type?.flavour}
+                                    {item?.productId?.unitName}
+                                    <span>
+                                      -{item?.productId.type?.flavour}
+                                    </span>
                                   </Link>
                                 </div>
                               </div>
@@ -267,7 +286,12 @@ function AppProductList() {
                                 class="cart_bttn text-decoration-none"
                                 to=""
                                 onClick={() =>
-                                  addToCartt(item?.productId?._id, index, item)
+                                  addToCartt(
+                                    item?.productId?._id,
+                                    index,
+                                    item,
+                                    item?.productId?.slug
+                                  )
                                 }>
                                 <i class="fa-light fa-plus "></i>
                               </Link>
@@ -303,7 +327,8 @@ function AppProductList() {
                                 src={
                                   item?.productId.type?.flavourImage
                                     ? item?.productId.type?.flavourImage
-                                    : require("../../assets/img/product.jpg")
+                                    : item?.productId?.productImage ||
+                                      require("../../assets/img/product.jpg")
                                 }
                                 alt="Product Image not updated"
                               />
@@ -314,9 +339,8 @@ function AppProductList() {
                                   class="product-title"
                                   to={`/app/product-detail/${item?.productId?.slug}`}
                                   state={{ type: item?.productId?.type }}>
-                                  {item?.productId?.unitName +
-                                    "-" +
-                                    item?.productId.type?.flavour}
+                                  {item?.productId?.unitName}
+                                  <span>-{item?.productId.type?.flavour}</span>
                                 </Link>
                               </div>
                             </div>

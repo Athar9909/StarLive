@@ -18,6 +18,7 @@ import Swal from "sweetalert2";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import styled from "styled-components";
+import ScrollToTop from "react-scroll-to-top";
 
 function AppProductDetail() {
   const addFav = `${process.env.REACT_APP_APIENDPOINTNEW}user/fav/addToFav`;
@@ -59,6 +60,7 @@ function AppProductDetail() {
     setObjectID(id);
     setFlavour(location?.state?.type);
     setItemNo(0);
+    document.getElementById("buttn")?.click();
   }
 
   console.log(location?.state);
@@ -338,7 +340,8 @@ function AppProductDetail() {
                       <p className="mb-1 fw-bold">
                         Case Size :
                         <span className="text-primary fw-normal">
-                         {" "} {flavour?.caseQty ? flavour?.caseQty : ""}
+                          {" "}
+                          {flavour?.caseQty ? flavour?.caseQty : ""}
                         </span>
                       </p>
                     </div>
@@ -428,6 +431,20 @@ function AppProductDetail() {
         </div>
 
         <AppFooter />
+        <ScrollToTop
+          id="buttn"
+          smooth
+          color="#fff"
+          top={1000}
+          style={{
+            background: "#eb3237",
+            borderRadius: "50%",
+            display: "none",
+            height: "40px",
+            width: "45px",
+            zIndex: "999",
+          }}
+        />
       </div>
     </>
   );
