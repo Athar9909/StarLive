@@ -65,7 +65,7 @@ function AppHotDeals() {
             icon: "warning",
             confirmButtonText: "Okay",
           }).then((res) => {
-            navigate(`/app/product-detail/${slug}`,{ state: "hii" });
+            navigate(`/app/product-detail/${slug}`, { state: "hii" });
           });
         }
         // if (data?.error) {
@@ -96,7 +96,7 @@ function AppHotDeals() {
           icon: "warning",
           confirmButtonText: "Okay",
         }).then((res) => {
-          navigate(`/app/product-detail/${slug}`,{ state: "hii" });
+          navigate(`/app/product-detail/${slug}`, { state: "hii" });
         });
       }
       // if (data?.error) {
@@ -218,6 +218,10 @@ function AppHotDeals() {
                               state={{ type: item?.productId?.type }}>
                               <img
                                 class="mb-2"
+                                style={{
+                                  height: "7rem",
+                                  borderRadius: "8px",
+                                }}
                                 src={
                                   item?.productId.type?.flavourImage
                                     ? item?.productId.type?.flavourImage
@@ -233,9 +237,12 @@ function AppHotDeals() {
                                   class="product-title"
                                   to={`/app/product-detail/${item?.productId?.slug}`}
                                   state={{ type: item?.productId?.type }}>
-                                  {item?.productId?.unitName +
-                                    "-" +
-                                    item?.productId.type?.flavour}
+                                  {item?.productId?.unitName?.slice(0, 28)}
+                                  <span>
+                                    {item?.productId.type
+                                      ? item?.productId.type?.flavour
+                                      : ""}
+                                  </span>
                                 </Link>
                               </div>
                             </div>
@@ -303,11 +310,15 @@ function AppHotDeals() {
                           ) : null}
 
                           <Link
-                            class="product-thumbnail d-block"
+                            class="product-thumbnail d-block py-2"
                             to={`/app/product-detail/${item?.productId?.slug}`}
                             state={{ type: item?.productId?.type }}>
                             <img
                               class="mb-2"
+                              style={{
+                                height: "7rem",
+                                borderRadius: "8px",
+                              }}
                               src={
                                 item?.productId.type?.flavourImage
                                   ? item?.productId.type?.flavourImage
@@ -323,10 +334,24 @@ function AppHotDeals() {
                                 class="product-title"
                                 to={`/app/product-detail/${item?.productId?.slug}`}
                                 state={{ type: item?.productId?.type }}>
-                                {item?.productId?.unitName +
-                                  "-" +
-                                  item?.productId.type?.flavour}
+                                {item?.productId?.unitName?.slice(0, 28)}
+                                <span>
+                                  {item?.productId.type
+                                    ? item?.productId.type?.flavour
+                                    : ""}
+                                </span>
                               </Link>
+                              {item?.price ? (
+                                <p className="mb-0">
+                                  {" "}
+                                  {item?.price ? "Price-" : ""}
+                                  <span className=" mx-1 text-danger fw-bold mb-0">
+                                    {item?.price ? "$" + item.price : ""}
+                                  </span>
+                                </p>
+                              ) : (
+                                ""
+                              )}
                             </div>
                           </div>
                         </div>

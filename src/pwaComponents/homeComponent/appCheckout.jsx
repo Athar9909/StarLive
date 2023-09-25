@@ -106,7 +106,7 @@ function AppCheckout() {
         });
     }
   };
-  
+
   const LogOut = () => {
     localStorage.removeItem("token-user");
     localStorage.removeItem("UserData");
@@ -158,65 +158,69 @@ function AppCheckout() {
         <div class="page-content-wrapper">
           <div class="container">
             <div class="checkout-wrapper-area py-3">
-              <div class="shipping-method-choose mb-3  border rounded bg-dark">
-                <div class="card shipping-method-choose-title-card ">
-                  <div
-                    class="card-body"
-                    onClick={() => {
-                      setDown(!down);
-                    }}>
-                    <h6 class="text-center mb-0 text-white">
-                      Select Your Account{" "}
-                      <i class="fa fa-angle-down mx-2 m" aria-hidden="true"></i>
-                    </h6>
+              {users?.multipleUsers && (
+                <div class="shipping-method-choose mb-3  border rounded bg-dark">
+                  <div class="card shipping-method-choose-title-card ">
+                    <div
+                      class="card-body"
+                      onClick={() => {
+                        setDown(!down);
+                      }}>
+                      <h6 class="text-center mb-0 text-white">
+                        Select Your Account{" "}
+                        <i
+                          class="fa fa-angle-down mx-2 m"
+                          aria-hidden="true"></i>
+                      </h6>
+                    </div>
                   </div>
-                </div>
-                <div
-                  class={
-                    down
-                      ? "card shipping-method-choose-card "
-                      : "card shipping-method-choose-card d-none"
-                  }>
-                  <div class="card-body">
-                    <div class="shipping-method-choose">
-                      <ul class="ps-0">
-                        <li>
-                          <input
-                            id="main_account"
-                            type="radio"
-                            name="selector_acc"
-                            onClick={() => {
-                              newAddress(users?.companyName);
-                              setSubUser();
-                            }}
-                            defaultChecked="true"
-                          />
-                          <label for="main_account">
-                            <strong>Main Acc : {users?.companyName}</strong>
-                          </label>
-                          <div class="check"></div>
-                        </li>
-                        {subAccList?.map((itm, id) => (
+                  <div
+                    class={
+                      down
+                        ? "card shipping-method-choose-card "
+                        : "card shipping-method-choose-card d-none"
+                    }>
+                    <div class="card-body">
+                      <div class="shipping-method-choose">
+                        <ul class="ps-0">
                           <li>
                             <input
-                              id={itm?._id}
+                              id="main_account"
                               type="radio"
                               name="selector_acc"
                               onClick={() => {
-                                newAddress(itm?._id);
+                                newAddress(users?.companyName);
+                                setSubUser();
                               }}
+                              defaultChecked="true"
                             />
-                            <label for={itm?._id}>
-                              <strong>Sub-Acc : {itm?.companyName}</strong>
+                            <label for="main_account">
+                              <strong>Main Acc : {users?.companyName}</strong>
                             </label>
                             <div class="check"></div>
                           </li>
-                        ))}
-                      </ul>
+                          {subAccList?.map((itm, id) => (
+                            <li>
+                              <input
+                                id={itm?._id}
+                                type="radio"
+                                name="selector_acc"
+                                onClick={() => {
+                                  newAddress(itm?._id);
+                                }}
+                              />
+                              <label for={itm?._id}>
+                                <strong>Sub-Acc : {itm?.companyName}</strong>
+                              </label>
+                              <div class="check"></div>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              )}
 
               {subUser ? (
                 <div class="billing-information-card mb-3">

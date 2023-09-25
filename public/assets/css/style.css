@@ -17976,3 +17976,14 @@ figure.effect-ming:hover img {
   min-height: 4rem !important;
   max-height: 5rem !important;
 }
+.product-feat-label{
+  background-color: #eb3237;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  position: relative;
+  border-radius: 10px 0px 0px 10px;
+  top: 10px;
+  left: 20px;
+  z-index: 999 !important;
+}

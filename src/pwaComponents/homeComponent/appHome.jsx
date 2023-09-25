@@ -236,14 +236,14 @@ function AppHome() {
   const handleRefresh = () => {
     setTimeout(() => {
       window.location.reload(false);
-    }, [2000]);
+    }, [500]);
   };
   return (
     <>
       <PullToRefresh
         className="mb-0 pb-0"
         onRefresh={handleRefresh}
-        pullDownThreshold={70}
+        pullDownThreshold={60}
         maxPullDownDistance={110}
         pullingContent={
           <div className="text-center mt-2">

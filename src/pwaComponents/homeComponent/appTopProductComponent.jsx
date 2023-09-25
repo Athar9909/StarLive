@@ -162,10 +162,20 @@ function TopProduct() {
                 .map((item, index) => (
                   <div class="col-6 mb-3">
                     <div class="cardTp">
+                      <span className="product-feat-label px-2">
+                        HOT{item?.price ? "-" : ""}
+                        <span className=" mx-1  fs-5 fw-bold">
+                          {item?.price ? "$" + item.price : ""}
+                        </span>
+                      </span>
                       <div class="cardTp-img">
                         <div class="">
                           <img
                             class="img"
+                            style={{
+                              height: "7rem",
+                              borderRadius: "8px",
+                            }}
                             src={
                               item?.productId.type?.flavourImage
                                 ? item?.productId.type?.flavourImage
@@ -212,7 +222,6 @@ function TopProduct() {
                                 item?.productId?.slug
                               )
                             }></i>
-                          
                         </a>
                       </div>
                     </div>
@@ -226,10 +235,20 @@ function TopProduct() {
                 .map((item, index) => (
                   <div class="col-6 mb-3">
                     <div class="cardTp">
+                      <span className="product-feat-label px-2">
+                        HOT{item?.price ? "-" : ""}
+                        <span className=" mx-1  fs-5 fw-bold">
+                          {item?.price ? "$" + item.price : ""}
+                        </span>
+                      </span>
                       <div class="cardTp-img">
                         <div class="">
                           <img
                             class="img"
+                            style={{
+                              height: "7rem",
+                              borderRadius: "8px",
+                            }}
                             src={
                               item?.productId.type?.flavourImage
                                 ? item?.productId.type?.flavourImage
@@ -276,7 +295,6 @@ function TopProduct() {
                                 item?.productId?.slug
                               )
                             }></i>
-                         
                         </a>
                       </div>
                     </div>
