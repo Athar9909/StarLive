@@ -66,7 +66,7 @@ function TopProduct() {
             icon: "warning",
             confirmButtonText: "Okay",
           }).then((res) => {
-            navigate(`/app/product-detail/${slug}`,{ state: "hii" });
+            navigate(`/app/product-detail/${slug}`, { state: "hii" });
           });
         }
         // if (data?.error) {
@@ -97,7 +97,7 @@ function TopProduct() {
           icon: "warning",
           confirmButtonText: "Okay",
         }).then((res) => {
-          navigate(`/app/product-detail/${slug}`,{ state: "hii" });
+          navigate(`/app/product-detail/${slug}`, { state: "hii" });
         });
       }
       // if (data?.error) {
@@ -156,7 +156,8 @@ function TopProduct() {
                 .filter(
                   (itm, idx) =>
                     itm.category != "639a042ff2f72167b43774de" &&
-                    itm.category != "639a7617f2f72167b4377754"
+                    itm.category != "639a7617f2f72167b4377754" &&
+                    idx < 4
                 )
                 .map((item, index) => (
                   <div class="col-6 mb-3">
@@ -179,9 +180,12 @@ function TopProduct() {
                         <Link
                           to={`/app/product-detail/${item?.productId?.slug}`}
                           state={{ type: item?.productId?.type }}>
-                          {item?.productId?.unitName?.slice(0, 28) +
-                            "-" +
-                            item?.productId.type?.flavour}
+                          {item?.productId?.unitName?.slice(0, 28)}
+                          <span>
+                            {item?.productId.type
+                              ? item?.productId.type?.flavour
+                              : ""}
+                          </span>
                         </Link>
                       </div>
 
