@@ -56,7 +56,9 @@ function AppCheckout() {
             if (
               res?.data.message === "Your account has been disabled by admin"
             ) {
-              navigate("/app/logout");
+              LogOut();
+            } else {
+              navigate("/app/thankyou");
             }
           }
         });
@@ -75,7 +77,7 @@ function AppCheckout() {
             if (
               res?.data.message === "Your account has been disabled by admin"
             ) {
-              navigate("/app/logout");
+              LogOut();
             } else {
               navigate("/app/thankyou");
             }
@@ -96,13 +98,20 @@ function AppCheckout() {
             if (
               res?.data.message === "Your account has been disabled by admin"
             ) {
-              navigate("/app/logout");
+              LogOut();
             } else {
               navigate("/app/thankyou");
             }
           }
         });
     }
+  };
+  
+  const LogOut = () => {
+    localStorage.removeItem("token-user");
+    localStorage.removeItem("UserData");
+    navigate("/app/home");
+    window.location.reload();
   };
 
   const createQuoteOrder = async () => {

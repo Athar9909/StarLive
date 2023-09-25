@@ -19,7 +19,7 @@ const Checkout = () => {
   };
   const [userType, setUserType] = useState({ type: "ParentAcc" });
   const [subAccList, setSubAccList] = useState([]);
- const [multipleUsers,setMultipleUsers] = useState(false)
+  const [multipleUsers, setMultipleUsers] = useState(false);
   let MainId = localStorage.getItem("objectId");
   useEffect(() => {
     getUser();
@@ -29,7 +29,7 @@ const Checkout = () => {
     await axios.get(userApi).then((res) => {
       console.log(res);
       setUsers(res?.data.results);
-      setMultipleUsers(res?.data.results?.multipleUsers)
+      setMultipleUsers(res?.data.results?.multipleUsers);
       setSubAccList(res?.data.results?.subAccounts);
     });
   };
@@ -65,7 +65,14 @@ const Checkout = () => {
               icon: "success",
               confirmButtonText: "View Order",
             }).then((data) => {
-              navigate(`/app/order-detail/${res?.data.results?.order._id}`);
+              if (
+                res?.data.message === "Your account has been disabled by admin"
+              ) {
+                
+                navigate("/app/home");
+              } else {
+                navigate(`/app/order-detail/${res?.data.results?.order._id}`);
+              }
             });
           }
         });

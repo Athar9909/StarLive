@@ -1110,7 +1110,7 @@ const EditInventory = () => {
                                     </label>
                                   </div>
                                 </div>
-                                <label
+                                {/* <label
                                   htmlFor=""
                                   className="text-danger fs-6 "
                                   onClick={() =>
@@ -1121,7 +1121,7 @@ const EditInventory = () => {
                                   }
                                 >
                                   <i className="fa fa-trash"></i> Remove
-                                </label>
+                                </label> */}
                               </div>
                             </div>
                           ))}
@@ -1153,3 +1153,4 @@ const EditInventory = () => {
 };
 
 export default EditInventory;
+
