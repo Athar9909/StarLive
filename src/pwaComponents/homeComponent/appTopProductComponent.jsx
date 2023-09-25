@@ -162,14 +162,14 @@ function TopProduct() {
                 )
                 .map((item, index) => (
                   <div class="col-6 mb-3">
-                    <div class="cardTp">
+                    <div class="card">
                       <span className="product-feat-label px-2">
-                        Deal{item?.price ? "-" : ""}
+                        Hot{item?.price ? "-" : ""}
                         <span className=" mx-1  fs-5 fw-bold">
                           {item?.price ? "$" + item.price : ""}
-                        </span>
+                        </span>ca
                       </span>
-                      <div class="cardTp-img">
+                      <div class="card-img">
                         <div class="">
                           <img
                             class="img"
@@ -242,7 +242,7 @@ function TopProduct() {
                           {item?.price ? "$" + item.price : ""}
                         </span>
                       </span>
-                      <div class="cardTp-img">
+                      <div class="card-img">
                         <div class="">
                           <img
                             class="img"
