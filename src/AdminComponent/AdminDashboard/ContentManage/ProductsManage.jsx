@@ -21,6 +21,7 @@ const ProductsManage = () => {
   const [featured, setFeatured] = useState([]);
   const [closeOut, setCloseOut] = useState([]);
   const [price, setPrice] = useState("");
+  const [priceEdit, setPriceEdit] = useState("");
   useEffect(() => {
     createOptions();
   }, [searchKey]);
@@ -49,6 +50,27 @@ const ProductsManage = () => {
       setFeatured(data?.results.promotion);
     }
   };
+
+  const changePrice = async (type, id, flavour) => {
+    const { data } = await axios.post(editPromotions, {
+      type: type,
+      productId: id,
+      flavourId: flavour?._id,
+      price: priceEdit,
+    });
+    if (!data.error) {
+      getPromotionsFeatured();
+      getPromotionsClose();
+      GetPromotions();
+      Swal.fire({
+        title: "Price Updated!",
+        icon: "success",
+        timer: 1000,
+      });
+      setPriceEdit();
+    }
+  };
+
   const getPromotionsClose = async () => {
     const { data } = await axios.post(allPromotions, {
       type: "CloseOut",
@@ -62,7 +84,7 @@ const ProductsManage = () => {
   const deleteProduct = async (type, id, flavour) => {
     const { data } = await axios.post(editPromotions, {
       type: type,
-      productId: id,
+      deleteKey: id,
       flavourId: flavour?._id,
     });
     if (!data.error) {
@@ -353,20 +375,41 @@ const ProductsManage = () => {
                                           {User?.productId?.unitName}
                                         </td>
                                         <td className="border">
-                                          {User?.productId?.type?.flavour}
+                                          {User?.productId?.type?.flavour
+                                            ? User?.productId?.type?.flavour
+                                            : "Not Selected"}
+                                        </td>
+
+                                        <td
+                                          className="border"
+                                          key={User?.price}>
+                                          <input
+                                            type="number"
+                                            className="form-control"
+                                            defaultValue={User?.price}
+                                            onChange={(e) => {
+                                              setPriceEdit(e.target.value);
+                                            }}></input>
                                         </td>
 
                                         <td className="border">
-                                          {User?.price}
-                                        </td>
-
-                                        <td className="border">
+                                          <button
+                                            className="comman_btn mx-2"
+                                            onClick={() => {
+                                              changePrice(
+                                                "HotSelling",
+                                                User?.productId?._id,
+                                                User?.productId?.type
+                                              );
+                                            }}>
+                                            Save
+                                          </button>
                                           <a
                                             className="comman_btn2 text-white text-decoration-none"
                                             onClick={() => {
                                               deleteProduct(
                                                 "HotSelling",
-                                                User?.productId?._id,
+                                                User?._id,
                                                 User?.productId?.type
                                               );
                                             }}>
@@ -482,19 +525,40 @@ const ProductsManage = () => {
                                           {User?.productId?.unitName}
                                         </td>
                                         <td className="border">
-                                          {User?.productId?.type?.flavour}
+                                          {User?.productId?.type?.flavour
+                                            ? User?.productId?.type?.flavour
+                                            : "Not Selected"}
                                         </td>
-                                        <td className="border">
-                                          {User?.price}
+                                        <td
+                                          className="border"
+                                          key={User?.price}>
+                                          <input
+                                            type="number"
+                                            className="form-control"
+                                            defaultValue={User?.price}
+                                            onChange={(e) => {
+                                              setPriceEdit(e.target.value);
+                                            }}></input>
                                         </td>
 
                                         <td className="border">
+                                          <button
+                                            className="comman_btn mx-2"
+                                            onClick={() => {
+                                              changePrice(
+                                                "Featured",
+                                                User?.productId?._id,
+                                                User?.productId?.type
+                                              );
+                                            }}>
+                                            Save
+                                          </button>
                                           <a
                                             className="comman_btn2 text-white text-decoration-none"
                                             onClick={() => {
                                               deleteProduct(
                                                 "Featured",
-                                                User?.productId?._id,
+                                                User?._id,
                                                 User?.productId?.type
                                               );
                                             }}>
@@ -623,10 +687,20 @@ const ProductsManage = () => {
                                           {User?.productId?.unitName}
                                         </td>
                                         <td className="border">
-                                          {User?.productId?.type?.flavour}
+                                          {User?.productId?.type?.flavour
+                                            ? User?.productId?.type?.flavour
+                                            : "Not Selected"}
                                         </td>
-                                        <td className="border">
-                                          {User?.price}
+                                        <td
+                                          className="border"
+                                          key={User?.price}>
+                                          <input
+                                            type="number"
+                                            className="form-control"
+                                            defaultValue={User?.price}
+                                            onChange={(e) => {
+                                              setPriceEdit(e.target.value);
+                                            }}></input>
                                         </td>
                                         <td className="border">
                                           {moment(
@@ -635,12 +709,23 @@ const ProductsManage = () => {
                                         </td>
 
                                         <td className="border">
+                                          <button
+                                            className="comman_btn mx-2"
+                                            onClick={() => {
+                                              changePrice(
+                                                "CloseOut",
+                                                User?.productId?._id,
+                                                User?.productId?.type
+                                              );
+                                            }}>
+                                            Save
+                                          </button>
                                           <a
                                             className="comman_btn2 text-white text-decoration-none"
                                             onClick={() => {
                                               deleteProduct(
                                                 "CloseOut",
-                                                User?.productId?._id,
+                                                User?._id,
                                                 User?.productId?.type
                                               );
                                             }}>

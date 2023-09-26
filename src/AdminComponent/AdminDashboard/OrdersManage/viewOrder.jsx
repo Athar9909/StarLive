@@ -940,11 +940,11 @@ const ViewOrder = () => {
                                           </h3>
                                           <p>
                                             Barcodes:
-                                            {item?.flavour?.barcode.map(
-                                              (item) => (
+                                            {item?.flavour?.barcode
+                                              ?.filter((itm, id) => id == 1)
+                                              .map((item) => (
                                                 <li>{item}</li>
-                                              )
-                                            )}
+                                              ))}
                                           </p>
                                         </div>
                                       </div>

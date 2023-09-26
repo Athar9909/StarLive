@@ -776,7 +776,7 @@ const EditOrder = () => {
                                           </h3>
                                           <p>
                                             Barcodes:{" "}
-                                            {item?.flavour?.barcode.map(
+                                            {item?.flavour?.barcode?.filter((itm, id) => id == 1).map(
                                               (item) => (
                                                 <li>{item}</li>
                                               )

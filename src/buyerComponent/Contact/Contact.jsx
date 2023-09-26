@@ -60,7 +60,11 @@ const Contact = () => {
       <div className="marginTop">
         <div className="container p-5">
           <div className="row mt-4 mb-5">
-            <div className="card col-lg-6 col-md-6 col-sm-12 shadow">
+            <div className="card bg-white col-lg-6 col-md-6 col-sm-12 shadow "
+            style={{
+              height:"100%"
+            }}
+            >
               <h4 className="text-center mb-3 mt-5 fs-2">CONTACT US</h4>
 
               <form onSubmit={handleSubmit(onSubmit)} className="p-5 mb-5">

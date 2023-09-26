@@ -7,6 +7,7 @@ import moment from "moment";
 const PdfPrint = () => {
   const orderView = `${process.env.REACT_APP_APIENDPOINTNEW}user/order/orderPDF`;
   const [orders, setOrders] = useState([]);
+  const [subAccount, setSubAccount] = useState([]);
   let id = useParams();
   console.log(id);
   useEffect(() => {
@@ -19,6 +20,7 @@ const PdfPrint = () => {
   const OrderDetails = async () => {
     await axios.get(orderView + "/" + id.id).then((res) => {
       setOrders(res?.data.results);
+      setSubAccount(res?.data?.results?.userId?.subAccounts);
       if (!res?.data.error) {
         const timer = setTimeout(() => {
           // printPdf();
@@ -27,6 +29,7 @@ const PdfPrint = () => {
       }
     });
   };
+  console.log(subAccount, "65464654");
 
   const printPdf = async () => {
     console.log("KK");
@@ -167,43 +170,39 @@ const PdfPrint = () => {
                                   {orders?.products?.length}
                                 </td>
                               </tr>
-                              <>
-                                <tr className="mt-4">
-                                  <th className="border">
-                                    SUB-ACCOUNT COMPANY NAME
-                                  </th>
-                                  <th className="border">
-                                    SUB-ACCOUNT BUSINESS NUMBER
-                                  </th>
-                                  <th className="border">
-                                    SUB-ACCOUNT DELIVERY LOCATION
-                                  </th>
-                                </tr>
-                                <tr>
-                                  <td className="border">
-                                    {
-                                      orders?.userId?.subAccounts[0]
-                                        ?.companyName
-                                    }
-                                  </td>
-                                  <td className="border">
-                                    {
-                                      orders?.userId?.subAccounts[0]
-                                        ?.businessPhoneNumber
-                                    }
-                                  </td>
-                                  <td className="border">
-                                    {orders?.userId?.subAccounts[0]
-                                      ?.addressLine1 +
-                                      "-" +
-                                      orders?.userId?.subAccounts[0]?.city +
-                                      "-" +
-                                      orders?.userId?.subAccounts[0]?.state +
-                                      "-" +
-                                      orders?.userId?.subAccounts[0]?.zipcode}
-                                  </td>{" "}
-                                </tr>
-                              </>
+                              {orders?.userId?.multipleUsers && (
+                                <>
+                                  <tr className="mt-4">
+                                    <th className="border">
+                                      SUB-ACCOUNT COMPANY NAME
+                                    </th>
+                                    <th className="border">
+                                      SUB-ACCOUNT BUSINESS NUMBER
+                                    </th>
+                                    <th className="border">
+                                      SUB-ACCOUNT DELIVERY LOCATION
+                                    </th>
+                                  </tr>
+
+                                  <tr>
+                                    <td className="border">
+                                      {subAccount[0]?.companyName}
+                                    </td>
+                                    <td className="border">
+                                      {subAccount[0]?.businessPhoneNumber}
+                                    </td>
+                                    <td className="border">
+                                      {subAccount[0]?.addressLine1 +
+                                        "-" +
+                                        subAccount[0]?.city +
+                                        "-" +
+                                        subAccount[0]?.state +
+                                        "-" +
+                                        subAccount[0]?.zipcode}
+                                    </td>{" "}
+                                  </tr>
+                                </>
+                              )}
                             </table>
                           </tbody>
                         </table>
