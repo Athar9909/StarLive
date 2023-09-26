@@ -43,21 +43,15 @@ const ViewCatalog = () => {
               </Link>
               {/* <h1>Star Importers & Wholesalers</h1> */}
             </div>
-           
           </header>
           <div className="bg-white cateView">
             <iframe
-              src={
-                location?.state
-                  ? location?.state
-                  : "https://8f920893-trial.flowpaper.com/fileexamplePDF500kB/"
-              }
+              src={location?.state}
               width="100%"
               height="90%"
               allowFullScreen></iframe>
           </div>
         </div>
-       
       </section>
     </div>
   );

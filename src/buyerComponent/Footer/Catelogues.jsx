@@ -115,9 +115,9 @@ const Catelogues = () => {
                     <Carousel cols={3} rows={1} gap={15} loop autoplay={3000}>
                       {(catalogs || [])?.map((item, ind) => (
                         <Carousel.Item>
-                          <Link
+                          <a
                             target="_blank"
-                            to="/app/events/catelog&flyer/View"
+                            href={item?.url}
                             className="border rounded bg-white shadow">
                             <figure className="effect-ming tm-video-item">
                               <img
@@ -141,7 +141,7 @@ const Catelogues = () => {
                                 )}
                               </span>
                             </div>
-                          </Link>
+                          </a>
                         </Carousel.Item>
                       ))}
                     </Carousel>
@@ -163,8 +163,8 @@ const Catelogues = () => {
                     <Carousel cols={3} rows={1} gap={15} loop autoplay={3000}>
                       {(flyers || [])?.map((item, ind) => (
                         <Carousel.Item>
-                          <Link
-                            to="/app/events/catelog&flyer/View"
+                          <a
+                            href={item?.url}
                             target="_blank"
                             className="border rounded bg-white shadow">
                             <figure className="effect-ming tm-video-item">
@@ -189,7 +189,7 @@ const Catelogues = () => {
                                 )}
                               </span>
                             </div>
-                          </Link>
+                          </a>
                         </Carousel.Item>
                       ))}
                     </Carousel>
