@@ -71,7 +71,7 @@ function AppCategories() {
           
           {searchKey.length ? null : (
             <div className="brands_section mt-3 p-0">
-              {browserName === "WebKit" || browserName === "Chrome WebView" ? (
+              {/* {browserName === "WebKit" || browserName === "Chrome WebView" ? (
                 <div className="row mx-0 justify-content-center">
                   {categories
                     ?.filter(
@@ -135,7 +135,7 @@ function AppCategories() {
                     </div>
                   ) : null}
                 </div>
-              ) : (
+              ) : ( */}
                 <div className="row mx-0 justify-content-center">
                   {categories?.map((item, index) => {
                     return (
@@ -192,7 +192,7 @@ function AppCategories() {
                     </div>
                   ) : null}
                 </div>
-              )}
+              {/* )} */}
             </div>
           )}
         </div>

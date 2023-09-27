@@ -44,6 +44,8 @@ function AppBrands() {
   };
 
   return (
+
+
     <>
       <div className="star_imp_app">
         <div class="header-area" id="headerArea" ref={ref}>
@@ -72,7 +74,7 @@ function AppBrands() {
         <WebHeader2 />
         <div className="page-content-wrapper container-fluid">
           <Search />
-          {browserName === "WebKit" || browserName === "Chrome WebView" ? (
+          {/* {browserName === "WebKit" || browserName === "Chrome WebView" ? (
             <div>
               {searchKey?.length ? null : (
                 <div className="brands_section pt-3">
@@ -103,7 +105,7 @@ function AppBrands() {
               )}
             </div>
           ) : (
-            <div>
+            <div> */}
               {searchKey?.length ? null : (
                 <div className="brands_section pt-3">
                   <div className="row mx-0">
@@ -130,11 +132,11 @@ function AppBrands() {
                 </div>
               )}
             </div>
-          )}
+          {/* )} */}
         </div>
 
         <AppFooter />
-      </div>
+      {/* </div> */}
     </>
   );
 }

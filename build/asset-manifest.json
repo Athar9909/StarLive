@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.f70942d4.css",
-    "main.js": "/static/js/main.64f71250.js",
+    "main.js": "/static/js/main.ff2fc9af.js",
     "static/js/406.d47d405c.chunk.js": "/static/js/406.d47d405c.chunk.js",
     "static/media/videoN.MP4": "/static/media/videoN.af979433153db1fbdac5.MP4",
     "static/media/no-data.gif": "/static/media/no-data.2ae01f27c176ac22de6a.gif",
@@ -14,12 +14,12 @@
     "static/media/featured.jpg": "/static/media/featured.ff6b1e20c3a253554fe2.jpg",
     "static/media/logo.png": "/static/media/logo.967205a2e98fe897dcdc.png",
     "static/media/welcomeLog2.png": "/static/media/welcomeLog2.967205a2e98fe897dcdc.png",
+    "static/media/static99.png": "/static/media/static99.2a1d8d246f247e1a9d3c.png",
     "static/media/about-img.png": "/static/media/about-img.13f7e0f8ab784789e53f.png",
     "static/media/banner_1.jpg": "/static/media/banner_1.040239dfa94ff0bc2963.jpg",
     "static/media/banner_img1.jpg": "/static/media/banner_img1.8ba076339837f91f9fd1.jpg",
     "static/media/hot1.jpg": "/static/media/hot1.43a7347cfdb9c68b9586.jpg",
     "static/media/cate1.jpg": "/static/media/cate1.f79f061e497bc8db6953.jpg",
-    "static/media/noitem.png": "/static/media/noitem.a3d40d4f09876b6bb0a2.png",
     "static/media/verification_bg.jpg": "/static/media/verification_bg.49ff3a4903c53a663ff2.jpg",
     "static/media/banner_img3.jpg": "/static/media/banner_img3.ee31b5c3c6598db6b026.jpg",
     "static/media/bg.jpg": "/static/media/bg.ee31b5c3c6598db6b026.jpg",
@@ -31,11 +31,11 @@
     "static/media/preview2.png": "/static/media/preview2.3b9939de361864f2871b.png",
     "index.html": "/index.html",
     "main.f70942d4.css.map": "/static/css/main.f70942d4.css.map",
-    "main.64f71250.js.map": "/static/js/main.64f71250.js.map",
+    "main.ff2fc9af.js.map": "/static/js/main.ff2fc9af.js.map",
     "406.d47d405c.chunk.js.map": "/static/js/406.d47d405c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f70942d4.css",
-    "static/js/main.64f71250.js"
+    "static/js/main.ff2fc9af.js"
   ]
 }

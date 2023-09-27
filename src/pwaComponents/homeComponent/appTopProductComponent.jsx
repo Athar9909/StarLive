@@ -142,6 +142,7 @@ function TopProduct() {
   return (
     <>
       <div className="top-products-area pb-3 ">
+
         <div className="container">
           <div className=" d-flex align-items-center justify-content-between dir-rtl mt-2 mb-3">
             <h6 className="fs-5 fw-bold">Featured Products</h6>
@@ -150,7 +151,7 @@ function TopProduct() {
             </Link>
           </div>
 
-          {browserName === "WebKit" || browserName === "Chrome WebView" ? (
+          {/* {browserName === "WebKit" || browserName === "Chrome WebView" ? (
             <div className="row px-3 ">
               {(product || [])
                 .filter(
@@ -229,7 +230,7 @@ function TopProduct() {
                   </div>
                 ))}
             </div>
-          ) : (
+          ) : ( */}
             <div className="row px-3 ">
               {(product || [])
                 .filter((itm, idx) => idx < 4)
@@ -302,7 +303,8 @@ function TopProduct() {
                   </div>
                 ))}
             </div>
-          )}
+          {/* )} */}
+          
         </div>
       </div>
     </>

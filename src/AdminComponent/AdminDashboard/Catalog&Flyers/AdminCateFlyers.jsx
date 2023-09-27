@@ -621,7 +621,7 @@ const AdminCateFlyers = () => {
                               <div className="col-12 pt-2">
                                 <a
                                   className="text-decoration-none mt-2 pb-3"
-                                  href="https://flowpaper.com/"
+                                  href="https://dcatalog.com/"
                                   target="_blank">
                                   Convert PDF to Flipbook.
                                 </a>
@@ -785,7 +785,7 @@ const AdminCateFlyers = () => {
                               <div className="col-12 pt-2">
                                 <a
                                   className="text-decoration-none mt-2 pb-3"
-                                  href="https://flowpaper.com/"
+                                  href="https://dcatalog.com/"
                                   target="_blank">
                                   Convert PDF to Flipbook.
                                 </a>

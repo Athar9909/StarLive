@@ -77,7 +77,6 @@ const UserManage = () => {
     localStorage.getItem("AdminLogToken");
   let User = JSON.parse(localStorage.getItem("AdminData"));
 
-  console.log(search);
   const userSearch = async (key) => {
     let string = key;
     setSearch(key);
@@ -104,11 +103,11 @@ const UserManage = () => {
   };
 
   const sorting = async (i) => {
-    console.log(i);
     await axios
       .post(apiUrl, {
         type: "PENDING",
         sortBy: i,
+        page: activePendingPage,
       })
       .then((res) => {
         setPendingUsers(res.data.results.usersList);
@@ -117,14 +116,16 @@ const UserManage = () => {
       .post(apiUrl, {
         type: "APPROVED",
         sortBy: i,
+        page: activeApprovePage,
       })
       .then((res) => {
         setApprovedUsers(res?.data.results.usersList);
       });
     await axios
       .post(apiUrl, {
-        type: "RETURNED",
+        type: "REJECTED",
         sortBy: i,
+        page: activeReturnedPage,
       })
       .then((res) => {
         setRejectedUsers(res?.data.results.usersList);
@@ -159,11 +160,13 @@ const UserManage = () => {
     setMaxRetPage(res?.data.results.totalPages);
     return res.data;
   };
+
   const GetUserCount = async () => {
     await axios.get(totalUser).then((res) => {
       setUsersTotal(res?.data.results);
     });
   };
+
   const onUpload = async () => {
     setLoader(true);
     const formData = new FormData();
@@ -209,16 +212,17 @@ const UserManage = () => {
       setLoader(false);
     }, [6000]);
   };
+
   const modalClose = () => {
     window.location.reload(false);
   };
-  
 
   const handleClick = () => {
     localStorage.removeItem("AdminData");
     localStorage.removeItem("AdminLogToken");
     localStorage.removeItem("AdminEmail");
   };
+
   const handleDate = (e) => {
     const value = e.target.value;
     setValues({
@@ -226,12 +230,15 @@ const UserManage = () => {
       [e.target.name]: value,
     });
   };
+
   const onPendingView = (index) => {
     localStorage.setItem("objectId", pendingUsers[index]?._id);
   };
+
   const onReturnedView = (index) => {
     localStorage.setItem("objectId", rejectedUsers[index]?._id);
   };
+
   const onApprovedView = (index) => {
     localStorage.setItem("objectId", approvedUsers[index]?._id);
     // setStatsIndex(approvedUsers[index]?._id);
@@ -467,23 +474,26 @@ const UserManage = () => {
                     </Link>
                   </li>
                   <li
-                  className={
-                    User?.access?.includes("catalogFlyers") ? "" : "d-none"
-                  }>
-                  <Link
-                    className=""
-                    to="/Catelog-Flyers"
-                    style={{
-                      textDecoration: "none",
-                      fontSize: "18px",
-                     
-                    }}>
-                    <i
-                      style={{ position: "relative", left: "4px", top: "3px" }}
-                      class="fa-solid fa-book"></i>{" "}
-                    Catalog & Flyers
-                  </Link>
-                </li>
+                    className={
+                      User?.access?.includes("catalogFlyers") ? "" : "d-none"
+                    }>
+                    <Link
+                      className=""
+                      to="/Catelog-Flyers"
+                      style={{
+                        textDecoration: "none",
+                        fontSize: "18px",
+                      }}>
+                      <i
+                        style={{
+                          position: "relative",
+                          left: "4px",
+                          top: "3px",
+                        }}
+                        class="fa-solid fa-book"></i>{" "}
+                      Catalog & Flyers
+                    </Link>
+                  </li>
                   <li
                     className={
                       User?.access?.includes("Orders Management")
@@ -735,22 +745,24 @@ const UserManage = () => {
                       Gallery Management
                     </Link>
                   </li>
-                  <li
-                 >
-                  <Link
-                    className=""
-                    to="/Catelog-Flyers"
-                    style={{
-                      textDecoration: "none",
-                      fontSize: "18px",
-                     
-                    }}>
-                    <i
-                      style={{ position: "relative", left: "4px", top: "3px" }}
-                      class="fa-solid fa-book"></i>{" "}
-                    Catalog & Flyers
-                  </Link>
-                </li>
+                  <li>
+                    <Link
+                      className=""
+                      to="/Catelog-Flyers"
+                      style={{
+                        textDecoration: "none",
+                        fontSize: "18px",
+                      }}>
+                      <i
+                        style={{
+                          position: "relative",
+                          left: "4px",
+                          top: "3px",
+                        }}
+                        class="fa-solid fa-book"></i>{" "}
+                      Catalog & Flyers
+                    </Link>
+                  </li>
                   <li
                     onClick={() =>
                       setPageData([{ page: 1, searchKey: "", sortBy: "1" }])
@@ -1451,7 +1463,7 @@ const UserManage = () => {
                                     </thead>
                                     <tbody>
                                       {(rejectedUsers || [])
-                                        .filter((User) => {
+                                        ?.filter((User) => {
                                           if (searchTerm == "") {
                                             return User;
                                           } else if (

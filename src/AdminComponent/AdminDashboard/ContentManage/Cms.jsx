@@ -61,6 +61,8 @@ const Cms = () => {
   const editAgeBanner = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/cms/editAgeConfirmation`;
   const editVideo = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/cms/editVideoSlide`;
   const getVideoSlides = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/cms/getVideoSlides`;
+  const rmvAudio = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/cms/removeAudio/`;
+
   const { register, handleSubmit, reset } = useForm();
   const [editorTitleState, setTitleEditorState] = useState(null);
   const [editorDescState, setDescEditorState] = useState(null);
@@ -85,6 +87,7 @@ const Cms = () => {
     localStorage.getItem("AdminLogToken");
   let User = JSON.parse(localStorage.getItem("AdminData"));
   const playerRef = useRef(null);
+  
   const videoJsOptions = {
     autoplay: true,
     controls: true,
@@ -103,7 +106,6 @@ const Cms = () => {
 
   const handlePlayerReady = (player) => {
     playerRef.current = player;
-    // You can handle player events here, for example:
     player.on("waiting", () => {
       videojs.log("player is waiting");
     });
@@ -171,14 +173,13 @@ const Cms = () => {
     );
     formData.append(
       "url",
-      (no == 1 && urlV1) ||
-        (no == 2 && urlV2) ||
-        (no == 3 && urlV3) ||
-        (no == 4 && urlV4)
+      (no == 1 ? urlV1 : "") ||
+        (no == 2 ? urlV2 : "") ||
+        (no == 3 ? urlV3 : "") ||
+        (no == 4 ? urlV4 : "")
     );
     const { data } = await axios.post(editVideo + "/" + id, formData);
     if (!data.error) {
-      // window.location.reload(false);
       setLoader(false);
       setLoader2(false);
       setLoader3(false);
@@ -305,7 +306,7 @@ const Cms = () => {
     setFiles({ ...files, [key]: e.target.files[0] });
   };
 
-  const onFileSelectionVideo = (e, key) => {
+  const onFileSelectionVideo = async (e, key, id) => {
     setVideoFile({ ...videoFile, [key]: e.target.files[0] });
   };
 
@@ -1269,7 +1270,7 @@ const Cms = () => {
                                       role="tab"
                                       aria-controls="SlideOne"
                                       aria-selected="true">
-                                      {slideData[0]?.slide}
+                                      slide 1
                                     </button>
                                   </li>
                                   <li
@@ -1345,7 +1346,7 @@ const Cms = () => {
                                       role="tab"
                                       aria-controls="SlideThree"
                                       aria-selected="false">
-                                      {slideData[2]?.slide}
+                                      Slide 2
                                     </button>
                                   </li>
                                   <li
@@ -1360,7 +1361,7 @@ const Cms = () => {
                                       role="tab"
                                       aria-controls="SlideFour"
                                       aria-selected="false">
-                                      {slideData[3]?.slide}
+                                      Slide 3
                                     </button>
                                   </li>
                                   <li
@@ -1375,7 +1376,7 @@ const Cms = () => {
                                       role="tab"
                                       aria-controls="SlideFive"
                                       aria-selected="false">
-                                      {slideData[4]?.slide}
+                                      Slide 4
                                     </button>
                                   </li>
                                   <li
@@ -1390,7 +1391,7 @@ const Cms = () => {
                                       role="tab"
                                       aria-controls="SlideSix"
                                       aria-selected="false">
-                                      {slideData[5]?.slide}
+                                      Slide 5
                                     </button>
                                   </li>
                                 </ul>
@@ -1624,7 +1625,8 @@ const Cms = () => {
                                                     onChange={(e) =>
                                                       onFileSelectionVideo(
                                                         e,
-                                                        "video1"
+                                                        "video1",
+                                                        videoSlides[0]?._id
                                                       )
                                                     }
                                                   />
@@ -1734,7 +1736,8 @@ const Cms = () => {
                                                     onChange={(e) =>
                                                       onFileSelectionVideo(
                                                         e,
-                                                        "video2"
+                                                        "video2",
+                                                        videoSlides[1]?._id
                                                       )
                                                     }
                                                   />
@@ -1844,7 +1847,8 @@ const Cms = () => {
                                                     onChange={(e) =>
                                                       onFileSelectionVideo(
                                                         e,
-                                                        "video3"
+                                                        "video3",
+                                                        videoSlides[2]?._id
                                                       )
                                                     }
                                                   />
@@ -1954,7 +1958,8 @@ const Cms = () => {
                                                     onChange={(e) =>
                                                       onFileSelectionVideo(
                                                         e,
-                                                        "video4"
+                                                        "video4",
+                                                        videoSlides[3]?._id
                                                       )
                                                     }
                                                   />

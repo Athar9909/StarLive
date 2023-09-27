@@ -75,7 +75,7 @@ function AppWishlist() {
               <div className="section-heading d-flex align-items-center justify-content-between rtl-flex-d-row-r mb-4">
                 <h6>Wishlist Items - {products?.length}</h6>
               </div>
-              {browserName === "WebKit" || browserName === "Chrome WebView" ? (
+              {/* {browserName === "WebKit" || browserName === "Chrome WebView" ? (
                 <div className="row mt-0">
                   {(products || [])
                     ?.filter(
@@ -146,7 +146,7 @@ function AppWishlist() {
                     </Link>
                   </div>
                 </div>
-              ) : (
+              ) : ( */}
                 <div className="row mt-0">
                   {(products || [])?.map((item, index) => (
                     <div className="col-12 mb-3" key={index}>
@@ -213,7 +213,7 @@ function AppWishlist() {
                     </Link>
                   </div>
                 </div>
-              )}
+              {/* )} */}
             </div>
           </div>
         </div>

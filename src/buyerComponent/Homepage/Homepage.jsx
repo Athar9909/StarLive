@@ -151,7 +151,7 @@ const Homepage = () => {
       });
   };
 
-  let image = require("../../assets/img/banner_2.png");
+  let image = require("../../assets/img/static99.png");
 
   const AddtoCart = async (id, flavour, slug) => {
     console.log(";;lk;");
@@ -310,9 +310,9 @@ const Homepage = () => {
         <div>
           <OwlCarousel
             className="banner_slider"
-            autoplay={true}
-            autoplayHoverPause={true}
-            autoplayTimeout={8000}
+            // autoplay={true}
+            // autoplayHoverPause={true}
+            // autoplayTimeout={8000}
             rewind={true}
             loop={true}
             dots={false}
@@ -379,15 +379,21 @@ const Homepage = () => {
                   ? videos[0]?.url
                   : "https://starimporters.com/app/home";
               }}>
-              <video
-                muted={isMuted ? true : false}
-                id="frameOne"
-                className="main_video bg-dark"
-                autoPlay
-                loop
-                preload="auto">
-                <source src={videos[0]?.video} />
-              </video>
+              <div
+                className="video_banner"
+                style={{
+                  backgroundImage: `url(${image})`,
+                }}>
+                <video
+                  muted={isMuted ? true : false}
+                  id="frameOne"
+                  className="bg-light p-0"
+                  autoPlay
+                  loop
+                  preload="auto">
+                  <source src={videos[0]?.video} />
+                </video>
+              </div>
             </div>
 
             <div
@@ -397,15 +403,21 @@ const Homepage = () => {
                   ? videos[1]?.url
                   : "https://starimporters.com/app/home";
               }}>
-              <video
-                id="frameTwo"
-                className="main_video bg-dark"
-                autoPlay
-                loop
-                muted={true}
-                preload="auto">
-                <source src={videos[1]?.video} />
-              </video>
+              <div
+                className="video_banner"
+                style={{
+                  backgroundImage: `url(${image})`,
+                }}>
+                <video
+                  muted={isMuted ? true : false}
+                  id="frameTwo"
+                  className="bg-light p-0"
+                  autoPlay
+                  loop
+                  preload="auto">
+                  <source src={videos[1]?.video} />
+                </video>
+              </div>
             </div>
 
             <div
@@ -415,15 +427,21 @@ const Homepage = () => {
                   ? videos[2]?.url
                   : "https://starimporters.com/app/home";
               }}>
-              <video
-                id="frameThree"
-                className="main_video bg-dark"
-                autoPlay
-                loop
-                muted={true}
-                preload="auto">
-                <source src={videos[2]?.video} />
-              </video>
+              <div
+                className="video_banner"
+                style={{
+                  backgroundImage: `url(${image})`,
+                }}>
+                <video
+                  muted={isMuted ? true : false}
+                  id="frameThree"
+                  className="bg-light p-0"
+                  autoPlay
+                  loop
+                  preload="auto">
+                  <source src={videos[2]?.video} />
+                </video>
+              </div>
             </div>
 
             <div
@@ -433,16 +451,21 @@ const Homepage = () => {
                   ? videos[3]?.url
                   : "https://starimporters.com/app/home";
               }}>
-              <video
-                id="frameFour"
-                className="main_video bg-dark"
-                autoPlay
-                loop
-                oncanplay="this.muted=true"
-                muted={true}
-                preload="auto">
-                <source src={videos[3]?.video} />
-              </video>
+              <div
+                className="video_banner"
+                style={{
+                  backgroundImage: `url(${image})`,
+                }}>
+                <video
+                  muted={isMuted ? true : false}
+                  id="frameFour"
+                  className="bg-light p-0"
+                  autoPlay
+                  loop
+                  preload="auto">
+                  <source src={videos[3]?.video} />
+                </video>
+              </div>
             </div>
 
             <div
@@ -1079,8 +1102,6 @@ const Homepage = () => {
               </div>
             </div>
           </section>
-
-        
 
           <section
             className="product_show_home"

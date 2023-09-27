@@ -12878,6 +12878,27 @@ a:hover {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px !important;
 }
 
+.video_banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 600px !important;
+}
+.video_banner video{
+  max-height: 90% !important;
+  max-width: 55% !important;
+  position: relative;
+  left:18%;
+  border: 2px solid #000;
+  border-radius: 10px;
+  
+}
+
 .product_show_home {
   display: flex;
   align-items: center;

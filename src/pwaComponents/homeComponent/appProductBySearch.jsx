@@ -172,7 +172,7 @@ function AppProductBySearch() {
           </div>
 
           <div className="top-products-area py-3">
-            {browserName === "WebKit" || browserName === "Chrome WebView" ? (
+            {/* {browserName === "WebKit" || browserName === "Chrome WebView" ? (
               <div className="container">
                 <div className="section-heading d-flex align-items-center justify-content-between dir-rtl mb-2">
                   <h6>
@@ -251,7 +251,7 @@ function AppProductBySearch() {
                   </div>
                 )}
               </div>
-            ) : (
+            ) : ( */}
               <div className="container">
                 <div className="section-heading d-flex align-items-center justify-content-between dir-rtl">
                   <h6> Showing results for "{search ? search : preSearch}"</h6>
@@ -293,7 +293,7 @@ function AppProductBySearch() {
                   </div>
                 )}
               </div>
-            )}
+            {/* )} */}
           </div>
         </div>
       </div>

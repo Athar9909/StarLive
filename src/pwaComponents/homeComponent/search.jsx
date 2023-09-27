@@ -152,7 +152,7 @@ const Search = () => {
           )}
         </div>
       </div>
-      {browserName === "WebKit" || browserName === "Chrome WebView" ? (
+      {/* {browserName === "WebKit" || browserName === "Chrome WebView" ? (
         <div>
           {search?.length || relateCate?.length >= 1 ? (
             <div className="top-products-area py-1">
@@ -240,9 +240,7 @@ const Search = () => {
                                   <img
                                     className="mb-2"
                                     src={
-                                      // item?.type.flavourImage
-                                      //   ? item?.type.flavourImage
-                                      //   :
+                                    
 
                                       item?.productImage ||
                                       require("../../assets/img/product.jpg")
@@ -255,7 +253,6 @@ const Search = () => {
                                   className="product-title"
                                   to={`/app/product-detail/${item.slug}`}
                                   state={{ type: item?.type }}>
-                                  {/* {item.unitName + "-" + item?.type.flavour} */}
                                   {item?.unitName}
                                 </Link>
                               </div>
@@ -277,7 +274,7 @@ const Search = () => {
             </div>
           ) : null}
         </div>
-      ) : (
+      ) : ( */}
         <div>
           {search?.length || relateCate?.length >= 1 ? (
             <div className="top-products-area py-1">
@@ -320,9 +317,7 @@ const Search = () => {
                                 <img
                                   className="mb-2"
                                   src={
-                                    // item?.type.flavourImage
-                                    //   ? item?.type.flavourImage
-                                    //   :
+                                   
                                     item?.productImage ||
                                     require("../../assets/img/product.jpg")
                                   }
@@ -334,7 +329,6 @@ const Search = () => {
                                 className="product-title"
                                 to={`/app/product-detail/${item?.slug}`}
                                 state={{ type: item?.type }}>
-                                {/* {item.unitName + "-" + item?.type.flavour} */}
                                 {item?.unitName}
                               </Link>
                             </div>
@@ -356,7 +350,7 @@ const Search = () => {
             </div>
           ) : null}
         </div>
-      )}
+      {/* )} */}
       <div
         class="modal fade"
         id="staticBackdrop"

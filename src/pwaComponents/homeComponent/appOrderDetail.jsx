@@ -94,7 +94,7 @@ function AppOrderDetail() {
                   </div>
                 </div>
               </div>
-              {browserName === "WebKit" || browserName === "Chrome WebView" ? (
+              {/* {browserName === "WebKit" || browserName === "Chrome WebView" ? (
                 <div className="col-12 mb-3">
                   <div className="row mx-0 border rounded position-relative bg-white shadow cart-table">
                     <div className="table-responsive card-body">
@@ -147,7 +147,7 @@ function AppOrderDetail() {
                     </div>
                   </div>
                 </div>
-              ) : (
+              ) : ( */}
                 <div className="col-12 mb-3">
                   <div className="row mx-0 border rounded position-relative bg-white shadow cart-table">
                     <div className="table-responsive card-body">
@@ -194,7 +194,7 @@ function AppOrderDetail() {
                     </div>
                   </div>
                 </div>
-              )}
+              {/* )} */}
 
               <div className="col-12 mb-3">
                 <div className="card border rounded py-3 px-1 position-relative bg-white shadow">

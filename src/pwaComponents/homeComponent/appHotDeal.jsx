@@ -150,7 +150,7 @@ function AppHotDeals() {
             </Link>
           </div>
 
-          {browserName === "WebKit" || browserName === "Chrome WebView" ? (
+          {/* {browserName === "WebKit" || browserName === "Chrome WebView" ? (
             <div className="row px-3 ">
               <Swiper
                 slidesPerView={2}
@@ -254,7 +254,7 @@ function AppHotDeals() {
                   ))}
               </Swiper>
             </div>
-          ) : (
+          ) : ( */}
             <div className="row px-3 ">
               <Swiper
                 slidesPerView={2}
@@ -362,7 +362,7 @@ function AppHotDeals() {
                 ))}
               </Swiper>
             </div>
-          )}
+          {/* )} */}
         </div>
       </div>
     </>

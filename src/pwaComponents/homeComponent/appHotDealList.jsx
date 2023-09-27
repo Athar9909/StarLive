@@ -188,7 +188,7 @@ function AppHotDealList() {
         <div class="page-content-wrapper">
           <Search />
           <div>
-            {browserName === "WebKit" || browserName === "Chrome WebView" ? (
+            {/* {browserName === "WebKit" || browserName === "Chrome WebView" ? (
               <div>
                 {searchKey?.length ? null : (
                   <div className="row p-3">
@@ -275,7 +275,7 @@ function AppHotDealList() {
                   </div>
                 )}
               </div>
-            ) : (
+            ) : ( */}
               <div>
                 {searchKey?.length ? null : (
                   <div className="row p-3 ">
@@ -354,7 +354,7 @@ function AppHotDealList() {
                   </div>
                 )}
               </div>
-            )}
+            {/* )} */}
           </div>
         </div>
 

@@ -256,7 +256,7 @@ function AppCart() {
                 ) : null}
               </div>
               <div className="cart-table card mb-1">
-                {browserName === "WebKit" ||
+                {/* {browserName === "WebKit" ||
                 browserName === "Chrome WebView" ? (
                   <div className="table-responsive card-body p-1">
                     {load ? <Loader speed="slow" content="Updating.." /> : null}
@@ -443,7 +443,7 @@ function AppCart() {
                       </table>
                     </div>
                   </div>
-                ) : (
+                ) : ( */}
                   <div className="table-responsive card-body p-1">
                     {load ? <Loader speed="slow" content="Updating.." /> : null}
 
@@ -613,7 +613,7 @@ function AppCart() {
                       </table>
                     </div>
                   </div>
-                )}
+                {/* )} */}
               </div>
             </div>
             {cart?.length ? (

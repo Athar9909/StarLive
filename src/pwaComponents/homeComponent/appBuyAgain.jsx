@@ -185,7 +185,7 @@ function AppBuyAgain() {
       <div className="star_imp_app">
         <AppHeader cartCount={cartCount} />
         <div className="page-content-wrapper">
-          {browserName === "WebKit" || browserName === "Chrome WebView" ? (
+          {/* {browserName === "WebKit" || browserName === "Chrome WebView" ? (
             <div className="py-3">
               <div className="row mb-2">
                 <div className="col-5 mx-3 mx-xs-0 col-xs-6">
@@ -321,7 +321,7 @@ function AppBuyAgain() {
                 </div>
               </div>
             </div>
-          ) : (
+          ) : ( */}
             <div className="py-3">
               <div className="row mb-2 p-2 justify-content-between">
                 <div className="col-auto mx-3 mx-xs-0 col-xs-auto">
@@ -452,7 +452,7 @@ function AppBuyAgain() {
                 </div>
               </div>
             </div>
-          )}
+          {/* )} */}
         </div>
 
         <AppFooter />

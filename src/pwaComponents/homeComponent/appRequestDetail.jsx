@@ -115,7 +115,8 @@ function AppRequestDetail() {
                   </div>
                 </div>
               </div>
-              {browserName === "WebKit" || browserName === "Chrome WebView" ? (
+
+              {/* {browserName === "WebKit" || browserName === "Chrome WebView" ? (
                 <div className="col-12 mb-3">
                   <div className="row mx-0 border rounded position-relative bg-white shadow cart-table">
                     <div className="table-responsive card-body">
@@ -145,14 +146,7 @@ function AppRequestDetail() {
                                       to={`/app/product-detail/${item?.productId?.slug}`}>
                                       {item?.productId?.unitName}
                                     </Link>
-                                    {/* <div className="bar_code mt-1">
-                                  Bar Code:{" "}
-                                  <span>
-                                    {item?.flavour.barcode.map((item) => (
-                                      <li>{item}</li>
-                                    ))}
-                                  </span>
-                                </div> */}
+                                   
                                     <div className="bar_code mt-1 d-flex">
                                       Price: $<span>{item?.price}</span>
                                     </div>
@@ -186,7 +180,7 @@ function AppRequestDetail() {
                     </div>
                   </div>
                 </div>
-              ) : (
+              ) : ( */}
                 <div className="col-12 mb-3">
                   <div className="row mx-0 border rounded position-relative bg-white shadow cart-table">
                     <div className="table-responsive card-body">
@@ -251,7 +245,7 @@ function AppRequestDetail() {
                     </div>
                   </div>
                 </div>
-              )}
+              {/* )} */}
             </div>
           </div>
         </div>
