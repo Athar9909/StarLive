@@ -12887,7 +12887,7 @@ a:hover {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  height: 600px !important;
+  height: 500px !important;
 }
 .video_banner video{
   max-height: 90% !important;

@@ -723,6 +723,7 @@ function AppHome() {
                   )}
                 </div>
               ) : ( */}
+              
               <div>
                 {search?.length || relateCate?.length >= 1 ? (
                   <div className="top-products-area py-1">

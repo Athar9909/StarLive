@@ -78,18 +78,6 @@ const Homepage = () => {
     setTimeout(() => setRows(80), 2000);
   };
 
-  // const renderer = ({ days, hours, minutes, seconds, completed }) => {
-  //   return (
-  //     <div class="">
-  //       <div class="">
-  //         <span class="time_main">{days}d:</span>
-  //         <span class="time_main">{hours}hr:</span>
-  //         <span class="time_main">{minutes}m:</span>
-  //         <span class="time_main">{seconds}s</span>
-  //       </div>
-  //     </div>
-  //   );
-  // };
   const pagination = {
     clickable: true,
   };
@@ -151,7 +139,8 @@ const Homepage = () => {
       });
   };
 
-  let image = require("../../assets/img/static99.png");
+  let image = require("../../assets/img/starBgg.jpg");
+  let videoStatic = require("../../assets/img/videoN.MP4");
 
   const AddtoCart = async (id, flavour, slug) => {
     console.log(";;lk;");
@@ -310,9 +299,9 @@ const Homepage = () => {
         <div>
           <OwlCarousel
             className="banner_slider"
-            // autoplay={true}
-            // autoplayHoverPause={true}
-            // autoplayTimeout={8000}
+            autoplay={true}
+            autoplayHoverPause={true}
+            autoplayTimeout={8000}
             rewind={true}
             loop={true}
             dots={false}
@@ -382,7 +371,9 @@ const Homepage = () => {
               <div
                 className="video_banner"
                 style={{
-                  backgroundImage: `url(${image})`,
+                  backgroundImage: videos[0]?.videoCover
+                    ? videos[0]?.videoCover
+                    : `url(${image})`,
                 }}>
                 <video
                   muted={isMuted ? true : false}
@@ -391,7 +382,9 @@ const Homepage = () => {
                   autoPlay
                   loop
                   preload="auto">
-                  <source src={videos[0]?.video} />
+                  <source
+                    src={videos[0]?.video ? videos[0]?.video : videoStatic}
+                  />
                 </video>
               </div>
             </div>
@@ -406,7 +399,9 @@ const Homepage = () => {
               <div
                 className="video_banner"
                 style={{
-                  backgroundImage: `url(${image})`,
+                  backgroundImage: videos[1]?.videoCover
+                    ? videos[1]?.videoCover
+                    : `url(${image})`,
                 }}>
                 <video
                   muted={isMuted ? true : false}
@@ -415,7 +410,9 @@ const Homepage = () => {
                   autoPlay
                   loop
                   preload="auto">
-                  <source src={videos[1]?.video} />
+                  <source
+                    src={videos[1]?.video ? videos[1]?.video : videoStatic}
+                  />
                 </video>
               </div>
             </div>
@@ -430,7 +427,9 @@ const Homepage = () => {
               <div
                 className="video_banner"
                 style={{
-                  backgroundImage: `url(${image})`,
+                  backgroundImage: videos[2]?.videoCover
+                    ? videos[2]?.videoCover
+                    : `url(${image})`,
                 }}>
                 <video
                   muted={isMuted ? true : false}
@@ -439,7 +438,9 @@ const Homepage = () => {
                   autoPlay
                   loop
                   preload="auto">
-                  <source src={videos[2]?.video} />
+                  <source
+                    src={videos[2]?.video ? videos[2]?.video : videoStatic}
+                  />
                 </video>
               </div>
             </div>
@@ -454,7 +455,9 @@ const Homepage = () => {
               <div
                 className="video_banner"
                 style={{
-                  backgroundImage: `url(${image})`,
+                  backgroundImage: videos[3]?.videoCover
+                    ? videos[3]?.videoCover
+                    : `url(${image})`,
                 }}>
                 <video
                   muted={isMuted ? true : false}
@@ -463,7 +466,9 @@ const Homepage = () => {
                   autoPlay
                   loop
                   preload="auto">
-                  <source src={videos[3]?.video} />
+                  <source
+                    src={videos[3]?.video ? videos[3]?.video : videoStatic}
+                  />
                 </video>
               </div>
             </div>
