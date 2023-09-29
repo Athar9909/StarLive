@@ -19,6 +19,9 @@ import DOMPurify from "dompurify";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
+import image from "../../assets/img/starBgg.jpg";
+import videoStatic from "../../assets/img/videoN.MP4";
+
 import { useSetRecoilState } from "recoil";
 import {
   pageBrand,
@@ -63,6 +66,7 @@ const Homepage = () => {
   const navigate = useNavigate();
   axios.defaults.headers.common["x-auth-token-user"] =
     localStorage.getItem("token-user");
+
   let token = localStorage.getItem("token-user");
   let NewUser = sessionStorage.getItem("new");
   const [hotSell, setHotSell] = useState([]);
@@ -96,6 +100,7 @@ const Homepage = () => {
         }, 2000);
       }
     }
+    VideoSlidesGet();
     getSlides();
     getPromotions();
     getPromotionsClose();
@@ -108,7 +113,6 @@ const Homepage = () => {
     setPage3(1);
     setData([]);
     setData2([]);
-    VideoSlidesGet();
     setTimeout(() => {
       setLoading(false);
     }, 8000);
@@ -138,9 +142,6 @@ const Homepage = () => {
         }
       });
   };
-
-  let image = require("../../assets/img/starBgg.jpg");
-  let videoStatic = require("../../assets/img/videoN.MP4");
 
   const AddtoCart = async (id, flavour, slug) => {
     console.log(";;lk;");
@@ -362,7 +363,7 @@ const Homepage = () => {
             </div>
 
             <div
-              className="banner_section item"
+              className="banner_section item bg-white shadow"
               onClick={() => {
                 window.location.href = videos[0]?.url
                   ? videos[0]?.url
@@ -371,26 +372,26 @@ const Homepage = () => {
               <div
                 className="video_banner"
                 style={{
-                  backgroundImage: videos[0]?.videoCover
-                    ? videos[0]?.videoCover
+                  backgroundImage: videos[0]?.videoCover?.length > 4
+                    ? `url(${videos[0]?.videoCover})`
                     : `url(${image})`,
                 }}>
                 <video
                   muted={isMuted ? true : false}
                   id="frameOne"
-                  className="bg-light p-0"
+                  className="bg-white p-0 shadow"
                   autoPlay
                   loop
                   preload="auto">
                   <source
-                    src={videos[0]?.video ? videos[0]?.video : videoStatic}
+                    src={videos[0]?.video?.length > 4 ? videos[0]?.video : videoStatic}
                   />
                 </video>
               </div>
             </div>
 
             <div
-              className="banner_section item"
+              className="banner_section item bg-white shadow"
               onClick={() => {
                 window.location.href = videos[1]?.url
                   ? videos[1]?.url
@@ -399,26 +400,26 @@ const Homepage = () => {
               <div
                 className="video_banner"
                 style={{
-                  backgroundImage: videos[1]?.videoCover
-                    ? videos[1]?.videoCover
+                  backgroundImage: videos[1]?.videoCover?.length > 4
+                    ? `url(${videos[1]?.videoCover})`
                     : `url(${image})`,
                 }}>
                 <video
                   muted={isMuted ? true : false}
                   id="frameTwo"
-                  className="bg-light p-0"
+                  className="bg-white shadow p-0"
                   autoPlay
                   loop
                   preload="auto">
                   <source
-                    src={videos[1]?.video ? videos[1]?.video : videoStatic}
+                    src={videos[1]?.video?.length > 4 ? videos[1]?.video : videoStatic}
                   />
                 </video>
               </div>
             </div>
 
             <div
-              className="banner_section item"
+              className="banner_section item bg-white shadow"
               onClick={() => {
                 window.location.href = videos[2]?.url
                   ? videos[2]?.url
@@ -427,26 +428,26 @@ const Homepage = () => {
               <div
                 className="video_banner"
                 style={{
-                  backgroundImage: videos[2]?.videoCover
-                    ? videos[2]?.videoCover
+                  backgroundImage: videos[2]?.videoCover?.length > 4
+                    ? `url(${videos[2]?.videoCover})`
                     : `url(${image})`,
                 }}>
                 <video
                   muted={isMuted ? true : false}
                   id="frameThree"
-                  className="bg-light p-0"
+                  className="bg-white shadow p-0"
                   autoPlay
                   loop
                   preload="auto">
                   <source
-                    src={videos[2]?.video ? videos[2]?.video : videoStatic}
+                    src={videos[2]?.video?.length > 4 ? videos[2]?.video : videoStatic}
                   />
                 </video>
               </div>
             </div>
 
             <div
-              className="banner_section item"
+              className="banner_section item bg-white shadow"
               onClick={() => {
                 window.location.href = videos[3]?.url
                   ? videos[3]?.url
@@ -455,19 +456,19 @@ const Homepage = () => {
               <div
                 className="video_banner"
                 style={{
-                  backgroundImage: videos[3]?.videoCover
-                    ? videos[3]?.videoCover
+                  backgroundImage: videos[3]?.videoCover?.length > 4
+                    ? `url(${videos[3]?.videoCover})`
                     : `url(${image})`,
                 }}>
                 <video
                   muted={isMuted ? true : false}
                   id="frameFour"
-                  className="bg-light p-0"
+                  className="bg-white p-0"
                   autoPlay
                   loop
                   preload="auto">
                   <source
-                    src={videos[3]?.video ? videos[3]?.video : videoStatic}
+                    src={videos[3]?.video?.length > 4 ? videos[3]?.video : videoStatic}
                   />
                 </video>
               </div>
@@ -490,7 +491,7 @@ const Homepage = () => {
                 alt="Loading..."
               />
               <div
-                className={
+                className={ 
                   (allSlides[2]?.position === "One" && "carousel-caption ") ||
                   (allSlides[2]?.position === "Two" &&
                     "carousel-caption banner-titles mx-3") ||
