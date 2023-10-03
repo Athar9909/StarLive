@@ -15,6 +15,7 @@ import classNames from "classnames";
 import { useForm } from "react-hook-form";
 import { default as ReactSelect } from "react-select";
 import { components } from "react-select";
+import { MDBDataTable } from "mdbreact";
 
 export const DaysOption = [
   { value: "SUNDAY", label: "Sunday" },
@@ -97,7 +98,6 @@ const OrderReq = () => {
   const apiCities = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/getCities`;
   const allPullers = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/allPullers`;
   const assign = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/assignPuller`;
-  const [cities, setCities] = useState([]);
   const [citySearch, setCitySearch] = useState([]);
   const [pullOrderId, setPullOrderId] = useState();
   const [allCount, setAllCount] = useState();
@@ -113,6 +113,44 @@ const OrderReq = () => {
     },
   ]);
   const [selectedPuller, setSelectedPuller] = useState([]);
+  // const [, ] = useState([]);
+  const [cities, setCities] = useState({
+    columns: [
+      {
+        label: "S.NO",
+        field: "sn",
+        sort: "asc",
+        width: 150,
+      },
+
+      {
+        label: "STATE",
+        field: "state",
+        sort: "asc",
+        width: 100,
+      },
+      {
+        label: "CITY",
+        field: "city",
+        sort: "asc",
+        width: 100,
+      },
+      {
+        label: "DAYS",
+        field: "days",
+        sort: "asc",
+        width: 100,
+      },
+
+      {
+        label: "Action",
+        field: "action",
+        sort: "asc",
+        width: 100,
+      },
+    ],
+    rows: [],
+  });
 
   const handleChangeEdit = (selected) => {
     setSelectEditOptions({
@@ -147,7 +185,40 @@ const OrderReq = () => {
   const getCities = async (state) => {
     const { data } = await axios.get(apiCities);
     if (!data.error) {
-      setCities(data?.results.delivery);
+      const newRows = [];
+      let values = data?.results?.delivery;
+      values?.map((list, index) => {
+        const returnData = {};
+        returnData.sn = list?.index + 1;
+        returnData.state = list?.state;
+        returnData.city = list?.city;
+        returnData.days = (
+          <>
+            <td className="border">
+              {list?.day?.map((itm, ind) => (
+                <p>{itm}</p>
+              ))}
+            </td>
+          </>
+        );
+        returnData.action = (
+          <>
+            <button
+              className="comman_btn table_viewbtn"
+              data-bs-toggle="modal"
+              id="modal-toggle"
+              data-bs-target="#staticBackdrop33"
+              href="javscript:;"
+              onClick={() => {
+                editDays(list?._id);
+              }}>
+              Edit
+            </button>
+          </>
+        );
+        newRows.push(returnData);
+      });
+      setCities({ ...cities, rows: newRows });
     }
   };
 
@@ -2394,55 +2465,15 @@ const OrderReq = () => {
                               <div className="row recent_orders_order  ">
                                 <div className="col-12 comman_table_design px-0">
                                   <div className="table-responsive">
-                                    <table className="table mb-0">
-                                      <thead>
-                                        <tr
-                                          style={{
-                                            backgroundColor: "#f2f2f2",
-                                          }}>
-                                          <th>State</th>
-                                          <th>City</th>
-                                          <th>Days</th>
-                                          <th>Edit</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody key={citySearch}>
-                                        {(cities || [])
-                                          ?.filter(
-                                            (items) =>
-                                              items?.state === "Georgia"
-                                          )
-                                          .map((item, index) => (
-                                            <tr key={index}>
-                                              <td className="border">
-                                                {item?.state}
-                                              </td>
-                                              <td className="border">
-                                                {item?.city}
-                                              </td>
-                                              <td className="border">
-                                                {item?.day?.map((itm, ind) => (
-                                                  <p>{itm}</p>
-                                                ))}
-                                              </td>
-
-                                              <td className="border">
-                                                <button
-                                                  className="comman_btn table_viewbtn"
-                                                  data-bs-toggle="modal"
-                                                  id="modal-toggle"
-                                                  data-bs-target="#staticBackdrop33"
-                                                  href="javscript:;"
-                                                  onClick={() => {
-                                                    editDays(item?._id);
-                                                  }}>
-                                                  Edit
-                                                </button>
-                                              </td>
-                                            </tr>
-                                          ))}
-                                      </tbody>
-                                    </table>
+                                    <MDBDataTable
+                                      bordered
+                                      displayEntries={false}
+                                      className="categoryTable"
+                                      hover
+                                      data={cities}
+                                      noBottomColumns
+                                      sortable
+                                    />
                                   </div>
                                 </div>
                               </div>

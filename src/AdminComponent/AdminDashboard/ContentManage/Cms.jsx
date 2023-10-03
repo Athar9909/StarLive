@@ -172,13 +172,13 @@ const Cms = () => {
         (no == 3 && videoFile?.video3) ||
         (no == 4 && videoFile?.video4)
     );
-    formData.append(
-      "videoCover",
-      (no == 1 && files?.slideV1Img) ||
-        (no == 2 && files?.slideV2Img) ||
-        (no == 3 && files?.slideV3Img) ||
-        (no == 4 && files?.slideV4Img)
-    );
+    // formData.append(
+    //   "videoCover",
+    //   (no == 1 && files?.slideV1Img) ||
+    //     (no == 2 && files?.slideV2Img) ||
+    //     (no == 3 && files?.slideV3Img) ||
+    //     (no == 4 && files?.slideV4Img)
+    // );
     formData.append(
       "url",
       (no == 1 ? urlV1 : "") ||
@@ -1610,7 +1610,7 @@ const Cms = () => {
                                             className="form-design row"
                                             action="">
                                             <div className="form-group col-12 ">
-                                              <label
+                                              {/* <label
                                                 htmlFor=""
                                                 className="labels">
                                                 Slide background
@@ -1656,7 +1656,7 @@ const Cms = () => {
                                                     }
                                                   />
                                                 </div>
-                                              </div>
+                                              </div> */}
 
                                               <div className="account_profile position-relative d-inline-block mt-3">
                                                 <div className="fw-bold">
@@ -1727,7 +1727,7 @@ const Cms = () => {
 
                                             <div className="form-group col-12 text-start">
                                               <Button
-                                                className="comman_btn"
+                                                className="comman_btn2"
                                                 appearance="primary"
                                                 loading={loader}
                                                 style={{
@@ -1769,7 +1769,7 @@ const Cms = () => {
                                             className="form-design row"
                                             action="">
                                             <div className="form-group col-12 ">
-                                              <label
+                                              {/* <label
                                                 htmlFor=""
                                                 className="labels">
                                                 Slide background
@@ -1816,7 +1816,7 @@ const Cms = () => {
                                                     }
                                                   />
                                                 </div>
-                                              </div>
+                                              </div> */}
 
                                               <div className="account_profile position-relative d-inline-block mt-3">
                                                 <div className="fw-bold">
@@ -1886,7 +1886,7 @@ const Cms = () => {
 
                                             <div className="form-group col-12 text-start">
                                               <Button
-                                                className="comman_btn"
+                                                className="comman_btn2"
                                                 appearance="primary"
                                                 loading={loader2}
                                                 style={{
@@ -1929,7 +1929,7 @@ const Cms = () => {
                                             className="form-design row"
                                             action="">
                                             <div className="form-group col-12 ">
-                                              <label
+                                              {/* <label
                                                 htmlFor=""
                                                 className="labels">
                                                 Slide background
@@ -1976,7 +1976,7 @@ const Cms = () => {
                                                     }
                                                   />
                                                 </div>
-                                              </div>
+                                              </div> */}
 
                                               <div className="account_profile position-relative d-inline-block">
                                                 <div className="fw-bold">
@@ -2046,7 +2046,7 @@ const Cms = () => {
 
                                             <div className="form-group col-12 text-start">
                                               <Button
-                                                className="comman_btn"
+                                                className="comman_btn2"
                                                 appearance="primary"
                                                 loading={loader3}
                                                 style={{
@@ -2088,7 +2088,7 @@ const Cms = () => {
                                             className="form-design row"
                                             action="">
                                             <div className="form-group col-12 ">
-                                              <label
+                                              {/* <label
                                                 htmlFor=""
                                                 className="labels">
                                                 Slide background
@@ -2134,7 +2134,7 @@ const Cms = () => {
                                                     }
                                                   />
                                                 </div>
-                                              </div>
+                                              </div> */}
 
                                               <div className="account_profile position-relative d-inline-block">
                                                 <div className="fw-bold">
@@ -2205,7 +2205,7 @@ const Cms = () => {
 
                                             <div className="form-group col-12 text-start">
                                               <Button
-                                                className="comman_btn"
+                                                className="comman_btn2"
                                                 appearance="primary"
                                                 loading={loader4}
                                                 style={{
