@@ -363,6 +363,79 @@ const Homepage = () => {
             </div>
 
             <div
+              className="banner_section item"
+              onClick={() => {
+                window.location.href = videos[0]?.url
+                  ? videos[0]?.url
+                  : "https://starimporters.com/app/home";
+              }}>
+              <video
+                muted={isMuted ? true : false}
+                id="frameOne"
+                className="main_video bg-dark"
+                autoPlay
+                loop
+                preload="auto">
+                <source src={videos[0]?.video} />
+              </video>
+            </div>
+
+            <div
+              className="banner_section item"
+              onClick={() => {
+                window.location.href = videos[1]?.url
+                  ? videos[1]?.url
+                  : "https://starimporters.com/app/home";
+              }}>
+              <video
+                id="frameTwo"
+                className="main_video bg-dark"
+                autoPlay
+                loop
+                muted={true}
+                preload="auto">
+                <source src={videos[1]?.video} />
+              </video>
+            </div>
+
+            <div
+              className="banner_section item"
+              onClick={() => {
+                window.location.href = videos[2]?.url
+                  ? videos[2]?.url
+                  : "https://starimporters.com/app/home";
+              }}>
+              <video
+                id="frameThree"
+                className="main_video bg-dark"
+                autoPlay
+                loop
+                muted={true}
+                preload="auto">
+                <source src={videos[2]?.video} />
+              </video>
+            </div>
+
+            <div
+              className="banner_section item"
+              onClick={() => {
+                window.location.href = videos[3]?.url
+                  ? videos[3]?.url
+                  : "https://starimporters.com/app/home";
+              }}>
+              <video
+                id="frameFour"
+                className="main_video bg-dark"
+                autoPlay
+                loop
+                oncanplay="this.muted=true"
+                muted={true}
+                preload="auto">
+                <source src={videos[3]?.video} />
+              </video>
+            </div>
+            
+            {/* <div
               className="banner_section item bg-white shadow"
               onClick={() => {
                 window.location.href = videos[0]?.url
@@ -472,7 +545,7 @@ const Homepage = () => {
                   />
                 </video>
               </div>
-            </div>
+            </div> */}
 
             <div
               className="banner_section item "
