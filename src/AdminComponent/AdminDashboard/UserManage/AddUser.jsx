@@ -15,6 +15,7 @@ import Swal from "sweetalert2";
 const AddUser = () => {
   const [files, setFiles] = useState([]);
   const apiUrl = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/addUser`;
+  const cityApi = `${process.env.REACT_APP_APIENDPOINTNEW}user/cityByState`;
   const navigate = useNavigate();
   const [emailErr, setEmailErr] = useState("");
   const [loader, setLoader] = useState("");
@@ -23,15 +24,11 @@ const AddUser = () => {
   const [cities, setCities] = useState([]);
 
   const handleCities = async (state) => {
-    const { data } = await axios.post(
-      "https://countriesnow.space/api/v0.1/countries/state/cities",
-      {
-        country: "United States",
-        state: state ? state : "Georgia",
-      }
-    );
+    const { data } = await axios.post(cityApi, {
+      state: state,
+    });
     if (!data.error) {
-      setCities(data?.data);
+      setCities(data?.results?.states);
     }
   };
 
@@ -912,7 +909,7 @@ const AddUser = () => {
                           })}>
                           <option value="">Select City</option>
                           {(cities || [])?.map((item, ind) => (
-                            <option value={item}>{item}</option>
+                            <option value={item?.city}>{item?.city}</option>
                           ))}
                         </select>
                         {errors.city && (

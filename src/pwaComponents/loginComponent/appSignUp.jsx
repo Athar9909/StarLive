@@ -17,17 +17,14 @@ function AppSignUp() {
   const [selectedFile5, setSelectedFile5] = useState(null);
   const [loader, setLoader] = useState(false);
   const [cities, setCities] = useState([]);
+  const cityApi = `${process.env.REACT_APP_APIENDPOINTNEW}user/cityByState`;
 
   const handleCities = async (state) => {
-    const { data } = await axios.post(
-      "https://countriesnow.space/api/v0.1/countries/state/cities",
-      {
-        country: "United States",
-        state: state,
-      }
-    );
+    const { data } = await axios.post(cityApi, {
+      state: state,
+    });
     if (!data.error) {
-      setCities(data?.data);
+      setCities(data?.results?.states);
     }
   };
 
@@ -314,10 +311,10 @@ function AppSignUp() {
                       </label>
 
                       <select
-                          className={classNames(
-                            "form-select border border-secondary signup_fields fw-bolder",
-                            { "is-invalid": errors.city }
-                          )}
+                        className={classNames(
+                          "form-select border border-secondary signup_fields fw-bolder",
+                          { "is-invalid": errors.city }
+                        )}
                         placeholder=""
                         name="state"
                         id="state"
@@ -429,9 +426,13 @@ function AppSignUp() {
                         {...register("city", {
                           required: "Required*",
                         })}>
-                        <option value="">{cities?.length ? "Select City" : "No cities in selected State."}</option>
+                        <option value="">
+                          {cities?.length
+                            ? "Select City"
+                            : "No cities in selected State."}
+                        </option>
                         {(cities || [])?.map((item, ind) => (
-                          <option value={item}>{item}</option>
+                          <option value={item?.city}>{item?.city}</option>
                         ))}
                       </select>
                       {errors.city && (

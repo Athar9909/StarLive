@@ -327,8 +327,8 @@ function AppCloseOutList() {
                               <img
                                 class="mb-2"
                                 src={
-                                  item?.productId.type?.flavourImage
-                                    ? item?.productId.type?.flavourImage
+                                  item?.productId?.type?.flavourImage
+                                    ? item?.productId?.type?.flavourImage
                                     : item?.productId?.productImage ||
                                       require("../../assets/img/product.jpg")
                                 }
@@ -343,7 +343,7 @@ function AppCloseOutList() {
                                   state={{ type: item?.productId?.type }}>
                                   {item?.productId?.unitName}
 
-                                  <span>-{item?.productId.type?.flavour}</span>
+                                  <span>-{item?.productId?.type?.flavour}</span>
                                 </Link>
                               </div>
                             </div>

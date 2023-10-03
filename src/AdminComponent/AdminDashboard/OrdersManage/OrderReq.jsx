@@ -117,20 +117,13 @@ const OrderReq = () => {
   const [cities, setCities] = useState({
     columns: [
       {
-        label: "S.NO",
-        field: "sn",
-        sort: "asc",
-        width: 150,
-      },
-
-      {
         label: "STATE",
         field: "state",
         sort: "asc",
         width: 100,
       },
       {
-        label: "CITY",
+        label: "CITY-(Click to Sort)",
         field: "city",
         sort: "asc",
         width: 100,
@@ -194,9 +187,9 @@ const OrderReq = () => {
         returnData.city = list?.city;
         returnData.days = (
           <>
-            <td className="border">
+            <td className="d-flex mx-2 justify-content-center">
               {list?.day?.map((itm, ind) => (
-                <p>{itm}</p>
+                <strong>{itm},</strong>
               ))}
             </td>
           </>
@@ -2150,6 +2143,7 @@ const OrderReq = () => {
                                     </ul>
                                   </div>
                                 ) : null}
+
                               </div>
                             </div>
                           </div>
@@ -2432,7 +2426,7 @@ const OrderReq = () => {
                                 action="">
                                 <div className=" d-flex col-12">
                                   <div className="form-group mb-0 position-relative icons_set d-flex justify-content-between">
-                                    <a
+                                    {/* <a
                                       className="fs-3 mt-2"
                                       aria-expanded="false">
                                       {sort === 1 ? (
@@ -2448,8 +2442,8 @@ const OrderReq = () => {
                                             sortCities(1);
                                           }}></i>
                                       )}
-                                    </a>
-                                    <input
+                                    </a> */}
+                                    {/* <input
                                       type="search"
                                       className="form-control bg-white mx-2"
                                       placeholder="Search by City"
@@ -2458,7 +2452,7 @@ const OrderReq = () => {
                                       onChange={(e) => {
                                         CitySearch(e.target.value);
                                       }}
-                                    />
+                                    /> */}
                                   </div>
                                 </div>
                               </form>

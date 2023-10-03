@@ -14,6 +14,8 @@ const SignUp = () => {
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
   const apiUrl = `${process.env.REACT_APP_APIENDPOINTNEW}user/register`;
+  const cityApi = `${process.env.REACT_APP_APIENDPOINTNEW}user/cityByState`;
+  const states = `${process.env.REACT_APP_APIENDPOINTNEW}user/getState`;
   const [text, setText] = useRecoilState(textState);
   const [cities, setCities] = useState([]);
   const {
@@ -30,15 +32,11 @@ const SignUp = () => {
   console.log(files);
 
   const handleCities = async (state) => {
-    const { data } = await axios.post(
-      "https://countriesnow.space/api/v0.1/countries/state/cities",
-      {
-        country: "United States",
-        state: state,
-      }
-    );
+    const { data } = await axios.post(cityApi, {
+      state: state,
+    });
     if (!data.error) {
-      setCities(data?.data);
+      setCities(data?.results?.states);
     }
   };
   console.log(cities);
@@ -420,7 +418,6 @@ const SignUp = () => {
                 </div>
 
                 <div className="form-floating col-4 mb-4 select_dropdown ">
-                  
                   <select
                     className={classNames(
                       "form-select border border-secondary signup_fields fw-bolder",
@@ -433,9 +430,13 @@ const SignUp = () => {
                     {...register("city", {
                       required: "City is Required*",
                     })}>
-                    <option value="">{cities?.length ? "Select City" : "No cities in selected State."}</option>
+                    <option value="">
+                      {cities?.length > 0
+                        ? "Select City"
+                        : "No cities in selected State."}
+                    </option>
                     {(cities || [])?.map((item, ind) => (
-                      <option value={item}>{item}</option>
+                      <option value={item?.city}>{item?.city}</option>
                     ))}
                   </select>
                   {errors.city && (

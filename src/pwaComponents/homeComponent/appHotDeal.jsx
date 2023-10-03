@@ -321,8 +321,8 @@ function AppHotDeals() {
                                 borderRadius: "8px",
                               }}
                               src={
-                                item?.productId.type?.flavourImage
-                                  ? item?.productId.type?.flavourImage
+                                item?.productId?.type?.flavourImage
+                                  ? item?.productId?.type?.flavourImage
                                   : item?.productId?.productImage ||
                                     require("../../assets/img/product.jpg")
                               }
@@ -337,8 +337,8 @@ function AppHotDeals() {
                                 state={{ type: item?.productId?.type }}>
                                 {item?.productId?.unitName?.slice(0, 28)}
                                 <span>
-                                  {item?.productId.type
-                                    ? item?.productId.type?.flavour
+                                  {item?.productId?.type
+                                    ? item?.productId?.type?.flavour
                                     : ""}
                                 </span>
                               </Link>

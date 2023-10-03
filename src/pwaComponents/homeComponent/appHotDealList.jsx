@@ -14,8 +14,7 @@ import Swal from "sweetalert2";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { charSearchKey } from "../../selecter";
 import Search from "./search";
-import { browserName } from "react-device-detect";
-import { appFeaturedProd } from "../../atom";
+
 
 function AppHotDealList() {
   const addFav = `${process.env.REACT_APP_APIENDPOINTNEW}user/fav/addToFav`;
