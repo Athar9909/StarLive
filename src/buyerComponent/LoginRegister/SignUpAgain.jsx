@@ -15,7 +15,9 @@ const SignUpAgain = () => {
   const apiUrl = `${process.env.REACT_APP_APIENDPOINTNEW}user/register`;
   const DecUser = `${process.env.REACT_APP_APIENDPOINTNEW}user/semiSignup`;
   const reSubmit = `${process.env.REACT_APP_APIENDPOINTNEW}user/reSignup`;
+  const cityApi = `${process.env.REACT_APP_APIENDPOINTNEW}user/cityByState`;
   const [userData, setUserData] = useState([]);
+  const [cities, setCities] = useState([]);
 
   const {
     register,
@@ -24,6 +26,15 @@ const SignUpAgain = () => {
     formState: { errors },
     trigger,
   } = useForm();
+
+  const handleCities = async (state) => {
+    const { data } = await axios.post(cityApi, {
+      state: state,
+    });
+    if (!data.error) {
+      setCities(data?.results?.states);
+    }
+  };
 
   useEffect(() => {
     let email = localStorage.getItem("userEmail");

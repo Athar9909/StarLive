@@ -18,6 +18,7 @@ const SignUp = () => {
   const states = `${process.env.REACT_APP_APIENDPOINTNEW}user/getState`;
   const [text, setText] = useRecoilState(textState);
   const [cities, setCities] = useState([]);
+  
   const {
     register,
     handleSubmit,
@@ -318,7 +319,7 @@ const SignUp = () => {
                 <div className="form-floating col-4 mb-4 select_dropdown ">
                   <select
                     className={classNames(
-                      "form-select border border-secondary signup_fields fw-bolder",
+                      "form-select border border-secondary signup_fields fw-bolder mt-1",
                       { "is-invalid": errors.state }
                     )}
                     id="floatingSelect1"
@@ -412,7 +413,7 @@ const SignUp = () => {
                     </small>
                   )}
 
-                  <label htmlFor="floatingSelect6" className="mx-2 fw-bolder">
+                  <label htmlFor="floatingSelect1" className="mx-2 fw-bolder mb-4">
                     State/Province
                   </label>
                 </div>
@@ -420,10 +421,10 @@ const SignUp = () => {
                 <div className="form-floating col-4 mb-4 select_dropdown ">
                   <select
                     className={classNames(
-                      "form-select border border-secondary signup_fields fw-bolder",
+                      "form-select border border-secondary signup_fields fw-bolder mt-1",
                       { "is-invalid": errors.city }
                     )}
-                    id="floatingSelect1"
+                    id="floatingSelect2"
                     aria-label="Floating label select example"
                     name="city"
                     disabled={cities?.length ? false : true}
@@ -445,40 +446,14 @@ const SignUp = () => {
                     </small>
                   )}
 
-                  <label htmlFor="floatingSelect6" className="mx-2 fw-bolder">
+                  <label htmlFor="floatingSelect2" className="mx-2 fw-bolder mb-2">
                     City
                   </label>
                 </div>
 
-                {/* <div className="form-floating col-4 mb-4">
-                  <input
-                    type="text"
-                    className={classNames(
-                      "form-control  border border-secondary signup_fields",
-                      { "is-invalid": errors.city }
-                    )}
-                    id="floatingInput5"
-                    placeholder="name@example.com"
-                    name="city"
-                    {...register("city", {
-                      required: "City is Required*",
-                      pattern: {
-                        value: /^[^*|\":<>[\]{}`\\()';@$]+$/,
-                        message: "Special Character not allowed",
-                      },
-                    })}
-                  />
-                  {errors.city && (
-                    <small className="errorText mx-1 fw-bold">
-                      {errors.city?.message}
-                    </small>
-                  )}
-                  <label htmlFor="floatingInput5" className="mx-2 fw-bolder">
-                    City <span className="text-danger">*</span>
-                  </label>
-                </div> */}
+               
                 <>
-                  <div className="form-floating col-4 mb-4">
+                  <div className="form-floating col-4 mb-4 mt-1">
                     <input
                       type="numer"
                       className={classNames(
