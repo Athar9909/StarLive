@@ -221,7 +221,6 @@ function AppCheckout() {
                   </div>
                 </div>
               )}
-
               {subUser ? (
                 <div class="billing-information-card mb-3">
                   <div class="card billing-information-title-card ">
@@ -359,6 +358,7 @@ function AppCheckout() {
                   </div>
                 </div>
               )}
+
               <div class="shipping-method-choose mb-3">
                 <div class="card shipping-method-choose-title-card">
                   <div class="card-body">
@@ -469,6 +469,7 @@ function AppCheckout() {
                   </div>
                 </div>
               </div>
+
               <div class="shipping-method-choose mb-3">
                 <div class="card shipping-method-choose-title-card">
                   <div class="card-body">
@@ -489,6 +490,7 @@ function AppCheckout() {
                   </div>
                 </div>
               </div>
+              
               {delevryChoice == "Delivery" ? (
                 <div className="col-12 text-start">
                   {users?.cityAndState?.day?.length ? (

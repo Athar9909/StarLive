@@ -171,6 +171,7 @@ function AppHome() {
       }
     }
   };
+  
 
   const microphoneSearch = async () => {
     setSearch("");

@@ -58,7 +58,8 @@ const Checkout = () => {
           subUserId: userType?.id,
         })
         .then((res) => {
-          if (!res.error) {
+          console.log(res);
+          if (!res.data.error) {
             Swal.fire({
               title: "Order Placed!",
               text: "You can Track your order on my account",
@@ -68,11 +69,16 @@ const Checkout = () => {
               if (
                 res?.data.message === "Your account has been disabled by admin"
               ) {
-                
                 navigate("/app/home");
               } else {
                 navigate(`/app/order-detail/${res?.data.results?.order._id}`);
               }
+            });
+          } else if (res?.data.message === "Tobacco licence expired!") {
+            Swal.fire({
+              title: res?.data.message,
+              icon: "error",
+              confirmButtonText: "Okay",
             });
           }
         });
@@ -86,7 +92,9 @@ const Checkout = () => {
           subUserId: userType?.id,
         })
         .then((res) => {
-          if (!res.error) {
+          console.log(res);
+
+          if (!res.data.error) {
             Swal.fire({
               title: "Order Placed!",
               text: "You can Track your order on my account",
@@ -95,6 +103,12 @@ const Checkout = () => {
               confirmButtonText: "View Order",
             }).then((data) => {
               navigate(`/app/order-detail/${res?.data.results?.order._id}`);
+            });
+          } else if (res?.data.message === "Tobacco licence expired!") {
+            Swal.fire({
+              title: res?.data.message,
+              icon: "error",
+              confirmButtonText: "Okay",
             });
           }
         });
@@ -108,7 +122,9 @@ const Checkout = () => {
           subUserId: userType?.id,
         })
         .then((res) => {
-          if (!res.error) {
+          console.log(res);
+
+          if (!res.data.error) {
             Swal.fire({
               title: "Order Placed!",
               text: "You can Track your order on my account",
@@ -116,6 +132,12 @@ const Checkout = () => {
               confirmButtonText: "View Order",
             }).then((data) => {
               navigate(`/app/order-detail/${res?.data.results?.order._id}`);
+            });
+          } else if (res?.data.message === "Tobacco licence expired!") {
+            Swal.fire({
+              title: res?.data.message,
+              icon: "error",
+              confirmButtonText: "Okay",
             });
           }
         });

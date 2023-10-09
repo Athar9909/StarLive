@@ -11,7 +11,7 @@ import Footer from "../Footer/Footer";
 const UserForgotPass = () => {
   const apiUrl = `${process.env.REACT_APP_APIENDPOINTNEW}user/forgotPassword`;
   const [passDiss, setPassDis] = useState(false);
-  const [emailDiss, setEmailDis] = useState(false);
+  const [emailDiss, setEmailDis] = useState(true);
   let navigate = useNavigate();
   const {
     register,
@@ -73,76 +73,71 @@ const UserForgotPass = () => {
               <form
                 className="row login-new-form"
                 onSubmit={handleSubmit(onSubmit)}>
-                <div
-                  className={emailDiss ? "d-none" : "form-group mb-4 col-12"}>
-                  <input
-                    type="email"
-                    className={classNames("form-control", {
-                      "is-invalid": errors.email,
-                    })}
-                    id="floatingEmail"
-                    name="email"
-                    placeholder="Enter Your Email Address"
-                    {...register("email", {
-                      required: "Required!",
-                    })}
-                    onChange={(e) => {
-                      let volue = e.target.value;
-                      if (volue.length == 1) {
-                        setPassDis(true);
-                      } else if (volue == 0) {
-                        setPassDis(!passDiss);
-                      }
-                    }}
-                  />
-                  {errors.email && (
-                    <small className="errorText mx-1 fw-bold">
-                      {errors.email?.message}
-                    </small>
-                  )}
-                </div>
-
-                <div>
-                  <h5
-                    className={
-                      passDiss || emailDiss ? "d-none" : " fs-6 mt-2 mb-2"
-                    }>
-                    or
-                  </h5>
-                </div>
-                <div
-                  className={passDiss ? "d-none" : "form-group mb-4 col-12 "}>
-                  <input
-                    type="Number"
-                    className={classNames("form-control ", {
-                      "is-invalid": errors.phoneNumber,
-                    })}
-                    id="floatingNumber"
-                    name="phoneNumber"
-                    placeholder="Enter Your Phone Number"
-                    {...register("phoneNumber", {
-                      required: "Required!",
-                    })}
-                    onChange={(e) => {
-                      let number = e.target.value;
-                      if (number.length == 1) {
-                        setEmailDis(true);
-                      } else if (number == 0) {
-                        setEmailDis(!emailDiss);
-                      }
-                    }}
-                  />
-                  {errors.phoneNumber && (
-                    <small className="errorText mx-1 fw-bold">
-                      {errors.phoneNumber?.message}
-                    </small>
-                  )}
-                </div>
+                {emailDiss ? (
+                  <div className={"form-group mb-4 col-12"}>
+                    <input
+                      type="email"
+                      className={classNames("form-control", {
+                        "is-invalid": errors.email,
+                      })}
+                      id="floatingEmail"
+                      name="email"
+                      placeholder="Enter Your Email Address"
+                      {...register("email", {
+                        required: "Required!",
+                      })}
+                    />
+                    {errors.email && (
+                      <small className="errorText mx-1 fw-bold">
+                        {errors.email?.message}
+                      </small>
+                    )}
+                  </div>
+                ) : (
+                  <div className={"form-group mb-4 col-12 "}>
+                    <input
+                      type="Number"
+                      className={classNames("form-control ", {
+                        "is-invalid": errors.phoneNumber,
+                      })}
+                      id="floatingNumber"
+                      name="phoneNumber"
+                      placeholder="Enter Your Phone Number"
+                      {...register("phoneNumber", {
+                        required: "Required!",
+                      })}
+                      onChange={(e) => {
+                        let number = e.target.value;
+                        if (number.length == 1) {
+                          setEmailDis("okay");
+                        } else if (number == 0) {
+                          setEmailDis("");
+                        }
+                      }}
+                    />
+                    {errors.phoneNumber && (
+                      <small className="errorText mx-1 fw-bold">
+                        {errors.phoneNumber?.message}
+                      </small>
+                    )}
+                  </div>
+                )}
                 <div className="form-group mb-4 mt-3">
                   <button className="comman_btn" type="submit">
                     Send Otp
                   </button>
                 </div>
+                <p>
+                  {emailDiss ? (
+                    <a onClick={() => setEmailDis(!emailDiss)}>
+                      Use Phone Number instead of Email
+                    </a>
+                  ) : (
+                    <a onClick={() => setEmailDis(!emailDiss)}>
+                      Use Email Address instead of Number
+                    </a>
+                  )}
+                </p>
                 <div className="form-group mb-0 comman_text">
                   <span>
                     Didn't have access to email/phone?,
@@ -156,7 +151,7 @@ const UserForgotPass = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
