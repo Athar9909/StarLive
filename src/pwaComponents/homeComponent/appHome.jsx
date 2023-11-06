@@ -177,12 +177,7 @@ function AppHome() {
       if (Dd?.length) {
         navigate("/app/product-by-search", { state: { search: Dd } });
       } else {
-        Swal.fire({
-          title: "Trouble in fetching product!",
-          icon: "error",
-          timer: 1000,
-          confirmButtonText: "okay",
-        });
+        window.location.reload(false);
       }
     }
   };
@@ -451,9 +446,6 @@ function AppHome() {
                               </div>
                             ))}
                           </Carousel>
-
-
-                       
                         </div>
                       </div>
                     </div>
@@ -476,7 +468,7 @@ function AppHome() {
                             .filter((itm, idx) => idx < 7)
                             .map((item, index) => {
                               return (
-                                <div className="col-3  justify-content-center ">
+                                <div className="col-3  justify-content-center">
                                   <div
                                     className="catagory-card"
                                     onClick={() => {
@@ -490,21 +482,23 @@ function AppHome() {
                                       opacity: "unset",
                                       backgroundSize: "cover",
                                     }}></div>
-                                  <small
-                                    style={{
-                                      fontSize: "10px",
-                                    }}>
-                                    {" "}
-                                    {item?.categoryName?.slice(0, 15)}..
-                                  </small>
+                                  <div className="text-center">
+                                    <small
+                                      style={{
+                                        fontSize: "10px",
+                                      }}>
+                                      {" "}
+                                      {item?.categoryName?.slice(0, 12)}....
+                                    </small>
+                                  </div>
                                 </div>
                               );
                             })}
-                          <div className="col-3  justify-content-center p-1 ">
+                          <div className="col-3 justify-content-center ">
                             <div
                               className="catagory-card"
                               onClick={() => {
-                                navigate("/app/Categories");
+                                navigate("/app/Categories");       
                               }}
                               style={{
                                 backgroundImage: `url(${image5})`,
@@ -512,14 +506,15 @@ function AppHome() {
                                 opacity: "unset",
                                 backgroundSize: "cover",
                               }}></div>
-                            <small
-                              className="text-center"
-                              style={{
-                                fontSize: "10px",
-                              }}>
-                              {" "}
-                              View All
-                            </small>
+                            <div className="text-center">
+                              <small
+                                style={{
+                                  fontSize: "10px",
+                                }}>
+                                {" "}
+                                View All{"    "}
+                              </small>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -599,9 +594,7 @@ function AppHome() {
                                       backgroundPosition: "center",
                                       opacity: "unset",
                                       backgroundSize: "cover",
-                                    }}>
-                               
-                                  </div>
+                                    }}></div>
                                 </div>
                               </SwiperSlide>
                             ))}
@@ -619,7 +612,10 @@ function AppHome() {
             </div>
           )}
 
-          <div ref={ref} style={{ opacity: `${hideF.opacity}` }} className="mt-0">
+          <div
+            ref={ref}
+            style={{ opacity: `${hideF.opacity}` }}
+            className="mt-0">
             <AppFooter />
           </div>
 

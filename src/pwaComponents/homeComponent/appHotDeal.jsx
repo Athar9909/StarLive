@@ -182,7 +182,7 @@ function AppHotDeals() {
                         <div class="row  product-title_new">
                           <div class="col-auto">
                             <Link
-                              class="name text-white"
+                              class="name text-dark"
                               to={`/app/product-detail/${item?.productId?.slug}`}
                               state={{ type: item?.productId?.type }}>
                               {item?.productId?.unitName?.slice(0, 10)}

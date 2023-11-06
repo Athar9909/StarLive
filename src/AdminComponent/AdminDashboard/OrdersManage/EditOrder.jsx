@@ -40,7 +40,7 @@ const EditOrder = () => {
   }, [searchKey]);
 
   const OrderDetails = async () => {
-    await axios.get(orderView + "/" + id).then((res) => {
+    await axios.post(orderView + "/" + id).then((res) => {
       setOrders(res?.data.results);
     });
   };
