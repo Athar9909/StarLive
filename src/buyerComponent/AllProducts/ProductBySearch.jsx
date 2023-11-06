@@ -9,6 +9,7 @@ const ProductBySearch = () => {
   const [products, setProducts] = useState([]);
   let params = useParams();
   const [search, setSearch] = useState("");
+  const [relateCate, setRelateCate] = useState([]);
 
   let navigate = useNavigate();
 
@@ -23,6 +24,7 @@ const ProductBySearch = () => {
     });
     if (!data.error) {
       setProducts(data?.results.products);
+      setRelateCate(data?.results.subCategories);
     }
   };
   console.log(products);
@@ -41,6 +43,28 @@ const ProductBySearch = () => {
           {products?.length ? (
             <div>
               <div className="col w-100">
+                <div className="col-12 d-flex ">
+                  {relateCate?.length != 0 && (
+                    <span className="search_head2 p-0 mb-3 mx-2">
+                      Related Sub-Categories :
+                    </span>
+                  )}
+                  {relateCate?.map((itm, ind) => (
+                    <div>
+                      <p
+                        className="subCateSearch"
+                        onClick={() => {
+                          navigate(`/Category/Sub-Category/${itm?.slug}`, {
+                            state: {
+                              name: itm?.subCategoryName,
+                            },
+                          });
+                        }}>
+                        {" " + itm?.subCategoryName},{" "}
+                      </p>
+                    </div>
+                  ))}
+                </div>
                 <div className="product_single_right row p-4">
                   {(products || [])?.map((item, index) => (
                     <div className="col-xl-3 col-lg-3 col-md-3" key={index}>

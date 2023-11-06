@@ -225,9 +225,7 @@ const ViewPuller = () => {
                   </Link>
                 </li>
                 <li
-                  className={
-                    User?.access?.includes("Gallery") ? "" : "d-none"
-                  }>
+                  className={User?.access?.includes("Gallery") ? "" : "d-none"}>
                   <Link
                     className=""
                     to="/Gallery-Management"
@@ -251,7 +249,6 @@ const ViewPuller = () => {
                     style={{
                       textDecoration: "none",
                       fontSize: "18px",
-                     
                     }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "3px" }}
@@ -285,20 +282,19 @@ const ViewPuller = () => {
                     Content Management
                   </Link>
                 </li>
-               <li
+                <li
                   className={User?.access?.includes("Contact") ? "" : "d-none"}>
                   <Link
-                      className=""
-                      to="/Contact&Support"
-                      style={{
-                        textDecoration: "none",
-                        fontSize: "18px",
-                        
-                      }}>
-                      <i
-                        style={{ position: "relative", left: "4px", top: "3px" }}
-                        class="fa-solid fa-handshake-angle"></i>{" "}
-                      Contact & Support
+                    className=""
+                    to="/Contact&Support"
+                    style={{
+                      textDecoration: "none",
+                      fontSize: "18px",
+                    }}>
+                    <i
+                      style={{ position: "relative", left: "4px", top: "3px" }}
+                      class="fa-solid fa-handshake-angle"></i>{" "}
+                    Contact & Support
                   </Link>
                 </li>
                 <li>
@@ -710,16 +706,9 @@ const ViewPuller = () => {
                                     </td>
 
                                     <td className="border rounded">
-                                      {item?.scanned ? (
-                                        <span className="fs-5  p-2 px-3 rounded">
-                                          <img
-                                            src={require("../../../assets/img/Group 427322975.png")}></img>
-                                        </span>
-                                      ) : (
-                                        <span className="fs-5 text-secondary  p-2 px-3 rounded">
-                                          Pending
-                                        </span>
-                                      )}
+                                      <span className="fs-5 text-secondary  p-2 px-3 rounded">
+                                        {item?.pullStatus}
+                                      </span>
                                     </td>
 
                                     <td className="border text-center">

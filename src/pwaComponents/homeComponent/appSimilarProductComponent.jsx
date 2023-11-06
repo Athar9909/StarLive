@@ -60,18 +60,18 @@ function SimlarProduct({ categoryName }) {
               loop={true}
               nav={false}
               fade={false}
-              items={3}
-              margin={10}
-            >
+              items={2}
+              margin={10}>
               {(product || []).map((item, index) => {
                 return (
                   <div className="card flash-sale-card item" key={index}>
-                    <div className="card-body">
+                    <div className="border rounded p-1">
                       <Link
                         to={`/app/product-detail/${item?.slug}`}
-                        state={{ type: item?.type[0] }}
-                      >
+                        state={{ type: item?.type[0] }}>
                         <img
+                          width={40}
+                          height={40}
                           src={
                             item.type[0]?.flavourImage
                               ? item.type[0]?.flavourImage
@@ -85,8 +85,7 @@ function SimlarProduct({ categoryName }) {
                           <Link
                             class="product-title text-center"
                             to={`/app/product-detail/${item?.slug}`}
-                            state={{ type: item?.type[0] }}
-                          >
+                            state={{ type: item?.type[0] }}>
                             {item?.unitName + "-" + item.type[0]?.flavour}
                           </Link>
                         </div>

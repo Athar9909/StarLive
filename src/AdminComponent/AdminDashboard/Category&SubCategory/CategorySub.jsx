@@ -75,7 +75,7 @@ const CategorySub = () => {
           title: "New Category Added!",
           icon: "success",
           confirmButtonText: "okay",
-          timer:2000,
+          timer: 2000,
         });
         document.getElementById("resetCat").click();
       }
@@ -130,7 +130,7 @@ const CategorySub = () => {
           title: "New Sub-Category Added!",
           icon: "success",
           confirmButtonText: "okay",
-          timer:2000,
+          timer: 2000,
         });
         setLoader(false);
         setChange(!change);
@@ -431,40 +431,34 @@ const CategorySub = () => {
                 <li
                   className={
                     User?.access?.includes("Dashboard") ? "" : "d-none"
-                  }
-                >
+                  }>
                   <Link
                     className=""
                     to="/AdminDashboard"
                     style={{
                       textDecoration: "none",
                       fontSize: "18px",
-                    }}
-                  >
+                    }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "2px" }}
-                      className="fa fa-home"
-                    ></i>{" "}
+                      className="fa fa-home"></i>{" "}
                     Dashboard
                   </Link>
                 </li>
                 <li
                   className={
                     User?.access?.includes("User Management") ? "" : "d-none"
-                  }
-                >
+                  }>
                   <Link
                     className=""
                     to="/UserManage"
                     style={{
                       textDecoration: "none",
                       fontSize: "18px",
-                    }}
-                  >
+                    }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "3px" }}
-                      class="fa fa-user"
-                    ></i>{" "}
+                      class="fa fa-user"></i>{" "}
                     User Management
                   </Link>
                 </li>
@@ -473,8 +467,7 @@ const CategorySub = () => {
                     User?.access?.includes("Category Sub-Category Management")
                       ? ""
                       : "d-none"
-                  }
-                >
+                  }>
                   <Link
                     className="bg-white"
                     to="/CategorySub"
@@ -482,12 +475,10 @@ const CategorySub = () => {
                       textDecoration: "none",
                       fontSize: "18px",
                       color: "#3e4093",
-                    }}
-                  >
+                    }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "3px" }}
-                      class="fa fa-layer-group"
-                    ></i>{" "}
+                      class="fa fa-layer-group"></i>{" "}
                     Category &amp; Sub Category
                   </Link>
                 </li>
@@ -496,95 +487,76 @@ const CategorySub = () => {
                     User?.access?.includes("Inventory Management")
                       ? ""
                       : "d-none"
-                  }
-                >
+                  }>
                   <Link
                     className=""
                     to="/Inventory"
-                    style={{ textDecoration: "none", fontSize: "18px" }}
-                  >
+                    style={{ textDecoration: "none", fontSize: "18px" }}>
                     <i
                       style={{ position: "relative", left: "6px", top: "3px" }}
-                      class="far fa-building"
-                    ></i>{" "}
+                      class="far fa-building"></i>{" "}
                     Inventory Management
                   </Link>
                 </li>
                 <li
                   className={
                     User?.access?.includes("Brands Management") ? "" : "d-none"
-                  }
-                >
+                  }>
                   <Link
                     className=""
                     to="/brandsManage"
-                    style={{ textDecoration: "none", fontSize: "18px" }}
-                  >
+                    style={{ textDecoration: "none", fontSize: "18px" }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "3px" }}
-                      class="fa fa-ship"
-                    ></i>{" "}
+                      class="fa fa-ship"></i>{" "}
                     Brands Management
                   </Link>
                 </li>
-                 <li
+                <li
                   className={
                     User?.access?.includes("Sub-Admin") ? "" : "d-none"
-                  }
-                >
+                  }>
                   <Link
                     className=""
                     to="/Admin/SubAdmin"
                     style={{
                       textDecoration: "none",
                       fontSize: "18px",
-                    }}
-                  >
+                    }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "3px" }}
-                      class="fas fa-user-cog"
-                    ></i>{" "}
+                      class="fas fa-user-cog"></i>{" "}
                     Sub-Admin Management
                   </Link>
                 </li>
 
                 <li
-                  className={
-                    User?.access?.includes("Puller") ? "" : "d-none"
-                  }
-                >
+                  className={User?.access?.includes("Puller") ? "" : "d-none"}>
                   <Link
-                    className=""
+                    className="d-none ata"
                     to="/Puller-Management"
                     style={{
                       textDecoration: "none",
                       fontSize: "18px",
-                    }}
-                  >
+                    }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "3px" }}
-                      class="fas fa-users-gear"
-                    ></i>{" "}
+                      class="fas fa-users-gear"></i>{" "}
                     Puller Management
                   </Link>
                 </li>
                 <li
-                  className={
-                    User?.access?.includes("Gallery") ? "" : "d-none"
-                  }
-                >
+                  className={User?.access?.includes("Gallery") ? "" : "d-none"}>
                   <Link
                     className=""
                     to="/Gallery-Management"
                     style={{
                       textDecoration: "none",
                       fontSize: "18px",
-                    }}
-                  >
+                    }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "3px" }}
-                      class="fas fa-image"
-                    ></i>{" "}
+                      class="fas fa-image"></i>{" "}
                     Gallery Management
                   </Link>
                 </li>
@@ -598,7 +570,6 @@ const CategorySub = () => {
                     style={{
                       textDecoration: "none",
                       fontSize: "18px",
-                     
                     }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "3px" }}
@@ -624,29 +595,26 @@ const CategorySub = () => {
                   <Link
                     className=""
                     to="/Cms"
-                    style={{ textDecoration: "none", fontSize: "18px" }}
-                  >
+                    style={{ textDecoration: "none", fontSize: "18px" }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "3px" }}
-                      class="fa fa-cog"
-                    ></i>{" "}
+                      class="fa fa-cog"></i>{" "}
                     Content Management
                   </Link>
                 </li>
-               <li
+                <li
                   className={User?.access?.includes("Contact") ? "" : "d-none"}>
                   <Link
-                      className=""
-                      to="/Contact&Support"
-                      style={{
-                        textDecoration: "none",
-                        fontSize: "18px",
-                        
-                      }}>
-                      <i
-                        style={{ position: "relative", left: "4px", top: "3px" }}
-                        class="fa-solid fa-handshake-angle"></i>{" "}
-                      Contact & Support
+                    className=""
+                    to="/Contact&Support"
+                    style={{
+                      textDecoration: "none",
+                      fontSize: "18px",
+                    }}>
+                    <i
+                      style={{ position: "relative", left: "4px", top: "3px" }}
+                      class="fa-solid fa-handshake-angle"></i>{" "}
+                    Contact & Support
                   </Link>
                 </li>
                 <li>
@@ -654,12 +622,10 @@ const CategorySub = () => {
                     className=""
                     to="/AdminLogin"
                     onClick={handleClick}
-                    style={{ textDecoration: "none", fontSize: "18px" }}
-                  >
+                    style={{ textDecoration: "none", fontSize: "18px" }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "3px" }}
-                      class="fa fa-sign-out-alt"
-                    ></i>
+                      class="fa fa-sign-out-alt"></i>
                     Logout
                   </Link>
                 </li>
@@ -673,12 +639,10 @@ const CategorySub = () => {
                     style={{
                       textDecoration: "none",
                       fontSize: "18px",
-                    }}
-                  >
+                    }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "2px" }}
-                      className="fa fa-home"
-                    ></i>{" "}
+                      className="fa fa-home"></i>{" "}
                     Dashboard
                   </Link>
                 </li>
@@ -686,12 +650,10 @@ const CategorySub = () => {
                   <Link
                     className=""
                     to="/UserManage"
-                    style={{ textDecoration: "none", fontSize: "18px" }}
-                  >
+                    style={{ textDecoration: "none", fontSize: "18px" }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "3px" }}
-                      class="fa fa-user"
-                    ></i>{" "}
+                      class="fa fa-user"></i>{" "}
                     User Management
                   </Link>
                 </li>
@@ -703,12 +665,10 @@ const CategorySub = () => {
                       textDecoration: "none",
                       fontSize: "18px",
                       color: "#3e4093",
-                    }}
-                  >
+                    }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "3px" }}
-                      class="fa fa-layer-group"
-                    ></i>{" "}
+                      class="fa fa-layer-group"></i>{" "}
                     Category &amp; Sub Category
                   </Link>
                 </li>
@@ -719,12 +679,10 @@ const CategorySub = () => {
                     style={{
                       textDecoration: "none",
                       fontSize: "18px",
-                    }}
-                  >
+                    }}>
                     <i
                       style={{ position: "relative", left: "6px", top: "3px" }}
-                      class="far fa-building"
-                    ></i>{" "}
+                      class="far fa-building"></i>{" "}
                     Inventory Management
                   </Link>
                 </li>
@@ -732,12 +690,10 @@ const CategorySub = () => {
                   <Link
                     className=""
                     to="/brandsManage"
-                    style={{ textDecoration: "none", fontSize: "18px" }}
-                  >
+                    style={{ textDecoration: "none", fontSize: "18px" }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "3px" }}
-                      class="fa fa-ship"
-                    ></i>{" "}
+                      class="fa fa-ship"></i>{" "}
                     Brands Management
                   </Link>
                 </li>
@@ -748,28 +704,24 @@ const CategorySub = () => {
                     style={{
                       textDecoration: "none",
                       fontSize: "18px",
-                    }}
-                  >
+                    }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "3px" }}
-                      class="fas fa-user-cog"
-                    ></i>{" "}
+                      class="fas fa-user-cog"></i>{" "}
                     Sub-Admin Management
                   </Link>
                 </li>
-                     <li>
+                <li>
                   <Link
-                    className="d-none at"
+                    className="d-none ata"
                     to="/Puller-Management"
                     style={{
                       textDecoration: "none",
                       fontSize: "18px",
-                    }}
-                  >
+                    }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "3px" }}
-                      class="fas fa-users-gear"
-                    ></i>{" "}
+                      class="fas fa-users-gear"></i>{" "}
                     Puller Management
                   </Link>
                 </li>
@@ -780,12 +732,10 @@ const CategorySub = () => {
                     style={{
                       textDecoration: "none",
                       fontSize: "18px",
-                    }}
-                  >
+                    }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "3px" }}
-                      class="fas fa-image"
-                    ></i>{" "}
+                      class="fas fa-image"></i>{" "}
                     Gallery Management
                   </Link>
                 </li>
@@ -807,12 +757,10 @@ const CategorySub = () => {
                   <Link
                     className=""
                     to="/OrderRequest"
-                    style={{ textDecoration: "none", fontSize: "18px" }}
-                  >
+                    style={{ textDecoration: "none", fontSize: "18px" }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "3px" }}
-                      class="fa fa-layer-group"
-                    ></i>{" "}
+                      class="fa fa-layer-group"></i>{" "}
                     Order Management
                   </Link>
                 </li>
@@ -820,12 +768,10 @@ const CategorySub = () => {
                   <Link
                     className=""
                     to="/Cms"
-                    style={{ textDecoration: "none", fontSize: "18px" }}
-                  >
+                    style={{ textDecoration: "none", fontSize: "18px" }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "3px" }}
-                      class="fa fa-cog"
-                    ></i>{" "}
+                      class="fa fa-cog"></i>{" "}
                     Content Management
                   </Link>
                 </li>
@@ -833,12 +779,10 @@ const CategorySub = () => {
                   <Link
                     className=""
                     to="/Contact&Support"
-                    style={{ textDecoration: "none", fontSize: "18px" }}
-                  >
+                    style={{ textDecoration: "none", fontSize: "18px" }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "3px" }}
-                      class="fa-solid fa-handshake-angle"
-                    ></i>{" "}
+                      class="fa-solid fa-handshake-angle"></i>{" "}
                     Contact & Support
                   </Link>
                 </li>
@@ -847,12 +791,10 @@ const CategorySub = () => {
                     className=""
                     to="/AdminLogin"
                     onClick={handleClick}
-                    style={{ textDecoration: "none", fontSize: "18px" }}
-                  >
+                    style={{ textDecoration: "none", fontSize: "18px" }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "3px" }}
-                      class="fa fa-sign-out-alt"
-                    ></i>
+                      class="fa fa-sign-out-alt"></i>
                     Logout
                   </Link>
                 </li>
@@ -872,8 +814,7 @@ const CategorySub = () => {
                     onClick={() => {
                       console.log("yello");
                       setSideBar(!sideBar);
-                    }}
-                  >
+                    }}>
                     <i className="fa fa-bars"></i>
                   </h1>
                 </div>
@@ -884,8 +825,7 @@ const CategorySub = () => {
                       onClick={(e) => {
                         console.log(e);
                         setSideBar(!sideBar);
-                      }}
-                    >
+                      }}>
                       X
                     </button>
                   </h3>
@@ -930,23 +870,20 @@ const CategorySub = () => {
                             src={require("../../../assets/img/iconSort.png")}
                             width={23}
                             height={23}
-                            className="mx-3 mt-2"
-                          ></img>
+                            className="mx-3 mt-2"></img>
                         </button>
                         <div class="dropdown-content_sort">
                           <a>
                             <Link
                               className="text-decoration-none "
-                              onClick={() => sorting(1)}
-                            >
+                              onClick={() => sorting(1)}>
                               A to Z
                             </Link>
                           </a>
                           <a>
                             <Link
                               className="text-decoration-none"
-                              onClick={() => sorting(-1)}
-                            >
+                              onClick={() => sorting(-1)}>
                               Z to A
                             </Link>
                           </a>
@@ -964,8 +901,7 @@ const CategorySub = () => {
                         <div
                           className="nav nav-tabs"
                           id="nav-tab"
-                          role="tablist"
-                        >
+                          role="tablist">
                           <button
                             className="nav-link active"
                             id="nav-home-tab"
@@ -978,8 +914,7 @@ const CategorySub = () => {
                             onClick={() => {
                               document.getElementById("Search").value = "";
                               getCategories();
-                            }}
-                          >
+                            }}>
                             Category
                           </button>
                           <button
@@ -994,32 +929,27 @@ const CategorySub = () => {
                             onClick={() => {
                               document.getElementById("Search").value = "";
                               getSubCategories();
-                            }}
-                          >
+                            }}>
                             Sub Category
                           </button>
                         </div>
                       </nav>
                       <div
                         className="tab-content recent_orders_cate"
-                        id="nav-tabContent"
-                      >
+                        id="nav-tabContent">
                         <div
                           className="tab-pane fade show active"
                           id="nav-home"
                           role="tabpanel"
-                          aria-labelledby="nav-home-tab"
-                        >
+                          aria-labelledby="nav-home-tab">
                           <div className="row mx-0">
                             <div className="col-12">
                               <form
                                 className="form-design py-4 px-3 help-support-form row align-items-end justify-content-between"
-                                action=""
-                              >
+                                action="">
                                 <div
                                   className="form-group mb-0 col-4"
-                                  key={category}
-                                >
+                                  key={category}>
                                   <label htmlFor="">Category Name</label>
                                   <input
                                     type="text"
@@ -1077,15 +1007,13 @@ const CategorySub = () => {
                                       top: "-2px",
                                     }}
                                     className="comman_btn"
-                                    onClick={saveCategory}
-                                  >
+                                    onClick={saveCategory}>
                                     Save
                                   </Button>
                                   <button
                                     className="comman_btn d-none"
                                     id="resetCat"
-                                    type="reset"
-                                  >
+                                    type="reset">
                                     Reset
                                   </button>
                                 </div>
@@ -1096,8 +1024,9 @@ const CategorySub = () => {
                                     <table className="table mb-0">
                                       <thead>
                                         <tr
-                                          style={{ backgroundColor: "#f2f2f2" }}
-                                        >
+                                          style={{
+                                            backgroundColor: "#f2f2f2",
+                                          }}>
                                           <th>S.No.</th>
                                           <th>Date</th>
                                           <th>Category Name</th>
@@ -1134,8 +1063,7 @@ const CategorySub = () => {
                                                     item?.categoryImage
                                                       ? item?.categoryImage
                                                       : require("../../../assets/img/product.jpg")
-                                                  }
-                                                ></img>
+                                                  }></img>
                                               </td>
                                               <td className="border">
                                                 <img
@@ -1144,15 +1072,13 @@ const CategorySub = () => {
                                                     item?.background
                                                       ? item?.background
                                                       : require("../../../assets/img/product.jpg")
-                                                  }
-                                                ></img>
+                                                  }></img>
                                               </td>
                                               <td className="border">
                                                 {" "}
                                                 <div
                                                   className=""
-                                                  key={item?._id}
-                                                >
+                                                  key={item?._id}>
                                                   <label class="switchUser">
                                                     <input
                                                       type="checkbox"
@@ -1174,8 +1100,7 @@ const CategorySub = () => {
                                                 {" "}
                                                 <div
                                                   className=""
-                                                  key={item?._id}
-                                                >
+                                                  key={item?._id}>
                                                   <label class="switchUser">
                                                     <input
                                                       type="checkbox"
@@ -1201,8 +1126,7 @@ const CategorySub = () => {
                                                   key={index}
                                                   onClick={() => {
                                                     EditCategory(item?._id);
-                                                  }}
-                                                >
+                                                  }}>
                                                   Edit
                                                 </Link>
                                               </td>
@@ -1261,14 +1185,12 @@ const CategorySub = () => {
                           className="tab-pane fade recent_order"
                           id="nav-profile"
                           role="tabpanel"
-                          aria-labelledby="nav-profile-tab"
-                        >
+                          aria-labelledby="nav-profile-tab">
                           <div className="row mx-0">
                             <div className="col-12">
                               <form
                                 className="form-design py-4 px-3 help-support-form row align-items-end justify-content-between"
-                                action=""
-                              >
+                                action="">
                                 <div className="form-group col mb-0">
                                   <label htmlFor="">Category</label>
                                   <select
@@ -1276,8 +1198,7 @@ const CategorySub = () => {
                                     aria-label="Default select example"
                                     onChange={(e) => {
                                       setCategory(e.target.value);
-                                    }}
-                                  >
+                                    }}>
                                     <option selected="">Select Category</option>
                                     {(allCategories || [])?.map(
                                       (item, index) => (
@@ -1328,15 +1249,13 @@ const CategorySub = () => {
                                       top: "-2px",
                                     }}
                                     className="comman_btn"
-                                    onClick={saveSubCategory}
-                                  >
+                                    onClick={saveSubCategory}>
                                     Save
                                   </Button>
                                   <button
                                     className="comman_btn d-none"
                                     id="resetSubCat"
-                                    type="reset"
-                                  >
+                                    type="reset">
                                     Reset
                                   </button>
                                 </div>
@@ -1347,8 +1266,9 @@ const CategorySub = () => {
                                     <table className="table mb-0">
                                       <thead>
                                         <tr
-                                          style={{ backgroundColor: "#f2f2f2" }}
-                                        >
+                                          style={{
+                                            backgroundColor: "#f2f2f2",
+                                          }}>
                                           <th>S.No.</th>
                                           <th>Date</th>
                                           <th>Category Name</th>
@@ -1388,15 +1308,13 @@ const CategorySub = () => {
                                                     item?.subCategoryImage
                                                       ? item?.subCategoryImage
                                                       : require("../../../assets/img/product.jpg")
-                                                  }
-                                                ></img>
+                                                  }></img>
                                               </td>
                                               <td className="border">
                                                 {" "}
                                                 <div
                                                   className=""
-                                                  key={item?._id}
-                                                >
+                                                  key={item?._id}>
                                                   <label class="switchUser">
                                                     <input
                                                       type="checkbox"
@@ -1422,8 +1340,7 @@ const CategorySub = () => {
                                                   key={index}
                                                   onClick={() => {
                                                     EditSubCategory(item?._id);
-                                                  }}
-                                                >
+                                                  }}>
                                                   Edit
                                                 </Link>
                                               </td>
@@ -1447,8 +1364,7 @@ const CategorySub = () => {
                                                 : setActivePage2(
                                                     activePage2 - 1
                                                   )
-                                            }
-                                          >
+                                            }>
                                             «
                                           </a>
                                         </li>
@@ -1469,8 +1385,7 @@ const CategorySub = () => {
                                                 : setActivePage2(
                                                     activePage2 + 1
                                                   )
-                                            }
-                                          >
+                                            }>
                                             »
                                           </a>
                                         </li>
@@ -1499,8 +1414,7 @@ const CategorySub = () => {
           data-bs-keyboard="false"
           tabIndex={-1}
           aria-labelledby="staticBackdropLabel"
-          aria-hidden="true"
-        >
+          aria-hidden="true">
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content border-0">
               <div className="modal-header">
@@ -1524,8 +1438,7 @@ const CategorySub = () => {
               <div className="modal-body shadow">
                 <form
                   className="form-design px- py-2 help-support-form row align-items-end justify-content-center"
-                  action=""
-                >
+                  action="">
                   <div className="form-group col-6 p-3">
                     <label htmlFor="" className="mx-3">
                       Category Image
@@ -1559,8 +1472,7 @@ const CategorySub = () => {
                       <i
                         class="fa fa-trash mx-2 text-danger deleteBtnCat"
                         aria-hidden="true"
-                        onClick={deleteCatImage}
-                      ></i>
+                        onClick={deleteCatImage}></i>
                     ) : null}
                   </div>
 
@@ -1597,8 +1509,9 @@ const CategorySub = () => {
                       <i
                         class="fa fa-trash mx-2 text-danger deleteBtnCat"
                         aria-hidden="true"
-                        onClick={() => deleteBackImage(EditCategories?._id)}
-                      ></i>
+                        onClick={() =>
+                          deleteBackImage(EditCategories?._id)
+                        }></i>
                     ) : null}
                   </div>
                   <div className="form-group col-6">
@@ -1620,10 +1533,11 @@ const CategorySub = () => {
                       aria-label="Default select example"
                       onChange={(e) => {
                         setOrder(e.target.value);
-                      }}
-                    >
+                      }}>
                       <option selected value={EditCategories?.listingOrder}>
-                        {EditCategories?.listingOrder + 1}
+                        {EditCategories?.listingOrder
+                          ? EditCategories?.listingOrder
+                          : 0 + 1}
                       </option>
                       <option value="0">1</option>
                       <option value="1">2</option>
@@ -1645,8 +1559,7 @@ const CategorySub = () => {
                     <button
                       className="comman_btn d-none"
                       type="reset"
-                      id="ResetCat"
-                    >
+                      id="ResetCat">
                       reset
                     </button>
                   </div>
@@ -1662,8 +1575,7 @@ const CategorySub = () => {
           data-bs-keyboard="false"
           tabIndex={-1}
           aria-labelledby="staticBackdropLabel"
-          aria-hidden="true"
-        >
+          aria-hidden="true">
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content border-0">
               <div className="modal-header">
@@ -1686,8 +1598,7 @@ const CategorySub = () => {
               <div className="modal-body shadow">
                 <form
                   className="form-design px-3  help-support-form row align-items-end justify-content-center"
-                  action=""
-                >
+                  action="">
                   <div className="form-group col-12 p-1">
                     <label htmlFor="" className="">
                       Sub Category Image
@@ -1698,13 +1609,13 @@ const CategorySub = () => {
                         <i
                           class="fa fa-trash mx-2 text-danger "
                           aria-hidden="true"
-                          onClick={() => deleteSubImage(EditSubCategories?._id)}
-                        ></i>
+                          onClick={() =>
+                            deleteSubImage(EditSubCategories?._id)
+                          }></i>
                       ) : null}
                       <div
                         className="text-center mt-0 mb-5 "
-                        key={subCategoryIndex}
-                      >
+                        key={subCategoryIndex}>
                         <img
                           className="profile-pic subCatImages2"
                           id="subCatImg"
@@ -1738,8 +1649,7 @@ const CategorySub = () => {
                       aria-label="Default select example"
                       onChange={(e) => {
                         setCategory(e.target.value);
-                      }}
-                    >
+                      }}>
                       <option selected="">
                         {EditSubCategories?.categoryName?.categoryName}
                       </option>
@@ -1752,8 +1662,7 @@ const CategorySub = () => {
                   </div>
                   <div
                     className="form-group col-6"
-                    key={EditSubCategories?.subCategoryName}
-                  >
+                    key={EditSubCategories?.subCategoryName}>
                     <label htmlFor="">Sub Category Name</label>
                     <input
                       type="text"
@@ -1768,15 +1677,13 @@ const CategorySub = () => {
                   <div className="form-group mb-0 col-auto mt-3">
                     <button
                       className="comman_btn"
-                      onClick={onEditSaveSubCategory}
-                    >
+                      onClick={onEditSaveSubCategory}>
                       Save
                     </button>
                     <button
                       className="comman_btn d-none"
                       type="reset"
-                      id="ResetSub"
-                    >
+                      id="ResetSub">
                       reset
                     </button>
                   </div>

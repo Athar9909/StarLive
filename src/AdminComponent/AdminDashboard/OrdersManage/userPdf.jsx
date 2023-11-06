@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import html2pdf from "html2pdf.js/dist/html2pdf.min";
 import moment from "moment";
 
 const UserPdf = () => {
@@ -32,10 +31,7 @@ const UserPdf = () => {
     console.log("KK");
     window.print();
   };
-  const printHandler = () => {
-    const printElement = document.getElementById("main_pdf");
-    html2pdf().from(printElement).save(orders?.orderId);
-  };
+
   return (
     <div className="" id="main_pdf">
       <p className="d-flex mx-3 justify-content-between mt-1">

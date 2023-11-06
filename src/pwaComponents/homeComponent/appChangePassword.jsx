@@ -120,8 +120,8 @@ function AppChangePassword() {
         </div>
         <WebHeader2 />
 
-        <div className="page-content-wrapper">
-          <div className="page-content-wrapper">
+        <div className="page-content-wrapper2">
+          <div className="">
             <div className="container">
               <div className="profile-wrapper-area py-3">
                 <div className="card user-info-card">

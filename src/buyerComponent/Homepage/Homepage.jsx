@@ -435,118 +435,6 @@ const Homepage = () => {
               </video>
             </div>
 
-            {/* <div
-              className="banner_section item bg-white shadow"
-              onClick={() => {
-                window.location.href = videos[0]?.url
-                  ? videos[0]?.url
-                  : "https://starimporters.com/app/home";
-              }}>
-              <div
-                className="video_banner"
-                style={{
-                  backgroundImage: videos[0]?.videoCover?.length > 4
-                    ? `url(${videos[0]?.videoCover})`
-                    : `url(${image})`,
-                }}>
-                <video
-                  muted={isMuted ? true : false}
-                  id="frameOne"
-                  className="bg-white p-0 shadow"
-                  autoPlay
-                  loop
-                  preload="auto">
-                  <source
-                    src={videos[0]?.video?.length > 4 ? videos[0]?.video : videoStatic}
-                  />
-                </video>
-              </div>
-            </div>
-
-            <div
-              className="banner_section item bg-white shadow"
-              onClick={() => {
-                window.location.href = videos[1]?.url
-                  ? videos[1]?.url
-                  : "https://starimporters.com/app/home";
-              }}>
-              <div
-                className="video_banner"
-                style={{
-                  backgroundImage: videos[1]?.videoCover?.length > 4
-                    ? `url(${videos[1]?.videoCover})`
-                    : `url(${image})`,
-                }}>
-                <video
-                  muted={isMuted ? true : false}
-                  id="frameTwo"
-                  className="bg-white shadow p-0"
-                  autoPlay
-                  loop
-                  preload="auto">
-                  <source
-                    src={videos[1]?.video?.length > 4 ? videos[1]?.video : videoStatic}
-                  />
-                </video>
-              </div>
-            </div>
-
-            <div
-              className="banner_section item bg-white shadow"
-              onClick={() => {
-                window.location.href = videos[2]?.url
-                  ? videos[2]?.url
-                  : "https://starimporters.com/app/home";
-              }}>
-              <div
-                className="video_banner"
-                style={{
-                  backgroundImage: videos[2]?.videoCover?.length > 4
-                    ? `url(${videos[2]?.videoCover})`
-                    : `url(${image})`,
-                }}>
-                <video
-                  muted={isMuted ? true : false}
-                  id="frameThree"
-                  className="bg-white shadow p-0"
-                  autoPlay
-                  loop
-                  preload="auto">
-                  <source
-                    src={videos[2]?.video?.length > 4 ? videos[2]?.video : videoStatic}
-                  />
-                </video>
-              </div>
-            </div>
-
-            <div
-              className="banner_section item bg-white shadow"
-              onClick={() => {
-                window.location.href = videos[3]?.url
-                  ? videos[3]?.url
-                  : "https://starimporters.com/app/home";
-              }}>
-              <div
-                className="video_banner"
-                style={{
-                  backgroundImage: videos[3]?.videoCover?.length > 4
-                    ? `url(${videos[3]?.videoCover})`
-                    : `url(${image})`,
-                }}>
-                <video
-                  muted={isMuted ? true : false}
-                  id="frameFour"
-                  className="bg-white p-0"
-                  autoPlay
-                  loop
-                  preload="auto">
-                  <source
-                    src={videos[3]?.video?.length > 4 ? videos[3]?.video : videoStatic}
-                  />
-                </video>
-              </div>
-            </div> */}
-
             <div
               className="banner_section item "
               onClick={() => {
@@ -555,6 +443,7 @@ const Homepage = () => {
                   : "https://starimporters.com/app/home";
               }}>
               <img
+                loading="lazy"
                 src={
                   allSlides[2]?.banner
                     ? allSlides[2]?.banner
@@ -605,6 +494,7 @@ const Homepage = () => {
                   : "https://starimporters.com/app/home";
               }}>
               <img
+                loading="lazy"
                 src={
                   allSlides[3]?.banner
                     ? allSlides[3]?.banner
@@ -706,6 +596,7 @@ const Homepage = () => {
                   : "https://starimporters.com/app/home";
               }}>
               <img
+                loading="lazy"
                 src={
                   allSlides[5]?.banner
                     ? allSlides[5]?.banner
@@ -804,6 +695,7 @@ const Homepage = () => {
                                 );
                               }}>
                               <img
+                                loading="lazy"
                                 src={
                                   item?.productId?.type?.flavourImage
                                     ? item?.productId?.type?.flavourImage
@@ -938,6 +830,7 @@ const Homepage = () => {
                                   );
                                 }}>
                                 <img
+                                  loading="lazy"
                                   className="mt-3"
                                   src={
                                     item?.productId?.type?.flavourImage

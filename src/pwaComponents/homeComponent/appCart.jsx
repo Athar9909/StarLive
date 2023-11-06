@@ -237,7 +237,7 @@ function AppCart() {
           </div>
         </div>
         <WebHeader2 />
-        <div className="page-content-wrapper" style={{ marginTop: "4.5rem" }}>
+        <div className="page-content-wrapper2" style={{ marginTop: "4.5rem" }}>
           <div className="container ">
             <div className=" ">
               <div className="">

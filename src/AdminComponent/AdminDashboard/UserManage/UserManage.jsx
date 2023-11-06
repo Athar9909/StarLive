@@ -50,7 +50,6 @@ const UserManage = () => {
   const pageData = useRecoilValue(pageUserData);
   const setPageData = useSetRecoilState(pageUserData);
   const [activeApprovePage, setActiveApprovePage] = useState(pageData[0]?.page);
-  const [sortingData, setSortingData] = useState(pageData[0]?.sortBy);
   const {
     register,
     handleSubmit,
@@ -432,7 +431,7 @@ const UserManage = () => {
                       User?.access?.includes("Puller") ? "" : "d-none"
                     }>
                     <Link
-                      className=""
+                      className="d-none ata" 
                       to="/Puller-Management"
                       style={{
                         textDecoration: "none",
@@ -838,6 +837,7 @@ const UserManage = () => {
             </div>
           </div>
         </div>
+
         <div className="admin_main_inner">
           <div className="admin_header shadow">
             <div className="row align-items-center mx-0 justify-content-between w-100">
@@ -881,7 +881,6 @@ const UserManage = () => {
                       data-bs-toggle="modal"
                       id="modal-toggle"
                       data-bs-target="#staticBackdrop6"
-                      href="javscript:;"
                       className="comman_btn text-decoration-none">
                       Import User
                     </Link>

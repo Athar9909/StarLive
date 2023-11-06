@@ -23,7 +23,7 @@ function AppRequests() {
     <>
       <div className="star_imp_app">
         <AppHeader />
-        <div className="my_order_new mt-2">
+        <div className="my_order_new ">
           <div className="container">
             {orderDetails?.length ? (
               <div className="row">

@@ -47,7 +47,7 @@ const AgeVerification = ({ ModalClose }) => {
               <span className="fs-4">ARE YOU 21 YEARS OLD OR OLDER?</span>
               <form>
                 <div className="form-group custom_checkboxs mt-3 mb-md-4 mb-3">
-                  <label htmlFor="" className="fs-3">
+                  <label htmlFor="" >
                     THIS WEBSITE REQUIRES YOU TO BE 21+ YEARS OLDER TO ENTER.
                   </label>
                 </div>

@@ -9,7 +9,6 @@ import { Button, InputNumber, Loader } from "rsuite";
 import moment from "moment";
 
 const EditOrder = () => {
-
   const [sideBar, setSideBar] = useState(true);
   let location = useLocation();
   const orderView = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/order/getOrderDetail`;
@@ -280,7 +279,7 @@ const EditOrder = () => {
                 <li
                   className={User?.access?.includes("Puller") ? "" : "d-none"}>
                   <Link
-                    className="d-none at"
+                    className="d-none ata"
                     to="/Puller-Management"
                     style={{
                       textDecoration: "none",
@@ -292,10 +291,8 @@ const EditOrder = () => {
                     Puller Management
                   </Link>
                 </li>
-                 <li
-                  className={
-                    User?.access?.includes("Gallery") ? "" : "d-none"
-                  }>
+                <li
+                  className={User?.access?.includes("Gallery") ? "" : "d-none"}>
                   <Link
                     className=""
                     to="/Gallery-Management"
@@ -308,7 +305,8 @@ const EditOrder = () => {
                       class="fas fa-image"></i>{" "}
                     Gallery Management
                   </Link>
-                </li><li
+                </li>
+                <li
                   className={
                     User?.access?.includes("catalogFlyers") ? "" : "d-none"
                   }>
@@ -318,7 +316,6 @@ const EditOrder = () => {
                     style={{
                       textDecoration: "none",
                       fontSize: "18px",
-                     
                     }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "3px" }}
@@ -326,7 +323,7 @@ const EditOrder = () => {
                     Catalog & Flyers
                   </Link>
                 </li>
-                
+
                 <li
                   className={
                     User?.access?.includes("Orders Management") ? "" : "d-none"
@@ -356,20 +353,19 @@ const EditOrder = () => {
                     Content Management
                   </Link>
                 </li>
-               <li
+                <li
                   className={User?.access?.includes("Contact") ? "" : "d-none"}>
                   <Link
-                      className=""
-                      to="/Contact&Support"
-                      style={{
-                        textDecoration: "none",
-                        fontSize: "18px",
-                        
-                      }}>
-                      <i
-                        style={{ position: "relative", left: "4px", top: "3px" }}
-                        class="fa-solid fa-handshake-angle"></i>{" "}
-                      Contact & Support
+                    className=""
+                    to="/Contact&Support"
+                    style={{
+                      textDecoration: "none",
+                      fontSize: "18px",
+                    }}>
+                    <i
+                      style={{ position: "relative", left: "4px", top: "3px" }}
+                      class="fa-solid fa-handshake-angle"></i>{" "}
+                    Contact & Support
                   </Link>
                 </li>
                 <li>
@@ -464,7 +460,7 @@ const EditOrder = () => {
                 </li>
                 <li>
                   <Link
-                    className=""
+                    className="d-none ata"
                     to="/Puller-Management"
                     style={{
                       textDecoration: "none",
@@ -776,11 +772,11 @@ const EditOrder = () => {
                                           </h3>
                                           <p>
                                             Barcodes:{" "}
-                                            {item?.flavour?.barcode?.filter((itm, id) => id == 1).map(
-                                              (item) => (
+                                            {item?.flavour?.barcode
+                                              ?.filter((itm, id) => id == 1)
+                                              .map((item) => (
                                                 <li>{item}</li>
-                                              )
-                                            )}
+                                              ))}
                                           </p>
                                         </div>
                                       </div>
@@ -884,15 +880,18 @@ const EditOrder = () => {
 
                 <div className="form-group col-6 ">
                   <label htmlFor="">Product Quantity </label>
-
-                  <InputNumber
+                  <input
+                    type="tel"
+                    className=" form-select"
+                    maxLength={5}
+                    onChange={(e) => setQuantity(e.target.value)}></input>
+                  {/* <InputNumber
                     min={1}
-                    max={1000}
+                    max={5}
                     value={quantity}
                     className="mt-1"
-                    onChange={setQuantity}
                     enableMobileNumericKeyboard
-                  />
+                  /> */}
                 </div>
                 <div className="form-group mb-0 col-12 text-center ">
                   <button className="comman_btn2" onClick={AddProduct}>

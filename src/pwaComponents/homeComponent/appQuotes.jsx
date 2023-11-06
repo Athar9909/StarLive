@@ -152,7 +152,7 @@ function AppQuotes() {
           </div>
         </div>
         <WebHeader2 />
-        <div className="page-content-wrapper">
+        <div className="page-content-wrapper2">
           <div className="container">
             <div className="cart-wrapper-area py-3">
               <div className="cart-table card mb-3">

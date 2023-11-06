@@ -12,6 +12,7 @@ import Compressor from "compressorjs";
 
 const EditInventory = () => {
   const [files, setFiles] = useState([]);
+  const [seo, setSeo] = useState([]);
   const [productImage, setProductImage] = useState();
   const [allProducts, setAllProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -79,9 +80,11 @@ const EditInventory = () => {
       setFormValues(res?.data.results.type);
       setProductBarcode(res?.data.results?.pBarcode);
       SubCategoryDrop(data[0]?.category?._id);
+      setSeo(data[0]?.SEOKeywords);
     });
   };
 
+  console.log(seo);
   const NewSubCategory = async (e) => {
     let categoryId = e.target.value;
     await axios
@@ -150,6 +153,7 @@ const EditInventory = () => {
         productPriceStatus: data?.productPriceStatus,
         productImage: productImage ? productImage : "",
         type: formValues,
+        SEOKeywords: seo,
       })
       .then((res) => {
         if (res?.data.error) {
@@ -181,6 +185,26 @@ const EditInventory = () => {
         }
         setNchnge(Nchnge);
       });
+  };
+  function handleKeyDownSeo(e) {
+    // If user did not press enter key, return
+    if (e.key !== "Tab") return;
+    const value = e.target.value;
+    if (!value.trim()) return;
+    // Add the value to the tags array
+    setSeo([...seo, value.replace(/(\r\n|\n|\r)/gm, "")]);
+    let newFormValues = { ...seo };
+    newFormValues[e.target.name] = [
+      ...(seo || []),
+      value.replace(/(\r\n|\n|\r)/gm, ""),
+    ];
+    e.target.value = "";
+  }
+  const removeKeyWord = (i) => {
+    let newForm = [...seo];
+    newForm?.splice(i, 1);
+    setSeo(newForm);
+    setChange(!change);
   };
   const flavourPriceStatus = async (index) => {
     await axios
@@ -256,7 +280,7 @@ const EditInventory = () => {
             button: "Ok",
             timer: 2000,
           }).then(() => {
-          window.location.reload(false)
+            window.location.reload(false);
           });
         }
       });
@@ -441,7 +465,7 @@ const EditInventory = () => {
                 <li
                   className={User?.access?.includes("Puller") ? "" : "d-none"}>
                   <Link
-                    className="d-none"
+                    className="d-none ata"
                     to="/Puller-Management"
                     style={{
                       textDecoration: "none",
@@ -619,7 +643,7 @@ const EditInventory = () => {
                 </li>
                 <li>
                   <Link
-                    className=""
+                    className="d-none ata"
                     to="/Puller-Management"
                     style={{
                       textDecoration: "none",
@@ -799,7 +823,7 @@ const EditInventory = () => {
                       </div>
                     </div>
 
-                    <div className="form-group col-6">
+                    <div className="form-group col-4">
                       <label htmlFor="">Product Name</label>
                       <input
                         type="text"
@@ -809,7 +833,7 @@ const EditInventory = () => {
                         {...register("productName")}
                       />
                     </div>
-                    <div className="form-group col-6">
+                    <div className="form-group col-4">
                       <label htmlFor="">Case Size</label>
                       <input
                         type="text"
@@ -839,7 +863,7 @@ const EditInventory = () => {
                         ))}
                       </select>
                     </div>
-                    <div className="form-group col-4">
+                    <div className="form-group col-3">
                       <label htmlFor="">Sub Category</label>
                       <select
                         className="form-select form-control"
@@ -857,7 +881,7 @@ const EditInventory = () => {
                       </select>
                     </div>
 
-                    <div className="form-group col-4 ">
+                    <div className="form-group col-3 ">
                       <label htmlFor="">Brands</label>
                       <select
                         className="form-select form-control"
@@ -873,6 +897,30 @@ const EditInventory = () => {
                           </option>
                         ))}
                       </select>
+                    </div>
+
+                    <div className="form-group col-6">
+                      <label htmlFor="">SEO Keywords (Use Tab key)</label>
+                      <div className="tags-input-container">
+                        {(seo || [])?.map((tag, ind) => (
+                          <div className="tag-item" key={ind}>
+                            <span className="tag-text">{tag}</span>
+                            <span
+                              className="close"
+                              onClick={() => removeKeyWord(ind)}>
+                              &times;
+                            </span>
+                          </div>
+                        ))}
+
+                        <input
+                          type="text"
+                          className="tags-input mb-0 bg-light p-2"
+                          placeholder="Enter Keywords"
+                          name="SeoKeyword"
+                          onKeyDown={(e) => handleKeyDownSeo(e)}
+                        />
+                      </div>
                     </div>
                     <div className="form-group col-lg-12 col-md-10   mt-2 mb-4">
                       <form className="">

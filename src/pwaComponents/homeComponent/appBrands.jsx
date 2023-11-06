@@ -44,8 +44,6 @@ function AppBrands() {
   };
 
   return (
-
-
     <>
       <div className="star_imp_app">
         <div class="header-area" id="headerArea" ref={ref}>
@@ -72,70 +70,39 @@ function AppBrands() {
           </div>
         </div>
         <WebHeader2 />
-        <div className="page-content-wrapper container-fluid">
+        <div className="page-content-wrapper2 container-fluid">
           <Search />
-          {/* {browserName === "WebKit" || browserName === "Chrome WebView" ? (
-            <div>
-              {searchKey?.length ? null : (
-                <div className="brands_section pt-3">
-                  <div className="row mx-0">
-                    {brand
-                      .filter((itm, idx) => itm.isTobacco != true)
-                      .map((item, index) => {
-                        return (
-                          <div className="col-6 mb-3 pe-2">
-                            <Link
-                              className="brands_box shadow"
-                              to={`/app/productBrands/${item?.brandName}`}>
-                              <img
-                                src={
-                                  item?.brandImage
-                                    ? item.brandImage
-                                    : require("../../assets/img/product.jpg")
-                                }
-                                className="p-2"
-                                alt=""
-                              />
-                            </Link>
-                          </div>
-                        );
-                      })}
-                  </div>
-                </div>
-              )}
-            </div>
-          ) : (
-            <div> */}
-              {searchKey?.length ? null : (
-                <div className="brands_section pt-3">
-                  <div className="row mx-0">
-                    {brand?.map((item, index) => {
-                      return (
-                        <div className="col-6 mb-3 pe-2">
-                          <Link
-                            className="brands_box shadow"
-                            to={`/app/productBrands/${item?.brandName}`}>
-                            <img
-                              src={
-                                item?.brandImage
-                                  ? item.brandImage
-                                  : require("../../assets/img/product.jpg")
-                              }
-                              className="p-2"
-                              alt=""
-                            />
-                          </Link>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-            </div>
-          {/* )} */}
-        </div>
 
-        <AppFooter />
+          {searchKey?.length ? null : (
+            <div className="brands_section pt-3">
+              <div className="row mx-0">
+                {brand?.map((item, index) => {
+                  return (
+                    <div className="col-6 mb-3 pe-2">
+                      <Link
+                        className="brands_box shadow"
+                        to={`/app/productBrands/${item?.brandName}`}>
+                        <img
+                          src={
+                            item?.brandImage
+                              ? item.brandImage
+                              : require("../../assets/img/product.jpg")
+                          }
+                          className="p-2"
+                          alt=""
+                        />
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+        {/* )} */}
+      </div>
+
+      <AppFooter />
       {/* </div> */}
     </>
   );

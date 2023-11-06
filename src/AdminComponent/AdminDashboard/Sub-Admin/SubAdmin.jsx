@@ -37,6 +37,7 @@ export const colourOptions = [
   { value: "Orders Management", label: "Orders Management" },
   { value: "Gallery", label: "Gallery Management" },
   { value: "Contact", label: "Contact & Support" },
+  { value: "catalog", label: "Catalog & flyer" },
   { value: "CMS", label: "CMS" },
 ];
 
@@ -335,7 +336,7 @@ const SubAdmin = () => {
                 <li
                   className={User?.access?.includes("Puller") ? "" : "d-none"}>
                   <Link
-                    className=""
+                    className="d-none ata"
                     to="/Puller-Management"
                     style={{
                       textDecoration: "none",
@@ -517,7 +518,7 @@ const SubAdmin = () => {
 
                 <li>
                   <Link
-                    className="d-none at"
+                    className="d-none ata"
                     to="/Puller-Management"
                     style={{
                       textDecoration: "none",

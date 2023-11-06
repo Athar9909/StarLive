@@ -64,23 +64,31 @@ function AppHeader({ cartCount }) {
 
   return (
     <>
-      <div className="star_imp_app">
-        <div className="header-area " id="headerArea" ref={ref}>
-          <div className="container py-2  h-100 d-flex align-items-center justify-content-between d-flex rtl-flex-d-row-r">
-            <div className="logo-wrapper">
-              <Link
-                to="/app/home"
-                onClick={() => {
-                  setSearchkey(true);
-                  setData2([{ page: 1, sortBy: 1 }]);
-                  setData3([{ page: 1, sortBy: 1 }]);
-                  setData4([{ page: 1, sortBy: 1 }]);
-                  setData([{ page: 1, sortBy: 1 }]);
-                }}>
-                <img src={require("../../assets/img/logo.png")} alt="" />
-              </Link>
-            </div>
-            {browserName !== "Mobile Safari" ? null : (
+      <div className="">
+        <div className=" " id="headerArea" ref={ref}>
+          <div className="container-fluid py-1  h-100 ">
+            <div className="d-flex py-3">
+              <div className="suha-navbar-toggler">
+                <i
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#suhaOffcanvas"
+                  aria-controls="suhaOffcanvas"
+                  class="fa-solid fa-bars fs-5 mt-2"></i>
+              </div>
+              <div className="logo-wrapper">
+                <Link
+                  to="/app/home"
+                  onClick={() => {
+                    setSearchkey(true);
+                    setData2([{ page: 1, sortBy: 1 }]);
+                    setData3([{ page: 1, sortBy: 1 }]);
+                    setData4([{ page: 1, sortBy: 1 }]);
+                    setData([{ page: 1, sortBy: 1 }]);
+                  }}>
+                  <img src={require("../../assets/img/logo.png")} alt="" />
+                </Link>
+              </div>
+              {/* {browserName !== "Mobile Safari" ? null : (
               <div>
                 <a
                   className="appdownload_btn "
@@ -110,41 +118,33 @@ function AppHeader({ cartCount }) {
                   />
                 </a>
               </div>
-            )}
+            )} */}
 
-            <div className="navbar-logo-container d-flex align-items-center">
-              {token ? (
-                <div className="cart-icon-wrap">
+              <div className="navbar-logo-container d-flex align-items-end">
+                <div
+                  className={
+                    token
+                      ? "cart-icon-wrap opacity-100"
+                      : "cart-icon-wrap opacity-0"
+                  }>
                   <Link to="/app/cart">
                     <i className="fa-solid fa-bag-shopping"></i>
                     <span>{count}</span>
                   </Link>
                 </div>
-              ) : null}
 
-              <div className="user-profile ms-2">
-                <Link to={token ? "/app/profile" : "/app/login"}>
-                  <img
-                    className="headerProfile"
-                    src={
-                      detail?.profileImage
-                        ? detail?.profileImage
-                        : "/assets/img/logo.png"
-                    }
-                    alt=""
-                  />
-                </Link>
-              </div>
-
-              <div
-                className="suha-navbar-toggler ms-2"
-                data-bs-toggle="offcanvas"
-                data-bs-target="#suhaOffcanvas"
-                aria-controls="suhaOffcanvas">
-                <div>
-                  <span></span>
-                  <span></span>
-                  <span></span>
+                <div className="user-profile ms-2">
+                  <Link to={token ? "/app/profile" : "/app/login"}>
+                    <img
+                      className="headerProfile"
+                      src={
+                        detail?.profileImage
+                          ? detail?.profileImage
+                          : "/assets/img/logo.png"
+                      }
+                      alt=""
+                    />
+                  </Link>
                 </div>
               </div>
             </div>

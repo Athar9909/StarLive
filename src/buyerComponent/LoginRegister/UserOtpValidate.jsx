@@ -29,6 +29,14 @@ const UserOtpValidate = () => {
   }, [counter, email]);
 
   const onSubmit = async (data) => {
+    if (!OTP) {
+      Swal.fire({
+        title: "Enter Otp.",
+        text: "",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
+    }
     const VerifyUser = () => {
       axios
         .post(apiUrl, {
@@ -99,8 +107,7 @@ const UserOtpValidate = () => {
               <form
                 class="row login-new-form justify-content-center"
                 action=""
-                onSubmit={handleSubmit(onSubmit)}
-              >
+                onSubmit={handleSubmit(onSubmit)}>
                 <div class="form-group mb-2 col-12 otp_field">
                   <OTPInput
                     value={OTP}
@@ -129,20 +136,16 @@ const UserOtpValidate = () => {
                     {counter ? (
                       <a
                         className="text-decoration-none "
-                        style={{ color: "#3b4093" }}
-                      >
+                        style={{ color: "#3b4093" }}>
                         Check Email
                       </a>
                     ) : (
-                    
                       <a
                         className="text-decoration-none"
                         style={{ color: "#3b4093", cursor: "pointer" }}
-                        onClick={ResendOtp}
-                      >
+                        onClick={ResendOtp}>
                         Resend OTP
                       </a>
-
                     )}
                   </span>
                 </div>

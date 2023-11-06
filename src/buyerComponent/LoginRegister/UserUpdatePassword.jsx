@@ -143,8 +143,8 @@ const UserUpdatePassword = () => {
                       onClick={togglePassword}
                       className="showPassCheck"
                     />
-                    <small className=" showPass">Show Password</small>
-                    <div className="form-group">
+                    <small className=" showPass mb-3">Show Password</small>
+                    <div className="form-group mt-4">
                       <button type="submit" className="new---btn mt-5">
                         Submit
                       </button>

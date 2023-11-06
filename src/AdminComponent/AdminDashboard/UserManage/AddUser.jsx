@@ -25,7 +25,7 @@ const AddUser = () => {
 
   const handleCities = async (state) => {
     const { data } = await axios.post(cityApi, {
-      state: state,
+      state: state ? state : "Georgia",
     });
     if (!data.error) {
       setCities(data?.results?.states);
@@ -265,7 +265,7 @@ const AddUser = () => {
                 <li
                   className={User?.access?.includes("Puller") ? "" : "d-none"}>
                   <Link
-                    className=""
+                    className="d-none ata"
                     to="/Puller-Management"
                     style={{
                       textDecoration: "none",
@@ -494,7 +494,7 @@ const AddUser = () => {
                 </li>
                 <li>
                   <Link
-                    className="d-none at"
+                    className="d-none ata"
                     to="/Puller-Management"
                     style={{
                       textDecoration: "none",
@@ -650,7 +650,7 @@ const AddUser = () => {
                               </label>
                               <span></span>
                               <input
-                                className={classNames("form-control", {
+                                className={classNames("form-control mx-2", {
                                   "is-invalid": errors.imageProfile,
                                 })}
                                 type="file"

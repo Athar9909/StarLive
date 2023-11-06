@@ -12,12 +12,15 @@ import {
   pageCategory,
   pageSubCategory,
 } from "../../atom";
+import Swal from "sweetalert2";
 const Navbar = ({ NState, LoginState }) => {
   const width = window.innerWidth;
+  const [users, setUsers] = useState([]);
   const categoryApi = `${process.env.REACT_APP_APIENDPOINTNEW}user/category/getCatAndSubCat`;
   const cart = `${process.env.REACT_APP_APIENDPOINTNEW}user/countCartProducts`;
   const allProd = `${process.env.REACT_APP_APIENDPOINTNEW}user/products/getAllProducts`;
-  const allNotify = `${process.env.REACT_APP_APIENDPOINTNEW}user/notify/getAllNotifications `;
+  // const allNotify = `${process.env.REACT_APP_APIENDPOINTNEW}user/notify/getAllNotifications `;
+  const userApi = `${process.env.REACT_APP_APIENDPOINTNEW}user/getUserProfile`;
   const [SearchData, setSearchData] = useState([]);
   const [search, setSearch] = useState();
   const [category, setCategory] = useState([]);
@@ -36,12 +39,13 @@ const Navbar = ({ NState, LoginState }) => {
   const setFilter = useSetRecoilState(chngeFilter);
   const [load, setLoad] = useState(true);
   const ref = useRef(null);
+
   useEffect(() => {
     AllProducts();
     CartCounts();
-    getNotifications();
     getCategory();
     handleScroll();
+    getUser();
   }, [state, NState, alert, search]);
 
   useEffect(() => {
@@ -69,6 +73,22 @@ const Navbar = ({ NState, LoginState }) => {
     }
   };
 
+  const getUser = async () => {
+    await axios.get(userApi).then((res) => {
+      if (!res.data.error) {
+        let val = res?.data.results;
+        if (val?.status != true) {
+          Swal.fire({
+            title: "Your Account has been Disabled By Admin!",
+            text: "Please Contact Admin!",
+            icon: "warning",
+            confirmButtonText: "Okay",
+          }).then((res) => LogOut());
+        }
+      }
+    });
+  };
+
   const handleOutsideClick = (event) => {
     if (ref.current && !ref.current.contains(event.target)) {
       setSearch();
@@ -84,12 +104,6 @@ const Navbar = ({ NState, LoginState }) => {
   axios.defaults.headers.common["x-auth-token-user"] =
     localStorage.getItem("token-user");
 
-  const handleRefresh = () => {
-    window.location.reload(false);
-  };
-  const getEmail = (data) => {
-    setOtpEmail(data);
-  };
   const getCategory = async () => {
     await axios.get(categoryApi).then((res) => {
       setCategory(res?.data.results);
@@ -101,11 +115,6 @@ const Navbar = ({ NState, LoginState }) => {
     });
   };
 
-  const getNotifications = async () => {
-    await axios.get(allNotify).then((res) => {
-      setNotifications(res?.data.results?.notifications);
-    });
-  };
   useEffect(() => {
     // if (window.localStorage !== undefined) {
     const authToken = localStorage.getItem("token-user");
@@ -389,7 +398,7 @@ const Navbar = ({ NState, LoginState }) => {
                         Related Sub-Categories :
                       </span>
                     )}
-                    {relateCate?.map((itm, ind) => (
+                      {relateCate?.map((itm, ind) => (
                       <div>
                         <p
                           className="subCateSearch"
@@ -413,13 +422,15 @@ const Navbar = ({ NState, LoginState }) => {
                         <a className="featuredproduct_box p-2">
                           <div className="featuredproduct_img ">
                             <img
+                              loading="lazy"
                               src={
                                 // item?.type.flavour
                                 //   ? item?.type?.flavourImage ||
                                 //     require("../../assets/img/product.jpg")
                                 //   :
-                                item?.productImage ||
-                                require("../../assets/img/product.jpg")
+                                item?.productImage
+                                  ? item?.productImage
+                                  : require("../../assets/img/product.jpg")
                               }
                               alt="Product"
                               onClick={() => {

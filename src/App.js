@@ -101,7 +101,6 @@ import Photos from "./buyerComponent/Footer/Photos";
 import GalleryMain from "./AdminComponent/AdminDashboard/GalleryManage/GalleryMain";
 import UserPdf from "./AdminComponent/AdminDashboard/OrdersManage/userPdf";
 import AppDownloads from "./pwaComponents/homeComponent/appDownloads";
-import ViewDocs from "./buyerComponent/MyAccount/viewDoc";
 import UserLogin from "./buyerComponent/LoginRegister/UserLogin";
 import UserLoginPass from "./buyerComponent/LoginRegister/UserLoginPass";
 import UserForgotPass from "./buyerComponent/LoginRegister/UserForgotPass";
@@ -190,7 +189,7 @@ function App() {
             <Route path="/Products/Filter" element={<ProductsByFilter />} />
             <Route path="/app/verify" element={<AgeVerification />} />
             <Route path="/Admin/SubAdmin" element={<SubAdmin />} />
-            <Route path="/user/viewDocs" element={<ViewDocs />} />
+            {/* <Route path="/user/viewDocs" element={<ViewDocs />} /> */}
             <Route
               path="/AllProducts/Product/:id"
               element={<SingleProduct />}

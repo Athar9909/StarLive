@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import AppFooter from "./appFooter";
 import AppHeader from "./appHeader";
+import Swal from "sweetalert2";
 
 function AppCheckout() {
   const userApi = `${process.env.REACT_APP_APIENDPOINTNEW}user/getUserProfile`;
@@ -52,14 +53,19 @@ function AppCheckout() {
           subUserId: userType?.id,
         })
         .then((res) => {
-          if (!res.error) {
-            if (
-              res?.data.message === "Your account has been disabled by admin"
-            ) {
-              LogOut();
-            } else {
-              navigate("/app/thankyou");
-            }
+          if (res?.data.message === "Your account has been disabled by admin") {
+            LogOut();
+          }
+          if (res?.data.message === "Sub Account's Tobacco licence expired!") {
+            Swal.fire({
+              title: res?.data.message,
+              icon: "error",
+              timer: 2000,
+              confirmButtonText: "Okay",
+            });
+          }
+          if (!res?.data.error) {
+            navigate("/app/thankyou");
           }
         });
     } else if (delevryChoice == "Delivery") {
@@ -72,15 +78,19 @@ function AppCheckout() {
           subUserId: userType?.id,
         })
         .then((res) => {
-          if (!res.error) {
-            console.log(res?.data.message);
-            if (
-              res?.data.message === "Your account has been disabled by admin"
-            ) {
-              LogOut();
-            } else {
-              navigate("/app/thankyou");
-            }
+          if (res?.data.message === "Your account has been disabled by admin") {
+            LogOut();
+          }
+          if (res?.data.message === "Sub Account's Tobacco licence expired!") {
+            Swal.fire({
+              title: res?.data.message,
+              icon: "error",
+              timer: 2000,
+              confirmButtonText: "Okay",
+            });
+          }
+          if (!res?.data.error) {
+            navigate("/app/thankyou");
           }
         });
     } else if (delevryChoice == "In-Store Pickup") {
@@ -93,15 +103,19 @@ function AppCheckout() {
           subUserId: userType?.id,
         })
         .then((res) => {
-          if (!res.error) {
-            console.log(res?.data.message);
-            if (
-              res?.data.message === "Your account has been disabled by admin"
-            ) {
-              LogOut();
-            } else {
-              navigate("/app/thankyou");
-            }
+          if (res?.data.message === "Your account has been disabled by admin") {
+            LogOut();
+          }
+          if (res?.data.message === "Sub Account's Tobacco licence expired!") {
+            Swal.fire({
+              title: res?.data.message,
+              icon: "error",
+              timer: 2000,
+              confirmButtonText: "Okay",
+            });
+          }
+          if (!res?.data.error) {
+            navigate("/app/thankyou");
           }
         });
     }
@@ -191,6 +205,7 @@ function AppCheckout() {
                               onClick={() => {
                                 newAddress(users?.companyName);
                                 setSubUser();
+                                setUserType({ type: "ParentAcc" });
                               }}
                               defaultChecked="true"
                             />
@@ -221,6 +236,7 @@ function AppCheckout() {
                   </div>
                 </div>
               )}
+
               {subUser ? (
                 <div class="billing-information-card mb-3">
                   <div class="card billing-information-title-card ">
@@ -358,7 +374,6 @@ function AppCheckout() {
                   </div>
                 </div>
               )}
-
               <div class="shipping-method-choose mb-3">
                 <div class="card shipping-method-choose-title-card">
                   <div class="card-body">
@@ -469,7 +484,6 @@ function AppCheckout() {
                   </div>
                 </div>
               </div>
-
               <div class="shipping-method-choose mb-3">
                 <div class="card shipping-method-choose-title-card">
                   <div class="card-body">
@@ -490,7 +504,6 @@ function AppCheckout() {
                   </div>
                 </div>
               </div>
-              
               {delevryChoice == "Delivery" ? (
                 <div className="col-12 text-start">
                   {users?.cityAndState?.day?.length ? (

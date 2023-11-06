@@ -6,7 +6,7 @@ const AppDownloads = () => {
   return (
     <div className="star_imp_app mb-0">
       <AppHeader />
-      <div className="bg-white">
+      <div className="bg-white mt-4">
         <div class="container py-5 px-lg-5 bg-white mt-4">
           <div class="row g-5 align-items-center">
             <div class="col-lg-6 ">

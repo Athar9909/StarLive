@@ -69,6 +69,7 @@ const Inventory = () => {
       caseQty: "",
     },
   ]);
+  const [seo, setSeo] = useState([]);
   let User = JSON.parse(localStorage.getItem("AdminData"));
 
   const {
@@ -143,7 +144,6 @@ const Inventory = () => {
       });
   };
 
-  console.log(subCategories);
   const sorting = async (i) => {
     await axios
       .post(getProducts, {
@@ -268,6 +268,7 @@ const Inventory = () => {
         caseSize: data?.caseSize,
         brand: data?.brands,
         type: formValues,
+        SEOKeywords: seo,
       })
       .then((res) => {
         if (res?.data.error) {
@@ -358,10 +359,33 @@ const Inventory = () => {
     e.target.value = "";
   }
 
+  function handleKeyDownSeo(e) {
+    // If user did not press enter key, return
+    if (e.key !== "Tab") return;
+    const value = e.target.value;
+    if (!value.trim()) return;
+    // Add the value to the tags array
+    setSeo([...seo, value.replace(/(\r\n|\n|\r)/gm, "")]);
+    let newFormValues = { ...seo };
+    newFormValues[e.target.name] = [
+      ...(seo || []),
+      value.replace(/(\r\n|\n|\r)/gm, ""),
+    ];
+    e.target.value = "";
+  }
+  console.log(seo);
+
   const removeTag = (ind, i) => {
     console.log(ind, i);
     let newForm = { ...formValues };
     newForm[i]?.barcode.splice(ind, 1);
+    setChange(!change);
+  };
+
+  const removeKeyWord = (i) => {
+    let newForm = [...seo];
+    newForm?.splice(i, 1);
+    setSeo(newForm);
     setChange(!change);
   };
 
@@ -655,7 +679,7 @@ const Inventory = () => {
                   onClick={() => setPageData([{ page: 1, searchKey: "" }])}
                   className={User?.access?.includes("Puller") ? "" : "d-none"}>
                   <Link
-                    className=""
+                    className="d-none ata"
                     to="/Puller-Management"
                     style={{
                       textDecoration: "none",
@@ -668,7 +692,7 @@ const Inventory = () => {
                   </Link>
                 </li>
 
-                 <li
+                <li
                   onClick={() => setPageData([{ page: 1, searchKey: "" }])}
                   className={User?.access?.includes("Gallery") ? "" : "d-none"}>
                   <Link
@@ -683,7 +707,8 @@ const Inventory = () => {
                       class="fas fa-image"></i>{" "}
                     Gallery Management
                   </Link>
-                </li><li
+                </li>
+                <li
                   className={
                     User?.access?.includes("catalogFlyers") ? "" : "d-none"
                   }>
@@ -693,7 +718,6 @@ const Inventory = () => {
                     style={{
                       textDecoration: "none",
                       fontSize: "18px",
-                     
                     }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "3px" }}
@@ -701,7 +725,7 @@ const Inventory = () => {
                     Catalog & Flyers
                   </Link>
                 </li>
-                
+
                 <li
                   onClick={() => setPageData([{ page: 1, searchKey: "" }])}
                   className={
@@ -838,7 +862,7 @@ const Inventory = () => {
                 </li>
                 <li onClick={() => setPageData([{ page: 1, searchKey: "" }])}>
                   <Link
-                    className="d-none at"
+                    className="d-none ata"
                     to="/Puller-Management"
                     style={{
                       textDecoration: "none",
@@ -991,7 +1015,7 @@ const Inventory = () => {
                     className="form-design py-4 px-3 help-support-form row align-items-end justify-content-between"
                     action=""
                     onSubmit={handleSubmit(onSubmit)}>
-                    <div className="form-group col-4">
+                    <div className="form-group col-3">
                       <label htmlFor="">Product Name</label>
                       <input
                         type="text"
@@ -1007,7 +1031,7 @@ const Inventory = () => {
                       />
                     </div>
 
-                    <div className="form-group col-4 choose_fileInvent position-relative">
+                    <div className="form-group col-3 choose_fileInvent position-relative">
                       <span>Product Image </span>
                       <label htmlFor="upload_video" className="inputText">
                         <i className="fa fa-camera me-1" />
@@ -1029,7 +1053,7 @@ const Inventory = () => {
                         onChange={(e) => productImageSelection(e)}
                       />
                     </div>
-                    <div className="form-group col-4">
+                    <div className="form-group col-3">
                       <label htmlFor="">Case Size</label>
                       <input
                         type="text"
@@ -1044,7 +1068,7 @@ const Inventory = () => {
                         })}
                       />
                     </div>
-                    <div className="form-group col-4">
+                    <div className="form-group col-3">
                       <label htmlFor="">Category</label>
                       <select
                         className={classNames(
@@ -1067,7 +1091,7 @@ const Inventory = () => {
                       </select>
                     </div>
 
-                    <div className="form-group col-4">
+                    <div className="form-group col-3">
                       <label htmlFor="">Sub Category</label>
                       <select
                         className={classNames(
@@ -1088,7 +1112,7 @@ const Inventory = () => {
                       </select>
                     </div>
 
-                    <div className="form-group col-4">
+                    <div className="form-group col-3">
                       <label htmlFor="">Brands</label>
                       <select
                         className="form-select form-control"
@@ -1105,19 +1129,30 @@ const Inventory = () => {
                         ))}
                       </select>
                     </div>
-                    {/* <div className="form-group col-4">
-                      <label htmlFor="">Price</label>
-                      <input
-                        type=""
-                        className={classNames(
-                          " form-control border border-secondary",
-                          { "is-invalid": errors.productPrice }
-                        )}
-                        name="productPrice"
-                        placeholder="Enter Product Price"
-                        {...register("productPrice")}
-                      />
-                    </div> */}
+                    <div className="form-group col-6">
+                      <label htmlFor="">SEO Keywords (Use Tab key)</label>
+                      <div className="tags-input-container">
+                        {(seo || [])?.map((tag, ind) => (
+                          <div className="tag-item" key={ind}>
+                            <span className="tag-text">{tag}</span>
+                            <span
+                              className="close"
+                              onClick={() => removeKeyWord(ind)}>
+                              &times;
+                            </span>
+                          </div>
+                        ))}
+
+                        <input
+                          type="text"
+                          className="tags-input mb-0 bg-light p-2"
+                          placeholder="Enter Keywords"
+                          name="SeoKeyword"
+                          onKeyDown={(e) => handleKeyDownSeo(e)}
+                        />
+                      </div>
+                    </div>
+
                     <div className="form-group col-12 mt-2">
                       <form className="">
                         <div className="row flavour_box align-items-end mx-0 py-4 px-3">
@@ -1536,7 +1571,6 @@ const Inventory = () => {
                                     id={index}>
                                     View
                                   </Link>
-                                  {console.log(pageData)}
                                 </td>
                               </tr>
                             ))}
@@ -1603,6 +1637,7 @@ const Inventory = () => {
           </div>
         </div>
       </div>
+      
       <div
         className="modal comman_modal_form forms_modal"
         id="staticBackdrop66"
@@ -1778,6 +1813,7 @@ const Inventory = () => {
           </div>
         </div>
       </div>
+      
     </div>
   );
 };

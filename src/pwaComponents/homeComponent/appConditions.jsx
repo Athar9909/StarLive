@@ -34,7 +34,7 @@ function AppConditions() {
         </div>
         <WebHeader2 />
 
-        <div className="page-content-wrapper">
+        <div className="page-content-wrapper2">
           <div className="container">
             <div className="privacy-policy-wrapper py-3">
               <h6>TERM & CONDITION</h6>

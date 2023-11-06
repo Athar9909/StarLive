@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import html2pdf from "html2pdf.js/dist/html2pdf.min";
+// import html2pdf from "html2pdf.js/dist/html2pdf.min";
 import moment from "moment";
 
 const PdfPrint = () => {
@@ -10,6 +10,7 @@ const PdfPrint = () => {
   const [subAccount, setSubAccount] = useState([]);
   let id = useParams();
   console.log(id);
+
   useEffect(() => {
     OrderDetails();
   }, []);
@@ -35,10 +36,7 @@ const PdfPrint = () => {
     console.log("KK");
     window.print();
   };
-  const printHandler = () => {
-    const printElement = document.getElementById("main_pdf");
-    html2pdf().from(printElement).save(orders?.orderId);
-  };
+ 
   return (
     <div className="" id="main_pdf">
       <p className="d-flex mx-3 justify-content-between mt-1">
@@ -149,13 +147,9 @@ const PdfPrint = () => {
                                   {orders?.userId?.phoneNumber}
                                 </td>
                                 <td className="border">
-                                  {orders?.userId?.addressLine1 +
-                                    "-" +
-                                    orders?.userId?.city +
-                                    "-" +
-                                    orders?.userId?.state +
-                                    "-" +
-                                    orders?.userId?.zipcode}
+                                  {orders?.userId?.addressLine1}-
+                                  {orders?.userId?.city}-{orders?.userId?.state}
+                                  -{orders?.userId?.zipcode}
                                 </td>{" "}
                                 <td className="border">
                                   {moment(orders?.updatedAt).format(
@@ -370,6 +364,7 @@ const PdfPrint = () => {
                                                   display: "block",
                                                   maxWidth: 55,
                                                   margin: "0 auto",
+                                                  maxHeight: 70,
                                                 }}
                                                 src={
                                                   item?.flavour?._id
@@ -430,8 +425,9 @@ const PdfPrint = () => {
                                               padding: "10px 20px",
                                               borderLeft: 0,
                                               borderBottom: 0,
-                                            }}
-                                          />
+                                            }}>
+                                            {item?.pickedQuantity}
+                                          </td>
                                         </tr>
                                       )
                                     )}

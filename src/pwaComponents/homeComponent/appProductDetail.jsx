@@ -41,8 +41,9 @@ function AppProductDetail() {
   const [cartCount, setCartCount] = useState(false);
 
   const ScrollContainer = styled.div`
-    height: 5.2rem;
+    height: 10.6rem;
     overflow-y: scroll;
+    overflow-x: hidden;
     &::-webkit-scrollbar {
       width: 8px;
     }
@@ -63,7 +64,6 @@ function AppProductDetail() {
     document.getElementById("buttn")?.click();
   }
 
-  console.log(location?.state);
   useEffect(() => {
     getProductDetail();
     userInfo();
@@ -81,7 +81,6 @@ function AppProductDetail() {
       setCategoryName(data?.results?.category?.categoryName);
     }
   };
-  console.log(categoryName);
 
   const addToCartt = async () => {
     if (
@@ -182,6 +181,7 @@ function AppProductDetail() {
     getProductDetail();
     setHeart(!heart);
   };
+
   const rmvFromFav = async () => {
     await axios
       .post(rmvFav, {
@@ -217,8 +217,8 @@ function AppProductDetail() {
       <div className="star_imp_app">
         <AppHeader cartCount={cartCount} />
 
-        <div className="page-content-wrapper">
-          <div className="product-slide-wrapper" key={itemNo}>
+        <div className="page-content-wrapper2 mb-5 mt-0">
+          <div className="" key={itemNo}>
             {productDetail ? (
               <Carousel
                 showThumbs={false}
@@ -253,11 +253,11 @@ function AppProductDetail() {
             )}
           </div>
 
-          <div className="product-description pb-3">
-            <div className="product-title-meta-data bg-white mb-2 py-3">
-              <div className="container d-flex justify-content-between rtl-flex-d-row-r">
-                <div className="p-title-price mb-0 title_product">
-                  <h5 className="">{productDetail?.unitName}</h5>
+          <div className="pb-3">
+            <div className="product-title-meta-data bg-white ">
+              <div className="container-fluid  d-flex justify-content-between rtl-flex-d-row-r">
+                <div className="p-title-price mb-0 ">
+                  <h4 className="fs-5">{productDetail?.unitName}</h4>
                 </div>
                 {token?.length ? (
                   <div className="p-wishlist-share">
@@ -294,35 +294,55 @@ function AppProductDetail() {
                       </p>
                     </div>
                   ) : null}
-                  <form className="cart-form w-100" action="#" method="">
-                    <div className="order-plus-minus d-flex align-items-center">
-                      <span
-                        className="quantity-button-handler"
-                        key={quantity}
-                        onClick={() => {
-                          if (quantity > 1) setQuantity(quantity - 1);
-                        }}>
-                        -
-                      </span>
-                      <input
-                        className="cart-quantity-input text-center"
-                        type="number"
-                        id="quanInput"
-                        name="quantity"
-                        max="9999"
-                        value={quantity}
-                        onChange={(e) => setQuantity(e.target.value)}
-                      />
-                      <span
-                        className="quantity-button-handler"
-                        onClick={() => {
-                          document.getElementById("quanInput").stepUp(1);
-                          setQuantity(+quantity + 1);
-                        }}>
-                        +
-                      </span>
+                  <div className="row">
+                    <div className="col-6">
+                      <form className="cart-form w-100" action="#" method="">
+                        <div className="order-plus-minus d-flex align-items-center">
+                          <span
+                            className="quantity-button-handler"
+                            key={quantity}
+                            onClick={() => {
+                              if (quantity > 1) setQuantity(quantity - 1);
+                            }}>
+                            -
+                          </span>
+                          <input
+                            className="cart-quantity-input text-center"
+                            type="number"
+                            id="quanInput"
+                            name="quantity"
+                            max="9999"
+                            value={quantity}
+                            onChange={(e) => setQuantity(e.target.value)}
+                          />
+                          <span
+                            className="quantity-button-handler"
+                            onClick={() => {
+                              document.getElementById("quanInput").stepUp(1);
+                              setQuantity(+quantity + 1);
+                            }}>
+                            +
+                          </span>
+                        </div>
+                      </form>
                     </div>
-                  </form>
+                    <div className="col-6">
+                      <div className="">
+                        {token ? (
+                          <button
+                            className="comman_btn mb-2 new_btn_prod"
+                            type="submit"
+                            onClick={() => addToCartt()}>
+                            Add to Cart
+                          </button>
+                        ) : (
+                          <Link className="comman_btn mb-2" to="/app/login">
+                            Please Login.
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -353,7 +373,7 @@ function AppProductDetail() {
                         .map((item, index) =>
                           flavour?.flavour === item?.flavour ? (
                             <Link
-                              className="text-white"
+                              className="text-white col-12"
                               style={{
                                 cursor: "pointer",
                                 backgroundColor: "#3e4093",
@@ -367,11 +387,17 @@ function AppProductDetail() {
                                 document.getElementById("product-image").src =
                                   item?.flavourImage;
                               }}>
+                              <span>
+                                <img
+                                  className="border rounded mx-2"
+                                  width={30}
+                                  src={item?.flavourImage}></img>
+                              </span>{" "}
                               {item?.flavour}
                             </Link>
                           ) : (
                             <Link
-                              className=""
+                              className="col-12"
                               onClick={(e) => {
                                 e.preventDefault();
                                 setFlavour(item);
@@ -381,6 +407,12 @@ function AppProductDetail() {
                                 document.getElementById("product-image").src =
                                   item?.flavourImage;
                               }}>
+                              <span>
+                                <img
+                                  className="border rounded mx-2"
+                                  width={30}
+                                  src={item?.flavourImage}></img>
+                              </span>{" "}
                               {item?.flavour}
                             </Link>
                           )
@@ -390,7 +422,7 @@ function AppProductDetail() {
                 </div>
               </div>
             </div>
-            <div className="cart-form-wrapper bg-white mb-3 py-3">
+            {/* <div className="cart-form-wrapper bg-white mb-3 py-3">
               <div className="container">
                 <div className="">
                   {token ? (
@@ -407,7 +439,7 @@ function AppProductDetail() {
                   )}
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="selection-panel bg-white mb-3 py-3">
               <div className="container">
                 <div className="choose-color-wrapper">

@@ -126,7 +126,7 @@ function AppProductBrands() {
         </div>
         <WebHeader2 />
 
-        <div class="page-content-wrapper">
+        <div class="page-content-wrapper2">
           <div class="py-3">
             <Search />
 

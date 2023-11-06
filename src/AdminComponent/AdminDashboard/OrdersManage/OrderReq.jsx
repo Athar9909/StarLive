@@ -11,11 +11,12 @@ import ViewProduct from "../ViewProduct";
 import moment from "moment";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { orderPageData } from "../../../atom";
-import classNames from "classnames";
 import { useForm } from "react-hook-form";
 import { default as ReactSelect } from "react-select";
 import { components } from "react-select";
 import { MDBDataTable } from "mdbreact";
+import { Button } from "rsuite";
+import { BiEdit } from "react-icons/bi";
 
 export const DaysOption = [
   { value: "SUNDAY", label: "Sunday" },
@@ -55,7 +56,7 @@ const OrderReq = () => {
   const exportAllOrder = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/order/exportAllOrders`;
   const exportAllQuotes = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/quotations/exportAllQuotes`;
   const inventorySearch = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/inventory/searchInventory`;
-  const UserSearch = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/order/findUser`;
+  const UserSearch = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/searchUser`;
   const searchOrder = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/order/searchOrders`;
   const quoteOrder = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/quotations/searchQuotes`;
   const getProducts = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/inventory/singleProduct`;
@@ -63,7 +64,7 @@ const OrderReq = () => {
   const getUserDetails = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/order/getUserAddress`;
   const editCities = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/editCity`;
   const viewCities = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/viewCity`;
-  const [sort, setSort] = useState(1);
+  const importOrder = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/order/importOrder`;
   const [selectedCity, setSelectedCity] = useState();
   const [selectEditOptions, setSelectEditOptions] = useState([]);
   const [city, setCity] = useState();
@@ -78,7 +79,6 @@ const OrderReq = () => {
   const [options, setOptions] = useState([]);
   const [pullerOptions, setPullerOptions] = useState([]);
   const [UsersOptions, setUsersOptions] = useState([]);
-  // const [selectedProduct, setSelectedProduct] = useState({ products: [] });
   const [selectedUser, setSelectedUser] = useState([]);
   const [searchKey, setSearchKey] = useState("");
   const [searchKeyPull, setSearchKeyPull] = useState("");
@@ -89,7 +89,6 @@ const OrderReq = () => {
   const [maxPage, setMaxPage] = useState(1);
   const [maxPageComp, setMaxPageComp] = useState(1);
   const [maxPageCancel, setMaxPageCancel] = useState(1);
-  // const [maxPage, setMaxPage] = useState(1);
   const pageData = useRecoilValue(orderPageData);
   const setPageData = useSetRecoilState(orderPageData);
   const [activePage, setActivePage] = useState(pageData[0]?.page);
@@ -105,6 +104,11 @@ const OrderReq = () => {
   const [canCount, setCanCount] = useState();
   const [sharedCount, setSharedCount] = useState();
   const [quoteCount, setQuoteCount] = useState();
+  const [ux, setUx] = useState("");
+  const [impFile, setImpFile] = useState([]);
+  const [loader2, setLoader2] = useState(false);
+  const [searchType, setSearchType] = useState("companyName");
+  const [importedItems, setImportedItems] = useState([]);
   const [formValues, setFormValues] = useState([
     {
       productName: [],
@@ -144,21 +148,36 @@ const OrderReq = () => {
     ],
     rows: [],
   });
+  useEffect(() => {
+    getCities();
+    sharedQuotations();
+  }, []);
+
+  useEffect(() => {
+    OrderRequest();
+    QuoteRequest();
+  }, [activePage]);
+
+  useEffect(() => {
+    completedOrders();
+  }, [activePageComp]);
+
+  useEffect(() => {
+    cancelledOrders();
+  }, [activePageCancel]);
+
+  useEffect(() => {
+    createOptions();
+  }, [searchKey]);
+
+  useEffect(() => {
+    createOptionUsers();
+  }, [searchUserKey]);
 
   const handleChangeEdit = (selected) => {
     setSelectEditOptions({
       optionSelected: selected,
     });
-  };
-
-  const sortCities = (id) => {
-    if (id === 2) {
-      setSort(2);
-      cities?.sort().reverse();
-    } else if (id === 1) {
-      setSort(1);
-      getCities();
-    }
   };
 
   const {
@@ -170,6 +189,12 @@ const OrderReq = () => {
 
   const navigate = useNavigate();
   let User = JSON.parse(localStorage.getItem("AdminData"));
+
+  const onFileSelection = (e) => {
+    let file = e.target.files[0];
+    setImpFile(file);
+    setUx("uploaded");
+  };
 
   const fileDownload = (url, name) => {
     saveAs(url, name);
@@ -215,20 +240,6 @@ const OrderReq = () => {
     }
   };
 
-  const CitySearch = (val) => {
-    setCitySearch(val);
-    const query = val;
-    var updatedList = [...cities];
-    // Include all elements which includes the search query
-    updatedList = updatedList.filter((item) => {
-      return item?.city.toLowerCase().indexOf(query.toLowerCase()) !== -1;
-    });
-    setCities(updatedList);
-    if (val <= 2) {
-      getCities();
-    }
-  };
-
   const onSubmitDays = async (data) => {
     const res = await axios.post(editCities + "/" + city, {
       day: (selectEditOptions?.optionSelected || [])?.map(
@@ -248,31 +259,36 @@ const OrderReq = () => {
     }
   };
 
-  useEffect(() => {
-    getCities();
-    sharedQuotations();
-  }, []);
-
-  useEffect(() => {
-    OrderRequest();
-    QuoteRequest();
-  }, [activePage]);
-
-  useEffect(() => {
-    completedOrders();
-  }, [activePageComp]);
-
-  useEffect(() => {
-    cancelledOrders();
-  }, [activePageCancel]);
-
-  useEffect(() => {
-    createOptions();
-  }, [searchKey]);
-
-  useEffect(() => {
-    createOptionUsers();
-  }, [searchUserKey]);
+  const onUpload = async () => {
+    setLoader2(true);
+    const formData = new FormData();
+    formData.append("file", impFile);
+    const { data } = await axios.post(importOrder, formData);
+    console.log(data);
+    if (data?.results?.orders?.length) {
+      Swal.fire({
+        title: "Product Imported!",
+        icon: "success",
+        confirmButtonText: "okay",
+        timer: "1000",
+      });
+      setImportedItems(data?.results?.orders);
+      setLoader2(false);
+      document.getElementById("modal-closeImport").click();
+    } else if (data?.results?.unknownBarcodes?.length) {
+      Swal.fire({
+        title: "Invalid Barcodes or Invalid Data found!",
+        icon: "error",
+        confirmButtonText: "okay",
+      });
+      setLoader2(false);
+      setUx();
+      document.getElementById("reUpload").hidden = false;
+    }
+    setTimeout(() => {
+      setLoader2(false);
+    }, 2000);
+  };
 
   const OrderRequest = async () => {
     await axios
@@ -340,6 +356,7 @@ const OrderReq = () => {
         }
       });
   };
+
   const GetProducts = async (id) => {
     await axios.get(getProducts + "/" + id).then((res) => {
       let data = res?.data.results;
@@ -353,6 +370,7 @@ const OrderReq = () => {
     newFormValues[index].productName = selected;
     setFormValues(newFormValues);
   };
+
   const handleInputChange = (inputValue) => {
     setSearchKey(inputValue);
   };
@@ -421,13 +439,22 @@ const OrderReq = () => {
         flavour: item?.flavour?.length && JSON.parse(item?.flavour),
       };
     });
-    if (selectedUser?.userSelected?.value) {
+    const dataArrayImported = importedItems?.map(function (item) {
+      return {
+        productId: item?._id,
+        quantity: item?.quantity,
+        flavour: item?.type,
+      };
+    });
+
+    if (selectedUser?.id) {
       await axios
         .post(createOrder, {
-          userId: selectedUser?.userSelected.value,
+          userId: selectedUser?.id,
           type: addType,
-          products: dataArray,
-          address: address.addressLine1,
+          products: importedItems?.length > 0 ? dataArrayImported : dataArray,
+          address: selectedUser.address,
+          source: importedItems?.length > 0 ? "ERP" : "WEBSITE",
         })
         .then((res) => {
           if (!res.error) {
@@ -625,6 +652,24 @@ const OrderReq = () => {
       });
     }
   };
+  const userSearch = async (key) => {
+    let string = key;
+    if (string !== "") {
+      await axios
+        .post(UserSearch, {
+          type: "APPROVED",
+          search: string,
+          searchType: searchType,
+        })
+        .then((res) => {
+          if (!res.data.error) {
+            setUsersOptions(res?.data?.results?.users);
+          }
+        });
+    } else {
+      setUsersOptions([]);
+    }
+  };
 
   const removeFormFields = (index) => {
     let newFormValues = [...formValues];
@@ -761,7 +806,7 @@ const OrderReq = () => {
                 <li
                   className={User?.access?.includes("Puller") ? "" : "d-none"}>
                   <Link
-                    className=""
+                    className="d-none ata"
                     to="/Puller-Management"
                     style={{
                       textDecoration: "none",
@@ -946,7 +991,7 @@ const OrderReq = () => {
                 </li>
                 <li>
                   <Link
-                    className="d-none at"
+                    className="d-none ata"
                     to="/Puller-Management"
                     style={{
                       textDecoration: "none",
@@ -1078,14 +1123,16 @@ const OrderReq = () => {
         </div>
         <div className="admin_panel_data height_adjust">
           <div className="row category_management justify-content-center">
-            <div className="col-12 text-end mb-4">
+            <div className="col-12 text-end mb-4 d-flex">
               {addForm ? (
-                <a
-                  className="comman_btn2 text-decoration-none"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => setAddForm(!addForm)}>
-                  Add Order
-                </a>
+                <div>
+                  <a
+                    className="comman_btn2 text-decoration-none"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => setAddForm(!addForm)}>
+                    Add Order
+                  </a>
+                </div>
               ) : (
                 <a
                   className="comman_btn2 text-decoration-none"
@@ -1122,21 +1169,75 @@ const OrderReq = () => {
                   className="form-design py-4 px-3 help-support-form row align-items-end justify-content-between"
                   action=""
                   noValidate>
-                  <div className="form-group col-6">
-                    <label htmlFor="">Search User</label>
-                    <Select
-                      name="users"
-                      options={UsersOptions}
-                      value={selectedUser?.userSelected}
-                      className="basic-multi-select z-3"
-                      classNamePrefix="select"
-                      onChange={handleChangeUser}
-                      onInputChange={handleInputChangeUser}
-                      isClearable
-                      placeholder="Type any keyword to Search User"
-                      required
-                    />
+                  <div className="form-group col-6 ">
+                    <label htmlFor="">
+                      Search User -{" "}
+                      <a>
+                        {selectedUser?.name && (
+                          <BiEdit onClick={() => setSelectedUser()} />
+                        )}
+                      </a>
+                    </label>
+                    {selectedUser?.name ? (
+                      <div className="d-flex">
+                        <h6 className="fw-bold fs-5">Selected User</h6>:
+                        {selectedUser?.name}
+                      </div>
+                    ) : (
+                      <div className="d-flex">
+                        {console.log(selectedUser)}
+                        <button className="comman_btn_search ">
+                          <select
+                            className="searchDrop "
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setSearchType(e.target.value);
+                            }}>
+                            <option selected="" value="companyName">
+                              Company
+                            </option>
+                            {console.log(searchType)}
+                            <option value="firstName">User Name</option>
+                            <option value="email">Email</option>
+                            <option value="addressLine1">Address</option>
+                            <option value="phoneNumber">Mobile</option>
+                          </select>
+                        </button>
+
+                        <input
+                          type="search"
+                          className=" bg-white form-control-sub border "
+                          placeholder="Search"
+                          name="name"
+                          id="Search"
+                          onChange={(e) => {
+                            userSearch(e.target.value);
+                          }}
+                        />
+                      </div>
+                    )}
+
+                    {UsersOptions?.length > 0 && (
+                      <div className="bg-light border rounded mx-2 mt-2 p-1 pt-2">
+                        {UsersOptions?.map((item) => (
+                          <li
+                            className="bg-white mb-2 dropList"
+                            onClick={() => {
+                              setSelectedUser({
+                                name: item?.companyName + "-" + item?.email,
+                                id: item?._id,
+
+                                address: item?.addressLine1,
+                              });
+                              setUsersOptions();
+                            }}>
+                            {item?.companyName}-{item?.email}
+                          </li>
+                        ))}
+                      </div>
+                    )}
                   </div>
+
                   <div className="form-group col-6">
                     <label htmlFor="">Select Delivery Type</label>
                     <select
@@ -1154,104 +1255,156 @@ const OrderReq = () => {
                     </select>
                   </div>
 
-                  <div className="form-group col-12 mt-2 p-1">
-                    <form className=" ">
-                      <div className="row flavour_box align-items-end mx-0 py-3 px-4">
-                        {(formValues || [])?.map((item, index) => (
-                          <div className="form-group mb-0 col-12 border rounded p-3 mb-2">
-                            <div className="row" key={index}>
-                              <div className="form-group col-4">
-                                <label htmlFor="">Select Product</label>
-                                <Select
-                                  name="users"
-                                  options={options}
-                                  value={item?.productName || ""}
-                                  className="basic-multi-select z-3"
-                                  classNamePrefix="select"
-                                  onChange={(value) =>
-                                    handleChange2(value, index)
-                                  }
-                                  onInputChange={handleInputChange}
-                                  isClearable
-                                  required
-                                  placeholder="Type any keyword to Search Product"
-                                />
-                              </div>
-                              <div className="form-group col-4">
-                                <label htmlFor="">Select Flavour</label>
-                                <select
-                                  type="text"
-                                  className="form-select"
-                                  name="productName"
-                                  value={item?.flavour || ""}
-                                  onChange={(value) =>
-                                    handleChangeFlavour(value, index)
-                                  }
-                                  required>
-                                  <option selected="" value="">
-                                    Select Any Flavour
-                                  </option>
+                  <div className="form-group col-12 mt-2 p-1 ">
+                    <div className="col-12 d-flex justify-content-between ">
+                      <a
+                        className="comman_btn2 text-decoration-none mx-1 mb-3"
+                        data-bs-toggle="modal"
+                        id="modal-toggle66"
+                        data-bs-target="#staticBackdropImport"
+                        style={{ cursor: "pointer" }}>
+                        Import Products
+                      </a>
 
-                                  {product[
-                                    formValues[index]?.productName?.value
-                                  ]?.type?.map((item, ind) => (
-                                    <option
-                                      value={JSON.stringify(item)}
-                                      key={ind}>
-                                      {item?.flavour}
-                                    </option>
-                                  ))}
-                                </select>
-                              </div>
-                              <div className="form-group mb-0 col-3 ">
-                                <label htmlFor="">Add Quanitity</label>
-                                <input
-                                  type="tel"
-                                  maxLength={3}
-                                  className="form-New-select border "
-                                  name="flavourPrice"
-                                  value={item?.Quantity || ""}
-                                  onChange={(e) =>
-                                    handleChangeQuantity(e, index)
-                                  }
-                                  required
-                                />
-                              </div>
+                      {importedItems?.length > 0 && (
+                        <a
+                          onClick={() => {
+                            setImportedItems([]);
+                          }}
+                          className=" text-end comman_btn bg-danger text-decoration-none mx-1 mb-3">
+                          cancel
+                        </a>
+                      )}
+                    </div>
 
-                              <div className="form-group col-1  rmv_btn">
-                                <button
-                                  className="comman_btn "
-                                  type="button"
-                                  disabled={
-                                    formValues?.length <= 1 ? true : false
-                                  }
-                                  onClick={() => removeFormFields(index)}>
-                                  <i className="fa fa-minus mt-1 mx-1" />
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                        <div className="form-group  col-12 text-center mb-3 mb-0">
-                          <button
-                            className="comman_btn add_btn"
-                            type="button"
-                            onClick={() => addFormFields()}>
-                            <i className="fa fa-plus mt-1 mx-1" /> Add More
-                          </button>
+                    {importedItems?.length > 0 ? (
+                      <div className="col-12 comman_table_design px-0">
+                        <div className="table-responsive">
+                          <table className="table mb-0">
+                            <thead>
+                              <tr
+                                style={{
+                                  backgroundColor: "#f2f2f2",
+                                }}>
+                                <th>Barcode</th>
+                                <th>Product Name</th>
+                                <th>Flavour</th>
+                                <th>Quantity</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {(importedItems || [])?.map((item, index) => (
+                                <tr key={index}>
+                                  <td>{item?.type?.barcode[0]}</td>
+
+                                  <td>{item?.unitName}</td>
+                                  <td>{item?.type?.flavour}</td>
+                                  <td>{item?.quantity}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
                         </div>
                       </div>
-                    </form>
+                    ) : (
+                      <form className=" ">
+                        <div className="row flavour_box align-items-end mx-0 py-3 px-4">
+                          {(formValues || [])?.map((item, index) => (
+                            <div className="form-group mb-0 col-12 border rounded p-3 mb-2">
+                              <div className="row" key={index}>
+                                <div className="form-group col-4">
+                                  <label htmlFor="">Select Product</label>
+                                  <Select
+                                    name="users"
+                                    options={options}
+                                    value={item?.productName || ""}
+                                    className="basic-multi-select z-3"
+                                    classNamePrefix="select"
+                                    onChange={(value) =>
+                                      handleChange2(value, index)
+                                    }
+                                    onInputChange={handleInputChange}
+                                    isClearable
+                                    required
+                                    placeholder="Type any keyword to Search Product"
+                                  />
+                                </div>
+                                <div className="form-group col-4">
+                                  <label htmlFor="">Select Flavour</label>
+                                  <select
+                                    type="text"
+                                    className="form-select"
+                                    name="productName"
+                                    value={item?.flavour || ""}
+                                    onChange={(value) =>
+                                      handleChangeFlavour(value, index)
+                                    }
+                                    required>
+                                    <option selected="" value="">
+                                      Select Any Flavour
+                                    </option>
+
+                                    {product[
+                                      formValues[index]?.productName?.value
+                                    ]?.type?.map((item, ind) => (
+                                      <option
+                                        value={JSON.stringify(item)}
+                                        key={ind}>
+                                        {item?.flavour}
+                                      </option>
+                                    ))}
+                                  </select>
+                                </div>
+                                <div className="form-group mb-0 col-3 ">
+                                  <label htmlFor="">Add Quanitity</label>
+                                  <input
+                                    type="tel"
+                                    maxLength={3}
+                                    className="form-control-sub border "
+                                    name="flavourPrice"
+                                    value={item?.Quantity || ""}
+                                    onChange={(e) =>
+                                      handleChangeQuantity(e, index)
+                                    }
+                                    required
+                                  />
+                                </div>
+
+                                <div className="form-group col-1  rmv_btn">
+                                  <button
+                                    className="comman_btn "
+                                    type="button"
+                                    disabled={
+                                      formValues?.length <= 1 ? true : false
+                                    }
+                                    onClick={() => removeFormFields(index)}>
+                                    <i className="fa fa-minus mt-1 mx-1" />
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                          <div className="form-group  col-12 text-center mb-3 mb-0">
+                            <button
+                              className="comman_btn add_btn"
+                              type="button"
+                              onClick={() => addFormFields()}>
+                              <i className="fa fa-plus mt-1 mx-1" /> Add More
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    )}
                   </div>
                   <div className="form-group mb-0 col-12 text-center ">
                     <button
                       className="comman_btn2"
                       type="submit"
                       onClick={AddOrder}>
-                      Save Product
+                      Save Order
                     </button>
                     <button className="comman_btn2 d-none" type="reset">
-                      Save Product
+                      Save P
                     </button>
                   </div>
                 </form>
@@ -1504,6 +1657,7 @@ const OrderReq = () => {
                                           <th>Email</th>
                                           <th>Order ID</th>
                                           <th>Puller</th>
+                                          <th>Pull Status</th>
                                           <th>Order Details</th>
                                         </tr>
                                       </thead>
@@ -1547,6 +1701,7 @@ const OrderReq = () => {
                                                   {item?.puller?.fullName}
                                                 </td>
                                               )}
+                                              <td>{item?.pullStatus}</td>
                                               <td>
                                                 <button
                                                   className="comman_btn table_viewbtn"
@@ -2143,7 +2298,6 @@ const OrderReq = () => {
                                     </ul>
                                   </div>
                                 ) : null}
-
                               </div>
                             </div>
                           </div>
@@ -2288,131 +2442,7 @@ const OrderReq = () => {
                           id="nav-shared"
                           role="tabpanel"
                           aria-labelledby="nav-shared-tab">
-                          <div className="row mx-0 ">
-                            <div className="col-12">
-                              {/* <form
-                                className="form-design py-4 px-3 help-support-form row align-items-end justify-content-between bg-light border-bottom"
-                                action="">
-                                <div className="form-group mb-0 col-3">
-                                  <label htmlFor="">From</label>
-                                  <input
-                                    type="date"
-                                    className="form-control"
-                                    name="from"
-                                    id="reqFrom"
-                                    value={values.from}
-                                    onChange={handleDate}
-                                  />
-                                </div>
-                                <div className="form-group mb-0 col-3">
-                                  <label htmlFor="">To</label>
-                                  <input
-                                    type="date"
-                                    className="form-control"
-                                    name="to"
-                                    id="reqTo"
-                                    value={values.to}
-                                    onChange={handleDate}
-                                  />
-                                </div>
-                                <div className="form-group mb-0 col-1 text-center">
-                                  <button
-                                    className="comman_btn rounded"
-                                    onClick={onQuoteSearch}>
-                                    Search
-                                  </button>
-                                </div>
-                                <div className="col-2 text-center">
-                                  <button
-                                    className="comman_btn2 rounded"
-                                    onClick={exporQuotation}>
-                                    Export <i class="fa fa-download"></i>
-                                  </button>
-                                </div>
-                                <div className=" d -flex col-3">
-                                  <form className="form-design" action="">
-                                    <div className="form-group mb-0 position-relative icons_set">
-                                      <input
-                                        type="text"
-                                        className="form-control bg-white "
-                                        placeholder="Search by Quote
-                                         ID/Customer Name"
-                                        name="name"
-                                        id="name"
-                                        onChange={(e) => {
-                                          QuoteSearch(e);
-                                        }}
-                                      />
-                                    </div>
-                                  </form>
-                                </div>
-                              </form> */}
-                              <div className="row recent_orders_order  ">
-                                <div className="col-12 comman_table_design px-0">
-                                  <div className="table-responsive">
-                                    <table className="table mb-0">
-                                      <thead>
-                                        <tr
-                                          style={{
-                                            backgroundColor: "#f2f2f2",
-                                          }}>
-                                          <th>Date</th>
-                                          <th>Company Name</th>
-                                          <th>Mobile Number</th>
-                                          <th>Email</th>
-                                          <th>Request Id</th>
-                                          <th>Status</th>
-                                          <th>QUOTATION REQUEST</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        {(sharedQ || [])?.map((item, index) => (
-                                          <tr key={index}>
-                                            <td>
-                                              {moment(
-                                                item?.createdAt?.slice(0, 10)
-                                              ).format("MM/DD/YYYY")}
-                                            </td>
-                                            <td>
-                                              {item?.userId?.companyName ||
-                                                item?.user?.companyName}
-                                            </td>
-                                            <td>
-                                              {item?.userId?.phoneNumber ||
-                                                item?.user?.phoneNumber}
-                                            </td>
-                                            <td>
-                                              {item?.userId?.email ||
-                                                item?.user?.email}
-                                            </td>
-                                            <td>{item?.quoteId}</td>
-
-                                            <td>{item?.status}</td>
-                                            <td>
-                                              <button
-                                                className="comman_btn table_viewbtn"
-                                                onClick={() => {
-                                                  navigate(
-                                                    "/OrderRequest/ViewQuotationRequest",
-                                                    {
-                                                      state: {
-                                                        id: item?._id,
-                                                      },
-                                                    }
-                                                  );
-                                                }}>
-                                                View
-                                              </button>
-                                            </td>
-                                          </tr>
-                                        ))}
-                                      </tbody>
-                                    </table>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          <div className="row mx-0 "></div>
                         </div>
                         <div
                           className="tab-pane fade"
@@ -2670,6 +2700,92 @@ const OrderReq = () => {
                   </button>
                 </div>
               </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="modal comman_modal_form forms_modal"
+        id="staticBackdropImport"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabIndex={-1}
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content border-0 rounded-0  rounded-top">
+            <div className="modal-body">
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                onClick={() => {
+                  setUx("");
+                  setImpFile();
+                  setLoader2(false);
+                  document.getElementById("reUpload").hidden = false;
+                }}
+                id="modal-closeImport"
+              />
+
+              <div>
+                <div className="container">
+                  <div className="">
+                    <div className="drop_box p-5">
+                      <header>
+                        <h4>Choose File here</h4>
+                      </header>
+                      <p>Files Supported: CSV</p>
+                      <p className="text-dark bg-light p-2">
+                        {impFile?.name}{" "}
+                        <button
+                          hidden
+                          className="btn"
+                          id="reUpload"
+                          accept=".csv/*"
+                          onClick={() => {
+                            document.getElementById("fileIDs").click();
+                          }}>
+                          <BiEdit />
+                        </button>
+                      </p>
+                      <input
+                        type="file"
+                        accept=".csv"
+                        id="fileIDs"
+                        style={{ display: "none" }}
+                        onChange={onFileSelection}
+                      />
+                      {ux !== "" ? (
+                        <Button
+                          className="comman_btn"
+                          loading={loader2}
+                          style={{
+                            backgroundColor: "#eb3237",
+                            color: "#fff",
+                            fontSize: "20px",
+                            position: "relative",
+                            top: "-2px",
+                          }}
+                          onClick={onUpload}>
+                          Upload
+                        </Button>
+                      ) : (
+                        <button
+                          className="comman_btn2"
+                          htmlFor=""
+                          onClick={() => {
+                            document.getElementById("fileIDs").click();
+                          }}>
+                          Import
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -6,6 +6,12 @@ import "../../assets/css/main.css";
 import axios from "axios";
 import Profile from "./Profile";
 import moment from "moment";
+import { Steps } from "rsuite";
+import TaskIcon from "@rsuite/icons/Task";
+import DoingRoundIcon from "@rsuite/icons/DoingRound";
+import BookIcon from "@rsuite/icons/legacy/Book";
+import CheckRoundIcon from "@rsuite/icons/CheckRound";
+import RemindRoundIcon from "@rsuite/icons/RemindRound";
 
 const OrderDetails = () => {
   const [users, setUsers] = useState([]);
@@ -33,6 +39,20 @@ const OrderDetails = () => {
       setUsers(res?.data.results);
     });
   };
+
+  const currentScore = () => {
+    switch (orderDetails?.status) {
+      case "PROCESSING":
+        return 1;
+      case "SHIPPED":
+        return 2;
+      case "DELIVERED":
+        return 3;
+      default:
+        return 0;
+    }
+  };
+
   return (
     <div className="main_myaccount">
       <Navbar />
@@ -47,16 +67,14 @@ const OrderDetails = () => {
                     <li className="item_nanner">
                       <Link
                         to=""
-                        className="text-decoration-none text-white fs-6  "
-                      >
+                        className="text-decoration-none text-white fs-6  ">
                         Home <span className="arrow mx-1">&#9679;</span>{" "}
                       </Link>
                     </li>
                     <li className="breadcrumb-item" aria-current="page">
                       <Link
                         to=""
-                        className="text-decoration-none text-white fs-6 "
-                      >
+                        className="text-decoration-none text-white fs-6 ">
                         My Account <span className="arrow mx-1">&#9679;</span>
                       </Link>
                     </li>
@@ -64,8 +82,7 @@ const OrderDetails = () => {
                       <Link
                         to=""
                         style={{ position: "relative", left: "-12px" }}
-                        className="text-decoration-none text-white fs-6 "
-                      >
+                        className="text-decoration-none text-white fs-6 ">
                         My Orders
                       </Link>
                     </li>
@@ -90,8 +107,7 @@ const OrderDetails = () => {
                     className="tab-pane fade show active"
                     id="nav-home"
                     role="tabpanel"
-                    aria-labelledby="nav-home-tab"
-                  >
+                    aria-labelledby="nav-home-tab">
                     <div className="col-xl-12 justify content center">
                       <div className="bg-white p-4">
                         <div className="tab-content" id="nav-tabContent">
@@ -99,8 +115,7 @@ const OrderDetails = () => {
                             className="tab-pane fade show active"
                             id="nav-home"
                             role="tabpanel"
-                            aria-labelledby="nav-home-tab"
-                          >
+                            aria-labelledby="nav-home-tab">
                             <div className="row">
                               <div className="col-12 mb-3">
                                 <div className="order_heading">
@@ -246,6 +261,95 @@ const OrderDetails = () => {
                                     Track Your Order
                                   </span>
                                   {orderDetails?.status === "CANCEL" ? (
+                                    <Steps current={1}>
+                                      <Steps.Item
+                                        title="Order Cancelled"
+                                        icon={
+                                          <RemindRoundIcon
+                                          className="text-danger"
+                                            style={{
+                                              fontSize: 25,
+                                            }}
+                                          />
+                                        }
+                                      />
+                                    </Steps>
+                                  ) : (
+                                    <Steps current={currentScore()}>
+                                      <Steps.Item
+                                        title="Order Placed"
+                                        icon={
+                                          <TaskIcon
+                                            className={
+                                              (orderDetails?.status ===
+                                                "ORDER PLACED" &&
+                                                "colorRed") ||
+                                              (orderDetails?.status ===
+                                                "SHIPPED" &&
+                                                "colorRed") ||
+                                              (orderDetails?.status ===
+                                                "DELIVERED" &&
+                                                "colorRed")
+                                            }
+                                            style={{
+                                              fontSize: 25,
+                                            }}
+                                          />
+                                        }
+                                      />
+                                      <Steps.Item
+                                        title="Order Processing"
+                                        icon={
+                                          <DoingRoundIcon
+                                            className={
+                                              (orderDetails?.status ===
+                                                "SHIPPED" &&
+                                                "colorRed") ||
+                                              (orderDetails?.status ===
+                                                "DELIVERED" &&
+                                                "colorRed")
+                                            }
+                                            style={{
+                                              fontSize: 22,
+                                            }}
+                                          />
+                                        }
+                                      />
+                                      <Steps.Item
+                                        title="Shipped"
+                                        icon={
+                                          <BookIcon
+                                            className={
+                                              (orderDetails?.status ===
+                                                "SHIPPED" &&
+                                                "colorRed") ||
+                                              (orderDetails?.status ===
+                                                "DELIVERED" &&
+                                                "colorRed")
+                                            }
+                                            style={{
+                                              fontSize: 22,
+                                            }}
+                                          />
+                                        }
+                                      />
+                                      <Steps.Item
+                                        title="Delivered"
+                                        icon={
+                                          <CheckRoundIcon
+                                            className={
+                                              orderDetails?.status ===
+                                                "DELIVERED" && "colorRed"
+                                            }
+                                            style={{
+                                              fontSize: 22,
+                                            }}
+                                          />
+                                        }
+                                      />
+                                    </Steps>
+                                  )}
+                                  {/* {orderDetails?.status === "CANCEL" ? (
                                     <ul className="track_order list-unstyled mb-0">
                                       <li className="fs-4 text-danger">
                                         YOUR ORDER HAS BEEN CANCELED!
@@ -308,15 +412,13 @@ const OrderDetails = () => {
                                         Delivered
                                       </li>
                                     </ul>
-                                  )}
+                                  )} */}
                                 </div>
                               </div>
 
                               <div className="col-12 mb-4">
                                 <div className="row mx-0 border rounded pt-4 p-3 position-relative">
-                                  <span className="small_header">
-                                  Comment:
-                                  </span>
+                                  <span className="small_header">Comment:</span>
                                   <div className="col-6 mb-2">
                                     <div className="row">
                                       <div className="col-6">
@@ -326,21 +428,22 @@ const OrderDetails = () => {
                                       </div>
                                       <div className="col-6">
                                         <span className="data_submain">
-                                          {orderDetails?.statusComment ? orderDetails?.statusComment : "No Comments."
-                                           }
+                                          {orderDetails?.statusComment
+                                            ? orderDetails?.statusComment
+                                            : "No Comments."}
                                         </span>
                                       </div>
                                     </div>
                                   </div>
-                                 
                                 </div>
                               </div>
-
 
                               <div className="col-12 mb-4">
                                 <div className="row mx-0 border rounded pt-4 p-3 position-relative">
                                   <span className="small_header">
-                                    Shipment Details - { orderDetails?.orderedBy === "SubAcc" && "Sub-Account"}
+                                    Shipment Details -{" "}
+                                    {orderDetails?.orderedBy === "SubAcc" &&
+                                      "Sub-Account"}
                                   </span>
                                   <div className="col-6 mb-2">
                                     <div className="row">
@@ -402,8 +505,6 @@ const OrderDetails = () => {
                                   </div>
                                 </div>
                               </div>
-
-                              
                             </div>
                           </div>
                         </div>

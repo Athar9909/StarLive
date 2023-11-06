@@ -96,7 +96,7 @@ function AppEditProfile() {
   return (
     <>
       <div className="star_imp_app">
-        <div class="header-area" id="headerArea" ref={ref}>
+        <div class="header-area " id="headerArea" ref={ref}>
           <div class="container h-100 d-flex align-items-center justify-content-between rtl-flex-d-row-r">
             <div class="back-button me-2 me-2">
               <Link to="/app/profile">
@@ -122,7 +122,7 @@ function AppEditProfile() {
         </div>
         <WebHeader2 />
 
-        <div className="page-content-wrapper">
+        <div className="page-content-wrapper2">
           <div className="container">
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="profile-wrapper-area py-3">

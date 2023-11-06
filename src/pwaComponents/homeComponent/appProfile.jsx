@@ -20,11 +20,11 @@ function AppProfile() {
 
   return (
     <>
-      <div className="star_imp_app">
+      <div className="">
         <AppHeader />
-        <div className="page-content-wrapper">
+        <div className="page-content-wrapper ">
           <div className="container">
-            <div className="profile-wrapper-area py-3">
+            <div className="profile-wrapper-area ">
               <div className="card user-info-card">
                 <div className="card-body p-4 d-flex align-items-center">
                   <div className="user-profile me-3">
