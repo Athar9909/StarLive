@@ -303,7 +303,7 @@ function AppHome() {
                 <div
                   className={
                     browserName === "WebKit" || browserName === "Chrome WebView"
-                      ? "search-form pt-1 "
+                      ? "search-new2 pt-1 "
                       : "search-new pt-1 "
                   }>
                   <form className="" style={{ width: "100%" }}>
@@ -426,7 +426,7 @@ function AppHome() {
                   <div>
                     <div className="hero-wrapper">
                       <div className="container">
-                        <div className="pt-3 px-0">
+                        <div className="pt-1 px-0 mb-1">
                           <Carousel
                             showThumbs={false}
                             showIndicators={false}
@@ -451,65 +451,16 @@ function AppHome() {
                               </div>
                             ))}
                           </Carousel>
-                          {/* 
-                          <OwlCarousel
-                            className=" hero-slides "
-                            autoplay={true}
-                            autoplayHoverPause={false}
-                            autoplayTimeout={5000}
-                            dots={true}
-                            loop={true}
-                            nav={false}
-                            fade={false}
-                            items={1}>
-                            <div className="single-hero-slide item">
-                              <img
-                                src={
-                                  banner[1]?.banner
-                                    ? banner[1]?.banner
-                                    : require("../../assets/img/staticBg.png")
-                                }></img>
-                            </div>
-                            <div className="single-hero-slide item">
-                              <img
-                                src={
-                                  banner[2]?.banner
-                                    ? banner[2]?.banner
-                                    : require("../../assets/img/staticBg.png")
-                                }></img>
-                            </div>
-                            <div className="single-hero-slide item">
-                              <img
-                                src={
-                                  banner[3]?.banner
-                                    ? banner[3]?.banner
-                                    : require("../../assets/img/staticBg.png")
-                                }></img>
-                            </div>
-                            <div className="single-hero-slide item">
-                              <img
-                                src={
-                                  banner[4]?.banner
-                                    ? banner[4]?.banner
-                                    : require("../../assets/img/staticBg.png")
-                                }></img>
-                            </div>
-                            <div className="single-hero-slide item">
-                              <img
-                                src={
-                                  banner[5]?.banner
-                                    ? banner[5]?.banner
-                                    : require("../../assets/img/staticBg.png")
-                                }></img>
-                            </div>
-                          </OwlCarousel> */}
+
+
+                       
                         </div>
                       </div>
                     </div>
 
                     <div className="product-catagories-wrapper py-1 pb-3  mt-4">
                       <div className="container">
-                        <div className=" d-flex align-items-center justify-content-between dir-rtl mt-3 mb-2">
+                        <div className=" d-flex align-items-center justify-content-between dir-rtl  mb-2">
                           <h2 className="fs-6 fw-bold text-dark">
                             Top Categories
                           </h2>

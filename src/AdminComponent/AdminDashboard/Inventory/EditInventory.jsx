@@ -1,5 +1,5 @@
 import React, { useState, KeyboardEventHandler } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import "../../../assets/css/adminMain.css";
 import { useForm } from "react-hook-form";
 import Starlogo from "../../../assets/img/logo.png";
@@ -47,7 +47,7 @@ const EditInventory = () => {
     },
   ]);
   const location = useLocation();
-  let id = location.state?.id;
+  let { id } = useParams();
   const {
     register,
     handleSubmit,
@@ -961,33 +961,7 @@ const EditInventory = () => {
                                     onChange={(e) => handleChange(index, e)}
                                   />
                                 </div>
-                                <div className="form-group mb-2 col-lg-3">
-                                  <label htmlFor="" className="d-flex">
-                                    Price:
-                                    <Toggle
-                                      key={item?.flavourPriceStatus}
-                                      size="sm"
-                                      className="mx-2"
-                                      color="#3e4093"
-                                      defaultChecked={item?.flavourPriceStatus}
-                                      checkedChildren="enable"
-                                      unCheckedChildren="disable"
-                                      onChange={() => {
-                                        flavourPriceStatus(index);
-                                      }}
-                                    />
-                                  </label>
-
-                                  <input
-                                    type="number"
-                                    className="form-control"
-                                    name="flavourPrice"
-                                    placeholder="Enter Price"
-                                    defaultValue={item?.flavourPrice}
-                                    onChange={(e) => handleChange(index, e)}
-                                  />
-                                </div>
-                                <div className="form-group col-4">
+                                <div className="form-group col-3">
                                   <label htmlFor="">Description</label>
                                   <input
                                     type="text"
@@ -998,30 +972,8 @@ const EditInventory = () => {
                                     onChange={(e) => handleChange(index, e)}
                                   />
                                 </div>
-                                <div className="form-group mb-0 col-lg-4 col-md-5">
-                                  <label htmlFor="">Barcode</label>
-                                  <div className="tags-input-container">
-                                    {(item?.barcode || [])?.map((tag, ind) => (
-                                      <div className="tag-item" key={ind}>
-                                        <span className="tag-text">{tag}</span>
-                                        <span
-                                          className="close"
-                                          onClick={() => removeTag(ind, index)}>
-                                          &times;
-                                        </span>
-                                      </div>
-                                    ))}
-
-                                    <input
-                                      type="text"
-                                      className="tags-input mb-0"
-                                      name="barcode"
-                                      onKeyDown={(e) => handleKeyDown(index, e)}
-                                    />
-                                  </div>
-                                </div>
-                                <div className="form-group mb-2  col-lg-2 col-md-2 mt-1 ">
-                                  <label className="mx-2">Flavour Image</label>
+                                <div className="form-group mb-2  col-lg-3 col-md-3 col-3 col-sm-2 mt-1 ">
+                                  <label className="mx-2">Image</label>
 
                                   <div className="flavourImage position-relative d-inline-block">
                                     <div className="imageSection d-inline-flex">
@@ -1037,8 +989,8 @@ const EditInventory = () => {
                                       <img
                                         className="flavour-pic"
                                         style={{
-                                          height: "200px",
-                                          width: "130px",
+                                          height: "180px",
+                                          width: "140px",
                                           marginLeft: "0",
                                         }}
                                         src={
@@ -1077,7 +1029,59 @@ const EditInventory = () => {
                                     </div>
                                   </div>
                                 </div>
-                                <div className="form-group mb-2 mt-1 col-lg-1 col-md-1  position-relative">
+                                <div className="form-group mb-0 col-lg-5 col-md-5">
+                                  <label htmlFor="">Barcode</label>
+                                  <div className="tags-input-container">
+                                    {(item?.barcode || [])?.map((tag, ind) => (
+                                      <div className="tag-item" key={ind}>
+                                        <span className="tag-text">{tag}</span>
+                                        <span
+                                          className="close"
+                                          onClick={() => removeTag(ind, index)}>
+                                          &times;
+                                        </span>
+                                      </div>
+                                    ))}
+
+                                    <input
+                                      type="text"
+                                      className="tags-input mb-0"
+                                      name="barcode"
+                                      onKeyDown={(e) => handleKeyDown(index, e)}
+                                    />
+                                  </div>
+                                </div>
+                                <div className="form-group mb-2 col-lg-3 col-2">
+                                  <label htmlFor="" className="d-flex">
+                                    Price:
+                                    {item?.flavourPrice && (
+                                      <Toggle
+                                        key={item?.flavourPriceStatus}
+                                        size="sm"
+                                        className="mx-2"
+                                        color="#3e4093"
+                                        defaultChecked={
+                                          item?.flavourPriceStatus
+                                        }
+                                        checkedChildren="enable"
+                                        unCheckedChildren="disable"
+                                        onChange={() => {
+                                          flavourPriceStatus(index);
+                                        }}
+                                      />
+                                    )}
+                                  </label>
+
+                                  <input
+                                    type="number"
+                                    className="form-control"
+                                    name="flavourPrice"
+                                    placeholder="Enter Price"
+                                    defaultValue={item?.flavourPrice}
+                                    onChange={(e) => handleChange(index, e)}
+                                  />
+                                </div>
+                                <div className="form-group mb-2 mt-1 col-lg-1 col-md-1 col-1  position-relative">
                                   <label className=""> Status </label>
                                   <div className="">
                                     <label class="switchUser">

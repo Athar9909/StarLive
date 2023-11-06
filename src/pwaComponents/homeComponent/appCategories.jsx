@@ -66,7 +66,7 @@ function AppCategories() {
           </div>
         </div>
         <WebHeader2 />
-        <div className="page-content-wrapper container-fluid">
+        <div className="page-content-wrapper2 container-fluid">
           <Search />
 
           {searchKey.length ? null : (

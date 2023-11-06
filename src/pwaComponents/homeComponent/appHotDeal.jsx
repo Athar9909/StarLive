@@ -124,19 +124,7 @@ function AppHotDeals() {
     getProductList();
     setHeart(!heart);
   };
-  const rmvFromFav = async (index, itm) => {
-    await axios
-      .post(rmvFav, {
-        productId: itm?.productId?._id,
-        flavour: itm?.productId?.type,
-      })
-      .then((res) => {
-        if (!res.error) {
-          setHeart(!heart);
-        }
-      });
-    getProductList();
-  };
+
   return (
     <>
       <div className="top-products-area pb-2 mt-3">
@@ -152,7 +140,7 @@ function AppHotDeals() {
               autoplay={{
                 delay: 3000,
                 disableOnInteraction: true,
-                reverseDirection: true,
+                reverseDirection: false,
                 waitForTransition: true,
               }}
               loop={true}

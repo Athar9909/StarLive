@@ -1578,7 +1578,7 @@ const OrderReq = () => {
                                       <input
                                         type="text"
                                         className="form-control bg-white "
-                                        placeholder="Search by Order ID/Customer Name"
+                                        placeholder="Search by Order ID/Company Name"
                                         name="name"
                                         id="name"
                                         onChange={(e) => {
@@ -1838,7 +1838,7 @@ const OrderReq = () => {
                                       <input
                                         type="text"
                                         className="form-control bg-white "
-                                        placeholder="Search by Order ID/Customer Name"
+                                        placeholder="Search by Order ID/Company Name"
                                         name="name"
                                         id="name"
                                         onChange={(e) => {
@@ -2093,7 +2093,7 @@ const OrderReq = () => {
                                       <input
                                         type="text"
                                         className="form-control bg-white "
-                                        placeholder="Search by Order ID/Customer Name"
+                                        placeholder="Search by Order ID/Company Name"
                                         name="name"
                                         id="name"
                                         onChange={(e) => {
@@ -2357,7 +2357,7 @@ const OrderReq = () => {
                                         type="text"
                                         className="form-control bg-white "
                                         placeholder="Search by Quote
-                                         ID/Customer Name"
+                                         ID/Company Name"
                                         name="name"
                                         id="name"
                                         onChange={(e) => {

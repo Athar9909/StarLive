@@ -248,7 +248,7 @@ function App() {
               element={<ViewPuller />}
             />
             <Route path="/Inventory/View" element={<ViewProduct />} />
-            <Route path="/Inventory/View-Edit" element={<EditInventory />} />
+            <Route path="/Inventory/View-Edit/:id" element={<EditInventory />} />
             <Route path="/BrandsManage" element={<BrandsManage />} />
             <Route path="/Gallery-Management" element={<GalleryMain />} />
             <Route path="/Cms" element={<Cms />} />

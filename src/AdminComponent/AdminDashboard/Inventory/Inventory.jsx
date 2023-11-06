@@ -1560,14 +1560,13 @@ const Inventory = () => {
                                   <Link
                                     className="comman_btn2  text-decoration-none"
                                     to={{
-                                      pathname: "/Inventory/View-Edit",
+                                      pathname: `/Inventory/View-Edit/${User?._id}`,
                                     }}
                                     onClick={() => {
                                       setPageData([
                                         { page: activePage, searchKey: search },
                                       ]);
                                     }}
-                                    state={{ id: User?._id }}
                                     id={index}>
                                     View
                                   </Link>
@@ -1637,7 +1636,7 @@ const Inventory = () => {
           </div>
         </div>
       </div>
-      
+
       <div
         className="modal comman_modal_form forms_modal"
         id="staticBackdrop66"
@@ -1813,7 +1812,6 @@ const Inventory = () => {
           </div>
         </div>
       </div>
-      
     </div>
   );
 };

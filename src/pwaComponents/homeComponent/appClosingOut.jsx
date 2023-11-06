@@ -152,7 +152,7 @@ function AppClosingOut() {
               autoplay={{
                 delay: 3000,
                 disableOnInteraction: true,
-                reverseDirection: true,
+                reverseDirection: false,
                 waitForTransition: true,
               }}
               loop={true}
