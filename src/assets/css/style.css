@@ -6176,7 +6176,7 @@ background-color: #3e4093;
       font-family: "Poppins", sans-serif !important;
       color: #747794 !important;
       overflow-x: hidden;
-      background-color: #e9eeff !important;
+      background-color: #fff !important;
       scrollbar-width: thin;
       padding-right: 0 !important;
       letter-spacing: -0.2px;
@@ -6239,7 +6239,7 @@ background-color: #3e4093;
     font-family: "Poppins", sans-serif !important;
     color: #747794 !important;
     overflow-x: hidden;
-    background-color: #e9eeff !important;
+    background-color: #fff !important;
     scrollbar-width: thin;
     padding-right: 0 !important;
     letter-spacing: -0.5px;
@@ -7096,10 +7096,7 @@ background-color: #3e4093;
   .preview-footer-area .footer-logo img {
     max-height: 50px;
   }
-  .page-content-wrapper {
-    margin-top: 60px;
-    margin-bottom: 80px;
-  }
+
   .pwa-install-alert {
     position: fixed;
     z-index: 999;

@@ -161,6 +161,9 @@ function AppPreLogin() {
                         type="text"
                         className="form-control"
                         placeholder="User@gmail.com"
+                        style={{
+                          fontSize:"16px"
+                        }}
                         name="email"
                         id="email"
                         autoComplete="nope"

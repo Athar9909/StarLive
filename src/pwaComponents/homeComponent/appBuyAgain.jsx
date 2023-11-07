@@ -182,13 +182,13 @@ function AppBuyAgain() {
   };
   return (
     <>
-      <div className="star_imp_app">
+      <div className="">
         <AppHeader cartCount={cartCount} />
-        <div className="page-content-wrapper">
+        <div className="page-content-wrapper2 mt-1 bg-light ">
           
           <div className="py-3">
-            <div className="row mb-2 p-2 justify-content-between">
-              <div className="col-auto mx-3 mx-xs-0 col-xs-auto">
+            <div className="row mb-2 p-2 justify-content-between   ">
+              <div className="col-auto mx-3 mx-xs-0 col-xs-auto ">
                 <label class="checkbox-label-all d-flex">
                   <input
                     type="checkbox"

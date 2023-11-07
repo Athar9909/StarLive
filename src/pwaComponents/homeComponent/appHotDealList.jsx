@@ -43,7 +43,7 @@ function AppHotDealList() {
 
   const getProductList = async () => {
     const { data } = await axios.post(getPromotionProd, {
-      type: "Featured",
+      type: "HotSelling",
     });
 
     if (!data.error) {
@@ -183,7 +183,7 @@ function AppHotDealList() {
         </div>
         <WebHeader2 />
 
-        <div class="page-content-wrapper">
+        <div class="page-content-wrapper2">
           <Search />
           <div>
             {/* {browserName === "WebKit" || browserName === "Chrome WebView" ? (

@@ -217,7 +217,7 @@ function AppProductDetail() {
       <div className="star_imp_app">
         <AppHeader cartCount={cartCount} />
 
-        <div className="page-content-wrapper2 mb-5 mt-0">
+        <div className="page-content-wrapper2 mb-5 mt-0 bg-light">
           <div className="" key={itemNo}>
             {productDetail ? (
               <Carousel
@@ -422,24 +422,7 @@ function AppProductDetail() {
                 </div>
               </div>
             </div>
-            {/* <div className="cart-form-wrapper bg-white mb-3 py-3">
-              <div className="container">
-                <div className="">
-                  {token ? (
-                    <button
-                      className="comman_btn mb-2"
-                      type="submit"
-                      onClick={() => addToCartt()}>
-                      Add Cart to Order
-                    </button>
-                  ) : (
-                    <Link className="comman_btn mb-2" to="/app/login">
-                      Please Login to Add to Cart !
-                    </Link>
-                  )}
-                </div>
-              </div>
-            </div> */}
+          
             <div className="selection-panel bg-white mb-3 py-3">
               <div className="container">
                 <div className="choose-color-wrapper">

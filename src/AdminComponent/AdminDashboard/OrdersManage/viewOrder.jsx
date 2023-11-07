@@ -72,7 +72,7 @@ const ViewOrder = () => {
         setOrders(res?.data.results);
       });
   };
-  
+
   const UpdateOrderStatus = async (e) => {
     e.preventDefault();
     await axios
@@ -950,9 +950,7 @@ const ViewOrder = () => {
                                     <div class="dropdown-contents DropBg">
                                       <a
                                         className="text-decoration-none text-dark "
-                                        onClick={() =>
-                                          OrderDetails("", 1)
-                                        }>
+                                        onClick={() => OrderDetails("", 1)}>
                                         All
                                       </a>
                                       <a
@@ -983,90 +981,125 @@ const ViewOrder = () => {
                                 <th>Pull Quantity</th>
                               </tr>
                             </thead>
-                            <tbody className="border">
-                              {(orders?.products || [])?.map((item, index) => (
+                            {orders?.products?.length < 1 ? (
+                              <tbody className="border">
                                 <tr className="border">
                                   <td>
-                                    <div className="row align-items-center flex-lg-wrap flex-md-nowrap flex-nowrap">
-                                      <div className="col-auto">
-                                        <span className="cart_product">
-                                          <img
-                                            src={
-                                              item?.flavour?._id
-                                                ? item?.flavour?.flavourImage
-                                                : item?.productId?.productImage
-                                            }
-                                            alt=""
-                                          />
-                                        </span>
-                                      </div>
-                                      <div className="col">
-                                        <div className="cart_content ">
-                                          <h3 className="fs-5">
-                                            {item?.flavour?._id
-                                              ? item?.productId?.unitName +
-                                                "-" +
-                                                item?.flavour?.flavour
-                                              : item?.productId?.unitName}
-                                          </h3>
-                                          <p>
-                                            Barcodes:
-                                            {item?.flavour?.barcode
-                                              ?.filter((itm, id) => id == 1)
-                                              .map((item) => (
-                                                <li>{item}</li>
-                                              ))}
-                                          </p>
-                                        </div>
-                                      </div>
-                                    </div>
+                                    No Results -{" "}
+                                    <button
+                                      className="bg-primary text-white p-2 border rounded"
+                                      onClick={() => {
+                                        OrderDetails();
+                                      }}>
+                                      Refresh
+                                    </button>
                                   </td>
                                   <td className="border rounded">
                                     <span className="fs-5 bg-light p-2 px-3 rounded">
-                                      {item?.quantity}
+                                      No Results
                                     </span>
                                   </td>
-                                  <td className="border rounded">
-                                    {item?.scanned === "NotScanned" ? (
-                                      <span className="fs-5 text-secondary  p-2 px-3 rounded">
-                                        Not Scanned
-                                      </span>
-                                    ) : (
-                                      <div>
-                                        {item?.scanned === "PartlyScanned" && (
-                                          <span className="fs-5 text-secondary  p-2 px-3 rounded">
-                                            Under Scanned
-                                          </span>
-                                        )}
-                                        {item?.scanned === "OutOfStock" && (
-                                          <span className="fs-5 text-secondary  p-2 px-3 rounded">
-                                            Out of Stock
-                                          </span>
-                                        )}
-                                        {item?.scanned === "OverlyScanned" && (
-                                          <span className="fs-5 text-secondary  p-2 px-3 rounded">
-                                            Over Scanned
-                                          </span>
-                                        )}
-                                        {item?.scanned === "FullyScanned" && (
-                                          <span className="fs-5  p-2 px-3 rounded">
-                                            <img
-                                              className="mx-2"
-                                              src={require("../../../assets/img/Group 427322975.png")}></img>{" "}
-                                            Complete Order
-                                          </span>
-                                        )}
-                                      </div>
-                                    )}
-                                  </td>
+                                  <td className="border rounded">No Results</td>
                                   <td className="border rounded">
                                     <span className="fs-5 bg-light p-2 px-3 rounded">
-                                      {item?.pickedQuantity}
+                                      No Results
                                     </span>
                                   </td>
                                 </tr>
-                              ))}
-                            </tbody>
+                              </tbody>
+                            ) : (
+                              <tbody className="border">
+                                {(orders?.products || [])?.map(
+                                  (item, index) => (
+                                    <tr className="border">
+                                      <td>
+                                        <div className="row align-items-center flex-lg-wrap flex-md-nowrap flex-nowrap">
+                                          <div className="col-auto">
+                                            <span className="cart_product">
+                                              <img
+                                                src={
+                                                  item?.flavour?._id
+                                                    ? item?.flavour
+                                                        ?.flavourImage
+                                                    : item?.productId
+                                                        ?.productImage
+                                                }
+                                                alt=""
+                                              />
+                                            </span>
+                                          </div>
+                                          <div className="col">
+                                            <div className="cart_content ">
+                                              <h3 className="fs-5">
+                                                {item?.flavour?._id
+                                                  ? item?.productId?.unitName +
+                                                    "-" +
+                                                    item?.flavour?.flavour
+                                                  : item?.productId?.unitName}
+                                              </h3>
+                                              <p>
+                                                Barcodes:
+                                                {item?.flavour?.barcode
+                                                  ?.filter((itm, id) => id == 1)
+                                                  .map((item) => (
+                                                    <li>{item}</li>
+                                                  ))}
+                                              </p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </td>
+                                      <td className="border rounded">
+                                        <span className="fs-5 bg-light p-2 px-3 rounded">
+                                          {item?.quantity}
+                                        </span>
+                                      </td>
+                                      <td className="border rounded">
+                                        {item?.scanned === "NotScanned" ? (
+                                          <span className="fs-5 text-secondary  p-2 px-3 rounded">
+                                            Not Scanned
+                                          </span>
+                                        ) : (
+                                          <div>
+                                            {item?.scanned ===
+                                              "PartlyScanned" && (
+                                              <span className="fs-5 text-secondary  p-2 px-3 rounded">
+                                                Under Scanned
+                                              </span>
+                                            )}
+                                            {item?.scanned === "OutOfStock" && (
+                                              <span className="fs-5 text-secondary  p-2 px-3 rounded">
+                                                Out of Stock
+                                              </span>
+                                            )}
+                                            {item?.scanned ===
+                                              "OverlyScanned" && (
+                                              <span className="fs-5 text-secondary  p-2 px-3 rounded">
+                                                Over Scanned
+                                              </span>
+                                            )}
+                                            {item?.scanned ===
+                                              "FullyScanned" && (
+                                              <span className="fs-5  p-2 px-3 rounded">
+                                                <img
+                                                  className="mx-2"
+                                                  src={require("../../../assets/img/Group 427322975.png")}></img>{" "}
+                                                Complete Order
+                                              </span>
+                                            )}
+                                          </div>
+                                        )}
+                                      </td>
+                                      <td className="border rounded">
+                                        <span className="fs-5 bg-light p-2 px-3 rounded">
+                                          {item?.pickedQuantity}
+                                        </span>
+                                      </td>
+                                    </tr>
+                                  )
+                                )}
+                              </tbody>
+                            )}
                           </table>
                         </div>
                       </div>

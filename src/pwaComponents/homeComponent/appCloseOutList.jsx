@@ -154,7 +154,7 @@ function AppCloseOutList() {
   };
   return (
     <>
-      <div className="star_imp_app">
+      <div className="star_imp_app ">
         <div class="header-area" id="headerArea" ref={ref}>
           <div class="container h-100 d-flex align-items-center justify-content-between rtl-flex-d-row-r">
             <div class="back-button me-2">
@@ -182,7 +182,7 @@ function AppCloseOutList() {
         </div>
         <WebHeader2 />
 
-        <div class="page-content-wrapper">
+        <div class="page-content-wrapper2 bg-white">
           <Search />
           <div>
             <div>

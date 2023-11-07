@@ -184,7 +184,7 @@ function AppProductList() {
         </div>
         <WebHeader2 />
 
-        <div class="page-content-wrapper">
+        <div class="page-content-wrapper2">
           <Search />
           <div>
             {/* {browserName === "WebKit" || browserName === "Chrome WebView" ? (

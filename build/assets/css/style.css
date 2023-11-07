@@ -1,21 +1,11 @@
 /* Website */
 @media screen and (min-device-width: 768px) and (max-device-width: 2500px) {
   @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
-  /* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap"); */
-  /* @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i");
-  @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap'); */
-  /*--------------------------------------------------------------
-  # General
-  --------------------------------------------------------------*/
   :root {
     scroll-behavior: smooth !important;
   }
 
   body {
-    /* font-family: "Poppins" sans-serif !important; */
-    /* font-family: 'Unbounded', cursive !important; */
-    /* font-family: 'Cabin', sans-serif !important; */
     font-family: "Inter", sans-serif !important;
     color: #444444;
     overflow-x: hidden;
@@ -6170,97 +6160,26 @@ background-color: #3e4093;
   .star_imp_app {
     display: block !important;
     margin-top: 0rem !important;
+    background-color: #fff !important;
+    min-height: 100% !important;
   }
-  @media (max-width: 300px) {
-    body,
-    html {
-      font-family: "Poppins", sans-serif !important;
-      color: #747794 !important;
-      overflow-x: hidden;
-      background-color: #fff !important;
-      scrollbar-width: thin;
-      padding-right: 0 !important;
-      letter-spacing: -0.2px;
-    }
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      color: #020310;
-      font-weight: 300 !important;
-      font-size: 0.5rem !important;
-    }
+  body, html {
+    font-family: "Poppins", sans-serif !important;
+    color: #747794 !important;
+    overflow-x: hidden;
+    background-color: #fff !important;
+    scrollbar-width: thin;
+    padding-right: 0 !important;
+    letter-spacing: -0.5px;
+}
 
-    a,
-    a:hover,
-    a:focus {
-      -webkit-transition-duration: 500ms;
-      -o-transition-duration: 500ms;
-      transition-duration: 500ms;
-      text-decoration: none;
-      outline: 0 solid transparent;
-      -webkit-box-shadow: none;
-      box-shadow: none;
-      color: #3e4093;
-      font-weight: 200;
-      font-size: small !important;
-    }
-
-    .header-area {
-      -webkit-transition-duration: 500ms;
-      -o-transition-duration: 500ms;
-      transition-duration: 500ms;
-      background-color: #ffffff;
-      width: 100%;
-      height: 50px !important;
-      padding: 0;
-      position: fixed;
-      padding: 4px !important;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      -webkit-box-shadow: 0 0 4px rgb(15 15 15 / 10%);
-      box-shadow: 0 0 4px rgb(15 15 15 / 10%);
-    }
-    .dwn_btn {
-      width: 4rem !important;
-      height: 2rem;
-    }
-  }
   /* .dwn_btn {
     width: 6rem;
     height: 2rem;
     margin-left: 4px;
   } */
 
-  body,
-  html {
-    font-family: "Poppins", sans-serif !important;
-    color: #747794 !important;
-    overflow-x: hidden;
-    background-color: #e9eeff !important;
-    scrollbar-width: thin;
-    padding-right: 0 !important;
-    letter-spacing: -0.5px;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: #020310;
-    font-weight: 500;
-  }
-
-  p {
-    color: #747794;
-  }
-
+ 
   a,
   a:hover,
   a:focus {
@@ -6322,7 +6241,7 @@ background-color: #3e4093;
   #scrollUp {
     bottom: 30px;
     font-size: 16px;
-    right: 30px;
+    right: 3
     width: 30px;
     height: 30px;
     line-height: 30px;
@@ -7099,11 +7018,21 @@ background-color: #3e4093;
     max-height: 50px;
   }
   .page-content-wrapper {
-    margin-bottom: 60px;
+    margin-bottom: 40px;
+    min-height: 100% !important;
+    background-color: #fff !important;
   }
   .page-content-wrapper2 {
     margin-top: 60px;
-    margin-bottom: 20px;
+    margin-bottom: 40px !important;
+    min-height: 100% !important;
+    background-color: #fff !important;
+  }
+  .header_main{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    padding: 2px !important;
+    max-height: 4.2rem;
+  
   }
 
   .pwa-install-alert {
@@ -7260,21 +7189,7 @@ background-color: #3e4093;
   }
 
   /* Header CSS */
-  .header-area {
-    -webkit-transition-duration: 500ms;
-    -o-transition-duration: 500ms;
-    transition-duration: 500ms;
-    background-color: #ffffff;
-    width: 100%;
-    height: 60px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    -webkit-box-shadow: 0 0 4px rgb(15 15 15 / 10%);
-    box-shadow: 0 0 4px rgb(15 15 15 / 10%);
-  }
+ 
   .cart-icon-wrap a {
     display: block;
     position: relative;
@@ -7362,8 +7277,8 @@ background-color: #3e4093;
     height: 32px;
     font-size: 11px;
     font-weight: 600;
-    padding: 10px 14px;
-    padding-left: 32px !important;
+    padding: 10px 16px;
+    padding-left: 40px !important;
     border: 1px solid #b2beb5 !important;
     color: #c2d4f8 !important;
     opacity: 60%;
@@ -7373,13 +7288,15 @@ background-color: #3e4093;
   .search-new form button {
     background-color: #fff !important;
     position: absolute;
-    top: 1px;
+    top: 6px !important;
     left: -1px;
     margin-left: 2px;
+    margin-right: 12px !important;
     height: 37px;
-    border: 0;
-    width: 2rem !important;
+    border-radius: 10px;
+    width: 1rem !important;
     z-index: 100;
+    height: .8rem !important;
     color: #808080 !important;
   }
   .search-new form button:focus {
@@ -7412,13 +7329,13 @@ background-color: #3e4093;
   }
   .search-new2 form .form-control {
     width: 100% !important;
-    height: 32px;
+    height: 36px;
     font-size: 11px;
     font-weight: 600;
-    padding: 10px 14px;
-    padding-left: 32px !important;
-    border: 1px solid #b2beb5 !important;
-    color: #c2d4f8 !important;
+    padding: 14px 16px;
+    padding-left: 40px !important;
+    /* border: 1px solid #b2beb5 !important; */
+    color: #000 !important;
     opacity: 60%;
     border-radius: 0.5rem;
     z-index: 999;
@@ -7426,14 +7343,15 @@ background-color: #3e4093;
   .search-new2 form button {
     background-color: #fff !important;
     position: absolute;
-    top: 2px;
-    left: 0px;
+    top: 6px;
+    left: -1px;
     margin-left: 2px;
+    margin-right: 12px !important;
     height: 37px;
     border-radius: 10px;
-    width: 2rem !important;
+    width: 1rem !important;
     z-index: 100;
-    height: 1rem !important;
+    height: .8rem !important;
     color: #808080 !important;
   }
   .search-new2 form button:focus {
@@ -7591,7 +7509,8 @@ background-color: #3e4093;
   .footer-nav-area {
     position: fixed;
     z-index: 1000;
-    width: 96%;
+    width: 80% !important;
+    height: 3rem;
     left: 0;
     right: 0;
     bottom: 0px;
@@ -8767,6 +8686,9 @@ background-color: #3e4093;
   .product-card {
     position: relative;
     z-index: 1;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px !important;
+    margin-bottom: 5px;
+   
   }
   .product-card .badge {
     position: absolute;
@@ -12664,6 +12586,68 @@ background-color: #3e4093;
     margin-bottom: 0;
     color: #020310;
     line-height: 20px;
+  }
+}
+
+@media (max-width: 300px) {
+  
+  body,
+  html {
+    font-family: "Poppins", sans-serif !important;
+    color: #747794 ;
+    overflow-x: hidden;
+    background-color: #fff !important;
+    scrollbar-width: thin;
+    padding-right: 0 !important;
+    letter-spacing: -0.2px;
+    min-height: 100% !important;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #020310;
+    font-weight: 300 !important;
+    font-size: 0.5rem !important;
+  }
+
+  a,
+  a:hover,
+  a:focus {
+    -webkit-transition-duration: 500ms;
+    -o-transition-duration: 500ms;
+    transition-duration: 500ms;
+    text-decoration: none;
+    outline: 0 solid transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #3e4093;
+    font-weight: 200;
+    font-size: small !important;
+  }
+
+  .header-area {
+    -webkit-transition-duration: 500ms;
+    -o-transition-duration: 500ms;
+    transition-duration: 500ms;
+    /* background-color: #ffffff; */
+    width: 100%;
+    height: 50px !important;
+    padding: 0;
+    position: fixed;
+    padding: 4px !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    -webkit-box-shadow: 0 0 4px rgb(15 15 15 / 10%);
+    box-shadow: 0 0 4px rgb(15 15 15 / 10%);
+  }
+  .dwn_btn {
+    width: 4rem !important;
+    height: 2rem;
   }
 }
 a:hover {

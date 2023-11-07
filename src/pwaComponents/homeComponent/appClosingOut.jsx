@@ -197,7 +197,7 @@ function AppClosingOut() {
                               class="name text-dark"
                               to={`/app/product-detail/${item?.productId?.slug}`}
                               state={{ type: item?.productId?.type }}>
-                              {item?.productId?.unitName?.slice(0, 10)}
+                              {item?.productId?.unitName?.slice(0, 16)}
                               <span>
                                 {item?.productId?.type
                                   ? item?.productId?.type?.flavour?.slice(0, 8)
@@ -228,7 +228,8 @@ function AppClosingOut() {
           <div className="text-center">
             <Link
               className="btn p-0 text-white  mt-2"
-              to="/app/product-list/Close-Out">
+              to="/app/product-list/Close-Out"
+              state={{ ki: "kjh" }}>
               View All<i className="ms-1 fa-solid fa-arrow-right-long"></i>
             </Link>
           </div>

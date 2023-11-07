@@ -64,10 +64,10 @@ function AppHeader({ cartCount }) {
 
   return (
     <>
-      <div className="">
+      <div className="header_main">
         <div className=" " id="headerArea" ref={ref}>
-          <div className="container-fluid py-1  h-100 ">
-            <div className="d-flex py-3">
+          <div className="container-fluid ">
+            <div className="d-flex py-1">
               <div className="suha-navbar-toggler">
                 <i
                   data-bs-toggle="offcanvas"

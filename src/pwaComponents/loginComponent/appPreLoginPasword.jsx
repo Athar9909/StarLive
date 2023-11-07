@@ -99,6 +99,9 @@ function AppPreLoginPassword() {
                         className="form-control"
                         placeholder="**********"
                         name="password"
+                        style={{
+                          fontSize: "16px",
+                        }}
                         id="password"
                         {...register("password", { required: true })}
                       />
@@ -127,8 +130,7 @@ function AppPreLoginPassword() {
                 <div className="login-meta-data">
                   <Link
                     className="forgot-password d-block mt-3 mb-1"
-                    to="/app/forgot-password"
-                  >
+                    to="/app/forgot-password">
                     Forgot Password?
                   </Link>
                   <p className="mb-0">

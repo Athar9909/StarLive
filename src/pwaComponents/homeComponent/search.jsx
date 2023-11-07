@@ -97,15 +97,13 @@ const Search = () => {
   return (
     <div>
       <div className="container mt-0">
-        <div
-          className={
-            browserName === "WebKit" || browserName === "Chrome WebView"
-              ? "search-form pt-3 "
-              : "search-new pt-3 "
-          }>
-          <form className="bg-white border rounded  text-center">
+        <div className={"search-new2 pt-2"}>
+          <form className=" border rounded  text-center">
             <input
-              className="form-control "
+              style={{
+                fontSize: "16px",
+              }}
+              className="form-control"
               type="text"
               defaultValue={search}
               placeholder={"  " + "Search in Star Importers"}
@@ -121,24 +119,22 @@ const Search = () => {
               reset
             </button>
           </form>
-          </div>
+        </div>
 
-          {browserName === "WebKit" || browserName === "Chrome WebView" ? (
-            <div className="alternative-search-options">
-              <Link className="  ms-0 mx-2" to="" onClick={microphoneSearch}>
-                <img
-                  width={30}
-                  src={require("../../assets/img/Microphone.png")}></img>
-              </Link>
-              <a className=" ms-1" onClick={() => cameraScan()}>
-                <img
-                  width={30}
-                  src={require("../../assets/img/Scan.png")}></img>
-              </a>
-            </div>
-          ) : (
-            <div className="alternative-search-options"></div>
-          )}
+        {browserName === "WebKit" || browserName === "Chrome WebView" ? (
+          <div className="alternative-search-options">
+            <Link className="  ms-0 mx-2" to="" onClick={microphoneSearch}>
+              <img
+                width={30}
+                src={require("../../assets/img/Microphone.png")}></img>
+            </Link>
+            <a className=" ms-1" onClick={() => cameraScan()}>
+              <img width={30} src={require("../../assets/img/Scan.png")}></img>
+            </a>
+          </div>
+        ) : (
+          <div className="alternative-search-options"></div>
+        )}
       </div>
 
       <div>

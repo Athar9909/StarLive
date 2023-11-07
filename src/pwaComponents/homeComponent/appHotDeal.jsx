@@ -185,7 +185,7 @@ function AppHotDeals() {
                               class="name text-dark"
                               to={`/app/product-detail/${item?.productId?.slug}`}
                               state={{ type: item?.productId?.type }}>
-                              {item?.productId?.unitName?.slice(0, 10)}
+                              {item?.productId?.unitName?.slice(0, 16)}
                               <span>
                                 {item?.productId?.type
                                   ? item?.productId?.type?.flavour?.slice(0, 8)

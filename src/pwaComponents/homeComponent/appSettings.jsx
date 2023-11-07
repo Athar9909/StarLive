@@ -23,9 +23,9 @@ function AppSettings() {
       }
     });
   };
-  return (
+  return (  
     <>
-      <div className="star_imp_app">
+      <div className="bg-white">
         <AppHeader />
         <div className="page-content-wrapper">
           <div className="container">

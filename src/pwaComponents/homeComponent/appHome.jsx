@@ -34,6 +34,7 @@ import AppHotDeals from "./appHotDeal";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation, FreeMode, Grid } from "swiper";
 import { Carousel } from "react-responsive-carousel";
+import Search from "./search";
 
 function AppHome() {
   const [banner, setBanner] = useState([]);
@@ -290,136 +291,16 @@ function AppHome() {
               </div>
             </div>
           ) : (
-            <div className="page-content-wrapper mt-0">
+            <div className="page-content-wrapper2 mb-5 mt-0 bg-white">
               <div>
                 <AppHeader />
               </div>
-              <div className="container ">
-                <div
-                  className={
-                    browserName === "WebKit" || browserName === "Chrome WebView"
-                      ? "search-new2 pt-1 "
-                      : "search-new pt-1 "
-                  }>
-                  <form className="" style={{ width: "100%" }}>
-                    <input
-                      className="form-control"
-                      type="search"
-                      defaultValue={search}
-                      placeholder={"   " + "Search in Star Importers"}
-                      onChange={(e) => {
-                        setSearch(e.target.value);
-                        setSearchKeyRemove(false);
-                      }}
-                    />
-
-                    <button onClick={searchProduct} className="me-5">
-                      <i className="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                    <button type="reset" id="resetBtn" className="d-none">
-                      reset
-                    </button>
-                  </form>
-                </div>
-
-                {browserName === "WebKit" ||
-                browserName === "Chrome WebView" ? (
-                  <div className="alternative-search-options">
-                    <Link
-                      className=" ms-0 mx-2"
-                      to=""
-                      onClick={microphoneSearch}>
-                      <img
-                        width={30}
-                        src={require("../../assets/img/Microphone.png")}></img>
-                    </Link>
-                    <a className=" ms-1" onClick={() => cameraScan()}>
-                      <img
-                        width={30}
-                        src={require("../../assets/img/Scan.png")}></img>
-                    </a>
-                  </div>
-                ) : (
-                  <div className="alternative-search-options"></div>
-                )}
-              </div>
+              <Search />
 
               <div>
-                {search?.length || relateCate?.length >= 1 ? (
-                  <div className="top-products-area py-1">
-                    <div className="container">
-                      {relateCate?.length >= 1 ? (
-                        <>
-                          Related Sub-Categories
-                          <div className=" mb-2">
-                            {relateCate?.map((itm, ind) => (
-                              <span
-                                className=" text-primary  fw-bold"
-                                style={{
-                                  fontSize: "12px",
-                                }}
-                                onClick={() => {
-                                  navigate(
-                                    `/app/product-subCategory/${itm?.subCategoryName}`,
-                                    {}
-                                  );
-                                }}>
-                                {itm?.subCategoryName && itm?.subCategoryName} ,
-                              </span>
-                            ))}
-                          </div>
-                        </>
-                      ) : (
-                        ""
-                      )}
-
-                      {product?.length ? (
-                        <div className="row g-2">
-                          {(product || [])?.map((item, index) => {
-                            return (
-                              <div className="col-6 col-md-4" key={index}>
-                                <div className="card product-card">
-                                  <div className="card-body">
-                                    <Link
-                                      className="product-thumbnail d-block"
-                                      to={`/app/product-detail/${item.slug}`}
-                                      state={{ type: item?.type }}>
-                                      <img
-                                        className="mb-2"
-                                        src={
-                                          item?.productImage ||
-                                          require("../../assets/img/product.jpg")
-                                        }
-                                        alt=""
-                                      />
-                                    </Link>
-
-                                    <Link
-                                      className="product-title"
-                                      to={`/app/product-detail/${item?.slug}`}
-                                      state={{ type: item?.type }}>
-                                      {item?.unitName}
-                                    </Link>
-                                  </div>
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      ) : (
-                        <div>
-                          <img
-                            className="no-data"
-                            src={require("../../assets/img/no-data.gif")}
-                          />
-                          <h1 className="text-center"> No Product Results</h1>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ) : (
+              
                   <div>
-                    <div className="hero-wrapper">
+                    <div className="hero-wrapper bg-white">
                       <div className="container">
                         <div className="pt-1 px-0 mb-1">
                           <Carousel
@@ -498,7 +379,7 @@ function AppHome() {
                             <div
                               className="catagory-card"
                               onClick={() => {
-                                navigate("/app/Categories");       
+                                navigate("/app/Categories");
                               }}
                               style={{
                                 backgroundImage: `url(${image5})`,
@@ -553,7 +434,10 @@ function AppHome() {
                       <div className="container">
                         <div className="d-flex align-items-center justify-content-between rtl-flex-d-row-r mt-2 mb-3">
                           <h6 className="fs-6 fw-bold">Popular Brands</h6>
-                          <Link className="btn p-0" to="/app/brands">
+                          <Link
+                            className="btn p-0"
+                            to="/app/brands"
+                            state={{ ki: "kjh" }}>
                             View All
                             <i className="ms-1 fa-solid fa-arrow-right-long"></i>
                           </Link>
@@ -582,7 +466,9 @@ function AppHome() {
                                 <div class="">
                                   <div
                                     onClick={() => {
-                                      navigate("/app/brands");
+                                      navigate("/app/brands", {
+                                        state: "kjh",
+                                      });
                                     }}
                                     class="catagory-card w-100"
                                     style={{
@@ -606,9 +492,8 @@ function AppHome() {
                       {/* <small>{deviceId}</small> */}
                     </div>
                   </div>
-                )}
+              
               </div>
-              {/* )} */}
             </div>
           )}
 
