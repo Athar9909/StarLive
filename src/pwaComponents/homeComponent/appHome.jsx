@@ -229,6 +229,7 @@ function AppHome() {
                 <div>
                   <AppHeader />
                 </div>
+
                 <SkeletonTheme>
                   <div className="page-content-wrapper mt-0">
                     <div className="container ">
@@ -296,203 +297,204 @@ function AppHome() {
                 <AppHeader />
               </div>
               <Search />
-
               <div>
-              
-                  <div>
-                    <div className="hero-wrapper bg-white">
-                      <div className="container">
-                        <div className="pt-1 px-0 mb-1">
-                          <Carousel
-                            showThumbs={false}
-                            showIndicators={false}
-                            // onChange={onHoverMain}
-                            autoFocus={false}
-                            autoPlay={true}
-                            showStatus={false}
+                <div>
+                  <div className="hero-wrapper bg-white">
+                    <div className="container">
+                      <div className="pt-1 px-0 mb-1">
+                        <Carousel
+                          showThumbs={false}
+                          showIndicators={false}
+                          // onChange={onHoverMain}
+                          autoFocus={false}
+                          autoPlay={true}
+                          showStatus={false}
 
-                            // selectedItem={itemNo}
-                          >
-                            {banner?.map((item) => (
-                              <div className=" item slider_image">
-                                <img
-                                  className="banner_slider_img"
-                                  src={
-                                    item?.banner
-                                      ? item?.banner
-                                      : require("../../assets/img/staticBg.png")
-                                  }
-                                  alt=""
-                                />
-                              </div>
-                            ))}
-                          </Carousel>
-                        </div>
+                          // selectedItem={itemNo}
+                        >
+                          {banner?.map((item) => (
+                            <div className=" item slider_image">
+                              <img
+                                className="banner_slider_img"
+                                src={
+                                  item?.banner
+                                    ? item?.banner
+                                    : require("../../assets/img/staticBg.png")
+                                }
+                                alt=""
+                              />
+                            </div>
+                          ))}
+                        </Carousel>
                       </div>
                     </div>
+                  </div>
 
-                    <div className="product-catagories-wrapper py-1 pb-3  mt-4">
-                      <div className="container">
-                        <div className=" d-flex align-items-center justify-content-between dir-rtl  mb-2">
-                          <h2 className="fs-6 fw-bold text-dark">
-                            Top Categories
-                          </h2>
-                          <Link
-                            className="btn p-0 text-white"
-                            to="/app/Categories">
-                            View All
-                            <i className="ms-1 fa-solid fa-arrow-right-long"></i>
-                          </Link>
-                        </div>
-                        <div className="row g-2 rtl-flex-d-row-r">
-                          {category
-                            .filter((itm, idx) => idx < 7)
-                            .map((item, index) => {
-                              return (
-                                <div className="col-3  justify-content-center">
-                                  <div
-                                    className="catagory-card"
-                                    onClick={() => {
-                                      navigate(
-                                        `/app/Sub-Categories/${item._id}`
-                                      );
-                                    }}
+                  <div className="product-catagories-wrapper py-1 pb-3  mt-4">
+                    <div className="container">
+                      <div className=" d-flex align-items-center justify-content-between dir-rtl  mb-2">
+                        <h2 className="fs-6 fw-bold text-dark">
+                          Top Categories
+                        </h2>
+                        <Link
+                          className="btn p-0 text-white"
+                          to="/app/Categories">
+                          View All
+                          <i className="ms-1 fa-solid fa-arrow-right-long"></i>
+                        </Link>
+                      </div>
+                      <div className="row g-2 rtl-flex-d-row-r">
+                        {category
+                          .filter((itm, idx) => idx < 7)
+                          .map((item, index) => {
+                            return (
+                              <div className="col-3  justify-content-center">
+                                <div
+                                  className="catagory-card"
+                                  onClick={() => {
+                                    navigate(`/app/Sub-Categories/${item._id}`);
+                                  }}
+                                  style={{
+                                    backgroundImage: `url(${item?.categoryImage})`,
+                                    backgroundPosition: "center",
+                                    opacity: "unset",
+                                    backgroundSize: "cover",
+                                  }}></div>
+
+                                <div className="text-start">
+
+                                  <span
                                     style={{
-                                      backgroundImage: `url(${item?.categoryImage})`,
-                                      backgroundPosition: "center",
-                                      opacity: "unset",
-                                      backgroundSize: "cover",
-                                    }}></div>
-                                  <div className="text-center">
-                                    <small
-                                      style={{
-                                        fontSize: "10px",
-                                      }}>
-                                      {" "}
-                                      {item?.categoryName?.slice(0, 12)}....
-                                    </small>
-                                  </div>
+                                      marginTop: "4px",
+                                      marginLeft:"3px",
+                                      fontSize: "11px",
+                                      lineHeight: "15px",
+                                      display: "block",
+                                    }}>
+                                    
+                                    {item?.categoryName}
+                                  </span>
+                                  
                                 </div>
-                              );
-                            })}
-                          <div className="col-3 justify-content-center ">
-                            <div
-                              className="catagory-card"
-                              onClick={() => {
-                                navigate("/app/Categories");
-                              }}
+                              </div>
+                            );
+                          })}
+                        <div className="col-3 justify-content-center ">
+                          <div
+                            className="catagory-card"
+                            onClick={() => {
+                              navigate("/app/Categories");
+                            }}
+                            style={{
+                              backgroundImage: `url(${image5})`,
+                              backgroundPosition: "center",
+                              opacity: "unset",
+                              backgroundSize: "cover",
+                            }}></div>
+                          <div className="text-center">
+                            <span
                               style={{
-                                backgroundImage: `url(${image5})`,
-                                backgroundPosition: "center",
-                                opacity: "unset",
-                                backgroundSize: "cover",
-                              }}></div>
-                            <div className="text-center">
-                              <small
-                                style={{
-                                  fontSize: "10px",
-                                }}>
-                                {" "}
-                                View All{"    "}
-                              </small>
-                            </div>
+                                marginTop: "4px",
+                                marginLeft: "-30%",
+                                fontSize: "11px",
+                                lineHeight: "15px",
+                                display: "block",
+                              }}>
+                              {" "}
+                              View All{"    "}
+                            </span  >
                           </div>
                         </div>
                       </div>
                     </div>
-
-                    <div
-                      className="mt-1 "
-                      style={{
-                        backgroundImage: `url(${image4})`,
-                        backgroundPosition: "center",
-                        opacity: "unset",
-                        backgroundSize: "cover",
-                      }}>
-                      <img className="w-100" src={image7} />
-
-                      <AppHotDeals />
-                    </div>
-
-                    <div className=" py-2">
-                      <TopProduct />
-                    </div>
-
-                    <div
-                      className="mt-1 "
-                      style={{
-                        backgroundImage: `url(${image4})`,
-                        backgroundPosition: "center",
-                        opacity: "unset",
-                        backgroundSize: "cover",
-                      }}>
-                      <img className="w-100" src={image6} />
-                      <AppClosingOut />
-                    </div>
-
-                    <div className="flash-sale-wrapper py-2  pb-3  shadow mb-0">
-                      <div className="container">
-                        <div className="d-flex align-items-center justify-content-between rtl-flex-d-row-r mt-2 mb-3">
-                          <h6 className="fs-6 fw-bold">Popular Brands</h6>
-                          <Link
-                            className="btn p-0"
-                            to="/app/brands"
-                            state={{ ki: "kjh" }}>
-                            View All
-                            <i className="ms-1 fa-solid fa-arrow-right-long"></i>
-                          </Link>
-                        </div>
-
-                        {brand?.length ? (
-                          <Swiper
-                            slidesPerView={4}
-                            spaceBetween={6}
-                            autoplay={{
-                              delay: 3000,
-                              disableOnInteraction: true,
-                              reverseDirection: true,
-                              waitForTransition: true,
-                            }}
-                            loop={true}
-                            modules={[
-                              FreeMode,
-                              Pagination,
-                              Autoplay,
-                              Navigation,
-                            ]}
-                            className="mySwiper">
-                            {(brand || [])?.map((item, index) => (
-                              <SwiperSlide key={index} className="main_hot">
-                                <div class="">
-                                  <div
-                                    onClick={() => {
-                                      navigate("/app/brands", {
-                                        state: "kjh",
-                                      });
-                                    }}
-                                    class="catagory-card w-100"
-                                    style={{
-                                      backgroundImage: `url(${
-                                        item?.brandImage
-                                          ? item?.brandImage
-                                          : require("../../assets/img/product.jpg")
-                                      })`,
-                                      backgroundPosition: "center",
-                                      opacity: "unset",
-                                      backgroundSize: "cover",
-                                    }}></div>
-                                </div>
-                              </SwiperSlide>
-                            ))}
-                          </Swiper>
-                        ) : (
-                          ""
-                        )}
-                      </div>
-                      {/* <small>{deviceId}</small> */}
-                    </div>
                   </div>
-              
+
+                  <div
+                    className="mt-1 "
+                    style={{
+                      backgroundImage: `url(${image4})`,
+                      backgroundPosition: "center",
+                      opacity: "unset",
+                      backgroundSize: "cover",
+                    }}>
+                    <img className="w-100" src={image7} />
+
+                    <AppHotDeals />
+                  </div>
+
+                  <div className=" py-2">
+                    <TopProduct />
+                  </div>
+
+                  <div
+                    className="mt-1 "
+                    style={{
+                      backgroundImage: `url(${image4})`,
+                      backgroundPosition: "center",
+                      opacity: "unset",
+                      backgroundSize: "cover",
+                    }}>
+                    <img className="w-100" src={image6} />
+                    <AppClosingOut />
+                  </div>
+
+                  <div className="flash-sale-wrapper py-2  pb-3  shadow mb-0">
+                    <div className="container">
+                      <div className="d-flex align-items-center justify-content-between rtl-flex-d-row-r mt-2 mb-3">
+                        <h6 className="fs-6 fw-bold">Popular Brands</h6>
+                        <Link
+                          className="btn p-0"
+                          to="/app/brands"
+                          state={{ ki: "kjh" }}>
+                          View All
+                          <i className="ms-1 fa-solid fa-arrow-right-long"></i>
+                        </Link>
+                      </div>
+
+                      {brand?.length ? (
+                        <Swiper
+                          slidesPerView={4}
+                          spaceBetween={6}
+                          autoplay={{
+                            delay: 3000,
+                            disableOnInteraction: true,
+                            reverseDirection: true,
+                            waitForTransition: true,
+                          }}
+                          loop={true}
+                          modules={[FreeMode, Pagination, Autoplay, Navigation]}
+                          className="mySwiper">
+                          {(brand || [])?.map((item, index) => (
+                            <SwiperSlide key={index} className="main_hot">
+                              <div class="">
+                                <div
+                                  onClick={() => {
+                                    navigate("/app/brands", {
+                                      state: "kjh",
+                                    });
+                                  }}
+                                  class="catagory-card w-100"
+                                  style={{
+                                    backgroundImage: `url(${
+                                      item?.brandImage
+                                        ? item?.brandImage
+                                        : require("../../assets/img/product.jpg")
+                                    })`,
+                                    backgroundPosition: "center",
+                                    opacity: "unset",
+                                    backgroundSize: "cover",
+                                  }}></div>
+                              </div>
+                            </SwiperSlide>
+                          ))}
+                        </Swiper>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                    {/* <small>{deviceId}</small> */}
+                  </div>
+                </div>
               </div>
             </div>
           )}
