@@ -72,6 +72,7 @@ const Homepage = () => {
   const [hotSell, setHotSell] = useState([]);
   const [featured, setFeatured] = useState([]);
   const [closeOut, setCloseOut] = useState([]);
+  const [monthly, setMonthly] = useState([]);
   const [change, setChange] = useState(false);
   const [open, setOpen] = useState(false);
   const [rows, setRows] = useState(0);
@@ -105,6 +106,7 @@ const Homepage = () => {
     getPromotions();
     getPromotionsClose();
     getPromotionsFeatured();
+    getPromotionsMonthly();
     getCategory();
     getHeaders();
     getBrands();
@@ -242,6 +244,15 @@ const Homepage = () => {
     });
     if (!data.error) {
       setCloseOut(data?.results.promotion?.products);
+    }
+  };
+  const getPromotionsMonthly = async () => {
+    const { data } = await axios.post(getPromotionProd, {
+      type: "MonthlyDeals",
+    });
+
+    if (!data.error) {
+      setMonthly(data?.results.promotion?.products);
     }
   };
 
@@ -443,7 +454,6 @@ const Homepage = () => {
                   : "https://starimporters.com/app/home";
               }}>
               <img
-                loading="lazy"
                 src={
                   allSlides[2]?.banner
                     ? allSlides[2]?.banner
@@ -494,7 +504,6 @@ const Homepage = () => {
                   : "https://starimporters.com/app/home";
               }}>
               <img
-                loading="lazy"
                 src={
                   allSlides[3]?.banner
                     ? allSlides[3]?.banner
@@ -596,7 +605,6 @@ const Homepage = () => {
                   : "https://starimporters.com/app/home";
               }}>
               <img
-                loading="lazy"
                 src={
                   allSlides[5]?.banner
                     ? allSlides[5]?.banner
@@ -681,45 +689,54 @@ const Homepage = () => {
                       <SwiperSlide key={index} className="px-3 main_hot">
                         <div className="col-md-12 col-lg-12 px-2">
                           <div className="card_hot shadow">
-                            <span className="offer2">Hot Deals-Buy now.</span>{" "}
                             <div
-                              className="item-image p-4 mt-2 pt-5"
-                              onClick={() => {
-                                navigate(
-                                  `/AllProducts/Product/:${item?.productId?.slug}`,
-                                  {
-                                    state: {
-                                      type: item?.productId?.type,
-                                    },
-                                  }
-                                );
-                              }}>
-                              <img
-                                loading="lazy"
-                                src={
+                              style={{
+                                backgroundImage: `url(${
                                   item?.productId?.type?.flavourImage
                                     ? item?.productId?.type?.flavourImage
                                     : item?.productId?.productImage ||
                                       require("../../assets/img/product.jpg")
-                                }
-                              />
-                            </div>
-                            <div className="item-content text-center mt-2">
-                              <h3>
-                                {" "}
-                                {item?.productId?.unitName?.slice(0, 30)}.. -{" "}
-                                <strong className="fs-6">
-                                  {item?.productId?.type?.flavour?.slice(0, 30)}
-                                  ..
-                                </strong>
-                              </h3>{" "}
-                              <p className="mb-4">
-                                {" "}
-                                {item?.price ? "Offer price-" : ""}
-                                <span className=" mx-1 text-danger  fs-5 fw-bold">
-                                  {item?.price ? "$" + item.price : ""}
-                                </span>
-                              </p>{" "}
+                                })`,
+                                backgroundPosition: "center",
+                                opacity: "unset",
+                                backgroundSize: "cover",
+                                maxHeight: "18rem",
+                                position: "relative",
+                                top: "1rem",
+                              }}>
+                              <span className="offer2">Hot Deals-Buy now.</span>{" "}
+                              <div
+                                className="item-image p-4 mt-2 pt-5"
+                                onClick={() => {
+                                  navigate(
+                                    `/AllProducts/Product/:${item?.productId?.slug}`,
+                                    {
+                                      state: {
+                                        type: item?.productId?.type,
+                                      },
+                                    }
+                                  );
+                                }}></div>
+                              <div className="item-content text-center mt-2">
+                                <h3 className="fw-bold">
+                                  {" "}
+                                  {item?.productId?.unitName?.slice(0, 30)}.. -{" "}
+                                  <strong className="fs-6">
+                                    {item?.productId?.type?.flavour?.slice(
+                                      0,
+                                      30
+                                    )}
+                                    ..
+                                  </strong>
+                                </h3>{" "}
+                                <p className="mb-4">
+                                  {" "}
+                                  {item?.price ? "Offer price-" : ""}
+                                  <span className=" mx-1 text-danger  fs-5 fw-bold">
+                                    {item?.price ? "$" + item.price : ""}
+                                  </span>
+                                </p>{" "}
+                              </div>
                             </div>
                           </div>
                           <div className="product-action">
@@ -810,58 +827,63 @@ const Homepage = () => {
                         <SwiperSlide key={index} className="px-3 main_hot">
                           <div className="col-md-12 col-lg-12 px-2">
                             <div className="card_hot shadow">
-                              <span className="offer2">
-                                Ends on :{moment(item?.expireIn).format("L")}
-                                {/* <Countdown
-                                date={new Date(item?.expireIn)}
-                                renderer={renderer}
-                              /> */}
-                              </span>
                               <div
-                                className="item-image p-4 mt-2 pt-5"
-                                onClick={() => {
-                                  navigate(
-                                    `/AllProducts/Product/:${item?.productId?.slug}`,
-                                    {
-                                      state: {
-                                        type: item?.productId?.type,
-                                      },
-                                    }
-                                  );
-                                }}>
-                                <img
-                                  loading="lazy"
-                                  className="mt-3"
-                                  src={
+                                style={{
+                                  backgroundImage: `url(${
                                     item?.productId?.type?.flavourImage
                                       ? item?.productId?.type?.flavourImage
                                       : item?.productId?.productImage ||
                                         require("../../assets/img/product.jpg")
-                                  }
-                                />{" "}
-                              </div>
-                              <div className="item-content text-center mt-2">
-                                <h3>
-                                  {" "}
-                                  {item?.productId?.unitName?.slice(
-                                    0,
-                                    26
-                                  )} -{" "}
-                                  <strong className="fs-6">
-                                    {item?.productId?.type?.flavour?.slice(
+                                  })`,
+                                  backgroundPosition: "center",
+                                  opacity: "unset",
+                                  backgroundSize: "cover",
+                                  maxHeight: "18rem",
+                                  position: "relative",
+                                  top: "1rem",
+                                }}>
+                                <span className="offer2">
+                                  Ends on :{moment(item?.expireIn).format("L")}
+                                  {/* <Countdown
+                                date={new Date(item?.expireIn)}
+                                renderer={renderer}
+                              /> */}
+                                </span>
+                                <div
+                                  className="item-image p-4 mt-2 pt-5"
+                                  onClick={() => {
+                                    navigate(
+                                      `/AllProducts/Product/:${item?.productId?.slug}`,
+                                      {
+                                        state: {
+                                          type: item?.productId?.type,
+                                        },
+                                      }
+                                    );
+                                  }}></div>
+                                <div className="item-content text-center mt-2 fw-bold">
+                                  <h3 className="fw-bold">
+                                    {" "}
+                                    {item?.productId?.unitName?.slice(
                                       0,
-                                      30
-                                    )}
-                                    ..
-                                  </strong>
-                                </h3>{" "}
-                                <p className="mb-4">
-                                  {" "}
-                                  {item?.price ? "Offer price-" : ""}
-                                  <span className=" mx-1 text-danger  fs-5 fw-bold">
-                                    {item?.price ? "$" + item.price : ""}
-                                  </span>
-                                </p>{" "}
+                                      26
+                                    )} -{" "}
+                                    <strong className="fs-6">
+                                      {item?.productId?.type?.flavour?.slice(
+                                        0,
+                                        30
+                                      )}
+                                      ..
+                                    </strong>
+                                  </h3>{" "}
+                                  <p className="mb-4">
+                                    {" "}
+                                    {item?.price ? "Offer price-" : ""}
+                                    <span className=" mx-1 text-danger  fs-5 fw-bold">
+                                      {item?.price ? "$" + item.price : ""}
+                                    </span>
+                                  </p>{" "}
+                                </div>
                               </div>
                             </div>
                             <div className="product-action">
@@ -996,12 +1018,13 @@ const Homepage = () => {
                                   }
                                 />
                               </a>
-                              <span className="product-hot-label">
-                                HOT{item?.price ? "-" : ""}
-                                <span className=" mx-1  fs-5 fw-bold">
-                                  {item?.price ? "$" + item.price : ""}
+                              {item?.price?.lenghh > 1 && (
+                                <span className="product-hot-label">
+                                  <span className=" mx-1  fs-5 fw-bold">
+                                    {item?.price ? "$" + item.price : ""}
+                                  </span>
                                 </span>
-                              </span>
+                              )}
                               <ul className="product-links">
                                 <li>
                                   <a
@@ -1112,6 +1135,155 @@ const Homepage = () => {
               </div>
             </div>
           </section>
+
+          {monthly?.length > 0 && (
+            <section className="p-4 container">
+              <div className=" ">
+                <div className="row featuredproduct_slider">
+                  <div className="col-12 mb-2 mt-5 ">
+                    <div className="comn_heads mb-5">
+                      <h2>Monthly Deals</h2>
+                      <a
+                        className="view_all "
+                        onClick={() =>
+                          navigate("/app/monthly-products", { state: "hii" })
+                        }>
+                        View All{" "}
+                        <img
+                          class="ms-2"
+                          src={require("../../assets/img/arrow_colr.png")}
+                          alt=""></img>
+                      </a>
+                    </div>
+                  </div>
+                  <div className="">
+                    <Swiper
+                      slidesPerView={width <= 1400 ? 3 : 4}
+                      spaceBetween={30}
+                      navigation={true}
+                      autoplay={{
+                        delay: 5000,
+                        disableOnInteraction: true,
+                        reverseDirection: true,
+                        waitForTransition: true,
+                      }}
+                      loop={true}
+                      style={{ padding: "30px" }}
+                      modules={[FreeMode, Pagination, Autoplay, Navigation]}
+                      className="mySwiper pt-5">
+                      {(monthly || [])?.map((item, index) => (
+                        <SwiperSlide key={index} className="px-3 main_hot">
+                          <div className="col-md-12 col-lg-12 px-2">
+                            <div className="card_hot shadow">
+                              <div
+                                style={{
+                                  backgroundImage: `url(${
+                                    item?.productId?.type?.flavourImage
+                                      ? item?.productId?.type?.flavourImage
+                                      : item?.productId?.productImage ||
+                                        require("../../assets/img/product.jpg")
+                                  })`,
+                                  backgroundPosition: "center",
+                                  opacity: "unset",
+                                  backgroundSize: "cover",
+                                  maxHeight: "18rem",
+                                  position: "relative",
+                                  top: "1rem",
+                                }}>
+                                <span className="offer2">
+                                  Ends on :{moment(item?.expireIn).format("L")}
+                                  {/* <Countdown
+                                date={new Date(item?.expireIn)}
+                                renderer={renderer}
+                              /> */}
+                                </span>
+                                <div
+                                  className="item-image p-4 mt-2 pt-5"
+                                  onClick={() => {
+                                    navigate(
+                                      `/AllProducts/Product/:${item?.productId?.slug}`,
+                                      {
+                                        state: {
+                                          type: item?.productId?.type,
+                                        },
+                                      }
+                                    );
+                                  }}></div>
+                                <div className="item-content text-center mt-2 fw-bold">
+                                  <h3 className="fw-bold">
+                                    {" "}
+                                    {item?.productId?.unitName?.slice(
+                                      0,
+                                      26
+                                    )} -{" "}
+                                    <strong className="fs-6">
+                                      {item?.productId?.type?.flavour?.slice(
+                                        0,
+                                        30
+                                      )}
+                                      ..
+                                    </strong>
+                                  </h3>{" "}
+                                  <p className="mb-4">
+                                    {" "}
+                                    {item?.price ? "Offer price-" : ""}
+                                    <span className=" mx-1 text-danger  fs-5 fw-bold">
+                                      {item?.price ? "$" + item.price : ""}
+                                    </span>
+                                  </p>{" "}
+                                </div>
+                              </div>
+                            </div>
+                            <div className="product-action">
+                              {" "}
+                              <div className="product-action-style">
+                                {" "}
+                                <a
+                                  onClick={() => {
+                                    navigate(
+                                      `/AllProducts/Product/:${item?.productId?.slug}`,
+                                      {
+                                        state: {
+                                          type: item?.productId?.type,
+                                        },
+                                      }
+                                    );
+                                  }}>
+                                  {" "}
+                                  <i className="fas fa-eye" />
+                                </a>{" "}
+                                <a
+                                  onClick={() => {
+                                    addToFav(
+                                      item?.productId?._id,
+                                      item?.productId?.type
+                                    );
+                                  }}>
+                                  {" "}
+                                  <i className="fas fa-heart" />
+                                </a>{" "}
+                                <a
+                                  onClick={() => {
+                                    AddtoCart(
+                                      item?.productId?._id,
+                                      item?.productId?.type,
+                                      item?.productId?.slug
+                                    );
+                                  }}>
+                                  {" "}
+                                  <i className="fas fa-shopping-cart" />
+                                </a>{" "}
+                              </div>{" "}
+                            </div>
+                          </div>
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
 
           <section className="category_newdesign">
             <div className="container">

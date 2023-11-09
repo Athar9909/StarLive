@@ -128,6 +128,7 @@ import EditSubAccount from "./AdminComponent/AdminDashboard/UserManage/EditSubAc
 import ViewStore from "./buyerComponent/MyAccount/ViewStore";
 import AppSubAcc from "./pwaComponents/homeComponent/appSubAcc";
 import AppViewSub from "./pwaComponents/homeComponent/appViewSubAcc";
+import MonthlyDeals from "./buyerComponent/AllProducts/MonthlyDeals";
 
 function App() {
   const [apiData, setApiData] = useState([]);
@@ -248,7 +249,10 @@ function App() {
               element={<ViewPuller />}
             />
             <Route path="/Inventory/View" element={<ViewProduct />} />
-            <Route path="/Inventory/View-Edit/:id" element={<EditInventory />} />
+            <Route
+              path="/Inventory/View-Edit/:id"
+              element={<EditInventory />}
+            />
             <Route path="/BrandsManage" element={<BrandsManage />} />
             <Route path="/Gallery-Management" element={<GalleryMain />} />
             <Route path="/Cms" element={<Cms />} />
@@ -484,6 +488,7 @@ function App() {
             />
             <Route path="/app/HotSelling-products" element={<HotSelling />} />
             <Route path="/app/CloseOut-products" element={<CloseOut />} />
+            <Route path="/app/monthly-products" element={<MonthlyDeals />} />
             <Route
               path="/app/checkout"
               element={width < 999 ? <AppCheckout /> : <Checkout />}
