@@ -17256,10 +17256,17 @@ figure.effect-ming:hover img {
 
 .item-content {
   padding: 10px;
+   opacity: 30% !important;
+   height: 6.9rem !important;
+   background-color: #000;
+   border-radius: 0px 0 14px 14px;
 }
 
 .item-content h3 {
+  position: relative;
+  top: 8px;
   font-size: 20px;
+  color: #fff !important;
 }
 
 .item-content p {

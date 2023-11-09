@@ -1097,7 +1097,7 @@ const ProductsManage = () => {
                                             className="comman_btn mx-2"
                                             onClick={() => {
                                               changePrice(
-                                                "CloseOut",
+                                                "MonthlyDeals",
                                                 User?.productId?._id,
                                                 User?.productId?.type
                                               );
@@ -1108,7 +1108,7 @@ const ProductsManage = () => {
                                             className="comman_btn2 text-white text-decoration-none"
                                             onClick={() => {
                                               deleteProduct(
-                                                "CloseOut",
+                                                "MonthlyDeals",
                                                 User?._id,
                                                 User?.productId?.type
                                               );
