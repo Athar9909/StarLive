@@ -35,6 +35,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation, FreeMode, Grid } from "swiper";
 import { Carousel } from "react-responsive-carousel";
 import Search from "./search";
+import AppMonthly from "./appMonthly";
 
 function AppHome() {
   const [banner, setBanner] = useState([]);
@@ -362,19 +363,16 @@ function AppHome() {
                                   }}></div>
 
                                 <div className="text-start">
-
                                   <span
                                     style={{
                                       marginTop: "4px",
-                                      marginLeft:"3px",
+                                      marginLeft: "3px",
                                       fontSize: "11px",
                                       lineHeight: "15px",
                                       display: "block",
                                     }}>
-                                    
                                     {item?.categoryName}
                                   </span>
-                                  
                                 </div>
                               </div>
                             );
@@ -402,7 +400,7 @@ function AppHome() {
                               }}>
                               {" "}
                               View All{"    "}
-                            </span  >
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -417,13 +415,8 @@ function AppHome() {
                       opacity: "unset",
                       backgroundSize: "cover",
                     }}>
-                    <img className="w-100" src={image7} />
-
-                    <AppHotDeals />
-                  </div>
-
-                  <div className=" py-2">
-                    <TopProduct />
+                    <img className="w-100" src={image6} />
+                    <AppMonthly />
                   </div>
 
                   <div
@@ -438,6 +431,24 @@ function AppHome() {
                     <AppClosingOut />
                   </div>
 
+                 
+
+                  <div className=" py-2">
+                    <TopProduct />
+                  </div>
+
+                  <div
+                    className="mt-1 "
+                    style={{
+                      backgroundImage: `url(${image4})`,
+                      backgroundPosition: "center",
+                      opacity: "unset",
+                      backgroundSize: "cover",
+                    }}>
+                    <img className="w-100" src={image7} />
+
+                    <AppHotDeals />
+                  </div>
                   <div className="flash-sale-wrapper py-2  pb-3  shadow mb-0">
                     <div className="container">
                       <div className="d-flex align-items-center justify-content-between rtl-flex-d-row-r mt-2 mb-3">

@@ -163,10 +163,10 @@ function AppClosingOut() {
                   <div class="hotMain">
                     <div class="w-100">
                       <div
-                        class="card-body-hot"
+                        class="card-body-hot p-2"
                         style={{
                           backgroundImage: `url(${
-                            item?.productId?.type?.flavourImage
+                            item?.productId?.type?.flavourImage?.length
                               ? item?.productId?.type?.flavourImage
                               : item?.productId?.productImage ||
                                 require("../../assets/img/product.jpg")
@@ -194,7 +194,7 @@ function AppClosingOut() {
                         <div class="row  product-title_new">
                           <div class="col-auto">
                             <Link
-                              class="name text-dark"
+                              class="name text-white"
                               to={`/app/product-detail/${item?.productId?.slug}`}
                               state={{ type: item?.productId?.type }}>
                               {item?.productId?.unitName?.slice(0, 16)}
@@ -209,8 +209,12 @@ function AppClosingOut() {
                               <p className="mb-0 price-size">
                                 {" "}
                                 {item?.price ? "Price-" : ""}
-                                <span className=" mx-1 text-danger fw-bold mb-0">
-                                  {item?.price ? "$" + item.price : ""}
+                                <span
+                                  style={{
+                                    fontSize: "10px",
+                                  }}
+                                  className=" mx-1 text-danger fw-bold mb-0">
+                                  {item?.price ? "Price-$" + item.price : ""}
                                 </span>
                               </p>
                             ) : (

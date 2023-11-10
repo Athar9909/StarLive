@@ -17179,7 +17179,7 @@ figure.effect-ming:hover img {
   height: 40px;
   background-color: red;
   position: absolute;
-  top: 14px !important;
+  top: -2.8rem !important;
   left: -14px;
   border-color: red;
   border-radius: 20px;
@@ -17256,21 +17256,23 @@ figure.effect-ming:hover img {
 
 .item-content {
   padding: 10px;
-   opacity: 30% !important;
-   height: 6.9rem !important;
-   background-color: #000;
+  position: relative;
+  top: 22px;
+   opacity: 85% !important;
+   height: 5.5rem !important;
+   background-color: #3e4093;
    border-radius: 0px 0 14px 14px;
 }
 
 .item-content h3 {
   position: relative;
   top: 8px;
-  font-size: 20px;
+  font-size: 16px;
   color: #fff !important;
 }
 
 .item-content p {
-  font-size: 15px;
+  font-size: 12px !important;
   font-weight: 500;
 }
 
@@ -17283,9 +17285,11 @@ figure.effect-ming:hover img {
 .mb-45 {
   margin-bottom: 45px;
 }
+
 .main_hot:hover .product-action {
   opacity: 1;
 }
+
 .product-action {
   bottom: 0px;
   left: 0;
@@ -17367,7 +17371,7 @@ figure.effect-ming:hover img {
   opacity: 0;
 }
 .product-grid .product-image .pic-2 {
-  width: 100%;
+  width: 100% !important;
   height: 100%;
   opacity: 0;
   position: absolute;
@@ -17375,6 +17379,14 @@ figure.effect-ming:hover img {
   left: 0;
   transition: 0.3s;
 }
+
+.product-grid .product-image img {
+  width: 80% !important;
+  height: auto;
+  max-height: 13.6rem;
+  min-height: 13.5rem !important;
+}
+
 .product-grid:hover .product-image .pic-2 {
   opacity: 1;
   transform: scale(1.2);

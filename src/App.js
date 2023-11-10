@@ -129,6 +129,7 @@ import ViewStore from "./buyerComponent/MyAccount/ViewStore";
 import AppSubAcc from "./pwaComponents/homeComponent/appSubAcc";
 import AppViewSub from "./pwaComponents/homeComponent/appViewSubAcc";
 import MonthlyDeals from "./buyerComponent/AllProducts/MonthlyDeals";
+import AppMonthlyList from "./pwaComponents/homeComponent/appMonthlyList";
 
 function App() {
   const [apiData, setApiData] = useState([]);
@@ -469,6 +470,10 @@ function App() {
             <Route
               path="/app/product-list/Close-Out"
               element={<AppCloseOutList />}
+            />
+               <Route
+              path="/app/product-list/Monthly"
+              element={<AppMonthlyList />}
             />
             <Route
               path="/app/events/catelog&flyer/All-Catalogs"

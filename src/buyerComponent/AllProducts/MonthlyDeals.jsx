@@ -265,10 +265,19 @@ const MonthlyDeals = () => {
                                     }
                                   );
                                 }}>
-                                <strong className="fs-6">
+                                <small className="">
                                   {item?.productId?.type?.flavour}
                                   ..
-                                </strong>
+                                </small>
+                                <p
+                                  className="text-dark"
+                                  style={{
+                                    fontSize: "12px",
+                                  }}>
+                                  {item?.price
+                                    ? "Offer Price - $" + item.price
+                                    : ""}
+                                </p>
                               </a>
                               <h3 className="title ">
                                 <a className="text-decoration-none">

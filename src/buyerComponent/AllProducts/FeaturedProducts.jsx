@@ -203,8 +203,14 @@ const FeaturedProducts = () => {
                                   }
                                 />
                               </a>
-                              <span className="product-Featured-label">
-                                Trending
+                              <span
+                                className={
+                                  item?.price
+                                    ? "product-Featured-label"
+                                    : "d-none"
+                                }>
+                                Offer Price -{" "}
+                                {item?.price ? "$" + item.price : ""}
                               </span>
                               <ul className="product-links">
                                 <li>

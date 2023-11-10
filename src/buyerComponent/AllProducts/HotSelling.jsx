@@ -203,8 +203,11 @@ const HotSelling = () => {
                                   }
                                 />
                               </a>
-                              <span className="product-hot-label">
-                                Hot Selling
+                              <span
+                                className={
+                                  item?.price ? "product-hot-label" : "d-none"
+                                }>
+                               Offer Price - {item?.price ? "$" + item.price : ""}
                               </span>
                               <ul className="product-links">
                                 <li>
@@ -264,10 +267,10 @@ const HotSelling = () => {
                                     }
                                   );
                                 }}>
-                                <strong className="fs-6">
+                                <small>
                                   {item?.productId?.type?.flavour}
                                   ..
-                                </strong>
+                                </small>
                               </a>
                               <h3 className="title ">
                                 <a className="text-decoration-none">
