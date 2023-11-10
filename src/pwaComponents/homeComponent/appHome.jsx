@@ -57,11 +57,11 @@ function AppHome() {
   const setSearchKeyRemove = useSetRecoilState(searchKeyRemove);
   const [relateCate, setRelateCate] = useState([]);
 
-  let image3 = require("../../assets/img/featured.jpg");
   let image4 = require("../../assets/img/hotDealBg.png");
   let image5 = require("../../assets/img/viewAll.png");
   let image6 = require("../../assets/img/closeHead.png");
-  let image7 = require("../../assets/img/hotHead.png");
+  let image7 = require("../../assets/img/hotHeadNew.png");
+  let image8 = require("../../assets/img/monthly.png");
 
   useEffect(() => {
     getBanner();
@@ -415,7 +415,7 @@ function AppHome() {
                       opacity: "unset",
                       backgroundSize: "cover",
                     }}>
-                    <img className="w-100" src={image6} />
+                    <img className="w-100" src={image8} />
                     <AppMonthly />
                   </div>
 

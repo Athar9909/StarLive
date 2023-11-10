@@ -731,8 +731,8 @@ const Homepage = () => {
                                 </h3>{" "}
                                 <p className="mb-4">
                                   {" "}
-                                  {item?.price ? "Offer price-" : ""}
-                                  <span className=" mx-1 text-danger  fs-5 fw-bold">
+                                  {item?.price ? "Offer price:" : ""}
+                                  <span className=" mx-1 text-danger  fs-6 fw-bolder">
                                     {item?.price ? "$" + item.price : ""}
                                   </span>
                                 </p>{" "}
@@ -880,8 +880,8 @@ const Homepage = () => {
                                 </h3>{" "}
                                 <p className="mb-4">
                                   {" "}
-                                  {item?.price ? "Offer price-" : ""}
-                                  <span className=" mx-1 text-danger  fs-5 fw-bold">
+                                  {item?.price ? "Offer price:" : ""}
+                                  <span className=" mx-1 text-danger  fs-6 fw-bolder">
                                     {item?.price ? "$" + item.price : ""}
                                   </span>
                                 </p>{" "}
@@ -1208,7 +1208,7 @@ const Homepage = () => {
                                   );
                                 }}></div>
                             </div>
-                            <div className="item-content text-center mt-2 fw-bold">
+                            <div className="item-content text-center mt-0 fw-bold">
                               <h3 className="fw-bold">
                                 {" "}
                                 {item?.productId?.unitName?.slice(0, 35)}
@@ -1219,8 +1219,8 @@ const Homepage = () => {
                               </h3>{" "}
                               <p className="mb-4">
                                 {" "}
-                                {item?.price ? "Offer price-" : ""}
-                                <span className=" mx-1 text-danger  fs-5 fw-bold">
+                                {item?.price ? "Offer price:" : ""}
+                                <span className=" mx-1 text-danger  fs-6 fw-bolder">
                                   {item?.price ? "$" + item.price : ""}
                                 </span>
                               </p>{" "}

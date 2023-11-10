@@ -4335,7 +4335,7 @@
   }
 
   .nav-tabs_prod .nav-link {
-    width: 33.3333333%;
+    width: 25%;
     border: 0;
     background-color: #f2f2f2;
     font-weight: 600;
@@ -17193,8 +17193,9 @@ figure.effect-ming:hover img {
 }
 
 .item-content p {
-  font-size: 15px;
+  font-size: 12px !important;
   font-weight: 500;
+  color: #fff !important;
 }
 
 .item-price {
@@ -17206,6 +17207,7 @@ figure.effect-ming:hover img {
 .mb-45 {
   margin-bottom: 45px;
 }
+
 .main_hot:hover .product-action {
   opacity: 1;
 }

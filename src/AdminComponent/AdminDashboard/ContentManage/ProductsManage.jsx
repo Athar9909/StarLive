@@ -105,6 +105,7 @@ const ProductsManage = () => {
       getPromotionsFeatured();
       getPromotionsClose();
       GetPromotions();
+      getPromotionsMonthly()
     }
   };
 
