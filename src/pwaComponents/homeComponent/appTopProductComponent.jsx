@@ -157,7 +157,7 @@ function TopProduct() {
                     navigate(`/app/product-detail/${item?.productId?.slug}`);
                   }}>
                   <div
-                    class=""
+                    class="shadow"
                     style={{
                       backgroundImage: `url(${
                         item?.productId?.type?.flavourImage
@@ -170,12 +170,14 @@ function TopProduct() {
                       height: "12rem",
                       backgroundSize: "cover",
                     }}>
-                    <span className="product-feat-label px-2">
-                      HOT{item?.price ? "-" : ""}
-                      <span className=" mx-1  fs-5 fw-bold">
-                        {item?.price ? "$" + item.price : ""}
+                    {item?.price?.length > 0 && (
+                      <span className="product-feat-label px-2">
+                        Price : {item?.price ? "-" : ""}
+                        <span className=" mx-1  fs-5 fw-bold">
+                          {item?.price ? "$" + item.price : ""}
+                        </span>
                       </span>
-                    </span>
+                    )}
                   </div>
                   <Link
                     className="price-size2"

@@ -46,6 +46,7 @@ const Catelogues = () => {
     <div>
       <div className="">
         <Navbar />
+        
         <section className="marginTop">
           <>
             {loader ? (
@@ -118,9 +119,10 @@ const Catelogues = () => {
                           <a
                             target="_blank"
                             href={item?.url}
-                            className="border rounded bg-white shadow">
+                            className="border rounded bg-light shadow">
                             <figure className="effect-ming tm-video-item">
                               <img
+                              loading="lazy"
                                 src={
                                   item?.coverImage
                                     ? item?.coverImage

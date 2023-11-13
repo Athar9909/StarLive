@@ -194,8 +194,11 @@ function App() {
             {/* <Route path="/user/viewDocs" element={<ViewDocs />} /> */}
             <Route
               path="/AllProducts/Product/:id"
-              element={<SingleProduct />}
-            />
+              element={width < 999 ? <AppProductDetail /> : <SingleProduct />}
+            /> 
+
+
+
             {/* <Route path="/AllBrands" element={<AllBrands />} /> */}
             <Route path="/Cart" element={<Cart />} />
             <Route path="/MyQuotes" element={<MyQuotes />} />
@@ -471,7 +474,7 @@ function App() {
               path="/app/product-list/Close-Out"
               element={<AppCloseOutList />}
             />
-               <Route
+            <Route
               path="/app/product-list/Monthly"
               element={<AppMonthlyList />}
             />
