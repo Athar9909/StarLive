@@ -91,7 +91,7 @@ const HotSelling = () => {
             confirmButtonText: "View",
           }).then((res) => {
             console.log(res);
-            navigate(`/AllProducts/Product/:${slug}`);
+            navigate(`/AllProducts/Product/${slug}`);
           });
         }
       })
@@ -177,7 +177,7 @@ const HotSelling = () => {
                             "
                                 onClick={() => {
                                   navigate(
-                                    `/AllProducts/Product/:${item?.productId?.slug}`,
+                                    `/AllProducts/Product/${item?.productId?.slug}`,
                                     {
                                       state: {
                                         type: item?.productId?.type,
@@ -238,7 +238,7 @@ const HotSelling = () => {
                                     data-tip="Quick View"
                                     onClick={() => {
                                       navigate(
-                                        `/AllProducts/Product/:${item?.productId?.slug}`,
+                                        `/AllProducts/Product/${item?.productId?.slug}`,
                                         {
                                           state: {
                                             type: item?.productId?.type,
@@ -256,7 +256,7 @@ const HotSelling = () => {
                                 className="add-to-cart text-decoration-none"
                                 onClick={() => {
                                   navigate(
-                                    `/AllProducts/Product/:${item?.productId?.slug}`,
+                                    `/AllProducts/Product/${item?.productId?.slug}`,
                                     {
                                       state: {
                                         type: item?.productId?.type,

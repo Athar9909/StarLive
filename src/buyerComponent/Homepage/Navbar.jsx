@@ -434,7 +434,7 @@ const Navbar = ({ NState, LoginState }) => {
                               }
                               alt="Product"
                               onClick={() => {
-                                navigate(`/AllProducts/Product/:${item?.slug}`);
+                                navigate(`/AllProducts/Product/${item?.slug}`);
                                 setSearch();
                               }}
                             />
@@ -442,7 +442,7 @@ const Navbar = ({ NState, LoginState }) => {
                           <div className="featuredproduct_details p-2">
                             <span
                               onClick={() => {
-                                navigate(`/AllProducts/Product/:${item?.slug}`);
+                                navigate(`/AllProducts/Product/${item?.slug}`);
 
                                 setSearch();
                               }}>

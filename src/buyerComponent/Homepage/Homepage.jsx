@@ -185,7 +185,7 @@ const Homepage = () => {
             confirmButtonText: "View",
           }).then((res) => {
             console.log(res);
-            navigate(`/AllProducts/Product/:${slug}`);
+            navigate(`/AllProducts/Product/${slug}`);
           });
         }
       })
@@ -715,7 +715,7 @@ const Homepage = () => {
                                   className="item-image p-4 mt-2 pt-5"
                                   onClick={() => {
                                     navigate(
-                                      `/AllProducts/Product/:${item?.productId?.slug}`,
+                                      `/AllProducts/Product/${item?.productId?.slug}`,
                                       {
                                         state: {
                                           type: item?.productId?.type,
@@ -745,7 +745,7 @@ const Homepage = () => {
                                 <a
                                   onClick={() => {
                                     navigate(
-                                      `/AllProducts/Product/:${item?.productId?.slug}`,
+                                      `/AllProducts/Product/${item?.productId?.slug}`,
                                       {
                                         state: {
                                           type: item?.productId?.type,
@@ -854,7 +854,7 @@ const Homepage = () => {
                                   className="item-image  "
                                   onClick={() => {
                                     navigate(
-                                      `/AllProducts/Product/:${item?.productId?.slug}`,
+                                      `/AllProducts/Product/${item?.productId?.slug}`,
                                       {
                                         state: {
                                           type: item?.productId?.type,
@@ -894,7 +894,7 @@ const Homepage = () => {
                                 <a
                                   onClick={() => {
                                     navigate(
-                                      `/AllProducts/Product/:${item?.productId?.slug}`,
+                                      `/AllProducts/Product/${item?.productId?.slug}`,
                                       {
                                         state: {
                                           type: item?.productId?.type,
@@ -993,7 +993,7 @@ const Homepage = () => {
                             "
                                 onClick={() => {
                                   navigate(
-                                    `/AllProducts/Product/:${item?.productId?.slug}`,
+                                    `/AllProducts/Product/${item?.productId?.slug}`,
                                     {
                                       state: {
                                         type: item?.productId?.type,
@@ -1058,7 +1058,7 @@ const Homepage = () => {
                                     data-tip="Quick View"
                                     onClick={() => {
                                       navigate(
-                                        `/AllProducts/Product/:${item?.productId?.slug}`,
+                                        `/AllProducts/Product/${item?.productId?.slug}`,
                                         {
                                           state: {
                                             type: item?.productId?.type,
@@ -1076,7 +1076,7 @@ const Homepage = () => {
                                 className="add-to-cart text-decoration-none"
                                 onClick={() => {
                                   navigate(
-                                    `/AllProducts/Product/:${item?.productId?.slug}`,
+                                    `/AllProducts/Product/${item?.productId?.slug}`,
                                     {
                                       state: {
                                         type: item?.productId?.type,
@@ -1199,7 +1199,7 @@ const Homepage = () => {
                                 className="item-image"
                                 onClick={() => {
                                   navigate(
-                                    `/AllProducts/Product/:${item?.productId?.slug}`,
+                                    `/AllProducts/Product/${item?.productId?.slug}`,
                                     {
                                       state: {
                                         type: item?.productId?.type,
@@ -1233,7 +1233,7 @@ const Homepage = () => {
                               <a
                                 onClick={() =>
                                   navigate(
-                                    `/AllProducts/Product/:${item?.productId?.slug}`,
+                                    `/AllProducts/Product/${item?.productId?.slug}`,
                                     {
                                       state: {
                                         type: item?.productId?.type,

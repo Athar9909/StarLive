@@ -380,7 +380,7 @@ const ProductBySubCate = () => {
                                           : setPage(activePage);
 
                                         navigate(
-                                          `/AllProducts/Product/:${item?.products?.slug}`,
+                                          `/AllProducts/Product/${item?.products?.slug}`,
                                           {
                                             state: {
                                               image: item?.background,
@@ -415,7 +415,7 @@ const ProductBySubCate = () => {
                                     onClick={() => {
                                       setPage(activePage);
                                       navigate(
-                                        `/AllProducts/Product/:${item?.products?.slug}`,
+                                        `/AllProducts/Product/${item?.products?.slug}`,
                                         {
                                           state: {
                                             image: item?.background,

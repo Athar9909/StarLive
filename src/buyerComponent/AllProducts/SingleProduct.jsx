@@ -89,7 +89,7 @@ const SingleProduct = () => {
 
   const NewProducts = async () => {
     console.log(id?.slice(0, 1));
-    await axios.get(getProduct + "/" + id.slice(1)).then((res) => {
+    await axios.get(getProduct + "/" + id).then((res) => {
       console.log(res);
       axios
         .post(similarProduct, {
@@ -107,6 +107,7 @@ const SingleProduct = () => {
       setLoaderM(false);
     });
   };
+
   console.log(product?._id, "ddfsdf");
 
   const AddtoCart = async () => {
@@ -851,7 +852,7 @@ const SingleProduct = () => {
                               }
                               alt="Product"
                               onClick={() => {
-                                navigate(`/AllProducts/Product/:${item?.slug}`);
+                                navigate(`/AllProducts/Product/${item?.slug}`);
                                 window.scrollTo({
                                   top: 0,
                                   behavior: "smooth",
@@ -862,7 +863,7 @@ const SingleProduct = () => {
                           <span
                             class="text-decoration-none"
                             onClick={() => {
-                              navigate(`/AllProducts/Product/:${item?.slug}`);
+                              navigate(`/AllProducts/Product/${item?.slug}`);
                               window.scrollTo({
                                 top: 0,
                                 behavior: "smooth",

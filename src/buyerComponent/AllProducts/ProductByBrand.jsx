@@ -246,7 +246,7 @@ const ProductByBrand = () => {
                                     onClick={() => {
                                       setPage(activePage);
                                       navigate(
-                                        `/AllProducts/Product/:${item?.products?.slug}`,
+                                        `/AllProducts/Product/${item?.products?.slug}`,
                                         {
                                           state: {
                                             image: item?.background,
@@ -262,7 +262,7 @@ const ProductByBrand = () => {
                                   onClick={() => {
                                     setPage(activePage);
                                     navigate(
-                                      `/AllProducts/Product/:${item?.products?.slug}`,
+                                      `/AllProducts/Product/${item?.products?.slug}`,
                                       {
                                         state: {
                                           image: item?.background,

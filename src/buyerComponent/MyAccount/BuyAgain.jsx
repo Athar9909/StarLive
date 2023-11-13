@@ -74,7 +74,7 @@ const BuyAgain = () => {
   };
 
   const AddtoCart = async (e) => {
-    if (selected === []) {
+    if (selected == []) {
       Swal.fire({
         title: "Please Select any product!",
         icon: "error",
@@ -256,7 +256,7 @@ const BuyAgain = () => {
                     <img
                       onClick={() => {
                         navigate(
-                          `/AllProducts/Product/:${val?.productId?.slug}`,
+                          `/AllProducts/Product/${val?.productId?.slug}`,
                           {
                             state: {
                               id: val?.productId?.slug,
@@ -280,7 +280,7 @@ const BuyAgain = () => {
                       <span
                         onClick={() => {
                           navigate(
-                            `/AllProducts/Product/:${val?.productId?.slug}`,
+                            `/AllProducts/Product/${val?.productId?.slug}`,
                             {
                               state: {
                                 id: val?.productId?.slug,

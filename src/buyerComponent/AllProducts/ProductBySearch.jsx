@@ -81,7 +81,7 @@ const ProductBySearch = () => {
                             }
                             alt=""
                             onClick={() => {
-                              navigate(`/AllProducts/Product/:${item?.slug}`);
+                              navigate(`/AllProducts/Product/${item?.slug}`);
                             }}
                           />
                         </div>
@@ -92,7 +92,7 @@ const ProductBySearch = () => {
                               className="text-center fs-6 fw-bolder text-uppercase"
                               style={{ position: "relative", left: "0px" }}
                               onClick={() => {
-                                navigate(`/AllProducts/Product/:${item?.slug}`);
+                                navigate(`/AllProducts/Product/${item?.slug}`);
                               }}>
                               {/* {item?.type.flavour
                                 ? item?.unitName + "-" + item?.type?.flavour } */}
