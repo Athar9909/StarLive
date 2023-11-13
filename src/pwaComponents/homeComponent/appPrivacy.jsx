@@ -26,7 +26,7 @@ function AppPrivacy() {
 
   return (
     <>
-      <div className="star_imp_app">
+      <div className="star_imp_app ">
         <div class="header-area" id="headerArea">
           <div class="container h-100 d-flex align-items-center justify-content-between rtl-flex-d-row-r">
             <div class="back-button me-2 me-2">
@@ -41,7 +41,7 @@ function AppPrivacy() {
         </div>
         <WebHeader2 />
 
-        <div className="page-content-wrapper">
+        <div className="page-content-wrapper2">
           <div className="container">
             <div className="privacy-policy-wrapper py-3">
               <h6>PRIVACY POLICY</h6>

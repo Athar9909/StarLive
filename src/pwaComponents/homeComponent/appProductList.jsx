@@ -337,10 +337,18 @@ function AppProductList() {
                               <div class="col-auto">
                                 <Link
                                   class="product-title"
+                                  style={{
+                                    fontSize: "11px",
+                                  }}
                                   to={`/app/product-detail/${item?.productId?.slug}`}
                                   state={{ type: item?.productId?.type }}>
-                                  {item?.productId?.unitName}
-                                  <span>-{item?.productId?.type?.flavour}</span>
+                                   {item?.productId?.unitName?.slice(0, 30)}
+                                {item?.price > 0 && (
+                                  <span className="text-danger fw-bold">
+                                    {" "}
+                                    : ${item?.price}
+                                  </span>
+                                )}
                                 </Link>
                               </div>
                             </div>

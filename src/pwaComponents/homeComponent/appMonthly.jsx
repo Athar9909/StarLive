@@ -207,7 +207,7 @@ function AppMonthly() {
                             {item?.price ? (
                               <p className="mb-0 price-size text-start">
                                 <span className="  text-danger fw-bold mb-0">
-                                  {item?.price ? "-$" + item.price : ""}
+                                  {item?.price ? "$" + item.price : ""}
                                 </span>
                               </p>
                             ) : (

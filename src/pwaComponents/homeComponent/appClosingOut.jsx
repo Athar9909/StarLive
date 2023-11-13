@@ -160,7 +160,7 @@ function AppClosingOut() {
               className="">
               {(product || []).map((item, index) => (
                 <SwiperSlide key={index} className="">
-                  <div class="hotMain">
+                 <div class="hotMain">
                     <div class="w-100">
                       <div class="col-auto">
                         <Link
@@ -207,7 +207,7 @@ function AppClosingOut() {
                             {item?.price ? (
                               <p className="mb-0 price-size text-start">
                                 <span className="  text-danger fw-bold mb-0">
-                                  {item?.price ? "-$" + item.price : ""}
+                                  {item?.price ? "$" + item.price : ""}
                                 </span>
                               </p>
                             ) : (
