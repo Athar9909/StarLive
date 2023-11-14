@@ -48,7 +48,6 @@ const Cart = () => {
     getCart();
   }, []);
 
-  console.log(isActive, "jkhkjhk");
   const RemoveProduct = async (index) => {
     await axios
       .post(productRemove, {
@@ -78,6 +77,7 @@ const Cart = () => {
     }
   };
 
+  
   const HandleDecrease = async (id) => {
     setLoad(true);
     const formData = {

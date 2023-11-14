@@ -109,6 +109,7 @@ const OrderReq = () => {
   const [loader2, setLoader2] = useState(false);
   const [searchType, setSearchType] = useState("companyName");
   const [importedItems, setImportedItems] = useState([]);
+  const [importedData, setImportedData] = useState([]);
   const [formValues, setFormValues] = useState([
     {
       productName: [],
@@ -264,7 +265,8 @@ const OrderReq = () => {
     const formData = new FormData();
     formData.append("file", impFile);
     const { data } = await axios.post(importOrder, formData);
-    console.log(data);
+    setImportedData(data?.results);
+
     if (data?.results?.orders?.length) {
       Swal.fire({
         title: "Product Imported!",
@@ -1276,7 +1278,24 @@ const OrderReq = () => {
                         </a>
                       )}
                     </div>
-
+                    {console.log(importedData, "jiiji")}
+                    {importedData?.totalBarcodes > 0 && (
+                      <div className="col-12 d-flex justify-content-between ">
+                        <a className=" text-decoration-none mx-1 mb-3 fw-bold">
+                          Total Products : {importedData?.totalBarcodes}
+                        </a>
+                        <a className=" text-decoration-none mx-1 mb-3 fw-bold">
+                          Imported Products : {importedData?.scannedBarcodes}
+                        </a>
+                        <a className=" text-decoration-none mx-1 mb-3 fw-bold">
+                          Rejected Products : {importedData?.unScannedBracodes}{" "}
+                          -{" "}
+                          <a href={importedData?.file}>
+                            <i class="fa-solid fa-download"></i>
+                          </a>
+                        </a>
+                      </div>
+                    )}
                     {importedItems?.length > 0 ? (
                       <div className="col-12 comman_table_design px-0">
                         <div className="table-responsive">

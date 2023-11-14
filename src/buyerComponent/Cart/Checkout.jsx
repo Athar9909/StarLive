@@ -80,6 +80,14 @@ const Checkout = () => {
               icon: "error",
               confirmButtonText: "Okay",
             });
+          } else if (
+            res?.data.message === "Sub Account's Tobacco licence expired!"
+          ) {
+            Swal.fire({
+              title: res?.data.message,
+              icon: "error",
+              confirmButtonText: "Okay",
+            });
           }
         });
     } else if (delevryChoice == "Delivery") {
@@ -110,6 +118,14 @@ const Checkout = () => {
               icon: "error",
               confirmButtonText: "Okay",
             });
+          } else if (
+            res?.data.message === "Sub Account's Tobacco licence expired!"
+          ) {
+            Swal.fire({
+              title: res?.data.message,
+              icon: "error",
+              confirmButtonText: "Okay",
+            });
           }
         });
     } else if (delevryChoice == "In-Store Pickup") {
@@ -134,6 +150,14 @@ const Checkout = () => {
               navigate(`/app/order-detail/${res?.data.results?.order._id}`);
             });
           } else if (res?.data.message === "Tobacco licence expired!") {
+            Swal.fire({
+              title: res?.data.message,
+              icon: "error",
+              confirmButtonText: "Okay",
+            });
+          } else if (
+            res?.data.message === "Sub Account's Tobacco licence expired!"
+          ) {
             Swal.fire({
               title: res?.data.message,
               icon: "error",

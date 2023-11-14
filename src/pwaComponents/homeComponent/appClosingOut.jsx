@@ -57,8 +57,16 @@ function AppClosingOut() {
         const { data } = await addToCart(formData);
         if (!data.error) {
           navigate("/app/cart");
-        }
-        if (data?.message === "Flavour is not available!") {
+        } else if (data?.message === "Flavour is not available!") {
+          Swal.fire({
+            title: "Please Select a Flavour!",
+            text: "Click view to all flavours.",
+            icon: "warning",
+            confirmButtonText: "Okay",
+          }).then((res) => {
+            navigate(`/app/product-detail/${slug}`, { state: "hii" });
+          });
+        } else if (data?.message === "Please provide flavour!") {
           Swal.fire({
             title: "Please Select a Flavour!",
             text: "Click view to all flavours.",
@@ -68,9 +76,6 @@ function AppClosingOut() {
             navigate(`/app/product-detail/${slug}`, { state: "hii" });
           });
         }
-        // if (data?.error) {
-        //   navigate("/app/login");
-        // }
       } else {
         Swal.fire({
           title: "Your Tobacco licence is Expired/Invalid!",
@@ -98,6 +103,15 @@ function AppClosingOut() {
         }).then((res) => {
           navigate(`/app/product-detail/${slug}`, { state: "hii" });
         });
+      } else if (data?.message === "Please provide flavour!") {
+        Swal.fire({
+          title: "Please Select a Flavour!",
+          text: "Click view to all flavours.",
+          icon: "warning",
+          confirmButtonText: "Okay",
+        }).then((res) => {
+          navigate(`/app/product-detail/${slug}`, { state: "hii" });
+        });
       }
       // if (data?.error) {
       //   navigate("/app/login");
@@ -105,38 +119,38 @@ function AppClosingOut() {
     }
   };
 
-  const addToFav = async (index, itm) => {
-    await axios
-      .post(addFav, {
-        productId: itm?.productId?._id,
-        flavour: itm?.productId?.type,
-      })
-      .catch((err) => {
-        // toast.success(res?.data?.message);
-        if (err) {
-          Swal.fire({
-            title: "Please Login To Continue",
-            icon: "error",
-            button: "ok",
-          });
-        }
-      });
-    getProductList();
-    setHeart(!heart);
-  };
-  const rmvFromFav = async (index, itm) => {
-    await axios
-      .post(rmvFav, {
-        productId: itm?.productId?._id,
-        flavour: itm?.productId?.type,
-      })
-      .then((res) => {
-        if (!res.error) {
-          setHeart(!heart);
-        }
-      });
-    getProductList();
-  };
+  // const addToFav = async (index, itm) => {
+  //   await axios
+  //     .post(addFav, {
+  //       productId: itm?.productId?._id,
+  //       flavour: itm?.productId?.type,
+  //     })
+  //     .catch((err) => {
+  //       // toast.success(res?.data?.message);
+  //       if (err) {
+  //         Swal.fire({
+  //           title: "Please Login To Continue",
+  //           icon: "error",
+  //           button: "ok",
+  //         });
+  //       }
+  //     });
+  //   getProductList();
+  //   setHeart(!heart);
+  // };
+  // const rmvFromFav = async (index, itm) => {
+  //   await axios
+  //     .post(rmvFav, {
+  //       productId: itm?.productId?._id,
+  //       flavour: itm?.productId?.type,
+  //     })
+  //     .then((res) => {
+  //       if (!res.error) {
+  //         setHeart(!heart);
+  //       }
+  //     });
+  //   getProductList();
+  // };
   return (
     <>
       <div className="top-products-area pb-3 ">
@@ -160,7 +174,7 @@ function AppClosingOut() {
               className="">
               {(product || []).map((item, index) => (
                 <SwiperSlide key={index} className="">
-                 <div class="hotMain">
+                  <div class="hotMain">
                     <div class="w-100">
                       <div class="col-auto">
                         <Link

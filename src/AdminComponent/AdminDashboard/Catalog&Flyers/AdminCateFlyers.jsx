@@ -69,7 +69,7 @@ const AdminCateFlyers = () => {
     formData.append("url", catelogueUrl);
     formData.append("title", catelogueTitle);
     formData.append("type", "catalog");
-    formData.append("coverImage", files?.coverImageC);
+    formData.append("coverImage", files?.coverImageC ? files?.coverImageC : "");
     const { data } = await axios.post(addCatelog, formData);
     if (!data.error) {
       Swal.fire({
@@ -94,8 +94,8 @@ const AdminCateFlyers = () => {
     formData.append("url", flyerUrl);
     formData.append("title", flyerTitle);
     formData.append("type", "flyer");
-    formData.append("flyerDate", fDate);
-    formData.append("coverImage", files?.coverImageF);
+    formData.append("flyerDate", fDate ? fDate : "");
+    formData.append("coverImage", files?.coverImageF ? files?.coverImageF : "");
     const { data } = await axios.post(addCatelog, formData);
     if (!data.error) {
       Swal.fire({
@@ -727,8 +727,7 @@ const AdminCateFlyers = () => {
                                                     item?.coverImage
                                                       ? item?.coverImage
                                                       : require("../../../assets/img/product.jpg")
-                                                  }
-                                                ></img>
+                                                  }></img>
                                               </td>
 
                                               <td className="border">
@@ -897,8 +896,7 @@ const AdminCateFlyers = () => {
                                                     item?.coverImage
                                                       ? item?.coverImage
                                                       : require("../../../assets/img/product.jpg")
-                                                  }
-                                                ></img>
+                                                  }></img>
                                               </td>
                                               <td className="border">
                                                 {item?.url}
