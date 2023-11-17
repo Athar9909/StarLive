@@ -314,7 +314,13 @@ function AppHome() {
                           // selectedItem={itemNo}
                         >
                           {banner?.map((item) => (
-                            <div className=" item slider_image">
+                            <div
+                              className=" item slider_image"
+                              onClick={() => {
+                                window.location.href = item?.url
+                                  ? item?.url
+                                  : "https://starimporters.com/app/home";
+                              }}>
                               <img
                                 className="banner_slider_img"
                                 src={
@@ -430,8 +436,6 @@ function AppHome() {
                     <img className="w-100" src={image6} />
                     <AppClosingOut />
                   </div>
-
-                 
 
                   <div className=" py-2">
                     <TopProduct />

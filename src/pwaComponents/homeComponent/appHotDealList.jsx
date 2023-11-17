@@ -51,7 +51,7 @@ function AppHotDealList() {
     }
   };
 
-  const addToCartt = async (id, index, itm, slug) => {
+  const addToCartt = async (id, index, itm, slug, price) => {
     if (itm?.category?.isTobacco || itm?.subCategory?.isTobacco) {
       if (!userDetail?.istobaccoLicenceExpired) {
         const formData = {
@@ -62,20 +62,33 @@ function AppHotDealList() {
         const { data } = await addToCart(formData);
         if (!data.error) {
           navigate("/app/cart");
-        }
-        if (data?.message === "Flavour is not available!") {
+        } else if (data?.message === "Flavour is not available!") {
           Swal.fire({
             title: "Please Select a Flavour!",
             text: "Click view to all flavours.",
             icon: "warning",
             confirmButtonText: "Okay",
           }).then((res) => {
-            navigate(`/app/product-detail/${slug}`, { state: "hii" });
+            navigate(`/app/product-detail/${slug}`, {
+              state: {
+                offer: price,
+              },
+            });
+          });
+        } else if (data?.message === "Please provide flavour!") {
+          Swal.fire({
+            title: "Please Select a Flavour!",
+            text: "Click view to all flavours.",
+            icon: "warning",
+            confirmButtonText: "Okay",
+          }).then((res) => {
+            navigate(`/app/product-detail/${slug}`, {
+              state: {
+                offer: price,
+              },
+            });
           });
         }
-        // if (data?.error) {
-        //   navigate("/app/login");
-        // }
       } else {
         Swal.fire({
           title: "Your Tobacco licence is Expired/Invalid!",
@@ -101,7 +114,24 @@ function AppHotDealList() {
           icon: "warning",
           confirmButtonText: "Okay",
         }).then((res) => {
-          navigate(`/app/product-detail/${slug}`, { state: "hii" });
+          navigate(`/app/product-detail/${slug}`, {
+            state: {
+              offer: price,
+            },
+          });
+        });
+      } else if (data?.message === "Please provide flavour!") {
+        Swal.fire({
+          title: "Please Select a Flavour!",
+          text: "Click view to all flavours.",
+          icon: "warning",
+          confirmButtonText: "Okay",
+        }).then((res) => {
+          navigate(`/app/product-detail/${slug}`, {
+            state: {
+              offer: price,
+            },
+          });
         });
       }
       // if (data?.error) {
@@ -202,7 +232,8 @@ function AppHotDealList() {
                                   item?.productId?._id,
                                   index,
                                   item,
-                                  item?.productId?.slug
+                                  item?.productId?.slug,
+                                  item?.price
                                 )
                               }>
                               <i class="fa-light fa-plus "></i>
@@ -233,10 +264,12 @@ function AppHotDealList() {
                           <Link
                             class="product-thumbnail d-block"
                             to={`/app/product-detail/${item?.productId?.slug}`}
-                            state={{ type: item?.productId?.type }}>
+                            state={{
+                              type: item?.productId?.type,
+                              offer: item?.price,
+                            }}>
                             <img
                               class="mb-2"
-                              loading="lazy"
                               src={
                                 item?.productId?.type?.flavourImage
                                   ? item?.productId?.type?.flavourImage
@@ -254,7 +287,10 @@ function AppHotDealList() {
                                   fontSize: "11px",
                                 }}
                                 to={`/app/product-detail/${item?.productId?.slug}`}
-                                state={{ type: item?.productId?.type }}>
+                                state={{
+                                  type: item?.productId?.type,
+                                  offer: item?.price,
+                                }}>
                                 {item?.productId?.unitName?.slice(0, 30)}
                                 {item?.price > 0 && (
                                   <span className="text-danger fw-bold">
@@ -262,8 +298,6 @@ function AppHotDealList() {
                                     : ${item?.price}
                                   </span>
                                 )}
-
-                                {/* <span>-{item?.productId?.type?.flavour} </span> */}
                               </Link>
                             </div>
                           </div>

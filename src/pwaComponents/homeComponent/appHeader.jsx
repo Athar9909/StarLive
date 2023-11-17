@@ -206,30 +206,29 @@ function AppHeader({ cartCount }) {
               )}
 
               <li>
-                <Link to={token ? "/app/buy-again" : "/app/login"}>
-                  <i className="fa fa-shopping-cart mt-1" />
-                  Buy Again
+                <Link to={token ? "/app/wishlist" : "/app/login"}>
+                  <i className="fa-solid fa-heart"></i>My Wishlist
                 </Link>
               </li>
-              {/* <li>
-                  <Link to={token ? "/app/notifications" : "/app/login"}>
-                    <i className="fa-solid fa-bell lni-tada-effect"></i>
-                    Notifications
-                    <span className="ms-1 badge badge-warning">
-                      {token ? counter : null}
-                    </span>
-                  </Link>
-                </li> */}
               <li>
                 <Link to="/app/brands">
                   <i className="fa-solid fa-ribbon"></i>Brands
                 </Link>
               </li>
+
               <li>
-                <Link to={token ? "/app/wishlist" : "/app/login"}>
-                  <i className="fa-solid fa-heart"></i>My Wishlist
+                <Link to={token ? "/app/buy-again" : "/app/login"}>
+                  <i className="fa fa-shopping-cart mt-1" />
+                  Buy Again
                 </Link>
               </li>
+
+              <li>
+                <Link to="/app/catalog&flyer">
+                  <i className="fa-solid fa-book"></i>Catalogs & Flyers
+                </Link>
+              </li>
+
               <li>
                 <Link to={token ? "/app/settings" : "/app/login"}>
                   <i className="fa-solid fa-sliders"></i>Settings

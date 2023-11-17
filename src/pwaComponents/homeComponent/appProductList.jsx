@@ -53,7 +53,7 @@ function AppProductList() {
     }
   };
 
-  const addToCartt = async (id, index, itm, slug) => {
+  const addToCartt = async (id, index, itm, slug, price) => {
     if (itm?.category?.isTobacco || itm?.subCategory?.isTobacco) {
       if (!userDetail?.istobaccoLicenceExpired) {
         const formData = {
@@ -64,20 +64,33 @@ function AppProductList() {
         const { data } = await addToCart(formData);
         if (!data.error) {
           navigate("/app/cart");
-        }
-        if (data?.message === "Flavour is not available!") {
+        } else if (data?.message === "Flavour is not available!") {
           Swal.fire({
             title: "Please Select a Flavour!",
             text: "Click view to all flavours.",
             icon: "warning",
             confirmButtonText: "Okay",
           }).then((res) => {
-            navigate(`/app/product-detail/${slug}`, { state: "hii" });
+            navigate(`/app/product-detail/${slug}`, {
+              state: {
+                offer: price,
+              },
+            });
+          });
+        } else if (data?.message === "Please provide flavour!") {
+          Swal.fire({
+            title: "Please Select a Flavour!",
+            text: "Click view to all flavours.",
+            icon: "warning",
+            confirmButtonText: "Okay",
+          }).then((res) => {
+            navigate(`/app/product-detail/${slug}`, {
+              state: {
+                offer: price,
+              },
+            });
           });
         }
-        // if (data?.error) {
-        //   navigate("/app/login");
-        // }
       } else {
         Swal.fire({
           title: "Your Tobacco licence is Expired/Invalid!",
@@ -103,7 +116,24 @@ function AppProductList() {
           icon: "warning",
           confirmButtonText: "Okay",
         }).then((res) => {
-          navigate(`/app/product-detail/${slug}`, { state: "hii" });
+          navigate(`/app/product-detail/${slug}`, {
+            state: {
+              offer: price,
+            },
+          });
+        });
+      } else if (data?.message === "Please provide flavour!") {
+        Swal.fire({
+          title: "Please Select a Flavour!",
+          text: "Click view to all flavours.",
+          icon: "warning",
+          confirmButtonText: "Okay",
+        }).then((res) => {
+          navigate(`/app/product-detail/${slug}`, {
+            state: {
+              offer: price,
+            },
+          });
         });
       }
       // if (data?.error) {
@@ -274,91 +304,98 @@ function AppProductList() {
                 )}
               </div>
             ) : ( */}
-              <div>
-                {searchKey?.length ? null : (
-                  <div className="row p-3 ">
-                    {(product || []).map((item, index) => (
-                      <div class="col-6 mb-3">
-                        <div class="card product-card w-100">
-                          <div class="card-body">
+            <div>
+              {searchKey?.length ? null : (
+                <div className="row p-3 ">
+                  {(product || []).map((item, index) => (
+                    <div class="col-6 mb-3">
+                      <div class="card product-card w-100">
+                        <div class="card-body">
+                          <div class="col-auto">
+                            <Link
+                              class="cart_bttn text-decoration-none"
+                              to=""
+                              onClick={() =>
+                                addToCartt(
+                                  item?.productId?._id,
+                                  index,
+                                  item,
+                                  item?.productId?.slug,
+                                  item?.price
+                                )
+                              }>
+                              <i class="fa-light fa-plus "></i>
+                            </Link>
+                          </div>
+                          {token?.length ? (
+                            <a class="wishlist-btn">
+                              {item?.productId?.favourite ? (
+                                <i
+                                  class="fa fa-heart"
+                                  onClick={() => {
+                                    rmvFromFav(index, item);
+                                  }}
+                                  style={{ color: "#3e4093 " }}
+                                />
+                              ) : (
+                                <i
+                                  class="fa fa-heart"
+                                  onClick={() => {
+                                    addToFav(index, item);
+                                  }}
+                                  style={{ color: "#E1E1E1 " }}
+                                />
+                              )}
+                            </a>
+                          ) : null}
+
+                          <Link
+                            class="product-thumbnail d-block"
+                            to={`/app/product-detail/${item?.productId?.slug}`}
+                            state={{
+                              type: item?.productId?.type,
+                              offer: item?.price,
+                            }}>
+                            <img
+                              class="mb-2"
+                              src={
+                                item?.productId?.type?.flavourImage
+                                  ? item?.productId?.type?.flavourImage
+                                  : item?.productId?.productImage ||
+                                    require("../../assets/img/product.jpg")
+                              }
+                              alt="Product Image not updated"
+                            />
+                          </Link>
+                          <div class="row mt-1 d-flex align-items-center justify-content-between">
                             <div class="col-auto">
                               <Link
-                                class="cart_bttn text-decoration-none"
-                                to=""
-                                onClick={() =>
-                                  addToCartt(
-                                    item?.productId?._id,
-                                    index,
-                                    item,
-                                    item?.productId?.slug
-                                  )
-                                }>
-                                <i class="fa-light fa-plus "></i>
-                              </Link>
-                            </div>
-                            {token?.length ? (
-                              <a class="wishlist-btn">
-                                {item?.productId?.favourite ? (
-                                  <i
-                                    class="fa fa-heart"
-                                    onClick={() => {
-                                      rmvFromFav(index, item);
-                                    }}
-                                    style={{ color: "#3e4093 " }}
-                                  />
-                                ) : (
-                                  <i
-                                    class="fa fa-heart"
-                                    onClick={() => {
-                                      addToFav(index, item);
-                                    }}
-                                    style={{ color: "#E1E1E1 " }}
-                                  />
-                                )}
-                              </a>
-                            ) : null}
-
-                            <Link
-                              class="product-thumbnail d-block"
-                              to={`/app/product-detail/${item?.productId?.slug}`}
-                              state={{ type: item?.productId?.type }}>
-                              <img
-                                class="mb-2"
-                                src={
-                                  item?.productId?.type?.flavourImage
-                                    ? item?.productId?.type?.flavourImage
-                                    : item?.productId?.productImage ||
-                                      require("../../assets/img/product.jpg")
-                                }
-                                alt="Product Image not updated"
-                              />
-                            </Link>
-                            <div class="row mt-1 d-flex align-items-center justify-content-between">
-                              <div class="col-auto">
-                                <Link
-                                  class="product-title"
-                                  style={{
-                                    fontSize: "11px",
-                                  }}
-                                  to={`/app/product-detail/${item?.productId?.slug}`}
-                                  state={{ type: item?.productId?.type }}>
-                                   {item?.productId?.unitName?.slice(0, 30)}
+                                class="product-title"
+                                style={{
+                                  fontSize: "11px",
+                                }}
+                                to={`/app/product-detail/${item?.productId?.slug}`}
+                                state={{
+                                  type: item?.productId?.type,
+                                  offer: item?.price,
+                                }}>
+                                {item?.productId?.unitName?.slice(0, 30)}
                                 {item?.price > 0 && (
                                   <span className="text-danger fw-bold">
                                     {" "}
                                     : ${item?.price}
                                   </span>
                                 )}
-                                </Link>
-                              </div>
+                              </Link>
                             </div>
                           </div>
                         </div>
                       </div>
-                    ))}
-                  </div>
-                )}
-              </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
             {/* )} */}
           </div>
         </div>

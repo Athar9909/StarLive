@@ -145,8 +145,7 @@ const Homepage = () => {
       });
   };
 
-  const AddtoCart = async (id, flavour, slug) => {
-    console.log(";;lk;");
+  const AddtoCart = async (id, flavour, slug, price) => {
     await axios
       .post(addCart, {
         productId: id,
@@ -185,7 +184,11 @@ const Homepage = () => {
             confirmButtonText: "View",
           }).then((res) => {
             console.log(res);
-            navigate(`/AllProducts/Product/${slug}`);
+            navigate(`/AllProducts/Product/${slug}`, {
+              state: {
+                offer: price,
+              },
+            });
           });
         }
       })
@@ -719,13 +722,26 @@ const Homepage = () => {
                                       {
                                         state: {
                                           type: item?.productId?.type,
+                                          offer: item?.price,
                                         },
                                       }
                                     );
                                   }}></div>
                               </div>
                               <div className="item-content text-center mt-4 fw-bold">
-                                <h3 className="fw-bold">
+                                <h3
+                                  className="fw-bold"
+                                  onClick={() => {
+                                    navigate(
+                                      `/AllProducts/Product/${item?.productId?.slug}`,
+                                      {
+                                        state: {
+                                          type: item?.productId?.type,
+                                          offer: item?.price,
+                                        },
+                                      }
+                                    );
+                                  }}>
                                   {" "}
                                   {item?.productId?.unitName?.slice(0, 35)}
                                 </h3>{" "}
@@ -749,6 +765,7 @@ const Homepage = () => {
                                       {
                                         state: {
                                           type: item?.productId?.type,
+                                          offer: item?.price,
                                         },
                                       }
                                     );
@@ -771,7 +788,8 @@ const Homepage = () => {
                                     AddtoCart(
                                       item?.productId?._id,
                                       item?.productId?.type,
-                                      item?.productId?.slug
+                                      item?.productId?.slug,
+                                      item?.price
                                     );
                                   }}>
                                   {" "}
@@ -858,6 +876,7 @@ const Homepage = () => {
                                       {
                                         state: {
                                           type: item?.productId?.type,
+                                          offer: item?.price,
                                         },
                                       }
                                     );
@@ -898,6 +917,7 @@ const Homepage = () => {
                                       {
                                         state: {
                                           type: item?.productId?.type,
+                                          offer: item?.price,
                                         },
                                       }
                                     );
@@ -920,7 +940,8 @@ const Homepage = () => {
                                     AddtoCart(
                                       item?.productId?._id,
                                       item?.productId?.type,
-                                      item?.productId?.slug
+                                      item?.productId?.slug,
+                                      item?.price
                                     );
                                   }}>
                                   {" "}
@@ -997,6 +1018,7 @@ const Homepage = () => {
                                     {
                                       state: {
                                         type: item?.productId?.type,
+                                        offer: item?.price,
                                       },
                                     }
                                   );
@@ -1046,7 +1068,8 @@ const Homepage = () => {
                                       AddtoCart(
                                         item?.productId?._id,
                                         item?.productId?.type,
-                                        item?.productId?.slug
+                                        item?.productId?.slug,
+                                        item?.price
                                       );
                                     }}>
                                     {" "}
@@ -1062,6 +1085,7 @@ const Homepage = () => {
                                         {
                                           state: {
                                             type: item?.productId?.type,
+                                            offer: item?.price,
                                           },
                                         }
                                       );
@@ -1080,6 +1104,7 @@ const Homepage = () => {
                                     {
                                       state: {
                                         type: item?.productId?.type,
+                                        offer: item?.price,
                                       },
                                     }
                                   );
@@ -1203,6 +1228,7 @@ const Homepage = () => {
                                     {
                                       state: {
                                         type: item?.productId?.type,
+                                        offer: item?.price,
                                       },
                                     }
                                   );
@@ -1237,6 +1263,7 @@ const Homepage = () => {
                                     {
                                       state: {
                                         type: item?.productId?.type,
+                                        offer: item?.price,
                                       },
                                     }
                                   )
@@ -1258,7 +1285,8 @@ const Homepage = () => {
                                   AddtoCart(
                                     item?.productId?._id,
                                     item?.productId?.type,
-                                    item?.productId?.slug
+                                    item?.productId?.slug,
+                                    item?.price
                                   );
                                 }}>
                                 {" "}

@@ -53,8 +53,7 @@ const MonthlyDeals = () => {
     }
   };
 
-  const AddtoCart = async (id, flavour, slug) => {
-    console.log(";;lk;");
+  const AddtoCart = async (id, flavour, slug, price) => {
     await axios
       .post(addCart, {
         productId: id,
@@ -62,8 +61,6 @@ const MonthlyDeals = () => {
         flavour: flavour,
       })
       .then((res) => {
-        console.log(res, "kkkj");
-
         if (!res.data.error) {
           setNState(!NState);
           Swal.fire({
@@ -93,7 +90,11 @@ const MonthlyDeals = () => {
             confirmButtonText: "View",
           }).then((res) => {
             console.log(res);
-            navigate(`/AllProducts/Product/${slug}`);
+            navigate(`/AllProducts/Product/${slug}`, {
+              state: {
+                offer: price,
+              },
+            });
           });
         }
       })
@@ -166,9 +167,9 @@ const MonthlyDeals = () => {
               <div className="col singleproduct_divvision mx-0">
                 <div className="product_single_right row p-3">
                   <div class="col-12">
-                    <div class="row singleproduct---show">
+                    <div class="row singleproduct---show  mb-5">
                       {(products || [{}])?.map((item, index) => (
-                        <div className="col-xl-3 col-lg-3 col-md-3 mb-lg-3 mb-md-4 mb-3">
+                        <div className="col-xl-3 col-lg-3 col-md-3 mb-lg-3 mb-md-4 mb-3 ">
                           <div className="product-grid ">
                             <div
                               className="product-image mt-2
@@ -181,6 +182,7 @@ const MonthlyDeals = () => {
                                     {
                                       state: {
                                         type: item?.productId?.type,
+                                        offer: item?.price,
                                       },
                                     }
                                   );
@@ -227,7 +229,8 @@ const MonthlyDeals = () => {
                                       AddtoCart(
                                         item?.productId?._id,
                                         item?.productId?.type,
-                                        item?.productId?.slug
+                                        item?.productId?.slug,
+                                        item?.price
                                       );
                                     }}>
                                     {" "}
@@ -243,6 +246,7 @@ const MonthlyDeals = () => {
                                         {
                                           state: {
                                             type: item?.productId?.type,
+                                            offer: item?.price,
                                           },
                                         }
                                       );
@@ -261,16 +265,21 @@ const MonthlyDeals = () => {
                                     {
                                       state: {
                                         type: item?.productId?.type,
+                                        offer: item?.price,
                                       },
                                     }
                                   );
                                 }}>
                                 <small className="">
                                   {item?.productId?.type?.flavour}
-                                  ..
                                 </small>
+                              </a>
+                              <h3 className="title ">
+                                <a className="text-decoration-none">
+                                  {item?.productId?.unitName}
+                                </a>
                                 <p
-                                  className="text-dark"
+                                  className="text-dark fw-bold"
                                   style={{
                                     fontSize: "12px",
                                   }}>
@@ -278,11 +287,6 @@ const MonthlyDeals = () => {
                                     ? "Offer Price - $" + item.price
                                     : ""}
                                 </p>
-                              </a>
-                              <h3 className="title ">
-                                <a className="text-decoration-none">
-                                  {item?.productId?.unitName}
-                                </a>
                               </h3>
                             </div>
                           </div>

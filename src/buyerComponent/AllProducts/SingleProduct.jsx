@@ -53,6 +53,7 @@ const SingleProduct = () => {
   const [rows, setRows] = useState(0);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [offerPrice, setOfferPrice] = useState(location?.state?.offer);
 
   axios.defaults.headers.common["x-auth-token-user"] =
     localStorage.getItem("token-user");
@@ -645,12 +646,23 @@ const SingleProduct = () => {
                                 : product?.caseSize || "Not Set"}
                             </a>
                           </div>
+
+                          {offerPrice !== undefined && offerPrice !== 0 && (
+                            <div className="prdct---falvor">
+                              Offer Price :{" "}
+                              <a className="text-decoration-none fw-bold text-danger">
+                                {" "}
+                                $ {offerPrice}
+                              </a>
+                            </div>
+                          )}
                         </div>
+                        {console.log(offerPrice, "jj")}
                         {flavour ? (
                           <div className="col-12">
                             <p className="fw-bold">
                               {flavour?.flavourPriceStatus
-                                ? "Price : $" +
+                                ? "Actual Price : $" +
                                   (flavour?.flavourPrice
                                     ? flavour?.flavourPrice
                                     : " Not set")
@@ -718,6 +730,7 @@ const SingleProduct = () => {
                                         setTypeObj();
                                         setFlavour(item);
                                         setUnitCount(1);
+                                        setOfferPrice()
 
                                         document.getElementById(
                                           "productMainImg"

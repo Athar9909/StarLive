@@ -51,8 +51,7 @@ const HotSelling = () => {
     }
   };
 
-  const AddtoCart = async (id, flavour, slug) => {
-    console.log(";;lk;");
+  const AddtoCart = async (id, flavour, slug, price) => {
     await axios
       .post(addCart, {
         productId: id,
@@ -60,8 +59,6 @@ const HotSelling = () => {
         flavour: flavour,
       })
       .then((res) => {
-        console.log(res, "kkkj");
-
         if (!res.data.error) {
           setNState(!NState);
           Swal.fire({
@@ -91,7 +88,11 @@ const HotSelling = () => {
             confirmButtonText: "View",
           }).then((res) => {
             console.log(res);
-            navigate(`/AllProducts/Product/${slug}`);
+            navigate(`/AllProducts/Product/${slug}`, {
+              state: {
+                offer: price,
+              },
+            });
           });
         }
       })
@@ -181,6 +182,7 @@ const HotSelling = () => {
                                     {
                                       state: {
                                         type: item?.productId?.type,
+                                        offer: item?.price,
                                       },
                                     }
                                   );
@@ -203,12 +205,7 @@ const HotSelling = () => {
                                   }
                                 />
                               </a>
-                              <span
-                                className={
-                                  item?.price ? "product-hot-label" : "d-none"
-                                }>
-                               Offer Price - {item?.price ? "$" + item.price : ""}
-                              </span>
+
                               <ul className="product-links">
                                 <li>
                                   <a
@@ -229,7 +226,8 @@ const HotSelling = () => {
                                       AddtoCart(
                                         item?.productId?._id,
                                         item?.productId?.type,
-                                        item?.productId?.slug
+                                        item?.productId?.slug,
+                                        item?.price
                                       );
                                     }}>
                                     {" "}
@@ -245,6 +243,7 @@ const HotSelling = () => {
                                         {
                                           state: {
                                             type: item?.productId?.type,
+                                            offer: item?.price,
                                           },
                                         }
                                       );
@@ -263,19 +262,33 @@ const HotSelling = () => {
                                     {
                                       state: {
                                         type: item?.productId?.type,
+                                        offer: item?.price,
                                       },
                                     }
                                   );
                                 }}>
-                                <small>
-                                  {item?.productId?.type?.flavour}
-                                  ..
+                                <small
+                                  style={{
+                                    fontSize: "12px",
+                                  }}>
+                                  {item?.productId?.type?.flavour
+                                    ? item?.productId?.type?.flavour
+                                    : item?.productId?.unitName}
                                 </small>
                               </a>
                               <h3 className="title ">
                                 <a className="text-decoration-none">
                                   {item?.productId?.unitName}
                                 </a>
+                                <p
+                                  style={{
+                                    fontSize: "12px",
+                                  }}
+                                  className="text-dark fw-bold">
+                                  {item?.price
+                                    ? "Offer Price - $" + item.price
+                                    : ""}
+                                </p>
                               </h3>
                             </div>
                           </div>

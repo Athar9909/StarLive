@@ -36,15 +36,13 @@ function WebHeader2() {
         className="offcanvas offcanvas-start suha-offcanvas-wrap"
         tabindex="-1"
         id="suhaOffcanvas"
-        aria-labelledby="suhaOffcanvasLabel"
-      >
+        aria-labelledby="suhaOffcanvasLabel">
         <button
           className="btn-close btn-close-white"
           type="button"
           id="closeModal"
           data-bs-dismiss="offcanvas"
-          aria-label="Close"
-        ></button>
+          aria-label="Close"></button>
 
         <div className="offcanvas-body">
           <div className="sidenav-profile">
@@ -83,28 +81,29 @@ function WebHeader2() {
               </Link>
             </li>
             <li>
-              <Link to={token ? "/app/buy-again" : "/app/login"}>
-                <i className="fa fa-shopping-cart mt-1" />
-                Buy Again
+              <Link to={token ? "/app/wishlist" : "/app/login"}>
+                <i className="fa-solid fa-heart"></i>My Wishlist
               </Link>
             </li>
-            {/* <li>
-              <Link to={token ? "/app/notifications" : "/app/login"}>
-                <i className="fa-solid fa-bell lni-tada-effect"></i>
-                Notifications
-                <span className="ms-1 badge badge-warning">{counter}</span>
-              </Link>
-            </li> */}
             <li>
               <Link to="/app/brands">
                 <i className="fa-solid fa-ribbon"></i>Brands
               </Link>
             </li>
+
             <li>
-              <Link to={token ? "/app/wishlist" : "/app/login"}>
-                <i className="fa-solid fa-heart"></i>My Wishlist
+              <Link to={token ? "/app/buy-again" : "/app/login"}>
+                <i className="fa fa-shopping-cart mt-1" />
+                Buy Again
               </Link>
             </li>
+
+            <li>
+              <Link to="/app/catalog&flyer">
+                <i className="fa-solid fa-book"></i>Catalogs & Flyers
+              </Link>
+            </li>
+
             <li>
               <Link to={token ? "/app/settings" : "/app/login"}>
                 <i className="fa-solid fa-sliders"></i>Settings

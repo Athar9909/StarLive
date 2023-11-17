@@ -51,8 +51,7 @@ const FeaturedProducts = () => {
     }
   };
 
-  const AddtoCart = async (id, flavour, slug) => {
-    console.log(";;lk;");
+  const AddtoCart = async (id, flavour, slug,price) => {
     await axios
       .post(addCart, {
         productId: id,
@@ -60,8 +59,6 @@ const FeaturedProducts = () => {
         flavour: flavour,
       })
       .then((res) => {
-        console.log(res, "kkkj");
-
         if (!res.data.error) {
           setNState(!NState);
           Swal.fire({
@@ -82,7 +79,7 @@ const FeaturedProducts = () => {
         }
         if (
           res?.data.message === "Flavour is not available!" ||
-          res?.data.message === "Please provide flavour!"
+          res?.data.message === "Please provide flavour!" 
         ) {
           Swal.fire({
             title: "Please select a Flavour!",
@@ -91,7 +88,11 @@ const FeaturedProducts = () => {
             confirmButtonText: "View",
           }).then((res) => {
             console.log(res);
-            navigate(`/AllProducts/Product/${slug}`);
+            navigate(`/AllProducts/Product/${slug}`, {
+              state: {
+                offer: price,
+              },
+            });
           });
         }
       })
@@ -181,6 +182,7 @@ const FeaturedProducts = () => {
                                     {
                                       state: {
                                         type: item?.productId?.type,
+                                        offer: item?.price,
                                       },
                                     }
                                   );
@@ -232,7 +234,8 @@ const FeaturedProducts = () => {
                                       AddtoCart(
                                         item?.productId?._id,
                                         item?.productId?.type,
-                                        item?.productId?.slug
+                                        item?.productId?.slug,
+                                        item?.price
                                       );
                                     }}>
                                     {" "}
@@ -248,6 +251,7 @@ const FeaturedProducts = () => {
                                         {
                                           state: {
                                             type: item?.productId?.type,
+                                            offer: item?.price,
                                           },
                                         }
                                       );
@@ -266,19 +270,33 @@ const FeaturedProducts = () => {
                                     {
                                       state: {
                                         type: item?.productId?.type,
+                                        offer: item?.price,
                                       },
                                     }
                                   );
                                 }}>
-                                <strong className="fs-6">
-                                  {item?.productId?.type?.flavour}
-                                  ..
-                                </strong>
+                                <small
+                                  style={{
+                                    fontSize: "12px",
+                                  }}>
+                                  {item?.productId?.type?.flavour
+                                    ? item?.productId?.type?.flavour
+                                    : item?.productId?.unitName}
+                                </small>
                               </a>
                               <h3 className="title ">
                                 <a className="text-decoration-none">
                                   {item?.productId?.unitName}
                                 </a>
+                                <p
+                                  style={{
+                                    fontSize: "12px",
+                                  }}
+                                  className="text-dark fw-bold">
+                                  {item?.price
+                                    ? "Offer Price - $" + item.price
+                                    : ""}
+                                </p>
                               </h3>
                             </div>
                           </div>
@@ -286,47 +304,6 @@ const FeaturedProducts = () => {
                       ))}
                     </div>
                   </div>
-
-                  {/* {products?.length ? (
-                    <div className="col-12 py-2 rounded Paginate ">
-                      <div class="col-6 mb-2 ps-lg-3">
-                        <div class="singleproducttop---left ps-lg-2">
-                          Total Pages: <span>{maxPage}</span>
-                        </div>
-                      </div>
-                      <div class="col-6 mb-2 text-end">
-                        <div class="singleproduct---paginationss">
-                          <a
-                            onClick={() => {
-                              // window.scrollTo({ top: 0, behavior: "smooth" });
-                              activePage <= 1
-                                ? setActivePage(1)
-                                : setActivePage(activePage - 1);
-                            }}>
-                            <img
-                              src={require("../../assets/img/arrow.png")}
-                              alt=""
-                            />{" "}
-                            Previous
-                          </a>
-                          <span>{activePage}</span>
-                          <a
-                            onClick={() => {
-                              // window.scrollTo({ top: 0, behavior: "smooth" });
-                              activePage === maxPage
-                                ? setActivePage(maxPage)
-                                : setActivePage(activePage + 1);
-                            }}>
-                            Next{" "}
-                            <img
-                              src={require("../../assets/img/arrow.png")}
-                              alt=""
-                            />
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  ) : null} */}
                 </div>
               </div>
             </div>

@@ -46,7 +46,7 @@ function AppHotDeals() {
     }
   };
 
-  const addToCartt = async (id, index, itm, slug) => {
+  const addToCartt = async (id, index, itm, slug, price) => {
     if (itm?.category?.isTobacco || itm?.subCategory?.isTobacco) {
       if (!userDetail?.istobaccoLicenceExpired) {
         const formData = {
@@ -64,7 +64,11 @@ function AppHotDeals() {
             icon: "warning",
             confirmButtonText: "Okay",
           }).then((res) => {
-            navigate(`/app/product-detail/${slug}`, { state: "hii" });
+            navigate(`/app/product-detail/${slug}`, {
+              state: {
+                offer: price,
+              },
+            });
           });
         } else if (data?.message === "Please provide flavour!") {
           Swal.fire({
@@ -73,7 +77,11 @@ function AppHotDeals() {
             icon: "warning",
             confirmButtonText: "Okay",
           }).then((res) => {
-            navigate(`/app/product-detail/${slug}`, { state: "hii" });
+            navigate(`/app/product-detail/${slug}`, {
+              state: {
+                offer: price,
+              },
+            });
           });
         }
       } else {
@@ -101,7 +109,11 @@ function AppHotDeals() {
           icon: "warning",
           confirmButtonText: "Okay",
         }).then((res) => {
-          navigate(`/app/product-detail/${slug}`, { state: "hii" });
+          navigate(`/app/product-detail/${slug}`, {
+            state: {
+              offer: price,
+            },
+          });
         });
       } else if (data?.message === "Please provide flavour!") {
         Swal.fire({
@@ -110,7 +122,11 @@ function AppHotDeals() {
           icon: "warning",
           confirmButtonText: "Okay",
         }).then((res) => {
-          navigate(`/app/product-detail/${slug}`, { state: "hii" });
+          navigate(`/app/product-detail/${slug}`, {
+            state: {
+              offer: price,
+            },
+          });
         });
       }
       // if (data?.error) {
@@ -119,25 +135,6 @@ function AppHotDeals() {
     }
   };
 
-  // const addToFav = async (index, itm) => {
-  //   await axios
-  //     .post(addFav, {
-  //       productId: itm?.productId?._id,
-  //       flavour: itm?.productId?.type,
-  //     })
-  //     .catch((err) => {
-  //       // toast.success(res?.data?.message);
-  //       if (err) {
-  //         Swal.fire({
-  //           title: "Please Login To Continue",
-  //           icon: "error",
-  //           button: "ok",
-  //         });
-  //       }
-  //     });
-  //   getProductList();
-  //   setHeart(!heart);
-  // };
 
   return (
     <>
@@ -173,7 +170,8 @@ function AppHotDeals() {
                               item?.productId?._id,
                               index,
                               item,
-                              item?.productId?.slug
+                              item?.productId?.slug,
+                              item?.price
                             )
                           }>
                           <i class="fa-light fa-plus "></i>
@@ -181,6 +179,17 @@ function AppHotDeals() {
                       </div>
                       <div className=" d-flex justify-content-center">
                         <div
+                          onClick={() => {
+                            navigate(
+                              `/app/product-detail/${item?.productId?.slug}`,
+                              {
+                                state: {
+                                  type: item?.productId?.type,
+                                  offer: item?.price,
+                                },
+                              }
+                            );
+                          }}
                           class="card-body-hot p-2 text-center"
                           style={{
                             backgroundImage: `url(${
@@ -204,7 +213,10 @@ function AppHotDeals() {
                           <Link
                             class="name d-flex"
                             to={`/app/product-detail/${item?.productId?.slug}`}
-                            state={{ type: item?.productId?.type }}>
+                            state={{
+                              type: item?.productId?.type,
+                              offer: item?.price,
+                            }}>
                             {item?.productId?.unitName?.slice(0, 28)}..{" "}
                             {item?.price ? (
                               <p className="mb-0 price-size text-start">

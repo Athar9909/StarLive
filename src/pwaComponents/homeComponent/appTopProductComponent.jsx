@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import { Link } from "react-router-dom";
-import {
-  addToCart,
-  getFeaturedProd,
-} from "../httpServices/homeHttpService/homeHttpService";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Swal from "sweetalert2";
 
 function TopProduct() {
-  const addFav = `${process.env.REACT_APP_APIENDPOINTNEW}user/fav/addToFav`;
-  const rmvFav = `${process.env.REACT_APP_APIENDPOINTNEW}user/fav/removeFav`;
   const userData = `${process.env.REACT_APP_APIENDPOINTNEW}user/getUserProfile`;
   const getPromotionProd = `${process.env.REACT_APP_APIENDPOINTNEW}user/getPromotion`;
   const [product, setProduct] = useState([]);
@@ -44,98 +37,6 @@ function TopProduct() {
     }
   };
 
-  const addToCartt = async (id, index, itm, slug) => {
-    if (itm?.category?.isTobacco || itm?.subCategory?.isTobacco) {
-      if (!userDetail?.istobaccoLicenceExpired) {
-        const formData = {
-          productId: id,
-          quantity: 1,
-          flavour: itm?.productId?.type,
-        };
-        const { data } = await addToCart(formData);
-        if (!data.error) {
-          navigate("/app/cart");
-        }
-        if (data?.message === "Flavour is not available!") {
-          Swal.fire({
-            title: "Please Select a Flavour!",
-            text: "Click view to all flavours.",
-            icon: "warning",
-            confirmButtonText: "Okay",
-          }).then((res) => {
-            navigate(`/app/product-detail/${slug}`, { state: "hii" });
-          });
-        }
-        // if (data?.error) {
-        //   navigate("/app/login");
-        // }
-      } else {
-        Swal.fire({
-          title: "Your Tobacco licence is Expired/Invalid!",
-          text: "*Licence is Required for this product.",
-          icon: "warning",
-          confirmButtonText: "Okay",
-        });
-      }
-    } else {
-      const formData = {
-        productId: id,
-        quantity: 1,
-        flavour: itm?.productId?.type,
-      };
-      const { data } = await addToCart(formData);
-      if (!data.error) {
-        navigate("/app/cart");
-      }
-      if (data?.message === "Flavour is not available!") {
-        Swal.fire({
-          title: "Please Select a Flavour!",
-          text: "Click view to all flavours.",
-          icon: "warning",
-          confirmButtonText: "Okay",
-        }).then((res) => {
-          navigate(`/app/product-detail/${slug}`, { state: "hii" });
-        });
-      }
-      // if (data?.error) {
-      //   navigate("/app/login");
-      // }
-    }
-  };
-
-  const addToFav = async (index, itm) => {
-    await axios
-      .post(addFav, {
-        productId: itm?.productId?._id,
-        flavour: itm?.productId?.type,
-      })
-      .catch((err) => {
-        // toast.success(res?.data?.message);
-        if (err) {
-          Swal.fire({
-            title: "Please Login To Continue",
-            icon: "error",
-            button: "ok",
-          });
-        }
-      });
-    getPromotionsFeatured();
-    setHeart(!heart);
-  };
-  const rmvFromFav = async (index, itm) => {
-    await axios
-      .post(rmvFav, {
-        productId: itm?.productId?._id,
-        flavour: itm?.productId?.type,
-      })
-      .then((res) => {
-        if (!res.error) {
-          setHeart(!heart);
-        }
-      });
-    getPromotionsFeatured();
-  };
-
   return (
     <>
       <div className="top-products-area pb-3 ">
@@ -154,7 +55,12 @@ function TopProduct() {
                 <div
                   class=" feat_main col-6 mb-5 justify-content-center "
                   onClick={() => {
-                    navigate(`/app/product-detail/${item?.productId?.slug}`);
+                    navigate(`/app/product-detail/${item?.productId?.slug}`, {
+                      state: {
+                        type: item?.productId?.type,
+                        offer: item?.price,
+                      },
+                    });
                   }}>
                   <div
                     class="shadow"
@@ -182,7 +88,7 @@ function TopProduct() {
                   <Link
                     className="price-size2"
                     to={`/app/product-detail/${item?.productId?.slug}`}
-                    state={{ type: item?.productId?.type }}>
+                    state={{ type: item?.productId?.type, offer: item?.price }}>
                     {item?.productId?.unitName?.slice(0, 28)}
                     <span>
                       {item?.productId?.type

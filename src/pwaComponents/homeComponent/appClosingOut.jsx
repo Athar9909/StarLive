@@ -46,7 +46,7 @@ function AppClosingOut() {
     }
   };
 
-  const addToCartt = async (id, index, itm, slug) => {
+  const addToCartt = async (id, index, itm, slug, price) => {
     if (itm?.category?.isTobacco || itm?.subCategory?.isTobacco) {
       if (!userDetail?.istobaccoLicenceExpired) {
         const formData = {
@@ -64,7 +64,11 @@ function AppClosingOut() {
             icon: "warning",
             confirmButtonText: "Okay",
           }).then((res) => {
-            navigate(`/app/product-detail/${slug}`, { state: "hii" });
+            navigate(`/app/product-detail/${slug}`, {
+              state: {
+                offer: price,
+              },
+            });
           });
         } else if (data?.message === "Please provide flavour!") {
           Swal.fire({
@@ -73,7 +77,11 @@ function AppClosingOut() {
             icon: "warning",
             confirmButtonText: "Okay",
           }).then((res) => {
-            navigate(`/app/product-detail/${slug}`, { state: "hii" });
+            navigate(`/app/product-detail/${slug}`, {
+              state: {
+                offer: price,
+              },
+            });
           });
         }
       } else {
@@ -101,7 +109,11 @@ function AppClosingOut() {
           icon: "warning",
           confirmButtonText: "Okay",
         }).then((res) => {
-          navigate(`/app/product-detail/${slug}`, { state: "hii" });
+          navigate(`/app/product-detail/${slug}`, {
+            state: {
+              offer: price,
+            },
+          });
         });
       } else if (data?.message === "Please provide flavour!") {
         Swal.fire({
@@ -110,7 +122,11 @@ function AppClosingOut() {
           icon: "warning",
           confirmButtonText: "Okay",
         }).then((res) => {
-          navigate(`/app/product-detail/${slug}`, { state: "hii" });
+          navigate(`/app/product-detail/${slug}`, {
+            state: {
+              offer: price,
+            },
+          });
         });
       }
       // if (data?.error) {
@@ -119,38 +135,6 @@ function AppClosingOut() {
     }
   };
 
-  // const addToFav = async (index, itm) => {
-  //   await axios
-  //     .post(addFav, {
-  //       productId: itm?.productId?._id,
-  //       flavour: itm?.productId?.type,
-  //     })
-  //     .catch((err) => {
-  //       // toast.success(res?.data?.message);
-  //       if (err) {
-  //         Swal.fire({
-  //           title: "Please Login To Continue",
-  //           icon: "error",
-  //           button: "ok",
-  //         });
-  //       }
-  //     });
-  //   getProductList();
-  //   setHeart(!heart);
-  // };
-  // const rmvFromFav = async (index, itm) => {
-  //   await axios
-  //     .post(rmvFav, {
-  //       productId: itm?.productId?._id,
-  //       flavour: itm?.productId?.type,
-  //     })
-  //     .then((res) => {
-  //       if (!res.error) {
-  //         setHeart(!heart);
-  //       }
-  //     });
-  //   getProductList();
-  // };
   return (
     <>
       <div className="top-products-area pb-3 ">
@@ -185,7 +169,8 @@ function AppClosingOut() {
                               item?.productId?._id,
                               index,
                               item,
-                              item?.productId?.slug
+                              item?.productId?.slug,
+                              item?.price
                             )
                           }>
                           <i class="fa-light fa-plus "></i>
@@ -193,6 +178,17 @@ function AppClosingOut() {
                       </div>
                       <div className=" d-flex justify-content-center">
                         <div
+                          onClick={() => {
+                            navigate(
+                              `/app/product-detail/${item?.productId?.slug}`,
+                              {
+                                state: {
+                                  type: item?.productId?.type,
+                                  offer: item?.price,
+                                },
+                              }
+                            );
+                          }}
                           class="card-body-hot p-2 text-center"
                           style={{
                             backgroundImage: `url(${
@@ -216,7 +212,10 @@ function AppClosingOut() {
                           <Link
                             class="name d-flex"
                             to={`/app/product-detail/${item?.productId?.slug}`}
-                            state={{ type: item?.productId?.type }}>
+                            state={{
+                              type: item?.productId?.type,
+                              offer: item?.price,
+                            }}>
                             {item?.productId?.unitName?.slice(0, 28)}..{" "}
                             {item?.price ? (
                               <p className="mb-0 price-size text-start">

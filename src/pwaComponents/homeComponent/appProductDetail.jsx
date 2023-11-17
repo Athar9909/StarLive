@@ -39,7 +39,7 @@ function AppProductDetail() {
   let location = useLocation();
   let ref = useRef();
   const [cartCount, setCartCount] = useState(false);
-
+  const [offerPrice, setOfferPrice] = useState(location?.state?.offer);
   const ScrollContainer = styled.div`
     height: 10.6rem;
     overflow-y: scroll;
@@ -211,6 +211,7 @@ function AppProductDetail() {
   const onHoverMain = (ind) => {
     setFlavour(productDetail.type[ind - 1]);
     setQuantity(1);
+    setOfferPrice();
   };
   return (
     <>
@@ -285,15 +286,26 @@ function AppProductDetail() {
               </div>
               <div className="product-ratings mt-1">
                 <div className="container d-flex flex-wrap align-items-center justify-content-between rtl-flex-d-row-r">
-                  {flavour?.flavour ? (
-                    <div className="col-12 ">
+                  <div className="col-12 d-flex justify-content-between ">
+                    {flavour?.flavour ? (
                       <p className="fw-bold">
                         {flavour?.flavourPriceStatus
                           ? "Price : $" + flavour?.flavourPrice
                           : null}
                       </p>
-                    </div>
-                  ) : null}
+                    ) : null}
+                    {offerPrice !== 0 && offerPrice !== undefined && (
+                      <div className="choose-color-wrapper">
+                        <p className="mb-1 fw-bold">
+                          Offer Price :
+                          <span className="text-danger fw-bolder">
+                            $ {offerPrice}
+                          </span>
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                  {console.log(offerPrice)}
                   <div className="row">
                     <div className="col-6">
                       <form className="cart-form w-100" action="#" method="">
@@ -366,6 +378,7 @@ function AppProductDetail() {
                       </p>
                     </div>
                   )}
+
                   <div className="row ">
                     <ScrollContainer className="flavour_box">
                       {productDetail?.type
@@ -382,6 +395,7 @@ function AppProductDetail() {
                                 e.preventDefault();
                                 setFlavour(item);
                                 setFInd(index);
+                                setOfferPrice();
                                 setQuantity(1);
                                 setItemNo(index + 1);
                                 document.getElementById("product-image").src =
@@ -403,6 +417,7 @@ function AppProductDetail() {
                                 setFlavour(item);
                                 setFInd(index);
                                 setQuantity(1);
+                                setOfferPrice();
                                 setItemNo(index + 1);
                                 document.getElementById("product-image").src =
                                   item?.flavourImage;
@@ -422,7 +437,7 @@ function AppProductDetail() {
                 </div>
               </div>
             </div>
-          
+
             <div className="selection-panel bg-white mb-3 py-3">
               <div className="container">
                 <div className="choose-color-wrapper">

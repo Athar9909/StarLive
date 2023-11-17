@@ -130,6 +130,7 @@ import AppSubAcc from "./pwaComponents/homeComponent/appSubAcc";
 import AppViewSub from "./pwaComponents/homeComponent/appViewSubAcc";
 import MonthlyDeals from "./buyerComponent/AllProducts/MonthlyDeals";
 import AppMonthlyList from "./pwaComponents/homeComponent/appMonthlyList";
+import AppCatalogFlyer from "./pwaComponents/homeComponent/appCatalog&flyer";
 
 function App() {
   const [apiData, setApiData] = useState([]);
@@ -195,9 +196,7 @@ function App() {
             <Route
               path="/AllProducts/Product/:id"
               element={width < 999 ? <AppProductDetail /> : <SingleProduct />}
-            /> 
-
-
+            />
 
             {/* <Route path="/AllBrands" element={<AllBrands />} /> */}
             <Route path="/Cart" element={<Cart />} />
@@ -414,6 +413,10 @@ function App() {
             <Route
               path="/app/brands"
               element={width < 999 ? <AppBrands /> : <AllBrands />}
+            />
+            <Route
+              path="/app/catalog&flyer"
+              element={width < 999 ? <AppCatalogFlyer /> : <AllCatalogues />}
             />
             <Route
               path="/app/Categories"
