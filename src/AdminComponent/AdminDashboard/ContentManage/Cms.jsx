@@ -47,6 +47,15 @@ const Cms = () => {
   const [urlV2, setUrlV2] = useState("");
   const [urlV3, setUrlV3] = useState("");
   const [urlV4, setUrlV4] = useState("");
+  const [isExt1, setIsExt1] = useState(false);
+  const [isExt2, setIsExt2] = useState(false);
+  const [isExt3, setIsExt3] = useState(false);
+  const [isExt4, setIsExt4] = useState(false);
+  const [isExt5, setIsExt5] = useState(false);
+  const [isExt6, setIsExt6] = useState(false);
+  const [isExt7, setIsExt7] = useState(false);
+  const [isExt8, setIsExt8] = useState(false);
+  const [isExt9, setIsExt9] = useState(false);
   const AllSlides = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/cms/getAllSlides`;
   const AllHeaders = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/cms/getHeaders`;
   const EditSlide = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/cms/editSlide`;
@@ -61,7 +70,6 @@ const Cms = () => {
   const editAgeBanner = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/cms/editAgeConfirmation`;
   const editVideo = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/cms/editVideoSlide`;
   const getVideoSlides = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/cms/getVideoSlides`;
-  const rmvAudio = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/cms/removeAudio/`;
 
   const { register, handleSubmit, reset } = useForm();
   const [editorTitleState, setTitleEditorState] = useState(null);
@@ -185,6 +193,13 @@ const Cms = () => {
         (no == 2 ? urlV2 : "") ||
         (no == 3 ? urlV3 : "") ||
         (no == 4 ? urlV4 : "")
+    );
+    formData.append(
+      "isExternalURL",
+      (no == 1 ? isExt2 : "") ||
+        (no == 2 ? isExt3 : "") ||
+        (no == 3 ? isExt4 : "") ||
+        (no == 4 ? isExt5 : "")
     );
     const { data } = await axios.post(editVideo + "/" + id, formData);
     if (!data.error) {
@@ -390,6 +405,7 @@ const Cms = () => {
     formData.append("banner", files?.slide2Img);
     formData.append("position", currentPos2);
     formData.append("url", urlS2);
+    formData.append("isExternalURL", isExt1);
 
     await axios
       .post(EditSlide + "/" + slideData[1]?._id, formData)
@@ -414,6 +430,7 @@ const Cms = () => {
     formData.append("banner", files?.slide3Img);
     formData.append("position", currentPos3);
     formData.append("url", urlS3);
+    formData.append("isExternalURL", isExt6);
 
     await axios
       .post(EditSlide + "/" + slideData[2]?._id, formData)
@@ -439,6 +456,7 @@ const Cms = () => {
     formData.append("banner", files?.slide4Img);
     formData.append("position", currentPos3);
     formData.append("url", urlS4);
+    formData.append("isExternalURL", isExt7);
 
     await axios
       .post(EditSlide + "/" + slideData[3]?._id, formData)
@@ -464,6 +482,7 @@ const Cms = () => {
     formData.append("banner", files?.slide5Img);
     formData.append("position", currentPos3);
     formData.append("url", urlS5);
+    formData.append("isExternalURL", isExt8);
 
     await axios
       .post(EditSlide + "/" + slideData[4]?._id, formData)
@@ -489,6 +508,7 @@ const Cms = () => {
     formData.append("banner", files?.slide6Img);
     formData.append("position", currentPos3);
     formData.append("url", urlS6);
+    formData.append("isExternalURL", isExt9);
 
     await axios
       .post(EditSlide + "/" + slideData[5]?._id, formData)
@@ -1567,10 +1587,28 @@ const Cms = () => {
                                             }}
                                           />
                                         </div>
-
+                                        {slideData[1]?.isExternalURL}
                                         <div className="form-group col-12">
                                           <label htmlFor="" className="fw-bold">
-                                            Link/Url
+                                            Link/Url{" "}
+                                            <div class="form-check">
+                                              <input
+                                                class="form-check-input"
+                                                type="checkbox"
+                                                id="flexCheckDefault"
+                                                defaultChecked={
+                                                  slideData[1]?.isExternalURL
+                                                }
+                                                onChange={(e) => {
+                                                  setIsExt1(!isExt1);
+                                                }}
+                                              />
+                                              <label
+                                                class="form-check-label mt-1"
+                                                for="flexCheckDefault">
+                                                External Link.
+                                              </label>
+                                            </div>
                                           </label>
                                           <input
                                             type="text"
@@ -1705,7 +1743,27 @@ const Cms = () => {
                                                   <label
                                                     htmlFor=""
                                                     className="fw-bold">
-                                                    Link/Url
+                                                    Link/Url{" "}
+                                                    <div class="form-check">
+                                                      <input
+                                                        class="form-check-input"
+                                                        type="checkbox"
+                                                        value=""
+                                                        id="flexCheckDefault"
+                                                        defaultChecked={
+                                                          videoSlides[0]
+                                                            ?.isExternalURL
+                                                        }
+                                                        onChange={(e) => {
+                                                          setIsExt2(!isExt2);
+                                                        }}
+                                                      />
+                                                      <label
+                                                        class="form-check-label mt-1"
+                                                        for="flexCheckDefault">
+                                                        External Link.
+                                                      </label>
+                                                    </div>
                                                   </label>
                                                   <input
                                                     type="text"
@@ -1865,7 +1923,27 @@ const Cms = () => {
                                                 <label
                                                   htmlFor=""
                                                   className="fw-bold">
-                                                  Link/Url
+                                                  Link/Url{" "}
+                                                  <div class="form-check">
+                                                    <input
+                                                      class="form-check-input"
+                                                      type="checkbox"
+                                                      value=""
+                                                      id="flexCheckDefault"
+                                                      defaultChecked={
+                                                        videoSlides[1]
+                                                          ?.isExternalURL
+                                                      }
+                                                      onChange={(e) => {
+                                                        setIsExt3(!isExt3);
+                                                      }}
+                                                    />
+                                                    <label
+                                                      class="form-check-label mt-1"
+                                                      for="flexCheckDefault">
+                                                      External Link.
+                                                    </label>
+                                                  </div>
                                                 </label>
                                                 <input
                                                   type="text"
@@ -2025,7 +2103,27 @@ const Cms = () => {
                                                 <label
                                                   htmlFor=""
                                                   className="fw-bold">
-                                                  Link/Url
+                                                  Link/Url{" "}
+                                                  <div class="form-check">
+                                                    <input
+                                                      class="form-check-input"
+                                                      type="checkbox"
+                                                      value=""
+                                                      id="flexCheckDefault"
+                                                      defaultChecked={
+                                                        videoSlides[2]
+                                                          ?.isExternalURL
+                                                      }
+                                                      onChange={(e) => {
+                                                        setIsExt4(!isExt4);
+                                                      }}
+                                                    />
+                                                    <label
+                                                      class="form-check-label mt-1"
+                                                      for="flexCheckDefault">
+                                                      External Link.
+                                                    </label>
+                                                  </div>
                                                 </label>
                                                 <input
                                                   type="text"
@@ -2184,7 +2282,27 @@ const Cms = () => {
                                                 <label
                                                   htmlFor=""
                                                   className="fw-bold">
-                                                  Link/Url
+                                                  Link/Url{" "}
+                                                  <div class="form-check">
+                                                    <input
+                                                      class="form-check-input"
+                                                      type="checkbox"
+                                                      value=""
+                                                      id="flexCheckDefault"
+                                                      defaultChecked={
+                                                        videoSlides[3]
+                                                          ?.isExternalURL
+                                                      }
+                                                      onChange={(e) => {
+                                                        setIsExt5(!isExt5);
+                                                      }}
+                                                    />
+                                                    <label
+                                                      class="form-check-label mt-1"
+                                                      for="flexCheckDefault">
+                                                      External Link.
+                                                    </label>
+                                                  </div>
                                                 </label>
                                                 <input
                                                   type="text"
@@ -2396,7 +2514,26 @@ const Cms = () => {
                                             <label
                                               htmlFor=""
                                               className="fw-bold">
-                                              Link/Url
+                                              Link/Url{" "}
+                                              <div class="form-check">
+                                                <input
+                                                  class="form-check-input"
+                                                  type="checkbox"
+                                                  value=""
+                                                  id="flexCheckDefault"
+                                                  defaultChecked={
+                                                    slideData[2]?.isExternalURL
+                                                  }
+                                                  onChange={(e) => {
+                                                    setIsExt6(!isExt6);
+                                                  }}
+                                                />
+                                                <label
+                                                  class="form-check-label mt-1"
+                                                  for="flexCheckDefault">
+                                                  External Link.
+                                                </label>
+                                              </div>
                                             </label>
                                             <input
                                               type="text"
@@ -2585,7 +2722,26 @@ const Cms = () => {
                                             <label
                                               htmlFor=""
                                               className="fw-bold">
-                                              Link/Url
+                                              Link/Url{" "}
+                                              <div class="form-check">
+                                                <input
+                                                  class="form-check-input"
+                                                  type="checkbox"
+                                                  value=""
+                                                  id="flexCheckDefault"
+                                                  defaultChecked={
+                                                    slideData[3]?.isExternalURL
+                                                  }
+                                                  onChange={(e) => {
+                                                    setIsExt7(!isExt7);
+                                                  }}
+                                                />
+                                                <label
+                                                  class="form-check-label mt-1"
+                                                  for="flexCheckDefault">
+                                                  External Link.
+                                                </label>
+                                              </div>
                                             </label>
                                             <input
                                               type="text"
@@ -2774,7 +2930,26 @@ const Cms = () => {
                                             <label
                                               htmlFor=""
                                               className="fw-bold">
-                                              Link/Url
+                                              Link/Url{" "}
+                                              <div class="form-check">
+                                                <input
+                                                  class="form-check-input"
+                                                  type="checkbox"
+                                                  value=""
+                                                  id="flexCheckDefault"
+                                                  defaultChecked={
+                                                    slideData[4]?.isExternalURL
+                                                  }
+                                                  onChange={(e) => {
+                                                    setIsExt8(!isExt8);
+                                                  }}
+                                                />
+                                                <label
+                                                  class="form-check-label mt-1"
+                                                  for="flexCheckDefault">
+                                                  External Link.
+                                                </label>
+                                              </div>
                                             </label>
                                             <input
                                               type="text"
@@ -2964,7 +3139,26 @@ const Cms = () => {
                                             <label
                                               htmlFor=""
                                               className="fw-bold">
-                                              Link/Url
+                                              Link/Url{" "}
+                                              <div class="form-check">
+                                                <input
+                                                  class="form-check-input"
+                                                  type="checkbox"
+                                                  value=""
+                                                  id="flexCheckDefault"
+                                                  defaultChecked={
+                                                    slideData[5]?.isExternalURL
+                                                  }
+                                                  onChange={(e) => {
+                                                    setIsExt9(!isExt9);
+                                                  }}
+                                                />
+                                                <label
+                                                  class="form-check-label mt-1"
+                                                  for="flexCheckDefault">
+                                                  External Link.
+                                                </label>
+                                              </div>
                                             </label>
                                             <input
                                               type="text"

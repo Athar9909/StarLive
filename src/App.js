@@ -131,6 +131,7 @@ import AppViewSub from "./pwaComponents/homeComponent/appViewSubAcc";
 import MonthlyDeals from "./buyerComponent/AllProducts/MonthlyDeals";
 import AppMonthlyList from "./pwaComponents/homeComponent/appMonthlyList";
 import AppCatalogFlyer from "./pwaComponents/homeComponent/appCatalog&flyer";
+import WebView from "./pwaComponents/homeComponent/WebView";
 
 function App() {
   const [apiData, setApiData] = useState([]);
@@ -187,7 +188,10 @@ function App() {
               element={<ProductBySubCate />}
             />
 
-            <Route path="/Brands/:id" element={<ProductByBrand />} />
+            <Route
+              path="/app/productBrands/:id"
+              element={width < 999 ? <AppProductBrands /> : <ProductByBrand />}
+            />
 
             <Route path="/Products/Filter" element={<ProductsByFilter />} />
             <Route path="/app/verify" element={<AgeVerification />} />
@@ -274,9 +278,15 @@ function App() {
               element={<ViewQuoteReq />}
             />
             <Route path="/OrderRequest" element={<OrderReq />} />
-            <Route path="/app/Gallery" element={<Gallery />} />
+            <Route
+              path="/app/Gallery"
+              element={width < 999 ? <AppHome /> : <Gallery />}
+            />
             <Route path="/app/Gallery/Photos/:id" element={<Photos />} />
-            <Route path="/app/events/catelog&flyer" element={<Catelogues />} />
+            <Route
+              path="/app/events/catelog&flyer"
+              element={width < 999 ? <AppCatalogFlyer /> : <Catelogues />}
+            />
             <Route path="/Dashboard/UserDetails" element={<UserDetails />} />
             <Route path="/Cart/Checkout" element={<Checkout />} />
             <Route path="/app/subCategories" element={<SubCategories />} />
@@ -289,6 +299,11 @@ function App() {
             <Route
               path="/"
               element={width < 999 ? <AppHome /> : <Homepage />}
+            />
+
+            <Route
+              path="/app/webView"
+              element={width < 999 ? <WebView /> : <Homepage />}
             />
             <Route
               path="/app/downloads"
@@ -414,10 +429,10 @@ function App() {
               path="/app/brands"
               element={width < 999 ? <AppBrands /> : <AllBrands />}
             />
-            <Route
-              path="/app/catalog&flyer"
-              element={width < 999 ? <AppCatalogFlyer /> : <AllCatalogues />}
-            />
+            {/* <Route
+              path="/app/event/catalog&flyer"
+              element={width < 999 ? <AppCatalogFlyer /> : <Catelogues />}
+            /> */}
             <Route
               path="/app/Categories"
               element={width < 999 ? <AppCategories /> : <AllCategories />}

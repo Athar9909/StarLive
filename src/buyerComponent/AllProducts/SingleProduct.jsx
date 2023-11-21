@@ -657,7 +657,6 @@ const SingleProduct = () => {
                             </div>
                           )}
                         </div>
-                        {console.log(offerPrice, "jj")}
                         {flavour ? (
                           <div className="col-12">
                             <p className="fw-bold">

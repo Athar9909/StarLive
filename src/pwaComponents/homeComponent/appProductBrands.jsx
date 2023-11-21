@@ -55,35 +55,6 @@ function AppProductBrands() {
     }
   };
 
-  // const addToFav = async (index) => {
-  //   await axios
-  //     .post(addFav, {
-  //       productId: product[index]?.products?._id,
-  //       flavour: product[index]?.products?.type[0],
-  //     })
-  //     .then((res) => {
-  //       Swal.fire({
-  //         title: res?.data.message,
-  //         button: "ok",
-  //       });
-  //     });
-  //   getProductList();
-  // };
-  // const rmvFromFav = async (index) => {
-  //   await axios
-  //     .post(rmvFav, {
-  //       productId: product[index]?.products?._id,
-  //       flavour: product[index]?.products?.type[0],
-  //     })
-  //     .then((res) => {
-  //       Swal.fire({
-  //         title: res?.data.message,
-  //         button: "ok",
-  //       });
-  //     });
-  //   getProductList();
-  //   setBName(name);
-  // };
 
   useEffect(() => {
     document.addEventListener("click", handleOutsideClick, true);

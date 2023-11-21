@@ -1,16 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-import Animate from "../../Animate";
-import {
-  deleteCart,
-  deleteQuote,
-  getCart,
-  getQuotes,
-  updateCart,
-  updateQuote,
-} from "../httpServices/homeHttpService/homeHttpService";
 import AppFooter from "./appFooter";
 import WebHeader2 from "./webHeader2";
 
@@ -135,9 +125,12 @@ function AppCatalogFlyer() {
                     <div
                       className="col-sm-5 col-md-5 col-5 mb-2 p-2 m-2 brands_box shadow"
                       onClick={() => {
-                        window.location.href = item?.url
-                          ? item?.url
-                          : "https://starimporters.com/app/home";
+                        navigate("/app/webView", {
+                          state: item?.url,
+                        });
+                        // window.location.href = item?.url
+                        //   ? item?.url
+                        //   : "https://starimporters.com/app/home";
                       }}>
                       <Link className="text-center mt-4">
                         <div>

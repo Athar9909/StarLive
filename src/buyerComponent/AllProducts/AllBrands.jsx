@@ -118,7 +118,7 @@ const AllBrands = () => {
                     <div class="col-lg-3 col-md-4 mb-5">
                       <a class="categorynew_box text-decoration-none">
                         <Link
-                          to={`/Brands/${item?.slug}`}
+                          to={`/app/productBrands/${item?.slug}`}
                           state={{ name: item?.brandName }}>
                           <div class="categorynew_img p-2">
                             <img

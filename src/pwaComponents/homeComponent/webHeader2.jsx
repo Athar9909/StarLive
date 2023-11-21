@@ -99,7 +99,7 @@ function WebHeader2() {
             </li>
 
             <li>
-              <Link to="/app/catalog&flyer">
+              <Link to="/app/events/catelog&flyer">
                 <i className="fa-solid fa-book"></i>Catalogs & Flyers
               </Link>
             </li>

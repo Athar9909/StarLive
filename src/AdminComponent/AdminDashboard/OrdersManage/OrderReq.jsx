@@ -1278,7 +1278,6 @@ const OrderReq = () => {
                         </a>
                       )}
                     </div>
-                    {console.log(importedData, "jiiji")}
                     {importedData?.totalBarcodes > 0 && (
                       <div className="col-12 d-flex justify-content-between ">
                         <a className=" text-decoration-none mx-1 mb-3 fw-bold">

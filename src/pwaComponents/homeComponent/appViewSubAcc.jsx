@@ -19,7 +19,6 @@ const AppViewSub = () => {
       setDetail(data?.results?.subAccounts[0]);
     }
   };
-  console.log(detail);
 
   return (
     <div className="star_imp_app">

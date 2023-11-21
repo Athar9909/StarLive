@@ -1341,7 +1341,7 @@ const Homepage = () => {
                           <a className="categorynew_box">
                             <div className="categorynew_img p-2">
                               <Link
-                                to={`/Brands/${item?.slug}`}
+                                to={`/app/productBrands/${item?.slug}`}
                                 state={{ name: item?.brandName }}>
                                 <img
                                   src={
