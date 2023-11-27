@@ -186,6 +186,8 @@ const EditUser = () => {
     console.log(date);
     setUser(res.data.results);
     document.getElementById("expiryDate").defaultValue = date.slice(0, 10);
+    handleCities(res?.data?.results?.state);
+
     return res.data;
   };
 

@@ -7,14 +7,14 @@ const WebView = () => {
   console.log(location?.state);
   return (
     <div>
-      <div className="bg-dark  text-center text-white">
+      <div className="bg-dark  text-center text-white fs-4">
         <span >
           {" "}
           <Link
             onClick={() => {
               navigate(-1);
             }}>
-            <i class="fa-solid fa-arrow-left text-white mx-1"></i>
+            <i class="fa-solid fa-arrow-left text-white mx-2"></i>
           </Link>
         </span>
         Web View
