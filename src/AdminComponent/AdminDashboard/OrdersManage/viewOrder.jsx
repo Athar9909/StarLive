@@ -40,7 +40,7 @@ const ViewOrder = () => {
   const [options, setOptions] = useState([]);
   const [searchKey, setSearchKey] = useState("");
   const [selectedPuller, setSelectedPuller] = useState([]);
-
+  const [keySort, setKeySort] = useState();
   const navigate = useNavigate();
   let User = JSON.parse(localStorage.getItem("AdminData"));
   const [csvData, setCsvData] = useState([]);
@@ -61,6 +61,7 @@ const ViewOrder = () => {
   }, []);
 
   const OrderDetails = async (status, sort) => {
+    setKeySort(status);
     await axios
       .post(orderView + "/" + id, {
         sortBy: sort,
@@ -877,6 +878,7 @@ const ViewOrder = () => {
                                   Order Placed
                                 </option>
                                 <option value="PROCESSING">Processing</option>
+                                <option value="Picked-Up">Picked-Up</option>
                                 <option value="DELIVERED">Delivered</option>
                                 <option value="SHIPPED">Shipped</option>
                                 <option value="CANCEL">Canceled</option>
@@ -944,8 +946,16 @@ const ViewOrder = () => {
                                   Pull Status{" - "}
                                   <div class="dropdowns">
                                     <button class="dropdown-btns comman_btn2 ">
-                                      Sort{" "}
-                                      <i class="fa-solid fa-caret-down"></i>
+                                      {keySort
+                                        ? (keySort === "scanned" &&
+                                            "Scanned") ||
+                                          (keySort === "overUnderScanned" &&
+                                            "Over/Under Scanned") ||
+                                          (keySort === "outOfStock" &&
+                                            "Out of Stock") ||
+                                          (keySort === "" && "All")
+                                        : "Sort"}
+                                      <i class="fa-solid fa-caret-down mx-2"></i>
                                     </button>
                                     <div class="dropdown-contents DropBg">
                                       <a
@@ -1056,35 +1066,35 @@ const ViewOrder = () => {
                                       </td>
                                       <td className="border rounded">
                                         {item?.scanned === "NotScanned" ? (
-                                          <span className="fs-5 text-secondary  p-2 px-3 rounded">
+                                          <span className="fs-5 text-secondary  p-2 px-3 rounded bg-secondary text-white">
                                             Not Scanned
                                           </span>
                                         ) : (
                                           <div>
                                             {item?.scanned ===
                                               "PartlyScanned" && (
-                                              <span className="fs-5 text-secondary  p-2 px-3 rounded">
+                                              <span className="fs-5 text-secondary  p-2 px-3 rounded bg-warning text-white">
                                                 Under Scanned
                                               </span>
                                             )}
                                             {item?.scanned === "OutOfStock" && (
-                                              <span className="fs-5 text-secondary  p-2 px-3 rounded">
+                                              <span className="fs-5 text-secondary  p-2 px-3 rounded bg-danger text-white">
                                                 Out of Stock
                                               </span>
                                             )}
                                             {item?.scanned ===
                                               "OverlyScanned" && (
-                                              <span className="fs-5 text-secondary  p-2 px-3 rounded">
+                                              <span className="fs-5 text-secondary  p-2 px-3 rounded bg-primary text-white">
                                                 Over Scanned
                                               </span>
                                             )}
                                             {item?.scanned ===
                                               "FullyScanned" && (
-                                              <span className="fs-5  p-2 px-3 rounded">
+                                              <span className="fs-5  p-2 px-3 rounded bg-success text-white text-nowrap">
                                                 <img
                                                   className="mx-2"
                                                   src={require("../../../assets/img/Group 427322975.png")}></img>{" "}
-                                                Complete Order
+                                                Completely Scanned
                                               </span>
                                             )}
                                           </div>

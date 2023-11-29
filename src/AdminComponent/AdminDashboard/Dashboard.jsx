@@ -222,7 +222,7 @@ const Dashboard = () => {
                 <li
                   className={User?.access?.includes("Puller") ? "" : "d-none"}>
                   <Link
-                    className="d-none ata"
+                    className=""
                     to="/Puller-Management"
                     style={{
                       textDecoration: "none",
@@ -401,7 +401,7 @@ const Dashboard = () => {
                 </li>
                 <li>
                   <Link
-                    className="d-none ata"
+                    className=""
                     to="/Puller-Management"
                     style={{
                       textDecoration: "none",

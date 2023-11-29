@@ -619,12 +619,11 @@ const AdminCateFlyers = () => {
                             aria-labelledby="nav-home-tab">
                             <div className="row mx-0 ">
                               <div className="col-12 pt-2">
-                                <a
-                                  className="text-decoration-none mt-2 pb-3"
-                                  href="https://dcatalog.com/"
-                                  target="_blank">
-                                  Convert PDF to Flipbook.
-                                </a>
+                                <Link
+                                  className="text-decoration-none mt-2 pb-3 comman_btn d-none"
+                                  to={"/Catelog-Flyers/Create-New"}>
+                                  Create Catalog
+                                </Link>
 
                                 <form
                                   className="form-design py-4 px-3 help-support-form row align-items-end justify-content-between"

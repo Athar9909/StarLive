@@ -52,6 +52,7 @@ const EditUser = () => {
   useEffect(() => {
     handleCities();
   }, []);
+
   const {
     register,
     handleSubmit,
@@ -187,10 +188,10 @@ const EditUser = () => {
     setUser(res.data.results);
     document.getElementById("expiryDate").defaultValue = date.slice(0, 10);
     handleCities(res?.data?.results?.state);
-
     return res.data;
   };
 
+  
   const handleClick = () => {
     localStorage.removeItem("AdminData");
     localStorage.removeItem("AdminLogToken");

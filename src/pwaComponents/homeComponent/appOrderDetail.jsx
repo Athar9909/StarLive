@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import AppFooter from "./appFooter";
 import AppHeader from "./appHeader";
 import moment from "moment";
-import { browserName } from "react-device-detect";
+import DocPassIcon from "@rsuite/icons/DocPass";
 
 function AppOrderDetail() {
   const getOrderDetails = `${process.env.REACT_APP_APIENDPOINTNEW}user/order/viewOrder`;
@@ -148,52 +148,52 @@ function AppOrderDetail() {
                   </div>
                 </div>
               ) : ( */}
-                <div className="col-12 mb-3">
-                  <div className="row mx-0 border rounded position-relative bg-white shadow cart-table">
-                    <div className="table-responsive card-body">
-                      <table className="table mb-0">
-                        <tbody>
-                          {(orders?.products || [])?.map((item, index) => (
-                            <tr key={index}>
-                              <td>
-                                <div className="cart_icon">
-                                  <img
-                                    className=""
-                                    src={item?.flavour?.flavourImage}
-                                    alt=""
-                                  />
-                                </div>
-                              </td>
-                              <td>
-                                <div className="order_items">
-                                  <Link
-                                    to={`/app/product-detail/${item?.productId?.slug}`}
-                                    state={{ type: item?.flavour }}>
-                                    {item?.productId?.unitName +
-                                      "-" +
-                                      item?.flavour.flavour}
-                                  </Link>
+              <div className="col-12 mb-3">
+                <div className="row mx-0 border rounded position-relative bg-white shadow cart-table">
+                  <div className="table-responsive card-body">
+                    <table className="table mb-0">
+                      <tbody>
+                        {(orders?.products || [])?.map((item, index) => (
+                          <tr key={index}>
+                            <td>
+                              <div className="cart_icon">
+                                <img
+                                  className=""
+                                  src={item?.flavour?.flavourImage}
+                                  alt=""
+                                />
+                              </div>
+                            </td>
+                            <td>
+                              <div className="order_items">
+                                <Link
+                                  to={`/app/product-detail/${item?.productId?.slug}`}
+                                  state={{ type: item?.flavour }}>
+                                  {item?.productId?.unitName +
+                                    "-" +
+                                    item?.flavour.flavour}
+                                </Link>
 
-                                  <div className="bar_code mt-1"></div>
-                                </div>
-                              </td>
-                              <td>
-                                <div className="quantity">
-                                  <input
-                                    className="qty-text"
-                                    type="text"
-                                    disabled
-                                    value={item?.quantity}
-                                  />
-                                </div>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
+                                <div className="bar_code mt-1"></div>
+                              </div>
+                            </td>
+                            <td>
+                              <div className="quantity">
+                                <input
+                                  className="qty-text"
+                                  type="text"
+                                  disabled
+                                  value={item?.quantity}
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
+              </div>
               {/* )} */}
 
               <div className="col-12 mb-3">
@@ -237,7 +237,8 @@ function AppOrderDetail() {
                           className={
                             orders?.status === "PROCESSING" ||
                             orders?.status === "SHIPPED" ||
-                            orders?.status === "DELIVERED"
+                            orders?.status === "DELIVERED" ||
+                            orders?.status === "Picked-Up"
                               ? "single-order-status active"
                               : "single-order-status"
                           }>
@@ -252,27 +253,30 @@ function AppOrderDetail() {
                           </div>
                         </div>
 
-                        {/* <div
+                        <div
                           className={
                             orders?.status === "PROCESSING" ||
-                            orders?.status === "DELIVERED"
+                            orders?.status === "SHIPPED" ||
+                            orders?.status === "DELIVERED" ||
+                            orders?.status === "Picked-Up"
                               ? "single-order-status active"
                               : "single-order-status"
-                          }
-                        >
+                          }>
                           <div className="order-icon">
-                            <i className="fa-solid fa-truck"></i>
+                            <DocPassIcon
+                            className="p-1"
+                              style={{
+                                fontSize: 28,
+                              }}
+                            />
                           </div>
                           <div className="order-text">
-                            <h6>
-                            
-                              Picked Up
-                            </h6>
+                            <h6>Picked-Up</h6>
                           </div>
                           <div className="order-status">
                             <i className="fa-solid fa-circle-check"></i>
                           </div>
-                        </div> */}
+                        </div>
 
                         <div
                           className={
@@ -331,7 +335,6 @@ function AppOrderDetail() {
                   </div>
                 </div>
               </div>
-
 
               <div className="col-12 mb-3">
                 <div className="row mx-0 border rounded py-3 px-1 position-relative bg-white shadow">

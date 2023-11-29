@@ -22,7 +22,7 @@ const EditOrder = () => {
   const [product, setProducts] = useState([]);
   const [searchKey, setSearchKey] = useState("");
   const [flavour, setFlavour] = useState();
-  const [quantity, setQuantity] = useState();
+  const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
   const [load, setLoad] = useState(false);
   const [loader, setLoader] = useState(false);
@@ -131,7 +131,7 @@ const EditOrder = () => {
           OrderDetails();
           setSelectedProduct({ usersSelected: null });
           setProducts([]);
-          setQuantity(0);
+          setQuantity(1);
         }
       });
   };
@@ -878,12 +878,13 @@ const EditOrder = () => {
                   </select>
                 </div>
 
-                <div className="form-group col-6 ">
+                <div className="form-group col-6 " >
                   <label htmlFor="">Product Quantity </label>
                   <input
-                    type="tel"
+                    type="number"
                     className=" form-select"
                     maxLength={5}
+                    value={quantity}
                     onChange={(e) => setQuantity(e.target.value)}></input>
                   {/* <InputNumber
                     min={1}

@@ -17,6 +17,7 @@ import { components } from "react-select";
 import { MDBDataTable } from "mdbreact";
 import { Button } from "rsuite";
 import { BiEdit } from "react-icons/bi";
+import classNames from "classnames";
 
 export const DaysOption = [
   { value: "SUNDAY", label: "Sunday" },
@@ -97,7 +98,7 @@ const OrderReq = () => {
   const apiCities = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/getCities`;
   const allPullers = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/allPullers`;
   const assign = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/assignPuller`;
-  const [citySearch, setCitySearch] = useState([]);
+  const [editedCity, setEditedCity] = useState();
   const [pullOrderId, setPullOrderId] = useState();
   const [allCount, setAllCount] = useState();
   const [compCount, setCompCount] = useState();
@@ -139,9 +140,14 @@ const OrderReq = () => {
         sort: "asc",
         width: 100,
       },
-
       {
-        label: "Action",
+        label: "Action 2",
+        field: "action2",
+        sort: "asc",
+        width: 100,
+      },
+      {
+        label: "Action 1",
         field: "action",
         sort: "asc",
         width: 100,
@@ -220,6 +226,20 @@ const OrderReq = () => {
             </td>
           </>
         );
+        returnData.action2 = (
+          <>
+            <button
+              className="comman_btn table_viewbtn"
+              data-bs-toggle="modal"
+              id="modal-toggle"
+              data-bs-target="#staticBackdrop35"
+              onClick={() => {
+                editDays(list?._id);
+              }}>
+              Edit City
+            </button>
+          </>
+        );
         returnData.action = (
           <>
             <button
@@ -227,7 +247,6 @@ const OrderReq = () => {
               data-bs-toggle="modal"
               id="modal-toggle"
               data-bs-target="#staticBackdrop33"
-              href="javscript:;"
               onClick={() => {
                 editDays(list?._id);
               }}>
@@ -257,6 +276,24 @@ const OrderReq = () => {
         icon: "success",
         timer: 1000,
       });
+    }
+  };
+
+  const EditCity = async (e) => {
+    e.preventDefault();
+    const res = await axios.post(editCities + "/" + city, {
+      city: editedCity,
+    });
+    console.log(res);
+    if (!res.data.error) {
+      getCities();
+      document.getElementById("modalClose2").click();
+      Swal.fire({
+        title: res?.data.message,
+        icon: "success",
+        timer: 1000,
+      });
+      setEditedCity("");
     }
   };
 
@@ -808,7 +845,7 @@ const OrderReq = () => {
                 <li
                   className={User?.access?.includes("Puller") ? "" : "d-none"}>
                   <Link
-                    className="d-none ata"
+                    className=" ata"
                     to="/Puller-Management"
                     style={{
                       textDecoration: "none",
@@ -993,7 +1030,7 @@ const OrderReq = () => {
                 </li>
                 <li>
                   <Link
-                    className="d-none ata"
+                    className=""
                     to="/Puller-Management"
                     style={{
                       textDecoration: "none",
@@ -2474,33 +2511,13 @@ const OrderReq = () => {
                                 action="">
                                 <div className=" d-flex col-12">
                                   <div className="form-group mb-0 position-relative icons_set d-flex justify-content-between">
-                                    {/* <a
-                                      className="fs-3 mt-2"
-                                      aria-expanded="false">
-                                      {sort === 1 ? (
-                                        <i
-                                          class="fa-solid fa-arrow-down-a-z"
-                                          onClick={() => {
-                                            sortCities(2);
-                                          }}></i>
-                                      ) : (
-                                        <i
-                                          class="fa-solid fa-arrow-up-z-a"
-                                          onClick={() => {
-                                            sortCities(1);
-                                          }}></i>
-                                      )}
-                                    </a> */}
-                                    {/* <input
-                                      type="search"
-                                      className="form-control bg-white mx-2"
-                                      placeholder="Search by City"
-                                      name="name"
-                                      id="name"
-                                      onChange={(e) => {
-                                        CitySearch(e.target.value);
-                                      }}
-                                    /> */}
+                                    <a
+                                      data-bs-toggle="modal"
+                                      id="modal-toggle"
+                                      data-bs-target="#staticBackdrop38"
+                                      className="comman_btn">
+                                      Add City
+                                    </a>
                                   </div>
                                 </div>
                               </form>
@@ -2531,6 +2548,7 @@ const OrderReq = () => {
           </div>
         </div>
       </div>
+
       <div
         className="modal fade comman_modal"
         id="staticBackdropView1"
@@ -2559,6 +2577,101 @@ const OrderReq = () => {
           </div>
         </div>
       </div>
+
+      <div
+        className="modal comman_modal_form forms_modal"
+        id="staticBackdrop35"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabIndex={-1}
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content border-0 rounded-0  rounded-top">
+            <div className="modal-body">
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                id="modalClose2"
+                onClick={() => {
+                  document.getElementById("resetBtn").click();
+                  setEditedCity("");
+                }}
+              />
+
+              <div>
+                <div className="container">
+                  <div className="row justify-content-center p-2">
+                    <div className="col-11 text-center mt-2">
+                      <form>
+                        <div className="form-floating col-12 mb-4 select_dropdown ">
+                          <select
+                            className="form-select border border-secondary signup_fields fw-bolder"
+                            id="floatingSelect1"
+                            aria-label="Floating label select example"
+                            name="state"
+                            disabled
+                            {...register("state", {
+                              onChange: (e) => {
+                                getCities(e.target.value);
+                              },
+                            })}>
+                            <option value="Georgia" selected="Georgia">
+                              Georgia
+                            </option>
+                          </select>
+
+                          <label
+                            htmlFor="floatingSelect6"
+                            className="mx-2 fw-bolder">
+                            State/Province
+                          </label>
+                        </div>
+
+                        <div className="form-floating col-12 mb-4 select_dropdown ">
+                          <input
+                            type="text"
+                            className={classNames(
+                              "form-control border border-secondary  fw-bolder",
+                              {
+                                "is-invalid": errors.city,
+                              }
+                            )}
+                            defaultValue={selectedCity?.city}
+                            name="city"
+                            onChange={(e) => {
+                              setEditedCity(e.target.value);
+                            }}
+                          />
+                        </div>
+
+                        <div>
+                          <button
+                            className="comman_btn2 "
+                            onClick={(e) => {
+                              EditCity(e);
+                            }}>
+                            Save
+                          </button>
+                          <button
+                            className="comman_btn2 d-none"
+                            type="reset"
+                            id="resetBtn">
+                            Reset
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div
         className="modal comman_modal_form forms_modal"
         id="staticBackdrop33"
@@ -2674,6 +2787,121 @@ const OrderReq = () => {
       </div>
 
       <div
+        className="modal comman_modal_form forms_modal"
+        id="staticBackdrop38"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabIndex={-1}
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content border-0 rounded-0  rounded-top">
+            <div className="modal-body">
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                id="modalClose38"
+                onClick={() => {
+                  document.getElementById("resetBtn").click();
+                }}
+              />
+
+              <div>
+                <div className="container">
+                  <div className="row justify-content-center p-2">
+                    <div className="col-11 text-center mt-2">
+                      <form onSubmit={handleSubmit(onSubmitDays)}>
+                        <div className="form-floating col-12 mb-4 select_dropdown ">
+                          <select
+                            className="form-select border border-secondary signup_fields fw-bolder"
+                            id="floatingSelect1"
+                            aria-label="Floating label select example"
+                            name="state"
+                            disabled
+                            {...register("state", {
+                              onChange: (e) => {
+                                getCities(e.target.value);
+                              },
+                            })}>
+                            <option value="Georgia" selected="Georgia">
+                              Georgia
+                            </option>
+                            
+                          </select>
+
+                          <label
+                            htmlFor="floatingSelect6"
+                            className="mx-2 fw-bolder">
+                            State/Province
+                          </label>
+                        </div>
+
+                        <div className="form-floating col-12 mb-4 select_dropdown ">
+                          <select
+                            className="form-select border border-secondary signup_fields fw-bolder"
+                            id="floatingSelect1"
+                            aria-label="Floating label select example"
+                            name="city"
+                            disabled
+                            {...register("city", {
+                              onChange: (e) => {
+                                setSelectedCity(e.target.value);
+                              },
+                            })}>
+                            <option value={selectedCity?._id}>
+                              {selectedCity?.city}
+                            </option>
+                          </select>
+
+                          <label
+                            htmlFor="floatingSelect6"
+                            className="mx-2 fw-bolder">
+                            City
+                          </label>
+                        </div>
+
+                        <div className="form-floating col-12 mb-4 select_dropdown ">
+                          <label htmlFor="" className="mx-2 fw-bolder">
+                            Day
+                          </label>
+                          <ReactSelect
+                            options={DaysOption}
+                            isMulti
+                            closeMenuOnSelect={false}
+                            hideSelectedOptions={false}
+                            components={{
+                              Option,
+                            }}
+                            onChange={handleChangeEdit}
+                            allowSelectAll={true}
+                            value={selectEditOptions?.optionSelected}
+                          />
+                          {console.log(selectEditOptions)}
+                        </div>
+                        <div>
+                          <button className="comman_btn2 " type="submit">
+                            Save
+                          </button>
+                          <button
+                            className="comman_btn2 d-none"
+                            type="reset"
+                            id="resetBtn">
+                            Reset
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
         className="modal fade comman_modal"
         id="staticBackdropAdmin"
         data-bs-backdrop="static"
@@ -2701,7 +2929,7 @@ const OrderReq = () => {
                   <label htmlFor="">Select Puller</label>
                   <Select
                     options={pullerOptions}
-                    closeMenuOnSelect={false}
+                    closeMenuOnSelect={true}
                     hideSelectedOptions={false}
                     components={{
                       Option,

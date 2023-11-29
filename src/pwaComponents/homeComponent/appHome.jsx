@@ -171,6 +171,10 @@ function AppHome() {
     }
   };
 
+  const redirectToWeb = async (url) => {
+    await window.flutter_inappwebview.callHandler("External_Page", url);
+  };
+
   const microphoneSearch = async () => {
     setSearch("");
     if (window.flutter_inappwebview) {
@@ -193,8 +197,20 @@ function AppHome() {
   const handleRefresh = () => {
     setTimeout(() => {
       window.location.reload(false);
+      getBanner();
+      getCategoryList();
+      getTopProductList();
+      getBrandList();
+      setData([{ page: 1, sortBy: 1 }]);
+      setData2([{ page: 1, sortBy: 1 }]);
+      setData3([{ page: 1, sortBy: 1 }]);
+      setData4([{ page: 1, sortBy: 1 }]);
+      setTimeout(() => {
+        setLoading(false);
+      }, [1000]);
     }, [500]);
   };
+
   return (
     <>
       <PullToRefresh
@@ -302,7 +318,6 @@ function AppHome() {
                 <div>
                   <div className="hero-wrapper bg-white">
                     <div className="container">
-                      
                       <div className="pt-1 px-0 mb-1">
                         <Carousel
                           showThumbs={false}
@@ -315,16 +330,14 @@ function AppHome() {
                           // selectedItem={itemNo}
                         >
                           {banner
-                            ?.filter((itm, id) => id != 0)
+                            ?.filter((itm, id) => id != 0 && id < 6)
                             .map((item) => (
                               <div
                                 className=" item slider_image"
                                 onClick={() => {
                                   item?.isExternalURL
-                                    ? navigate("/app/webView", {
-                                        state: item?.url,
-                                      })
-                                    : navigate("/"+item?.url?.slice(26));
+                                    ? redirectToWeb(item?.url)
+                                    : navigate("/" + item?.url?.slice(26));
                                 }}>
                                 <img
                                   className="banner_slider_img"

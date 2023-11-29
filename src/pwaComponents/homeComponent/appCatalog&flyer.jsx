@@ -1,6 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import Animate from "../../Animate";
+import {
+  deleteCart,
+  deleteQuote,
+  getCart,
+  getQuotes,
+  updateCart,
+  updateQuote,
+} from "../httpServices/homeHttpService/homeHttpService";
 import AppFooter from "./appFooter";
 import WebHeader2 from "./webHeader2";
 

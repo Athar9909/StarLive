@@ -3281,6 +3281,7 @@
     width: 100%;
     height: 100%;
   }
+
   .home {
     margin-top: 1.7rem;
   }
@@ -6163,7 +6164,8 @@ background-color: #3e4093;
     background-color: #fff !important;
     min-height: 100% !important;
   }
-  body, html {
+  body,
+  html {
     font-family: "Poppins", sans-serif !important;
     color: #747794 !important;
     overflow-x: hidden;
@@ -6171,7 +6173,7 @@ background-color: #3e4093;
     scrollbar-width: thin;
     padding-right: 0 !important;
     letter-spacing: -0.5px;
-}
+  }
 
   /* .dwn_btn {
     width: 6rem;
@@ -6179,7 +6181,6 @@ background-color: #3e4093;
     margin-left: 4px;
   } */
 
- 
   a,
   a:hover,
   a:focus {
@@ -6241,7 +6242,6 @@ background-color: #3e4093;
   #scrollUp {
     bottom: 30px;
     font-size: 16px;
-    right: 3
     width: 30px;
     height: 30px;
     line-height: 30px;
@@ -6255,6 +6255,7 @@ background-color: #3e4093;
     border-radius: 6px;
     background-color: #020310;
   }
+
   #scrollUp:hover,
   #scrollUp:focus {
     background-color: #3e4093;
@@ -7028,11 +7029,11 @@ background-color: #3e4093;
     min-height: 100% !important;
     background-color: #fff !important;
   }
-  .header_main{
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  .header_main {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+      rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
     padding: 2px !important;
     max-height: 4.2rem;
-  
   }
 
   .pwa-install-alert {
@@ -7189,7 +7190,7 @@ background-color: #3e4093;
   }
 
   /* Header CSS */
- 
+
   .cart-icon-wrap a {
     display: block;
     position: relative;
@@ -7296,7 +7297,7 @@ background-color: #3e4093;
     border-radius: 10px;
     width: 1rem !important;
     z-index: 100;
-    height: .8rem !important;
+    height: 0.8rem !important;
     color: #808080 !important;
   }
   .search-new form button:focus {
@@ -7351,7 +7352,7 @@ background-color: #3e4093;
     border-radius: 10px;
     width: 1rem !important;
     z-index: 100;
-    height: .8rem !important;
+    height: 0.8rem !important;
     color: #808080 !important;
   }
   .search-new2 form button:focus {
@@ -7389,7 +7390,7 @@ background-color: #3e4093;
     left: 83% !important;
     top: -1.9rem !important;
     z-index: 99;
-    height: .5rem !important;
+    height: 0.5rem !important;
   }
 
   .search-form .alternative-search-options .dropdown-toggle {
@@ -8688,7 +8689,6 @@ background-color: #3e4093;
     z-index: 1;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px !important;
     margin-bottom: 5px;
-   
   }
   .product-card .badge {
     position: absolute;
@@ -11348,9 +11348,6 @@ background-color: #3e4093;
     color: #eb3237;
   }
 
-  [view-mode="rtl"] {
-    /* Demo */
-  }
   [view-mode="rtl"] .rtl-flex-d-row-r {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: reverse;
@@ -12426,9 +12423,6 @@ background-color: #3e4093;
 
     z-index: 99999999;
   }
-  .modal-backdrop {
-    /* background-color: rgba(0, 0, 0, 0.5) !important; */
-  }
 
   .d-none {
     display: none;
@@ -12574,7 +12568,6 @@ background-color: #3e4093;
     outline: 0;
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
     width: 100%;
-    -webkit-appearance: none;
     position: relative;
     background-image: url(img/arrow_down.png);
     background-size: 9px;
@@ -12590,11 +12583,10 @@ background-color: #3e4093;
 }
 
 @media (max-width: 300px) {
-  
   body,
   html {
     font-family: "Poppins", sans-serif !important;
-    color: #747794 ;
+    color: #747794;
     overflow-x: hidden;
     background-color: #fff !important;
     scrollbar-width: thin;
@@ -12650,7 +12642,6 @@ background-color: #3e4093;
     height: 2rem;
   }
 }
-
 a:hover {
   opacity: 1;
 }
@@ -15558,8 +15549,6 @@ figure.effect-ming:hover img {
   );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#3e4093",GradientType=1);
 }
-.text-dwn {
-}
 
 .dwn-title1 {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
@@ -17916,7 +17905,7 @@ li {
 .card-body-hot {
   height: 13rem !important;
   padding: 1rem;
-  z-index:  1 !important;
+  z-index: 1 !important;
   border-radius: 10px;
 }
 .cart_bttn {
@@ -17956,7 +17945,6 @@ li {
   color: #fff;
   font-weight: 500;
   border-radius: 0 0 8px 8px !important;
-
 }
 .product-title_new .name {
   font-size: 11px !important;
@@ -17971,13 +17959,11 @@ li {
   height: 14rem;
   padding: 10px;
   background-color: #fff !important;
-  
 }
 
 .price-size {
   font-size: 10px !important;
   color: #000000 !important;
-
 }
 .price-size2 {
   font-size: 13px !important;
@@ -17986,12 +17972,10 @@ li {
 }
 .feat_main {
   max-height: 12rem !important;
-
 }
 .feat_main img {
- max-width: 8rem;
- height: 10rem;
-  
+  max-width: 8rem;
+  height: 10rem;
 }
 .banner_slider_img {
   max-height: 7rem !important;
@@ -18010,15 +17994,21 @@ li {
   color: #fff !important;
 }
 
-.DropBg{
+.DropBg {
   background-color: #3e4093;
   color: #fff !important;
   border-radius: 8px !important;
   padding: 4px;
-  position:relative;
+  position: relative;
 }
-.DropBg a{
-color: #fff;
-position: relative;
-left:0;
+.DropBg a {
+  color: #fff;
+  position: relative;
+  left: 0;
+}
+
+.Template_img{
+  height: 15rem; 
+  background-color: #000;
+  border-radius: 0;
 }

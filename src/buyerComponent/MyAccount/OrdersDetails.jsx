@@ -12,7 +12,7 @@ import DoingRoundIcon from "@rsuite/icons/DoingRound";
 import BookIcon from "@rsuite/icons/legacy/Book";
 import CheckRoundIcon from "@rsuite/icons/CheckRound";
 import RemindRoundIcon from "@rsuite/icons/RemindRound";
-
+import DocPassIcon from "@rsuite/icons/DocPass";
 const OrderDetails = () => {
   const [users, setUsers] = useState([]);
   const userApi = `${process.env.REACT_APP_APIENDPOINTNEW}user/getUserProfile`;
@@ -266,7 +266,7 @@ const OrderDetails = () => {
                                         title="Order Cancelled"
                                         icon={
                                           <RemindRoundIcon
-                                          className="text-danger"
+                                            className="text-danger"
                                             style={{
                                               fontSize: 25,
                                             }}
@@ -289,16 +289,19 @@ const OrderDetails = () => {
                                                 "colorRed") ||
                                               (orderDetails?.status ===
                                                 "DELIVERED" &&
+                                                "colorRed") ||
+                                              (orderDetails?.status ===
+                                                "Picked-Up" &&
                                                 "colorRed")
                                             }
                                             style={{
-                                              fontSize: 25,
+                                              fontSize: 28,
                                             }}
                                           />
                                         }
                                       />
                                       <Steps.Item
-                                        title="Order Processing"
+                                        title="Processing"
                                         icon={
                                           <DoingRoundIcon
                                             className={
@@ -307,14 +310,36 @@ const OrderDetails = () => {
                                                 "colorRed") ||
                                               (orderDetails?.status ===
                                                 "DELIVERED" &&
+                                                "colorRed") ||
+                                              (orderDetails?.status ===
+                                                "Picked-Up" &&
                                                 "colorRed")
                                             }
                                             style={{
-                                              fontSize: 22,
+                                              fontSize: 28,
                                             }}
                                           />
                                         }
                                       />
+                                      <Steps.Item
+                                        title="Picked-Up"
+                                        icon={
+                                          <DocPassIcon
+                                            className={
+                                              (orderDetails?.status ===
+                                                "Picked-Up" &&
+                                                "colorRed") ||
+                                              (orderDetails?.status ===
+                                                "DELIVERED" &&
+                                                "colorRed")
+                                            }
+                                            style={{
+                                              fontSize: 28,
+                                            }}
+                                          />
+                                        }
+                                      />
+
                                       <Steps.Item
                                         title="Shipped"
                                         icon={
@@ -328,7 +353,7 @@ const OrderDetails = () => {
                                                 "colorRed")
                                             }
                                             style={{
-                                              fontSize: 22,
+                                              fontSize: 28,
                                             }}
                                           />
                                         }
@@ -342,7 +367,7 @@ const OrderDetails = () => {
                                                 "DELIVERED" && "colorRed"
                                             }
                                             style={{
-                                              fontSize: 22,
+                                              fontSize: 28,
                                             }}
                                           />
                                         }
