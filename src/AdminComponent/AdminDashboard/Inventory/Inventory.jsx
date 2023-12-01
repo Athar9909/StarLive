@@ -71,7 +71,8 @@ const Inventory = () => {
   ]);
   const [seo, setSeo] = useState([]);
   let User = JSON.parse(localStorage.getItem("AdminData"));
-
+  const [isCheckAll, setIsCheckAll] = useState(false);
+  const [Nstate, setNstate] = useState(false);
   const {
     register,
     handleSubmit,
@@ -87,6 +88,8 @@ const Inventory = () => {
   });
 
   useEffect(() => {
+    setIsCheck([]);
+    setIsCheckAll(!isCheckAll);
     getBrands();
     pageData[0]?.searchKey
       ? InventSearch(pageData[0]?.searchKey)
@@ -104,6 +107,7 @@ const Inventory = () => {
       if (!data.error) {
         setSelected([]);
         setIsCheck([]);
+        setSideBar([]);
         const downloadLink = document.createElement("a");
         downloadLink.href = data.results.file;
         downloadLink.download = "doc";
@@ -536,6 +540,31 @@ const Inventory = () => {
       }
     });
   };
+
+  const handleSelectAll = (e) => {
+    const { checked } = e.target;
+    setIsCheckAll(!isCheckAll);
+    let Nitem = [...isCheck];
+    console.log(allProducts);
+    allProducts?.map((li) => Nitem.push(li?._id));
+    setIsCheck(Nitem);
+    let allData = [...selected];
+
+    (allProducts || [])?.map((val, index) =>
+      allData.push({
+        productId: val?._id,
+      })
+    );
+    setSelected(allData);
+
+    if (isCheckAll) {
+      setIsCheck([]);
+    }
+    if (!checked) {
+      setSelected([]);
+    }
+  };
+  console.log(selected, "seee;");
 
   const handleClickSelect = (e, productId, i) => {
     const { id, checked } = e.target;
@@ -1484,7 +1513,18 @@ const Inventory = () => {
                         <table className="table mb-0">
                           <thead>
                             <tr style={{ backgroundColor: "#f2f2f2" }}>
-                              <th>Select</th>
+                              <th>
+                                <input
+                                  type="checkbox"
+                                  name="selectAll"
+                                  id="selectAll"
+                                  onChange={handleSelectAll}
+                                  checked={isCheckAll ? true : false}
+                                  class=""
+                                />
+                                <span class="checkmark-all"></span>
+                                <span className="mx-1">Select All</span>
+                              </th>
                               <th>Product Name</th>
                               <th>Brand</th>
                               <th>Category</th>

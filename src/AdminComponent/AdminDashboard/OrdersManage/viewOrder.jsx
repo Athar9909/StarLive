@@ -993,7 +993,12 @@ const ViewOrder = () => {
                             </thead>
                             {orders?.products?.length < 1 ? (
                               <tbody className="border">
-                                <tr className="border">
+                                <tr className="border" 
+                                style={{
+                                  width:"20rem"
+                                }}
+                                
+                                >
                                   <td>
                                     No Results -{" "}
                                     <button
@@ -1066,31 +1071,31 @@ const ViewOrder = () => {
                                       </td>
                                       <td className="border rounded">
                                         {item?.scanned === "NotScanned" ? (
-                                          <span className="fs-5 text-secondary  p-2 px-3 rounded bg-secondary text-white">
+                                          <span className="text-secondary  p-2 px-3 rounded bg-secondary text-white">
                                             Not Scanned
                                           </span>
                                         ) : (
                                           <div>
                                             {item?.scanned ===
                                               "PartlyScanned" && (
-                                              <span className="fs-5 text-secondary  p-2 px-3 rounded bg-warning text-white">
+                                              <span className=" text-secondary  p-2 px-3 rounded bg-warning text-white">
                                                 Under Scanned
                                               </span>
                                             )}
                                             {item?.scanned === "OutOfStock" && (
-                                              <span className="fs-5 text-secondary  p-2 px-3 rounded bg-danger text-white">
+                                              <span className=" text-secondary  p-2 px-3 rounded bg-danger text-white">
                                                 Out of Stock
                                               </span>
                                             )}
                                             {item?.scanned ===
                                               "OverlyScanned" && (
-                                              <span className="fs-5 text-secondary  p-2 px-3 rounded bg-primary text-white">
+                                              <span className=" text-secondary  p-2 px-3 rounded bg-primary text-white">
                                                 Over Scanned
                                               </span>
                                             )}
                                             {item?.scanned ===
                                               "FullyScanned" && (
-                                              <span className="fs-5  p-2 px-3 rounded bg-success text-white text-nowrap">
+                                              <span className="  p-2 px-3 rounded bg-success text-white text-nowrap">
                                                 <img
                                                   className="mx-2"
                                                   src={require("../../../assets/img/Group 427322975.png")}></img>{" "}

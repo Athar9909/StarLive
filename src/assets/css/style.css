@@ -49,6 +49,14 @@
   p {
     font-family: "Poppins";
   }
+  th{
+    font-size: 80% !important;
+    font-weight: bold !important;
+  }
+  td{
+    font-size: 80% !important;
+    font-weight: bold !important;
+  }
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -2294,6 +2302,10 @@
     left: 0;
     right: 0;
   }
+  .cart_table {
+    overflow-y: scroll;
+    max-height: 35rem;
+  }
   .cart_table tr th {
     border: 0;
     font-weight: 500;
@@ -2304,8 +2316,18 @@
     text-transform: uppercase;
     vertical-align: middle;
   }
+
+  .cart_table td {
+    font-size: clamp(1rem, 2vw, 1rem) !important;
+    padding: 14px 20px;
+  }
+  .cart_table span {
+    font-size: clamp(1rem, 2vw, .8rem) !important;
+    padding: 14px 20px;
+  }
+
   .cart_table tr td:first-child {
-    width: 800px;
+    width: 600px !important;
   }
   .cart_product img {
     max-width: 110px;
