@@ -925,7 +925,7 @@ const ViewOrder = () => {
 
                     <div className="col-12 mb-4">
                       <div className="cart_table_2">
-                        <div className="table-responsive">
+                        <div className="">
                           <table className="table">
                             <thead>
                               <tr>
@@ -1111,33 +1111,33 @@ const ViewOrder = () => {
                                           {item?.quantity}
                                         </span>
                                       </td>
-                                      <td className="border rounded">
+                                      <td className= "border rounded">
                                         {item?.scanned === "NotScanned" ? (
-                                          <span className="text-secondary  p-2 px-3 rounded bg-secondary text-white">
+                                          <span className="text-secondary  p-2 px-3 rounded bg-secondary text-white PullStatusText">
                                             Not Scanned
                                           </span>
                                         ) : (
                                           <div>
                                             {item?.scanned ===
                                               "PartlyScanned" && (
-                                              <span className=" text-secondary  p-2 px-3 rounded bg-warning text-white">
+                                              <span className=" text-secondary  p-2 px-3 rounded bg-warning text-white PullStatusText">
                                                 Under Scanned
                                               </span>
                                             )}
                                             {item?.scanned === "OutOfStock" && (
-                                              <span className=" text-secondary  p-2 px-3 rounded bg-danger text-white">
+                                              <span className=" text-secondary  p-2 px-3 rounded bg-danger text-white PullStatusText" >
                                                 Out of Stock
                                               </span>
                                             )}
                                             {item?.scanned ===
                                               "OverlyScanned" && (
-                                              <span className=" text-secondary  p-2 px-3 rounded bg-primary text-white">
+                                              <span className=" text-secondary  p-2 px-3 rounded bg-primary text-white PullStatusText">
                                                 Over Scanned
                                               </span>
                                             )}
                                             {item?.scanned ===
                                               "FullyScanned" && (
-                                              <span className="  p-2 px-3 rounded bg-success text-white text-nowrap">
+                                              <span className="  p-2 px-3 rounded bg-success text-white text-nowrap PullStatusText">
                                                 <img
                                                   className="mx-2"
                                                   src={require("../../../assets/img/Group 427322975.png")}></img>{" "}

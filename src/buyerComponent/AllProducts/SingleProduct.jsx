@@ -191,7 +191,7 @@ const SingleProduct = () => {
                   title: "This Product is not available in your State!",
                   icon: "warning",
                   focusConfirm: false,
-                  timer: 1000,
+                  timer: 4000,
                 });
               }
 
@@ -287,7 +287,7 @@ const SingleProduct = () => {
                 title: "This Product is not available in your State!",
                 icon: "warning",
                 focusConfirm: false,
-                timer: 1000,
+                timer: 4000,
               });
             }
             if (res.data?.message === "Product modified") {

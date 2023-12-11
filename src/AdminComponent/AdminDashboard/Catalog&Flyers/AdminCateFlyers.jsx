@@ -59,10 +59,6 @@ const AdminCateFlyers = () => {
     }
   };
 
-  // const onFileSelectionPdf = (e, key) => {
-  //   setPdf({ ...pdf, [key]: e.target.files[0] });
-  // };
-
   const AddCate = async (e) => {
     e.preventDefault();
     let formData = new FormData();

@@ -422,6 +422,7 @@ const PdfPrint = () => {
                                             {item?.quantity}
                                           </td>
                                           <td
+                                          className="border-bottom-2 border-dark "
                                             style={{
                                               fontSize: 16,
                                               fontWeight: 500,
@@ -430,7 +431,6 @@ const PdfPrint = () => {
                                               border: "2px solid #000",
                                               padding: "10px 20px",
                                               borderLeft: 0,
-                                              borderBottom: 0,
                                             }}>
                                             {item?.pickedQuantity}
                                           </td>
@@ -461,24 +461,7 @@ const PdfPrint = () => {
                                           verticalAlign: "middle",
                                         }}>
                                         {" "}
-                                        {/* <span
-                                          style={{
-                                            display: "block",
-                                            backgroundColor: "#f2f2f2",
-                                            borderRadius: 10,
-                                            padding: "17px 20px",
-                                          }}
-                                        >
-                                          <img
-                                            style={{
-                                              display: "block",
-                                              maxWidth: 55,
-                                              margin: "0 auto",
-                                            }}
-                                            src="product.png"
-                                            alt=""
-                                          />
-                                        </span> */}
+                                     
                                       </td>
                                       <td
                                         style={{
