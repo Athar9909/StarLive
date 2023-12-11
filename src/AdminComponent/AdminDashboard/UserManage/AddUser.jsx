@@ -49,6 +49,7 @@ const AddUser = () => {
     setFiles({ ...files, [key]: e.target.files[0] });
   };
   const onSubmit = async (data) => {
+    
     setLoader(true);
     const formData = new FormData();
     formData.append("profileImage", files?.imageProfile);

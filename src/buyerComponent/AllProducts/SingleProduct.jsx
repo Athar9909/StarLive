@@ -184,6 +184,17 @@ const SingleProduct = () => {
                   timer: 1000,
                 });
               }
+
+              if (res.data?.message === "Not available in your State!") {
+                setLoader(false);
+                Swal.fire({
+                  title: "This Product is not available in your State!",
+                  icon: "warning",
+                  focusConfirm: false,
+                  timer: 1000,
+                });
+              }
+
             })
             .catch((err) => {
               if (
@@ -265,6 +276,15 @@ const SingleProduct = () => {
               setLoader(false);
               Swal.fire({
                 title: "Please Select Any Flavour!",
+                icon: "warning",
+                focusConfirm: false,
+                timer: 1000,
+              });
+            }
+            if (res.data?.message === "Not available in your State!") {
+              setLoader(false);
+              Swal.fire({
+                title: "This Product is not available in your State!",
                 icon: "warning",
                 focusConfirm: false,
                 timer: 1000,

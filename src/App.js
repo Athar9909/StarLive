@@ -134,6 +134,7 @@ import AppCatalogFlyer from "./pwaComponents/homeComponent/appCatalog&flyer";
 import WebView from "./pwaComponents/homeComponent/WebView";
 import StarCate from "./AdminComponent/StarCate";
 import CreateCatalog from "./AdminComponent/AdminDashboard/Catalog&Flyers/CreateCatalog";
+import PreviewCate from "./AdminComponent/AdminDashboard/Catalog&Flyers/PreviewCate";
 
 function App() {
   const [apiData, setApiData] = useState([]);
@@ -258,6 +259,10 @@ function App() {
               element={<CreateCatalog />}
             />
 
+            <Route
+              path="/Catelog-Flyers/Preview-Catalog"
+              element={<PreviewCate />}
+            />
             <Route
               path="/Puller-Management/Puller-details/:id"
               element={<ViewPuller />}

@@ -225,19 +225,15 @@ const OrderDetails = () => {
                                                       </h3>
                                                       <p>
                                                         Bar Code:{" "}
-                                                        {item?.flavour?.barcode.map(
-                                                          (item) => (
-                                                            <li>{item}</li>
+                                                        {item?.flavour?.barcode
+                                                          ?.filter(
+                                                            (itm, id) => id < 4
                                                           )
-                                                        )}
+                                                          .map((item) => (
+                                                            <li>{item}</li>
+                                                          ))}
                                                       </p>
-                                                      {/* <span className="ordertext my-2 d-block ">
-                                                        Ordered On:{" "}
-                                                        {item?.productId?.createdAt?.slice(
-                                                          0,
-                                                          10
-                                                        )}
-                                                      </span> */}
+                                                     
                                                     </div>
                                                   </div>
                                                 </div>
@@ -255,6 +251,7 @@ const OrderDetails = () => {
                                   </div>
                                 </div>
                               </div>
+
                               <div className="col-12 mt-3 mb-4">
                                 <div className="row mx-0 border  rounded pt-5 p-3 position-relative">
                                   <span className="small_header">

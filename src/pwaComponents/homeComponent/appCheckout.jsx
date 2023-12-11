@@ -118,6 +118,31 @@ function AppCheckout() {
             navigate("/app/thankyou");
           }
         });
+    } else if (delevryChoice == "UPS") {
+      await axios
+        .post(newOrder, {
+          type: "UPS",
+          address: users?.addressLine1 + users?.addressLine2,
+          comments: comments,
+          orderedBy: userType?.type,
+          subUserId: userType?.id,
+        })
+        .then((res) => {
+          if (res?.data.message === "Your account has been disabled by admin") {
+            LogOut();
+          }
+          if (res?.data.message === "Sub Account's Tobacco licence expired!") {
+            Swal.fire({
+              title: res?.data.message,
+              icon: "error",
+              timer: 2000,
+              confirmButtonText: "Okay",
+            });
+          }
+          if (!res?.data.error) {
+            navigate("/app/thankyou");
+          }
+        });
     }
   };
 
@@ -445,13 +470,27 @@ function AppCheckout() {
                             </label>
                             <div class="check"></div>
                           </li>
+                          <li>
+                            <input
+                              id="UPS"
+                              type="radio"
+                              name="selector"
+                              onClick={() => {
+                                setDelevryChoice("UPS");
+                              }}
+                            />
+                            <label for="UPS">
+                              <strong>UPS</strong>
+                            </label>
+                            <div class="check"></div>
+                          </li>
                         </ul>
                       ) : (
                         <ul class="ps-0">
                           <li>
                             <input
                               id="fastShipping"
-                              type="radio"
+                              type="radioo"
                               name="selector"
                               onClick={() => {
                                 setDelevryChoice("In-Store Pickup");
@@ -464,7 +503,7 @@ function AppCheckout() {
                           <li>
                             <input
                               id="courier"
-                              type="radio"
+                              type="radioo"
                               name="selector"
                               onClick={() => {
                                 setDelevryChoice("Shipment");
@@ -475,6 +514,20 @@ function AppCheckout() {
                               <span>
                                 (Additional Shipping charges will be applied.)
                               </span>
+                            </label>
+                            <div class="check"></div>
+                          </li>
+                          <li>
+                            <input
+                              id="UPS"
+                              type="radioo"
+                              name="selector"
+                              onClick={() => {
+                                setDelevryChoice("Shipment");
+                              }}
+                            />
+                            <label for="UPS">
+                            UPS
                             </label>
                             <div class="check"></div>
                           </li>

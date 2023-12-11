@@ -9,9 +9,24 @@ import ProfileBar from "../ProfileBar";
 import Swal from "sweetalert2";
 import { Toggle } from "rsuite";
 import Compressor from "compressorjs";
-
+import { components } from "react-select";
+import { default as ReactSelect } from "react-select";
+const OptionSelect = (props) => {
+  return (
+    <div>
+      <components.Option {...props} className="d-flex ">
+        <input
+          type="checkbox"
+          className="border border-secondary"
+          checked={props.isSelected}
+          onChange={() => null}
+        />{" "}
+        <label className="mx-2 mt-1">{props.label}</label>
+      </components.Option>
+    </div>
+  );
+};
 const EditInventory = () => {
-  const [files, setFiles] = useState([]);
   const [seo, setSeo] = useState([]);
   const [productImage, setProductImage] = useState();
   const [allProducts, setAllProducts] = useState([]);
@@ -33,6 +48,10 @@ const EditInventory = () => {
   const deleteImg = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/inventory/deleteImage`;
   const EditProduct = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/inventory/updateProduct`;
   const removeFlavour = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/inventory/deleteFlavour`;
+  const [restrictedState, setRestrictedState] = useState([]);
+  const statesApi = "https://countriesnow.space/api/v0.1/countries/states";
+  const [options, setOptions] = useState([]);
+  const [searchKey, setSearchKey] = useState("");
 
   const navigate = useNavigate();
   let User = JSON.parse(localStorage.getItem("AdminData"));
@@ -53,6 +72,33 @@ const EditInventory = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    createOptions();
+  }, [searchKey]);
+
+  const createOptions = async () => {
+    await axios
+      .post(statesApi, {
+        country: "United States",
+      })
+      .then((res) => {
+        if (!res.error) {
+          let data = res?.data?.data?.states;
+          console.log(data, "jdfkk");
+          const optionList = data?.map((item, index) => ({
+            value: item?.name,
+            label: item?.name,
+          }));
+          setOptions(optionList);
+          // setRestrictedState(optionList);
+        }
+      });
+  };
+
+  const handleChange2 = (selected) => {
+    setRestrictedState(selected);
+  };
 
   useEffect(() => {
     GetProducts();
@@ -81,10 +127,15 @@ const EditInventory = () => {
       setProductBarcode(res?.data.results?.pBarcode);
       SubCategoryDrop(data[0]?.category?._id);
       setSeo(data[0]?.SEOKeywords);
+
+      const optionList = data[0]?.restrictedStates?.map((item, index) => ({
+        value: item,
+        label: item,
+      }));
+      setRestrictedState(optionList);
     });
   };
 
-  console.log(seo);
   const NewSubCategory = async (e) => {
     let categoryId = e.target.value;
     await axios
@@ -154,6 +205,7 @@ const EditInventory = () => {
         productImage: productImage ? productImage : "",
         type: formValues,
         SEOKeywords: seo,
+        restrictedStates: restrictedState?.map((itm) => itm?.label),
       })
       .then((res) => {
         if (res?.data.error) {
@@ -171,7 +223,7 @@ const EditInventory = () => {
             icon: "success",
             button: "Ok",
           });
-          navigate("/Inventory");
+          // navigate("/Inventory");
         }
         if (
           res?.data.message ==
@@ -186,6 +238,7 @@ const EditInventory = () => {
         setNchnge(Nchnge);
       });
   };
+
   function handleKeyDownSeo(e) {
     // If user did not press enter key, return
     if (e.key !== "Tab") return;
@@ -318,28 +371,6 @@ const EditInventory = () => {
       .then((res) => {
         GetProducts();
       });
-  };
-
-  const deleteFlavour = async (id, fId) => {
-    const { data } = await axios.post(removeFlavour + "/" + id, {
-      flavourId: fId,
-    });
-    if (data.errors) {
-      Swal.fire({
-        title: data.message,
-        text: "error",
-        timer: 1000,
-      });
-    }
-    if (!data.errors) {
-      GetProducts();
-      Swal.fire({
-        title: "Flavour Removed Successfully!",
-        text: "",
-        icon: "success",
-        timer: 2000,
-      });
-    }
   };
 
   const handleClick = () => {
@@ -922,6 +953,55 @@ const EditInventory = () => {
                         />
                       </div>
                     </div>
+
+                    <div className="form-group col-12">
+                      <label htmlFor="" className="d-flex">
+                        Select Restricted States {" -"}
+                        <span className="d-flex mx-2">
+                          <input
+                            className="form-check-input border border-secondary"
+                            type="checkbox"
+                            value={true}
+                            name="subscribe2"
+                            id="flexCheckAddress2"
+                            onChange={(e) => {
+                              let val = e.target.checked;
+                              setRestrictedState(val ? options : []);
+                            }}
+                          />
+                          <label
+                            className="form-check-label fs-6 text-primary fw-bold mx-2"
+                            for="flexCheckAddress2">
+                            Select All
+                          </label>
+                        </span>
+                      </label>
+                      <ReactSelect
+                        options={options}
+                        isMulti
+                        closeMenuOnSelect={false}
+                        hideSelectedOptions={false}
+                        components={{
+                          OptionSelect,
+                        }}
+                        onChange={handleChange2}
+                        allowSelectAll={true}
+                        value={restrictedState}
+                      />
+
+                      {/* <Select
+                        name="users"
+                        options={options}
+                        className="basic-multi-select z-3"
+                        classNamePrefix="select"
+                        onChange={handleChange2}
+                        onInputChange={handleInputChange}
+                        value={options}
+                        required
+                        allowSelectAll={true}
+                      /> */}
+                    </div>
+
                     <div className="form-group col-lg-12 col-md-10   mt-2 mb-4">
                       <form className="">
                         <div className="row flavour_box align-items-end mx-0 py-4 px-3">

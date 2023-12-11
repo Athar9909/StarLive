@@ -14,9 +14,28 @@ import { Button } from "rsuite";
 import Compressor from "compressorjs";
 import { pageInventoryData } from "../../../atom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import { components } from "react-select";
+import { default as ReactSelect } from "react-select";
+
+const OptionSelect = (props) => {
+  return (
+    <div>
+      <components.Option {...props} className="d-flex ">
+        <input
+          type="checkbox"
+          className="border border-secondary"
+          checked={props.isSelected}
+          onChange={() => null}
+        />{" "}
+        <label className="mx-2 mt-1">{props.label}</label>
+      </components.Option>
+    </div>
+  );
+};
 
 const Inventory = () => {
   const addProduct = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/inventory/addProduct`;
+  const statesApi = "https://countriesnow.space/api/v0.1/countries/states";
   const getProducts = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/inventory/allProducts`;
   const categoryApi = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/inventory/categoryDropdown`;
   const SubCategoryApi = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/inventory/subCategoryList`;
@@ -29,7 +48,6 @@ const Inventory = () => {
   const inventorySort = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/inventory/sortProducts`;
   const exportEdit = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/inventory/exportForEdit`;
   const [NewMessage, setNewMessage] = useState("");
-  const [compressedFile, setCompressedFile] = useState(null);
   const scrollBy = useScrollBy();
   const [maxPage, setMaxPage] = useState(1);
   const [productImage, setProductImage] = useState();
@@ -72,12 +90,15 @@ const Inventory = () => {
   const [seo, setSeo] = useState([]);
   let User = JSON.parse(localStorage.getItem("AdminData"));
   const [isCheckAll, setIsCheckAll] = useState(false);
-  const [Nstate, setNstate] = useState(false);
+  const [options, setOptions] = useState([]);
+  const [restrictedState, setRestrictedState] = useState([]);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [searchKey, setSearchKey] = useState("");
 
   const {
     register: register2,
@@ -98,6 +119,37 @@ const Inventory = () => {
 
   axios.defaults.headers.common["x-auth-token-admin"] =
     localStorage.getItem("AdminLogToken");
+
+  const handleChange2 = (selected) => {
+    setRestrictedState(selected);
+  };
+
+  const handleInputChange = (inputValue) => {
+    setSearchKey(inputValue);
+  };
+  useEffect(() => {
+    createOptions();
+  }, [searchKey]);
+
+  const createOptions = async () => {
+    await axios
+      .post(statesApi, {
+        country: "United States",
+      })
+      .then((res) => {
+        if (!res.error) {
+          let data = res?.data?.data?.states;
+          console.log(data, "jdfkk");
+          const optionList = data?.map((item, index) => ({
+            value: item?.name,
+            label: item?.name,
+          }));
+          setOptions(optionList);
+        }
+      });
+  };
+
+  console.log(restrictedState);
 
   const exportProducts = async () => {
     if (selected?.length) {
@@ -273,6 +325,7 @@ const Inventory = () => {
         brand: data?.brands,
         type: formValues,
         SEOKeywords: seo,
+        restrictedStates: restrictedState?.map((itm) => itm?.label),
       })
       .then((res) => {
         if (res?.data.error) {
@@ -377,7 +430,6 @@ const Inventory = () => {
     ];
     e.target.value = "";
   }
-  console.log(seo);
 
   const removeTag = (ind, i) => {
     console.log(ind, i);
@@ -564,7 +616,6 @@ const Inventory = () => {
       setSelected([]);
     }
   };
-  console.log(selected, "seee;");
 
   const handleClickSelect = (e, productId, i) => {
     const { id, checked } = e.target;
@@ -1015,6 +1066,7 @@ const Inventory = () => {
             </div>
           </div>
         </div>
+
         <div className="admin_panel_data height_adjust mt-0">
           <div className="row inventory-management justify-content-center">
             <div className="col-12">
@@ -1180,6 +1232,54 @@ const Inventory = () => {
                           onKeyDown={(e) => handleKeyDownSeo(e)}
                         />
                       </div>
+                    </div>
+
+                    <div className="form-group col-12">
+                      <label htmlFor="" className="d-flex">
+                        Select Restricted States {" -"}
+                        <span className="d-flex mx-2">
+                          <input
+                            className="form-check-input border border-secondary"
+                            type="checkbox"
+                            value={true}
+                            name="subscribe2"
+                            id="flexCheckAddress2"
+                            onChange={(e) => {
+                              let val = e.target.checked;
+                              setRestrictedState(val ? options : []);
+                            }}
+                          />
+                          <label
+                            className="form-check-label fs-6 text-primary fw-bold mx-2"
+                            for="flexCheckAddress2">
+                            Select All
+                          </label>
+                        </span>
+                      </label>
+                      <ReactSelect
+                        options={options}
+                        isMulti
+                        closeMenuOnSelect={false}
+                        hideSelectedOptions={false}
+                        components={{
+                          OptionSelect,
+                        }}
+                        onChange={handleChange2}
+                        allowSelectAll={true}
+                        value={restrictedState}
+                      />
+
+                      {/* <Select
+                        name="users"
+                        options={options}
+                        className="basic-multi-select z-3"
+                        classNamePrefix="select"
+                        onChange={handleChange2}
+                        onInputChange={handleInputChange}
+                        value={options}
+                        required
+                        allowSelectAll={true}
+                      /> */}
                     </div>
 
                     <div className="form-group col-12 mt-2">

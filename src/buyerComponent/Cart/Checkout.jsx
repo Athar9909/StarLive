@@ -165,6 +165,43 @@ const Checkout = () => {
             });
           }
         });
+    } else if (delevryChoice == "UPS") {
+      await axios
+        .post(newOrder, {
+          type: "UPS",
+          address: users?.addressLine1 + users?.addressLine2,
+          comments: comments,
+          orderedBy: userType?.type,
+          subUserId: userType?.id,
+        })
+        .then((res) => {
+          console.log(res);
+
+          if (!res.data.error) {
+            Swal.fire({
+              title: "Order Placed!",
+              text: "You can Track your order on my account",
+              icon: "success",
+              confirmButtonText: "View Order",
+            }).then((data) => {
+              navigate(`/app/order-detail/${res?.data.results?.order._id}`);
+            });
+          } else if (res?.data.message === "Tobacco licence expired!") {
+            Swal.fire({
+              title: res?.data.message,
+              icon: "error",
+              confirmButtonText: "Okay",
+            });
+          } else if (
+            res?.data.message === "Sub Account's Tobacco licence expired!"
+          ) {
+            Swal.fire({
+              title: res?.data.message,
+              icon: "error",
+              confirmButtonText: "Okay",
+            });
+          }
+        });
     }
   };
 
@@ -327,7 +364,7 @@ const Checkout = () => {
 
                   {users?.state === "Georgia" ? (
                     <form className="row" action="">
-                      <div className="form-group col-4 custom_radio">
+                      <div className="form-group col-3 custom_radio">
                         <input
                           type="radio"
                           defaultChecked="true"
@@ -341,7 +378,7 @@ const Checkout = () => {
                         />
                         <label htmlFor="new_radio">In-Store Pickup</label>
                       </div>
-                      <div className="form-group col-4 custom_radio">
+                      <div className="form-group col-3 custom_radio">
                         <input
                           type="radio"
                           className="d-none"
@@ -354,7 +391,7 @@ const Checkout = () => {
                         />
                         <label htmlFor="new_radio1">Delivery</label>
                       </div>
-                      <div className="form-group col-4 custom_radio">
+                      <div className="form-group col-3 custom_radio">
                         <input
                           type="radio"
                           className="d-none"
@@ -367,10 +404,23 @@ const Checkout = () => {
                         />
                         <label htmlFor="new_radio2">Shipment</label>
                       </div>
+                      <div className="form-group col-3 custom_radio">
+                        <input
+                          type="radio"
+                          className="d-none"
+                          value={true}
+                          id="new_radio3"
+                          name="radioo"
+                          onClick={() => {
+                            setDelevryChoice("UPS");
+                          }}
+                        />
+                        <label htmlFor="new_radio3">UPS</label>
+                      </div>
                     </form>
                   ) : (
                     <form className="row" action="">
-                      <div className="form-group col-4 custom_radio">
+                      <div className="form-group col-3 custom_radio">
                         <input
                           type="radio"
                           defaultChecked="true"
@@ -384,7 +434,7 @@ const Checkout = () => {
                         />
                         <label htmlFor="new_radio">In-Store Pickup</label>
                       </div>
-                      <div className="form-group col-4 custom_radio">
+                      <div className="form-group col-3 custom_radio">
                         <input
                           type="radio"
                           className="d-none"
@@ -397,6 +447,21 @@ const Checkout = () => {
                         />
                         <label htmlFor="new_radio2">Shipment</label>
                       </div>
+
+                      <div className="form-group col-3 custom_radio">
+                        <input
+                          type="radio"
+                          className="d-none"
+                          id="new_radio3"
+                          onClick={() => {
+                            setDelevryChoice("UPS");
+                          }}
+                          value={true}
+                          name="radioo"
+                        />
+                        <label htmlFor="new_radio3">UPS</label>
+                      </div>
+
                     </form>
                   )}
                 </div>

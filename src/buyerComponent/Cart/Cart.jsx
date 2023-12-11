@@ -203,7 +203,7 @@ const Cart = () => {
                   <div className="col-12 bg-white">
                     <div className="row">
                       <div className="col-12">
-                        <div className="cart_table">
+                        <div className="cart_table_web">
                           {product?.length ? (
                             <div className="table-responsive">
                               <table className="table ">

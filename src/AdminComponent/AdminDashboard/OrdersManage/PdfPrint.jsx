@@ -36,7 +36,7 @@ const PdfPrint = () => {
     console.log("KK");
     window.print();
   };
- 
+
   return (
     <div className="" id="main_pdf">
       <p className="d-flex mx-3 justify-content-between mt-1">
@@ -60,33 +60,6 @@ const PdfPrint = () => {
                   width="100%"
                   style={{ margin: "0 auto", border: 0, borderSpacing: 0 }}>
                   <tbody>
-                    {/* <tr>
-                      <td style={{ paddingBottom: 25 }}>
-                        <table
-                          width="100%"
-                          style={{
-                            margin: "0 auto",
-                            border: 0,
-                            borderSpacing: 0,
-                          }}
-                        >
-                          <tbody>
-                            <tr>
-                              <td
-                                style={{
-                                  width: "20%",
-                                  textAlign: "start",
-                                  borderSpacing: 0,
-                                  verticalAlign: "top",
-                                }}
-                              >
-                                kii
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </td>
-                    </tr> */}
                     <tr>
                       <td
                         style={{
@@ -226,6 +199,20 @@ const PdfPrint = () => {
                                   <thead>
                                     <tr>
                                       <th
+                                      className="text-center"
+                                        style={{
+                                          backgroundColor: "#f2f2f2",
+                                          fontSize: 15,
+                                          fontWeight: 600,
+                                          textAlign: "start",
+                                          color: "#000",
+                                          border: "2px solid #000",
+                                          padding: "10px 20px",
+                                          borderBottom: 0,
+                                        }}>
+                                        Scanned By
+                                      </th>
+                                      <th
                                         style={{
                                           backgroundColor: "#f2f2f2",
                                           fontSize: 15,
@@ -300,6 +287,25 @@ const PdfPrint = () => {
                                     {(orders?.products || [])?.map(
                                       (item, index) => (
                                         <tr>
+                                          <td
+                                          className="text-center"
+                                            style={{
+                                              fontSize: 16,
+                                              fontWeight: 500,
+                                              textAlign: "start",
+                                              color: "#000",
+                                              border: "2px solid #000",
+                                              padding: "10px 20px",
+                                              borderBottom: 0,
+                                            }}>
+                                            <span className="fs-5 bg-light p-2 px-3 rounded">
+                                              {item?.isDirectScanned ? (
+                                                <i class="fa-solid fa-file-pen"></i>
+                                              ) : (
+                                                <i class="fa-solid fa-qrcode"></i>
+                                              )}
+                                            </span>
+                                          </td>
                                           <td
                                             style={{
                                               fontSize: 16,

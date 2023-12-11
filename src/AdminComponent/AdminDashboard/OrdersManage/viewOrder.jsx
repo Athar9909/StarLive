@@ -60,7 +60,7 @@ const ViewOrder = () => {
     exportOrder();
   }, []);
 
-  const OrderDetails = async (status, sort) => {
+  const OrderDetails = async (status, sort, scanType) => {
     setKeySort(status);
     await axios
       .post(orderView + "/" + id, {
@@ -68,6 +68,7 @@ const ViewOrder = () => {
         overUnderScanned: status === "overUnderScanned" ? true : false,
         outOfStock: status === "outOfStock" ? true : false,
         scanned: status === "scanned" ? true : false,
+        scanType: scanType,
       })
       .then((res) => {
         setOrders(res?.data.results);
@@ -117,7 +118,11 @@ const ViewOrder = () => {
         let data = res?.data.results.pullers;
         const optionList = data?.map((item, index) => ({
           value: item?._id,
-          label: item?.fullName,
+          label: (
+            <div>
+              {item?.fullName}-{item?.isPullerBusy ? "Busy" : "Available"}
+            </div>
+          ),
         }));
         setOptions(optionList);
       }
@@ -611,6 +616,9 @@ const ViewOrder = () => {
                         <button
                           class="dropdown-btns comman_btn2 mx-1"
                           data-bs-toggle="modal"
+                          onClick={() => {
+                            createOptions();
+                          }}
                           data-bs-target="#staticBackdropAdmin">
                           Assign Puller <i class="fas fa-user-gear"></i>
                         </button>
@@ -914,16 +922,42 @@ const ViewOrder = () => {
                         </div>
                       </div>
                     </div>
+
                     <div className="col-12 mb-4">
-                      <div className="cart_table">
+                      <div className="cart_table_2">
                         <div className="table-responsive">
                           <table className="table">
                             <thead>
                               <tr>
                                 <th>
+                                  {" "}
+                                  <div class="dropdowns">
+                                    <button class="dropdown-btns sort_btn ">
+                                      Scanned by{" "}
+                                      <i class="fa-solid fa-caret-down"></i>
+                                    </button>
+                                    <div class="dropdown-contents DropBg">
+                                      <a
+                                        className="text-decoration-none text-dark "
+                                        onClick={() =>
+                                          OrderDetails("", 1, "qr")
+                                        }>
+                                        Qr Scanned
+                                      </a>
+                                      <a
+                                        onClick={() =>
+                                          OrderDetails("", -1, "manual")
+                                        }
+                                        className="text-decoration-none text-dark ">
+                                        Manually Scanned
+                                      </a>
+                                    </div>
+                                  </div>
+                                </th>
+                                <th>
                                   Items{" - "}
                                   <div class="dropdowns">
-                                    <button class="dropdown-btns comman_btn2 ">
+                                    <button class="dropdown-btns sort_btn ">
                                       Sort{" "}
                                       <i class="fa-solid fa-caret-down"></i>
                                     </button>
@@ -945,7 +979,7 @@ const ViewOrder = () => {
                                 <th>
                                   Pull Status{" - "}
                                   <div class="dropdowns">
-                                    <button class="dropdown-btns comman_btn2 ">
+                                    <button class="dropdown-btns sort_btn ">
                                       {keySort
                                         ? (keySort === "scanned" &&
                                             "Scanned") ||
@@ -993,12 +1027,11 @@ const ViewOrder = () => {
                             </thead>
                             {orders?.products?.length < 1 ? (
                               <tbody className="border">
-                                <tr className="border" 
-                                style={{
-                                  width:"20rem"
-                                }}
-                                
-                                >
+                                <tr
+                                  className="border"
+                                  style={{
+                                    width: "20rem",
+                                  }}>
                                   <td>
                                     No Results -{" "}
                                     <button
@@ -1026,7 +1059,16 @@ const ViewOrder = () => {
                               <tbody className="border">
                                 {(orders?.products || [])?.map(
                                   (item, index) => (
-                                    <tr className="border">
+                                    <tr className="border text-center mt-5">
+                                      <td className="border rounded">
+                                        <span className="fs-5 bg-light p-2 px-3 rounded">
+                                          {item?.isDirectScanned ? (
+                                            <i class="fa-solid fa-file-pen"></i>
+                                          ) : (
+                                            <i class="fa-solid fa-qrcode"></i>
+                                          )}
+                                        </span>
+                                      </td>
                                       <td>
                                         <div className="row align-items-center flex-lg-wrap flex-md-nowrap flex-nowrap">
                                           <div className="col-auto">
@@ -1115,6 +1157,7 @@ const ViewOrder = () => {
                                 )}
                               </tbody>
                             )}
+
                           </table>
                         </div>
                       </div>
@@ -1126,6 +1169,7 @@ const ViewOrder = () => {
           </div>
         </div>
       </div>
+
       <div
         className="modal fade comman_modal"
         id="staticBackdropAdmin"

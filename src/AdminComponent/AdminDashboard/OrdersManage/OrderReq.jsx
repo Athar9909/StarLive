@@ -650,7 +650,11 @@ const OrderReq = () => {
         let data = res?.data.results.pullers;
         const optionList = data?.map((item, index) => ({
           value: item?._id,
-          label: item?.fullName,
+          label: (
+            <div>
+              {item?.fullName}-{item?.isPullerBusy ? "Busy" : "Available"}
+            </div>
+          ),
         }));
         setPullerOptions(optionList);
       }
@@ -659,7 +663,7 @@ const OrderReq = () => {
 
   const handleInputChangePull = (inputValue) => {
     console.log("lkjkl");
-    setSearchKey(inputValue);
+    setSearchKeyPull(inputValue);
   };
   const handleChange = (selected) => {
     setSelectedPuller({
@@ -1291,6 +1295,7 @@ const OrderReq = () => {
                       <option value="Shipment">Shipment</option>
                       <option value="Delivery">Delivery</option>
                       <option value="In-Store Pickup">In-Store Pickup</option>
+                      <option value="UPS">UPS</option>
                     </select>
                   </div>
 
@@ -1314,7 +1319,9 @@ const OrderReq = () => {
                           cancel
                         </a>
                       )}
+
                     </div>
+
                     {importedData?.totalBarcodes > 0 && (
                       <div className="col-12 d-flex justify-content-between ">
                         <a className=" text-decoration-none mx-1 mb-3 fw-bold">
@@ -1351,7 +1358,6 @@ const OrderReq = () => {
                               {(importedItems || [])?.map((item, index) => (
                                 <tr key={index}>
                                   <td>{item?.type?.barcode[0]}</td>
-
                                   <td>{item?.unitName}</td>
                                   <td>{item?.type?.flavour}</td>
                                   <td>{item?.quantity}</td>
@@ -1746,6 +1752,7 @@ const OrderReq = () => {
                                                     data-bs-toggle="modal"
                                                     onClick={() => {
                                                       setPullOrderId(item?._id);
+                                                      createOptionsPull();
                                                     }}
                                                     data-bs-target="#staticBackdropAdmin">
                                                     Assign Puller
@@ -2828,7 +2835,6 @@ const OrderReq = () => {
                             <option value="Georgia" selected="Georgia">
                               Georgia
                             </option>
-                            
                           </select>
 
                           <label

@@ -181,6 +181,7 @@ const SubAdmin = () => {
       optionSelected: selected,
     });
   };
+  
   const SubAdminStatus = async (id) => {
     const { data } = await axios.post(disableAdmin + "/" + id);
 

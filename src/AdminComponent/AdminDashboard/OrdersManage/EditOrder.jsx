@@ -682,6 +682,7 @@ const EditOrder = () => {
                                   <option value="In-Store Pickup">
                                     In-Store Pickup
                                   </option>
+                                  <option value="UPS">UPS</option>
                                 </select>
                               </div>
                             </div>
@@ -726,8 +727,7 @@ const EditOrder = () => {
                     </div>
 
                     <div className="col-12 mb-4 ">
-                      <div className="cart_table">
-                        <div className=""></div>
+                      <div className="cart_table_web">
                         <div className="table-responsive border rounded">
                           <table className="table">
                             <thead>
@@ -781,8 +781,16 @@ const EditOrder = () => {
                                         </div>
                                       </div>
                                     </div>
+                                    {orders?.products?.length > 1 && (
+                                      <button
+                                        className=" mx-4 mt-2 text-center text-danger fs-6 fw-bold bg-white"
+                                        onClick={() => deleteChange(index)}>
+                                       <i className="fa fa-trash"></i> Remove
+                                      </button>
+                                    )}
                                   </td>
-                                  <td className="border rounded">
+
+                                  <td className="border rounded text-center">
                                     <span className="fs-5 p-2 rounded">
                                       <input
                                         type="tel"
@@ -794,15 +802,6 @@ const EditOrder = () => {
                                           handleChange(index, e);
                                         }}></input>
                                     </span>
-                                  </td>
-                                  <td className="border">
-                                    {orders?.products?.length > 1 && (
-                                      <button
-                                        className="mx-5 text-danger fs-6 bg-white"
-                                        onClick={() => deleteChange(index)}>
-                                        Remove
-                                      </button>
-                                    )}
                                   </td>
                                 </tr>
                               ))}
@@ -878,7 +877,7 @@ const EditOrder = () => {
                   </select>
                 </div>
 
-                <div className="form-group col-6 " >
+                <div className="form-group col-6 ">
                   <label htmlFor="">Product Quantity </label>
                   <input
                     type="number"

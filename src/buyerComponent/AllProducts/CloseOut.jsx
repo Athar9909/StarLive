@@ -79,6 +79,15 @@ const CloseOut = () => {
             }
           });
         }
+        if (res.data?.message === "Not available in your State!") {
+    
+          Swal.fire({
+            title: "This Product is not available in your State!",
+            icon: "warning",
+            focusConfirm: false,
+            timer: 1000,
+          });
+        }
         if (
           res?.data.message === "Flavour is not available!" ||
           res?.data.message === "Please provide flavour!"

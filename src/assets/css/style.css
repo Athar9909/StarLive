@@ -49,14 +49,6 @@
   p {
     font-family: "Poppins";
   }
-  th{
-    font-size: 80% !important;
-    font-weight: bold !important;
-  }
-  td{
-    font-size: 80% !important;
-    font-weight: bold !important;
-  }
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -1680,12 +1672,13 @@
     position: relative;
   }
   .verification_content {
-    opacity: 0.9;
-    border-radius: 1rem;
-    padding: 2rem !important;
+    border: 2px dashed #f2f2f263;
+    padding: 32px 20px;
+    backdrop-filter: blur(4px);
+    background: rgba(255, 255, 255, 0.2);
   }
   .verification_content h2 {
-    -webkit-text-stroke: 2px #000;
+    /* -webkit-text-stroke: 2px #000; */
     color: #fff;
     font-weight: 700;
     font-size: 50px;
@@ -2302,10 +2295,6 @@
     left: 0;
     right: 0;
   }
-  .cart_table {
-    overflow-y: scroll;
-    max-height: 35rem;
-  }
   .cart_table tr th {
     border: 0;
     font-weight: 500;
@@ -2316,19 +2305,51 @@
     text-transform: uppercase;
     vertical-align: middle;
   }
-
-  .cart_table td {
-    font-size: clamp(1rem, 2vw, 1rem) !important;
-    padding: 14px 20px;
-  }
-  .cart_table span {
-    font-size: clamp(1rem, 2vw, .8rem) !important;
-    padding: 14px 20px;
-  }
-
   .cart_table tr td:first-child {
-    width: 600px !important;
+    width: 800px;
   }
+
+  .cart_table_2 {
+    overflow-y: scroll;
+    max-height: 35rem;
+  }
+
+  .cart_table_2 tr th {
+    border: 0;
+    font-weight: 500;
+    text-align: center;
+    color: #8f8f8f;
+    font-size: 13px !important;
+    padding: 14px 20px;
+    text-transform: uppercase;
+    vertical-align: middle;
+  }
+  .cart_table_2 tr td:nth-child(2) {
+    width: 700px;
+  }
+  .cart_table_2 tr td:nth-child(1) {
+    width: 100px !important;
+  }
+  .cart_product img {
+    max-width: 110px;
+  }
+
+  .cart_table_web tr th {
+    border: 0;
+    font-weight: 500;
+    text-align: center;
+    color: #8f8f8f;
+    font-size: 13px !important;
+    padding: 14px 20px;
+    text-transform: uppercase;
+    vertical-align: middle;
+  }
+  .cart_table_web tr td:nth-child(2) {
+    /* position: relative; */
+    padding-top: 3rem;
+    
+  }
+  
   .cart_product img {
     max-width: 110px;
   }
@@ -8212,7 +8233,7 @@ background-color: #3e4093;
     left: 0;
     z-index: 10;
   }
- 
+
   .owl-carousel .owl-item img {
     display: block;
     width: 100%;
@@ -13501,11 +13522,9 @@ p,
   position: relative;
   display: block;
   max-height: 18rem;
-  min-height:18rem;
+  min-height: 18rem;
   min-width: 100%;
-  max-width
-  
-  : 14rem;
+  max-width: 14rem;
   opacity: 0.8;
 }
 
@@ -17280,10 +17299,10 @@ figure.effect-ming:hover img {
   padding: 10px;
   position: relative;
   top: 22px;
-   opacity: 85% !important;
-   height: 5.5rem !important;
-   background-color: #3e4093;
-   border-radius: 0px 0 14px 14px;
+  opacity: 85% !important;
+  height: 5.5rem !important;
+  background-color: #3e4093;
+  border-radius: 0px 0 14px 14px;
 }
 
 .item-content h3 {
@@ -17367,11 +17386,10 @@ figure.effect-ming:hover img {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15), 10px 15px rgba(0, 0, 0, 0.05);
   max-height: 20rem !important;
   min-height: 18rem !important;
-  margin: .4rem;
-
+  margin: 0.4rem;
 }
 .product-grid:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.30), 10px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3), 10px 10px rgba(0, 0, 0, 0.05);
 }
 .product-grid .product-image {
   overflow: hidden;
@@ -17700,15 +17718,13 @@ figure.effect-ming:hover img {
   background-position: right top;
 }
 
-
-
 .sliderC {
   max-width: 100%;
   height: 30rem;
   margin: 100px auto;
 }
 
-.stf__parent{
+.stf__parent {
   max-width: 100% !important;
   height: 30rem !important;
   margin: 100px auto !important;
@@ -17717,9 +17733,8 @@ figure.effect-ming:hover img {
   box-sizing: border-box;
   transform: translateZ(0);
   -ms-touch-action: pan-y;
-  touch-action: pan-y;;
+  touch-action: pan-y;
 }
-
 
 @media (max-width: 400px) {
   .sliderC h1 {
@@ -17830,26 +17845,11 @@ figure.effect-ming:hover img {
   max-height: 5rem !important;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.site-header { 
+.site-header {
   border-bottom: 2px solid #ccc;
-  padding: .5em 1em;
-  font-family: 'Unbounded', cursive !important;
-  font-weight:600;
-
+  padding: 0.5em 1em;
+  font-family: "Unbounded", cursive !important;
+  font-weight: 600;
 }
 
 .site-header::after {
@@ -17864,11 +17864,10 @@ figure.effect-ming:hover img {
 
 .site-identity h1 {
   font-size: 1.5em;
-   font-family: 'Unbounded', cursive !important;
+  font-family: "Unbounded", cursive !important;
   text-decoration: none !important;
-  margin: .7em 0 .3em 0;
+  margin: 0.7em 0 0.3em 0;
   display: inline-block;
-  
 }
 
 .site-identity img {
@@ -17881,8 +17880,9 @@ figure.effect-ming:hover img {
   float: right;
 }
 
-.site-navigation ul, li {
-  margin: 0; 
+.site-navigation ul,
+li {
+  margin: 0;
   padding: 0;
 }
 
@@ -17904,8 +17904,6 @@ figure.effect-ming:hover img {
   top: -1rem !important;
   z-index: 10000 !important;
 }
-
-
 
 .wallet {
   --bg-color: #ceb2fc;
@@ -18005,7 +18003,7 @@ figure.effect-ming:hover img {
   transition: transform 0.3s ease-out;
 }
 
-.cateView{
+.cateView {
   width: 100%;
   height: 100vh !important;
 }
