@@ -220,7 +220,7 @@ const Dashboard = () => {
                 </li>
 
                 <li
-                  className={User?.access?.includes("Puller") ? "" : "d-none"}>
+                  className={User?.access?.includes("Puller") ? "d-none" : "d-none"}>
                   <Link
                     className=""
                     to="/Puller-Management"
@@ -399,9 +399,10 @@ const Dashboard = () => {
                     Sub-Admin Management
                   </Link>
                 </li>
+                
                 <li>
                   <Link
-                    className=""
+                    className="d-none"
                     to="/Puller-Management"
                     style={{
                       textDecoration: "none",
