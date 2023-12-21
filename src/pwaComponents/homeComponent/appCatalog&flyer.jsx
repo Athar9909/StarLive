@@ -132,17 +132,12 @@ function AppCatalogFlyer() {
               {(change ? catalogs : flyers)?.length > 0 ? (
                 <div className="row mx-0 justify-content-center mb-3 ">
                   {(change ? catalogs : flyers || [])?.map((item, ind) => (
-                    <div
-                      className="col-sm-5 col-md-5 col-5 mb-2 p-2 m-2 brands_box shadow"
-                      onClick={() => {
-                        navigate("/app/webView", {
-                          state: item?.url,
-                        });
-                        // window.location.href = item?.url
-                        //   ? item?.url
-                        //   : "https://starimporters.com/app/home";
-                      }}>
-                      <Link className="text-center mt-4">
+                    <div className="col-sm-5 col-md-5 col-5 mb-2 p-2 m-2 brands_box shadow">
+                      <Link
+                        to={`/app/webView`}
+                        target="_blank"
+                        state={item?.url}
+                        className="text-center mt-4">
                         <div>
                           <img
                             loading="lazy"

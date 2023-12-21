@@ -318,40 +318,76 @@ function AppHome() {
                 <div>
                   <div className="hero-wrapper bg-white">
                     <div className="container">
-                      <div className="pt-1 px-0 mb-1">
-                        <Carousel
-                          showThumbs={false}
-                          showIndicators={false}
-                          // onChange={onHoverMain}
-                          autoFocus={false}
-                          autoPlay={true}
-                          showStatus={false}
+                      {browserName === "WebKit" ||
+                      browserName === "Chrome WebView" ? (
+                        <div className="pt-1 px-0 mb-1">
+                          <Carousel
+                            showThumbs={false}
+                            showIndicators={false}
+                            // onChange={onHoverMain}
+                            autoFocus={false}
+                            autoPlay={true}
+                            showStatus={false}
 
-                          // selectedItem={itemNo}
-                        >
-                          {banner
-                            ?.filter((itm, id) => id != 0 && id < 6)
-                            .map((item) => (
-                              <div
-                                className=" item slider_image"
-                                onClick={() => {
-                                  item?.isExternalURL
-                                    ? redirectToWeb(item?.url)
-                                    : navigate("/" + item?.url?.slice(26));
-                                }}>
-                                <img
-                                  className="banner_slider_img"
-                                  src={
-                                    item?.banner
-                                      ? item?.banner
-                                      : require("../../assets/img/staticBg.png")
-                                  }
-                                  alt=""
-                                />
-                              </div>
-                            ))}
-                        </Carousel>
-                      </div>
+                            // selectedItem={itemNo}
+                          >
+                            {banner
+                              ?.filter((itm, id) => id != 0 && id < 6)
+                              .map((item) => (
+                                <div
+                                  className=" item slider_image"
+                                  onClick={() => {
+                                    item?.isExternalURL
+                                      ? redirectToWeb(item?.url)
+                                      : navigate("/" + item?.url?.slice(26));
+                                  }}>
+                                  <img
+                                    className="banner_slider_img"
+                                    src={
+                                      item?.banner
+                                        ? item?.banner
+                                        : require("../../assets/img/staticBg.png")
+                                    }
+                                    alt=""
+                                  />
+                                </div>
+                              ))}
+                          </Carousel>
+                        </div>
+                      ) : (
+                        <div className="pt-1 px-0 mb-1">
+                          <Carousel
+                            showThumbs={false}
+                            showIndicators={false}
+                            // onChange={onHoverMain}
+                            autoFocus={false}
+                            autoPlay={true}
+                            showStatus={false}
+
+                            // selectedItem={itemNo}
+                          >
+                            {banner
+                              ?.filter((itm, id) => id != 0 && id < 6)
+                              .map((item) => (
+                                <div
+                                  className=" item slider_image"
+                                  onClick={() => {
+                                    window.location.href = item?.url;
+                                  }}>
+                                  <img
+                                    className="banner_slider_img"
+                                    src={
+                                      item?.banner
+                                        ? item?.banner
+                                        : require("../../assets/img/staticBg.png")
+                                    }
+                                    alt=""
+                                  />
+                                </div>
+                              ))}
+                          </Carousel>
+                        </div>
+                      )}
                     </div>
                   </div>
 
