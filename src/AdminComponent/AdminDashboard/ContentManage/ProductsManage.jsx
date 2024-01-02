@@ -54,7 +54,6 @@ const ProductsManage = () => {
     }
   };
 
-
   const getPromotionsMonthly = async () => {
     const { data } = await axios.post(allPromotions, {
       type: "MonthlyDeals",
@@ -85,6 +84,26 @@ const ProductsManage = () => {
     }
   };
 
+  const EditMonthlyDate = async (date,type,id,flavour) => {
+    const { data } = await axios.post(editPromotions, {
+      type: type,
+      productId: id,
+      flavourId: flavour?._id,
+      expireIn: date,
+    });
+    if (!data.error) {
+      getPromotionsFeatured();
+      getPromotionsClose();
+      GetPromotions();
+      Swal.fire({
+        title: "Expiry Date!",
+        icon: "success",
+        timer: 1000,
+      });
+      setPriceEdit();
+    }
+  };
+
   const getPromotionsClose = async () => {
     const { data } = await axios.post(allPromotions, {
       type: "CloseOut",
@@ -105,7 +124,7 @@ const ProductsManage = () => {
       getPromotionsFeatured();
       getPromotionsClose();
       GetPromotions();
-      getPromotionsMonthly()
+      getPromotionsMonthly();
     }
   };
 
@@ -265,7 +284,6 @@ const ProductsManage = () => {
         }
       });
   };
-
 
   var today = new Date().toISOString().split("T")[0];
   document.getElementById("dateF")?.setAttribute("min", today);
@@ -553,6 +571,7 @@ const ProductsManage = () => {
                               </button>
                             </div>
                           </form>
+
                           <div className="row pt-2">
                             <div className="col-12 comman_table_design pb-3">
                               <div className="table-responsive">
@@ -713,7 +732,6 @@ const ProductsManage = () => {
                                       <th>Product Name</th>
                                       <th>Product Flavour</th>
                                       <th>Product Price</th>
-
                                       <th>Action</th>
                                     </tr>
                                   </thead>
@@ -918,11 +936,32 @@ const ProductsManage = () => {
                                               setPriceEdit(e.target.value);
                                             }}></input>
                                         </td>
-                                        <td className="border">
+                                        {/* <td className="border">
                                           {moment(
                                             User?.expireIn?.slice(0, 10)
                                           ).format("MM/DD/YYYY")}
-                                        </td>
+
+                                        </td> */}
+                                        <td className="border">
+                                        
+                                        <input
+                                          type="date"
+                                          className=" form-control"
+                                          id="dateEdit"
+                                          name="expiryDate"
+                                          defaultValue=  {moment(
+                                            User?.expireIn?.slice(0, 10)
+                                          ).format("YYYY-MM-DD")}
+                                        
+                                          onChange={(e) =>
+                                            EditMonthlyDate(
+                                              e.target.value,
+                                              "CloseOut",
+                                              User?.productId?._id,
+                                              User?.productId?.type
+                                            )
+                                          }></input>
+                                      </td>
 
                                         <td className="border">
                                           <button
@@ -958,7 +997,6 @@ const ProductsManage = () => {
                         </div>
                       </div>
                     </div>
-
 
                     <div
                       className="tab-pane fade"
@@ -1088,9 +1126,24 @@ const ProductsManage = () => {
                                             }}></input>
                                         </td>
                                         <td className="border">
-                                          {moment(
-                                            User?.expireIn?.slice(0, 10)
-                                          ).format("MM/DD/YYYY")}
+                                        
+                                          <input
+                                            type="date"
+                                            className=" form-control"
+                                            id="dateEdit"
+                                            name="expiryDate"
+                                            defaultValue=  {moment(
+                                              User?.expireIn?.slice(0, 10)
+                                            ).format("YYYY-MM-DD")}
+                                          
+                                            onChange={(e) =>
+                                              EditMonthlyDate(
+                                                e.target.value,
+                                                "MonthlyDeals",
+                                                User?.productId?._id,
+                                                User?.productId?.type
+                                              )
+                                            }></input>
                                         </td>
 
                                         <td className="border">
@@ -1127,7 +1180,6 @@ const ProductsManage = () => {
                         </div>
                       </div>
                     </div>
-
                   </div>
                 </div>
               </div>
