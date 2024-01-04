@@ -10,20 +10,25 @@ import moment from "moment";
 const ContactSupport = () => {
   const contactList = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/getAllContacts `;
   const newsLetterList = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/activeNewsLetterUsers`;
+  const consentsList = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/getAllConsent`;
   const [contacts, setContacts] = useState([]);
   const [newsLetters, setNewsLetter] = useState([]);
+  const [consents, setConsents] = useState([]);
   const [sideBar, setSideBar] = useState(true);
   const [values, setValues] = useState({ from: "", to: "" });
   const navigate = useNavigate();
   let User = JSON.parse(localStorage.getItem("AdminData"));
   const [activePage, setActivePage] = useState(1);
   const [activePage2, setActivePage2] = useState(1);
+  const [activePage3, setActivePage3] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
   const [maxPage2, setMaxPage2] = useState(1);
+  const [maxPage3, setMaxPage3] = useState(1);
   const [wrap, setWrap] = useState();
   useEffect(() => {
     getAllContacts();
     getAllNewsLetter();
+    getAllConsents();
   }, [activePage, activePage2]);
 
   const getAllContacts = async () => {
@@ -41,6 +46,16 @@ const ContactSupport = () => {
     if (!data.error) {
       setNewsLetter(data.results.users);
       setMaxPage2(data.results.totalPages);
+    }
+  };
+
+  const getAllConsents = async () => {
+    const { data } = await axios.post(consentsList, {
+      page: activePage3,
+    });
+    if (!data.error) {
+      setConsents(data.results.queries);
+      setMaxPage3(data.results.totalPages);
     }
   };
   const handleDate = async () => {};
@@ -176,9 +191,7 @@ const ContactSupport = () => {
                   </Link>
                 </li>
                 <li
-                  className={
-                    User?.access?.includes("Gallery") ? "" : "d-none"
-                  }>
+                  className={User?.access?.includes("Gallery") ? "" : "d-none"}>
                   <Link
                     className=""
                     to="/Gallery-Management"
@@ -192,7 +205,7 @@ const ContactSupport = () => {
                     Gallery Management
                   </Link>
                 </li>
-                  <li
+                <li
                   className={
                     User?.access?.includes("catalogFlyers") ? "" : "d-none"
                   }>
@@ -202,7 +215,6 @@ const ContactSupport = () => {
                     style={{
                       textDecoration: "none",
                       fontSize: "18px",
-                     
                     }}>
                     <i
                       style={{ position: "relative", left: "4px", top: "3px" }}
@@ -238,17 +250,17 @@ const ContactSupport = () => {
                 <li
                   className={User?.access?.includes("Contact") ? "" : "d-none"}>
                   <Link
-                      className="bg-white"
-                      to="/Contact&Support"
-                      style={{
-                        textDecoration: "none",
-                        fontSize: "18px",
-                        color: "#3e4093",
-                      }}>
-                      <i
-                        style={{ position: "relative", left: "4px", top: "3px" }}
-                        class="fa-solid fa-handshake-angle"></i>{" "}
-                      Contact & Support
+                    className="bg-white"
+                    to="/Contact&Support"
+                    style={{
+                      textDecoration: "none",
+                      fontSize: "18px",
+                      color: "#3e4093",
+                    }}>
+                    <i
+                      style={{ position: "relative", left: "4px", top: "3px" }}
+                      class="fa-solid fa-handshake-angle"></i>{" "}
+                    Contact & Support
                   </Link>
                 </li>
                 <li>
@@ -499,9 +511,8 @@ const ContactSupport = () => {
                             aria-controls="nav-home"
                             aria-selected="true"
                             style={{
-                              width:"33.33%"
-                            }}
-                            >
+                              width: "33.33%",
+                            }}>
                             Contact Us
                           </button>
                           <button
@@ -514,15 +525,14 @@ const ContactSupport = () => {
                             aria-controls="nav-profile"
                             aria-selected="false"
                             style={{
-                              width:"33.33%"
-                            }}
-                            >
+                              width: "33.33%",
+                            }}>
                             Newsletter Subscription
                           </button>
                           <button
                             className="nav-link"
                             style={{
-                              width:"33.33%"
+                              width: "33.33%",
                             }}
                             id="nav-profile2-tab"
                             data-bs-toggle="tab"
@@ -543,7 +553,6 @@ const ContactSupport = () => {
                           aria-labelledby="nav-home-tab">
                           <div className="row mx-0">
                             <div className="col-12">
-                            
                               <div className="row recent_orders_order">
                                 <div className="col-12 comman_table_design px-0">
                                   <div className="table-responsive">
@@ -576,13 +585,10 @@ const ContactSupport = () => {
                                               <td className="border text_area ">
                                                 {wrap === item?._id ? (
                                                   <>
-                                                    {item?.messageTextArea}{" "}
-                                                    ....
+                                                    {item?.messageTextArea} ....
                                                     <a
                                                       className="text-primary"
-                                                      onClick={() =>
-                                                        setWrap()
-                                                      }>
+                                                      onClick={() => setWrap()}>
                                                       read less
                                                     </a>
                                                   </>
@@ -796,35 +802,27 @@ const ContactSupport = () => {
                                           style={{
                                             backgroundColor: "#f2f2f2",
                                           }}>
-                                          <th>User Name</th>
+                                          <th>Country Code</th>
                                           <th>Mobile Number</th>
-                                          <th>Email</th>
-                                          <th>Address</th>
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        {(newsLetters || [])?.map(
+                                        {(consents || [])?.map(
                                           (item, index) => (
                                             <tr key={index}>
-                                              <td>{item?.firstName}</td>
-                                              <td>{item?.phoneNumber}</td>
-                                              <td>{item?.email}</td>
-                                              <td>
-                                                {item?.city +
-                                                  "-" +
-                                                  item?.zipcode}
-                                              </td>
-                                            
+                                              <td>{item?.country_code}</td>
+
+                                              <td>{item?.phone_number}</td>
                                             </tr>
                                           )
                                         )}
                                       </tbody>
                                     </table>
                                   </div>
-                                  {newsLetters?.length ? (
+                                  {consents?.length ? (
                                     <div className="col-11 d-flex justify-content-between py-2 mx-5">
                                       <span className="totalPage">
-                                        Total Pages : {maxPage2}
+                                        Total Pages : {maxPage3}
                                       </span>
                                       <ul id="pagination">
                                         <li>
@@ -832,10 +830,10 @@ const ContactSupport = () => {
                                             class="fs-5"
                                             href="#"
                                             onClick={() =>
-                                              activePage2 <= 1
-                                                ? setActivePage2(1)
-                                                : setActivePage2(
-                                                    activePage2 - 1
+                                              activePage3 <= 1
+                                                ? setActivePage3(1)
+                                                : setActivePage3(
+                                                    activePage3 - 1
                                                   )
                                             }>
                                             «<small>prev</small>
@@ -844,7 +842,7 @@ const ContactSupport = () => {
 
                                         <li>
                                           <a href="#" className="active">
-                                            {activePage2}
+                                            {activePage3}
                                           </a>
                                         </li>
 
@@ -853,10 +851,10 @@ const ContactSupport = () => {
                                             className="fs-5"
                                             href="#"
                                             onClick={() =>
-                                              activePage2 === maxPage2
-                                                ? setActivePage2(maxPage2)
-                                                : setActivePage2(
-                                                    activePage2 + 1
+                                              activePage3 === maxPage3
+                                                ? setActivePage3(maxPage3)
+                                                : setActivePage3(
+                                                    activePage3 + 1
                                                   )
                                             }>
                                             <small>next</small>»
