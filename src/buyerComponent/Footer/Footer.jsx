@@ -172,6 +172,15 @@ const Footer = () => {
                         Contact Us{" "}
                       </Link>
                     </li>
+                    <li>
+                      <Link
+                        className="text-decoration-none"
+                        to="/app/consent-form"
+                        state={"hidss"}
+                      >
+                        Consent Form{" "}
+                      </Link>
+                    </li>
                   </ul>
                 </div>
               </div>

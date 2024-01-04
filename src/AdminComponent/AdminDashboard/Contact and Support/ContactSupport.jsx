@@ -440,6 +440,7 @@ const ContactSupport = () => {
           </div>
         </div>
       </div>
+
       <div className="admin_main_inner">
         <div className="admin_header shadow">
           <div className="row align-items-center mx-0 justify-content-between w-100">
@@ -496,7 +497,11 @@ const ContactSupport = () => {
                             type="button"
                             role="tab"
                             aria-controls="nav-home"
-                            aria-selected="true">
+                            aria-selected="true"
+                            style={{
+                              width:"33.33%"
+                            }}
+                            >
                             Contact Us
                           </button>
                           <button
@@ -507,8 +512,26 @@ const ContactSupport = () => {
                             type="button"
                             role="tab"
                             aria-controls="nav-profile"
-                            aria-selected="false">
+                            aria-selected="false"
+                            style={{
+                              width:"33.33%"
+                            }}
+                            >
                             Newsletter Subscription
+                          </button>
+                          <button
+                            className="nav-link"
+                            style={{
+                              width:"33.33%"
+                            }}
+                            id="nav-profile2-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#nav-profile2"
+                            type="button"
+                            role="tab"
+                            aria-controls="nav-profile2"
+                            aria-selected="false">
+                            Consents
                           </button>
                         </div>
                       </nav>
@@ -520,42 +543,7 @@ const ContactSupport = () => {
                           aria-labelledby="nav-home-tab">
                           <div className="row mx-0">
                             <div className="col-12">
-                              {/* <form
-                                className="form-design py-4 px-3 help-support-form row align-items-end "
-                                action=""
-                              >
-                                <div className="form-group mb-0 col-5">
-                                  <label htmlFor="">From</label>
-                                  <input
-                                    type="date"
-                                    className="form-control"
-                                    name="from"
-                                    id="orderFrom"
-                                    value={values.from}
-                                    onChange={handleDate}
-                                  />
-                                </div>
-                                <div className="form-group mb-0 col-5">
-                                  <label htmlFor="">To</label>
-                                  <input
-                                    type="date"
-                                    className="form-control"
-                                    name="to"
-                                    id="orderTo"
-                                    value={values.to}
-                                    onChange={handleDate}
-                                  />
-                                </div>
-                                <div className="form-group mb-0 col-auto text-center">
-                                  <button
-                                    className="comman_btn rounded"
-                                    // onClick={}
-                                  >
-                                    Search
-                                  </button>
-                                </div>
-                              </form> */}
-
+                            
                               <div className="row recent_orders_order">
                                 <div className="col-12 comman_table_design px-0">
                                   <div className="table-responsive">
@@ -736,6 +724,97 @@ const ContactSupport = () => {
                                                   View
                                                 </button>
                                               </td> */}
+                                            </tr>
+                                          )
+                                        )}
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                  {newsLetters?.length ? (
+                                    <div className="col-11 d-flex justify-content-between py-2 mx-5">
+                                      <span className="totalPage">
+                                        Total Pages : {maxPage2}
+                                      </span>
+                                      <ul id="pagination">
+                                        <li>
+                                          <a
+                                            class="fs-5"
+                                            href="#"
+                                            onClick={() =>
+                                              activePage2 <= 1
+                                                ? setActivePage2(1)
+                                                : setActivePage2(
+                                                    activePage2 - 1
+                                                  )
+                                            }>
+                                            «<small>prev</small>
+                                          </a>
+                                        </li>
+
+                                        <li>
+                                          <a href="#" className="active">
+                                            {activePage2}
+                                          </a>
+                                        </li>
+
+                                        <li>
+                                          <a
+                                            className="fs-5"
+                                            href="#"
+                                            onClick={() =>
+                                              activePage2 === maxPage2
+                                                ? setActivePage2(maxPage2)
+                                                : setActivePage2(
+                                                    activePage2 + 1
+                                                  )
+                                            }>
+                                            <small>next</small>»
+                                          </a>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  ) : null}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div
+                          className="tab-pane fade"
+                          id="nav-profile2"
+                          role="tabpanel"
+                          aria-labelledby="nav-profile2-tab">
+                          <div className="row mx-0 ">
+                            <div className="col-12">
+                              <div className="row recent_orders_order  ">
+                                <div className="col-12 comman_table_design px-0">
+                                  <div className="table-responsive">
+                                    <table className="table mb-0">
+                                      <thead>
+                                        <tr
+                                          style={{
+                                            backgroundColor: "#f2f2f2",
+                                          }}>
+                                          <th>User Name</th>
+                                          <th>Mobile Number</th>
+                                          <th>Email</th>
+                                          <th>Address</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        {(newsLetters || [])?.map(
+                                          (item, index) => (
+                                            <tr key={index}>
+                                              <td>{item?.firstName}</td>
+                                              <td>{item?.phoneNumber}</td>
+                                              <td>{item?.email}</td>
+                                              <td>
+                                                {item?.city +
+                                                  "-" +
+                                                  item?.zipcode}
+                                              </td>
+                                            
                                             </tr>
                                           )
                                         )}
