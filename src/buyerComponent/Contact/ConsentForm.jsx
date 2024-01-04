@@ -389,9 +389,14 @@ const ConsentForm = () => {
                         automated notifications including Shipping and Order
                         Updates, at the phone number provided. Consent is not a
                         condition of purchase. Msg & data rates may apply. View
-                        our <Link to="/PrivacyPolicies"> Privacy Policy</Link>{" "}
+                        our <Link
+                        target="_blank"
+                        
+                        to="/PrivacyPolicies"> Privacy Policy</Link>{" "}
                         and
-                        <Link to="/Terms&Condition"> Terms of Service.</Link>
+                        <Link
+                        target="_blank"
+                        to="/Terms&Condition"> Terms of Service.</Link>
                       </small>
 
                       <div class="button-container mt-4">

@@ -29,7 +29,7 @@ const ContactSupport = () => {
     getAllContacts();
     getAllNewsLetter();
     getAllConsents();
-  }, [activePage, activePage2]);
+  }, [activePage, activePage2,activePage3]);
 
   const getAllContacts = async () => {
     const { data } = await axios.post(contactList, { page: activePage });
