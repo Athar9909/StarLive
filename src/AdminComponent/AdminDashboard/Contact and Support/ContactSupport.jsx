@@ -6,30 +6,27 @@ import Starlogo from "../../../assets/img/logo.png";
 import ProfileBar from "../ProfileBar";
 import ViewProduct from "../ViewProduct";
 import moment from "moment";
+import UserGuide from "./UserGuide";
 
 const ContactSupport = () => {
   const contactList = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/getAllContacts `;
   const newsLetterList = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/activeNewsLetterUsers`;
-  const consentsList = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/getAllConsent`;
+  const newsLetterExport = `${process.env.REACT_APP_APIENDPOINTNEW}api/admin/exportNewsLetter`;
   const [contacts, setContacts] = useState([]);
   const [newsLetters, setNewsLetter] = useState([]);
-  const [consents, setConsents] = useState([]);
   const [sideBar, setSideBar] = useState(true);
   const [values, setValues] = useState({ from: "", to: "" });
   const navigate = useNavigate();
   let User = JSON.parse(localStorage.getItem("AdminData"));
   const [activePage, setActivePage] = useState(1);
   const [activePage2, setActivePage2] = useState(1);
-  const [activePage3, setActivePage3] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
   const [maxPage2, setMaxPage2] = useState(1);
-  const [maxPage3, setMaxPage3] = useState(1);
   const [wrap, setWrap] = useState();
   useEffect(() => {
     getAllContacts();
     getAllNewsLetter();
-    getAllConsents();
-  }, [activePage, activePage2,activePage3]);
+  }, [activePage, activePage2]);
 
   const getAllContacts = async () => {
     const { data } = await axios.post(contactList, { page: activePage });
@@ -48,17 +45,23 @@ const ContactSupport = () => {
       setMaxPage2(data.results.totalPages);
     }
   };
-
-  const getAllConsents = async () => {
-    const { data } = await axios.post(consentsList, {
-      page: activePage3,
-    });
+  const ExportLetters = async () => {
+    const { data } = await axios.get(newsLetterExport);
     if (!data.error) {
-      setConsents(data.results.queries);
-      setMaxPage3(data.results.totalPages);
+      // let fileContent = data?.results?.file;
+      // const blob = new Blob([fileContent], { type: "text/plain" });
+
+      const blobURL = data?.results?.file;
+      const link = document.createElement("a");
+      link.href = blobURL;
+      link.download = "example.txt";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(blobURL);
     }
   };
-  const handleDate = async () => {};
+
   const handleClick = () => {
     localStorage.removeItem("AdminData");
     localStorage.removeItem("AdminLogToken");
@@ -452,7 +455,6 @@ const ContactSupport = () => {
           </div>
         </div>
       </div>
-
       <div className="admin_main_inner">
         <div className="admin_header shadow">
           <div className="row align-items-center mx-0 justify-content-between w-100">
@@ -502,6 +504,9 @@ const ContactSupport = () => {
                           id="nav-tab"
                           role="tablist">
                           <button
+                            style={{
+                              width: "33.33%",
+                            }}
                             className="nav-link active"
                             id="nav-home-tab"
                             data-bs-toggle="tab"
@@ -509,39 +514,39 @@ const ContactSupport = () => {
                             type="button"
                             role="tab"
                             aria-controls="nav-home"
-                            aria-selected="true"
-                            style={{
-                              width: "33.33%",
-                            }}>
+                            aria-selected="true">
                             Contact Us
-                          </button>
-                          <button
-                            className="nav-link"
-                            id="nav-profile-tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#nav-profile"
-                            type="button"
-                            role="tab"
-                            aria-controls="nav-profile"
-                            aria-selected="false"
-                            style={{
-                              width: "33.33%",
-                            }}>
-                            Newsletter Subscription
                           </button>
                           <button
                             className="nav-link"
                             style={{
                               width: "33.33%",
                             }}
-                            id="nav-profile2-tab"
+                            id="nav-profile-tab"
                             data-bs-toggle="tab"
-                            data-bs-target="#nav-profile2"
+                            data-bs-target="#nav-profile"
                             type="button"
                             role="tab"
-                            aria-controls="nav-profile2"
+                            aria-controls="nav-profile"
                             aria-selected="false">
-                            Consents
+                            Newsletter Subscription{" "}
+                            <i
+                              onClick={() => ExportLetters()}
+                              class="fa-solid fa-file-export"></i>
+                          </button>
+                          <button
+                            style={{
+                              width: "33.33%",
+                            }}
+                            className="nav-link"
+                            id="nav-help-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#nav-help"
+                            type="button"
+                            role="tab"
+                            aria-controls="nav-help"
+                            aria-selected="false">
+                            User Help & Guide
                           </button>
                         </div>
                       </nav>
@@ -553,6 +558,42 @@ const ContactSupport = () => {
                           aria-labelledby="nav-home-tab">
                           <div className="row mx-0">
                             <div className="col-12">
+                              {/* <form
+                                className="form-design py-4 px-3 help-support-form row align-items-end "
+                                action=""
+                              >
+                                <div className="form-group mb-0 col-5">
+                                  <label htmlFor="">From</label>
+                                  <input
+                                    type="date"
+                                    className="form-control"
+                                    name="from"
+                                    id="orderFrom"
+                                    value={values.from}
+                                    onChange={handleDate}
+                                  />
+                                </div>
+                                <div className="form-group mb-0 col-5">
+                                  <label htmlFor="">To</label>
+                                  <input
+                                    type="date"
+                                    className="form-control"
+                                    name="to"
+                                    id="orderTo"
+                                    value={values.to}
+                                    onChange={handleDate}
+                                  />
+                                </div>
+                                <div className="form-group mb-0 col-auto text-center">
+                                  <button
+                                    className="comman_btn rounded"
+                                    // onClick={}
+                                  >
+                                    Search
+                                  </button>
+                                </div>
+                              </form> */}
+
                               <div className="row recent_orders_order">
                                 <div className="col-12 comman_table_design px-0">
                                   <div className="table-responsive">
@@ -785,87 +826,13 @@ const ContactSupport = () => {
                             </div>
                           </div>
                         </div>
-
                         <div
                           className="tab-pane fade"
-                          id="nav-profile2"
+                          id="nav-help"
                           role="tabpanel"
-                          aria-labelledby="nav-profile2-tab">
+                          aria-labelledby="nav-help-tab">
                           <div className="row mx-0 ">
-                            <div className="col-12">
-                              <div className="row recent_orders_order  ">
-                                <div className="col-12 comman_table_design px-0">
-                                  <div className="table-responsive">
-                                    <table className="table mb-0">
-                                      <thead>
-                                        <tr
-                                          style={{
-                                            backgroundColor: "#f2f2f2",
-                                          }}>
-                                          <th>Country Code</th>
-                                          <th>Mobile Number</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        {(consents || [])?.map(
-                                          (item, index) => (
-                                            <tr key={index}>
-                                              <td>{item?.country_code}</td>
-
-                                              <td>{item?.phone_number}</td>
-                                            </tr>
-                                          )
-                                        )}
-                                      </tbody>
-                                    </table>
-                                  </div>
-                                  {consents?.length ? (
-                                    <div className="col-11 d-flex justify-content-between py-2 mx-5">
-                                      <span className="totalPage">
-                                        Total Pages : {maxPage3}
-                                      </span>
-                                      <ul id="pagination">
-                                        <li>
-                                          <a
-                                            class="fs-5"
-                                            href="#"
-                                            onClick={() =>
-                                              activePage3 <= 1
-                                                ? setActivePage3(1)
-                                                : setActivePage3(
-                                                    activePage3 - 1
-                                                  )
-                                            }>
-                                            «<small>prev</small>
-                                          </a>
-                                        </li>
-
-                                        <li>
-                                          <a href="#" className="active">
-                                            {activePage3}
-                                          </a>
-                                        </li>
-
-                                        <li>
-                                          <a
-                                            className="fs-5"
-                                            href="#"
-                                            onClick={() =>
-                                              activePage3 === maxPage3
-                                                ? setActivePage3(maxPage3)
-                                                : setActivePage3(
-                                                    activePage3 + 1
-                                                  )
-                                            }>
-                                            <small>next</small>»
-                                          </a>
-                                        </li>
-                                      </ul>
-                                    </div>
-                                  ) : null}
-                                </div>
-                              </div>
-                            </div>
+                            <UserGuide />
                           </div>
                         </div>
                       </div>
