@@ -16,7 +16,6 @@
     --sb-track-color: #f2f2f2;
     --sb-thumb-color: #3e4093;
     --sb-size: 15px;
-    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
   }
 
   body::-webkit-scrollbar {
@@ -3978,17 +3977,17 @@
     top: 0;
     z-index: 9;
     width: 18% !important;
-    max-height: 100vh;
+    height: 100vh;
     background-image: url(../../assets//img/verification_bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     border-right: 10px solid #eb3237;
     transition: 0.1s all;
-    overflow-y: scroll;
   }
+
   .siderbar_section::-webkit-scrollbar {
-    display: none;
+    opacity: 2% !important;
   }
   .vaccine_category {
     margin: 0 20px;
@@ -4062,13 +4061,7 @@
     /* bottom: 12px !important; */
   }
 
-  .sidebar_menus {
-    height: calc(100vh - 136px);
-    overflow: auto;
-  }
-  .sidebar_menus::-webkit-scrollbar {
-    display: none;
-  }
+  
   .sidebar_menus ul li i {
     width: 28px !important;
     font-size: 13px !important;
@@ -4961,11 +4954,14 @@
   }
 
   .sidebar_menus {
-    height: calc(100vh - 136px);
-    overflow: auto;
+    height: calc(100vh - 200px);
+    overflow-y: scroll !important;
   }
   .sidebar_menus::-webkit-scrollbar {
     display: none;
+  }
+  .sidebar_menus::-webkit-scrollbar-track{
+    opacity: 20%;
   }
   .sidebar_menus ul li a i {
     width: 28px;
@@ -6233,10 +6229,9 @@ background-color: #3e4093;
   html {
     font-family: "Poppins", sans-serif !important;
     color: #747794 !important;
-    overflow-x: hidden;
+    overflow-x: auto;
     background-color: #fff !important;
-    scrollbar-width: thin;
-    padding-right: 0 !important;
+      padding-right: 0 !important;
     letter-spacing: -0.5px;
   }
 

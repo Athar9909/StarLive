@@ -23,6 +23,8 @@ function AppClosingOut() {
   const [userDetail, setUserDetail] = useState([]);
   let { id } = useParams();
   const navigate = useNavigate();
+  let image4 = require("../../assets/img/hotDealBg.png");
+  let image6 = require("../../assets/img/closeHead.png");
 
   useEffect(() => {
     getProductList();
@@ -137,122 +139,140 @@ function AppClosingOut() {
 
   return (
     <>
-      <div className="top-products-area pb-3 ">
-        <div className="container">
-          {/* <div className=" d-flex align-items-center justify-content-between dir-rtl mt-2 mb-3">
+      {product?.length > 0 && (
+        <div
+          className="mt-1 "
+          style={{
+            backgroundImage: `url(${image4})`,
+            backgroundPosition: "center",
+            opacity: "unset",
+            backgroundSize: "cover",
+          }}
+        >
+          <img className="w-100" src={image6} />
+          <div className="top-products-area pb-3 ">
+            <div className="container">
+              {/* <div className=" d-flex align-items-center justify-content-between dir-rtl mt-2 mb-3">
             <h6 className="fs-5 fw-bold text-danger">CLOSING OUT DEALS</h6>
           </div> */}
 
-          <div className="row px-3 mt-3">
-            <Swiper
-              slidesPerView={2.3}
-              spaceBetween={8}
-              autoplay={{
-                delay: 3000,
-                disableOnInteraction: true,
-                reverseDirection: false,
-                waitForTransition: true,
-              }}
-              loop={true}
-              modules={[FreeMode, Pagination, Autoplay, Navigation]}
-              className="">
-              {(product || []).map((item, index) => (
-                <SwiperSlide key={index} className="">
-                  <div class="hotMain">
-                    <div class="w-100">
-                      <div class="col-auto">
-                        <Link
-                          class="cart_bttn2 text-decoration-none"
-                          to=""
-                          onClick={() =>
-                            addToCartt(
-                              item?.productId?._id,
-                              index,
-                              item,
-                              item?.productId?.slug,
-                              item?.price
-                            )
-                          }>
-                          <i class="fa-light fa-plus "></i>
-                        </Link>
-                      </div>
-                      <div className=" d-flex justify-content-center">
-                        <div
-                          onClick={() => {
-                            navigate(
-                              `/app/product-detail/${item?.productId?.slug}`,
-                              {
-                                state: {
+              <div className="row px-3 mt-3">
+                <Swiper
+                  slidesPerView={2.3}
+                  spaceBetween={8}
+                  autoplay={{
+                    delay: 3000,
+                    disableOnInteraction: true,
+                    reverseDirection: false,
+                    waitForTransition: true,
+                  }}
+                  loop={true}
+                  modules={[FreeMode, Pagination, Autoplay, Navigation]}
+                  className=""
+                >
+                  {(product || []).map((item, index) => (
+                    <SwiperSlide key={index} className="">
+                      <div class="hotMain">
+                        <div class="w-100">
+                          <div class="col-auto">
+                            <Link
+                              class="cart_bttn2 text-decoration-none"
+                              to=""
+                              onClick={() =>
+                                addToCartt(
+                                  item?.productId?._id,
+                                  index,
+                                  item,
+                                  item?.productId?.slug,
+                                  item?.price
+                                )
+                              }
+                            >
+                              <i class="fa-light fa-plus "></i>
+                            </Link>
+                          </div>
+                          <div className=" d-flex justify-content-center">
+                            <div
+                              onClick={() => {
+                                navigate(
+                                  `/app/product-detail/${item?.productId?.slug}`,
+                                  {
+                                    state: {
+                                      type: item?.productId?.type,
+                                      offer: item?.price,
+                                    },
+                                  }
+                                );
+                              }}
+                              class="card-body-hot p-2 text-center"
+                              style={{
+                                backgroundImage: `url(${
+                                  item?.productId?.type?.flavourImage
+                                    ? item?.productId?.type?.flavourImage
+                                    : item?.productId?.productImage ||
+                                      require("../../assets/img/product.jpg")
+                                })`,
+                                backgroundPosition: "center",
+                                opacity: "unset",
+                                backgroundSize: "cover",
+                                width: "8rem",
+                                maxHeight: "8.4rem",
+                                position: "relative",
+                                top: "-6px",
+                              }}
+                            ></div>
+                          </div>
+
+                          <div class="row  product-title_new ">
+                            <div class="col-auto">
+                              <Link
+                                class="name d-flex"
+                                to={`/app/product-detail/${item?.productId?.slug}`}
+                                state={{
                                   type: item?.productId?.type,
                                   offer: item?.price,
-                                },
-                              }
-                            );
-                          }}
-                          class="card-body-hot p-2 text-center"
-                          style={{
-                            backgroundImage: `url(${
-                              item?.productId?.type?.flavourImage
-                                ? item?.productId?.type?.flavourImage
-                                : item?.productId?.productImage ||
-                                  require("../../assets/img/product.jpg")
-                            })`,
-                            backgroundPosition: "center",
-                            opacity: "unset",
-                            backgroundSize: "cover",
-                            width: "8rem",
-                            maxHeight: "8.4rem",
-                            position: "relative",
-                            top: "-6px",
-                          }}></div>
-                      </div>
-
-                      <div class="row  product-title_new ">
-                        <div class="col-auto">
-                          <Link
-                            class="name d-flex"
-                            to={`/app/product-detail/${item?.productId?.slug}`}
-                            state={{
-                              type: item?.productId?.type,
-                              offer: item?.price,
-                            }}>
-                            {item?.productId?.unitName?.slice(0, 28)}..{" "}
-                            {item?.price ? (
-                              <p className="mb-0 price-size text-start">
-                                <span className="  text-danger fw-bold mb-0">
-                                  {item?.price ? "$" + item.price : ""}
-                                </span>
-                              </p>
-                            ) : (
-                              ""
-                            )}
-                            {/* <span>
+                                }}
+                              >
+                                {item?.productId?.unitName?.slice(0, 28)}..{" "}
+                                {item?.price ? (
+                                  <p className="mb-0 price-size text-start">
+                                    <span className="  text-danger fw-bold mb-0">
+                                      {item?.price ? "$" + item.price : ""}
+                                    </span>
+                                  </p>
+                                ) : (
+                                  ""
+                                )}
+                                {/* <span>
                               {item?.productId?.type
                                 ? item?.productId?.type?.flavour?.slice(0, 8)
                                 : ""}
                             </span>
                             .. */}
-                          </Link>
+                              </Link>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-          <div className="text-center">
-            <Link
-              className="btn p-0 text-white  mt-2"
-              to="/app/product-list/Close-Out"
-              state={{ ki: "kjh" }}>
-              View All<i className="ms-1 fa-solid fa-arrow-right-long"></i>
-            </Link>
-          </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+              <div className="text-center">
+                <Link
+                  className="btn p-0 text-white  mt-2"
+                  to="/app/product-list/Close-Out"
+                  state={{ ki: "kjh" }}
+                >
+                  View All<i className="ms-1 fa-solid fa-arrow-right-long"></i>
+                </Link>
+              </div>
 
-          {/* )} */}
+              {/* )} */}
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

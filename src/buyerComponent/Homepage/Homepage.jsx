@@ -1,5 +1,4 @@
-import React, { useRef } from "react";
-import Footer from "../Footer/Footer";
+import React, { useRef } from "react";import Footer from "../Footer/Footer";
 import Navbar from "./Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -20,8 +19,6 @@ import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import image from "../../assets/img/starBgg.jpg";
-import videoStatic from "../../assets/img/videoN.MP4";
-
 import { useSetRecoilState } from "recoil";
 import {
   pageBrand,
@@ -31,14 +28,13 @@ import {
   pageSubCategoryData,
 } from "../../atom";
 import Swal from "sweetalert2";
-import { Modal, ButtonToolbar, Button, Loader, Placeholder } from "rsuite";
+import { Modal, Loader } from "rsuite";
 import LoginPOP from "./loginPOP";
 import moment from "moment";
 
 const Homepage = () => {
   const width = window.innerWidth;
   const [isMuted, setIsMuted] = useState(true);
-  const refVideo = useRef(null);
   const [NState, setNState] = useState(false);
   const [allSlides, setAllSlides] = useState([]);
   const [allHeaders, setAllHeaders] = useState([]);
@@ -71,6 +67,7 @@ const Homepage = () => {
   let NewUser = sessionStorage.getItem("new");
   const [hotSell, setHotSell] = useState([]);
   const [featured, setFeatured] = useState([]);
+  const [NewArrival, setNewArrival] = useState([]);
   const [closeOut, setCloseOut] = useState([]);
   const [monthly, setMonthly] = useState([]);
   const [change, setChange] = useState(false);
@@ -93,6 +90,7 @@ const Homepage = () => {
       window.location.reload(false);
     }
   };
+
   useEffect(() => {
     if (!token) {
       if (!NewUser) {
@@ -107,6 +105,7 @@ const Homepage = () => {
     getPromotionsClose();
     getPromotionsFeatured();
     getPromotionsMonthly();
+    getPromotionsNewArrival();
     getCategory();
     getHeaders();
     getBrands();
@@ -231,40 +230,36 @@ const Homepage = () => {
     });
   };
 
+  const getPromotionsByType = async (type, setData) => {
+    try {
+      const { data } = await axios.post(getPromotionProd, { type });
+
+      if (!data.error) {
+        setData(data?.results.promotion?.products);
+      }
+    } catch (error) {
+      console.error(`Error fetching promotions for type ${type}`, error);
+    }
+  };
+
   const getPromotions = async () => {
-    const { data } = await axios.post(getPromotionProd, {
-      type: "HotSelling",
-    });
-
-    if (!data.error) {
-      setHotSell(data?.results.promotion?.products);
-    }
+    await getPromotionsByType("HotSelling", setHotSell);
   };
+
   const getPromotionsFeatured = async () => {
-    const { data } = await axios.post(getPromotionProd, {
-      type: "Featured",
-    });
-
-    if (!data.error) {
-      setFeatured(data?.results.promotion?.products);
-    }
+    await getPromotionsByType("Featured", setFeatured);
   };
+
   const getPromotionsClose = async () => {
-    const { data } = await axios.post(getPromotionProd, {
-      type: "CloseOut",
-    });
-    if (!data.error) {
-      setCloseOut(data?.results.promotion?.products);
-    }
+    await getPromotionsByType("CloseOut", setCloseOut);
   };
-  const getPromotionsMonthly = async () => {
-    const { data } = await axios.post(getPromotionProd, {
-      type: "MonthlyDeals",
-    });
 
-    if (!data.error) {
-      setMonthly(data?.results.promotion?.products);
-    }
+  const getPromotionsMonthly = async () => {
+    await getPromotionsByType("MonthlyDeals", setMonthly);
+  };
+
+  const getPromotionsNewArrival = async () => {
+    await getPromotionsByType("NewArrivals", setNewArrival);
   };
 
   const getHeaders = async () => {
@@ -331,14 +326,16 @@ const Homepage = () => {
             nav={true}
             // video={true}
             lazyLoad={true}
-            items={1}>
+            items={1}
+          >
             <div
               className="banner_section item"
               onClick={() => {
                 window.location.href = allSlides[1]?.url
                   ? allSlides[1]?.url
                   : "https://starimporters.com/app/home";
-              }}>
+              }}
+            >
               <img
                 src={
                   allSlides[1]?.banner
@@ -356,7 +353,8 @@ const Homepage = () => {
                     "carousel-caption banner-titles mx-3 mt-5") ||
                   (allSlides[1]?.position === "Three" &&
                     "carousel-caption bannerTitle2")
-                }>
+                }
+              >
                 <h5
                   className={
                     (allSlides[1]?.position === "One" &&
@@ -366,9 +364,8 @@ const Homepage = () => {
                     (allSlides[1]?.position === "Three" &&
                       " text-end bannerTxt")
                   }
-                  dangerouslySetInnerHTML={createMarkup(
-                    allSlides[1]?.title
-                  )}></h5>
+                  dangerouslySetInnerHTML={createMarkup(allSlides[1]?.title)}
+                ></h5>
                 <p
                   className={
                     (allSlides[1]?.position === "One" &&
@@ -380,7 +377,8 @@ const Homepage = () => {
                   }
                   dangerouslySetInnerHTML={createMarkup(
                     allSlides[1]?.description
-                  )}></p>
+                  )}
+                ></p>
               </div>
             </div>
 
@@ -390,14 +388,16 @@ const Homepage = () => {
                 window.location.href = videos[0]?.url
                   ? videos[0]?.url
                   : "https://starimporters.com/app/home";
-              }}>
+              }}
+            >
               <video
                 muted={isMuted ? true : false}
                 id="frameOne"
                 className="main_video bg-dark"
                 autoPlay
                 loop
-                preload="auto">
+                preload="auto"
+              >
                 <source src={videos[0]?.video} />
               </video>
             </div>
@@ -408,14 +408,16 @@ const Homepage = () => {
                 window.location.href = videos[1]?.url
                   ? videos[1]?.url
                   : "https://starimporters.com/app/home";
-              }}>
+              }}
+            >
               <video
                 id="frameTwo"
                 className="main_video bg-dark"
                 autoPlay
                 loop
                 muted={true}
-                preload="auto">
+                preload="auto"
+              >
                 <source src={videos[1]?.video} />
               </video>
             </div>
@@ -426,14 +428,16 @@ const Homepage = () => {
                 window.location.href = videos[2]?.url
                   ? videos[2]?.url
                   : "https://starimporters.com/app/home";
-              }}>
+              }}
+            >
               <video
                 id="frameThree"
                 className="main_video bg-dark"
                 autoPlay
                 loop
                 muted={true}
-                preload="auto">
+                preload="auto"
+              >
                 <source src={videos[2]?.video} />
               </video>
             </div>
@@ -444,7 +448,8 @@ const Homepage = () => {
                 window.location.href = videos[3]?.url
                   ? videos[3]?.url
                   : "https://starimporters.com/app/home";
-              }}>
+              }}
+            >
               <video
                 id="frameFour"
                 className="main_video bg-dark"
@@ -452,7 +457,8 @@ const Homepage = () => {
                 loop
                 oncanplay="this.muted=true"
                 muted={true}
-                preload="auto">
+                preload="auto"
+              >
                 <source src={videos[3]?.video} />
               </video>
             </div>
@@ -463,7 +469,8 @@ const Homepage = () => {
                 window.location.href = allSlides[2]?.url
                   ? allSlides[2]?.url
                   : "https://starimporters.com/app/home";
-              }}>
+              }}
+            >
               <img
                 src={
                   allSlides[2]?.banner
@@ -473,47 +480,16 @@ const Homepage = () => {
                 className="d-block w-100 "
                 alt="Loading..."
               />
-              <div
-                className={
-                  (allSlides[2]?.position === "One" && "carousel-caption ") ||
-                  (allSlides[2]?.position === "Two" &&
-                    "carousel-caption banner-titles mx-3") ||
-                  (allSlides[2]?.position === "Three" &&
-                    "carousel-caption bannerTitle2")
-                }>
-                <h5
-                  className={
-                    (allSlides[2]?.position === "One" &&
-                      "text-start bannerTxt") ||
-                    (allSlides[2]?.position === "Two" &&
-                      " text-center  Bannertext") ||
-                    (allSlides[2]?.position === "Three" &&
-                      " text-end bannerTxt")
-                  }
-                  dangerouslySetInnerHTML={createMarkup(
-                    allSlides[2]?.title
-                  )}></h5>
-                <p
-                  className={
-                    (allSlides[2]?.position === "One" &&
-                      " text-start fs-6 bannerTxt") ||
-                    (allSlides[2]?.position === "Two" &&
-                      "d-flex text-center fs-6 bannerTxt") ||
-                    (allSlides[2]?.position === "Three" &&
-                      "d-flex text-end fs-6 bannerTxt")
-                  }
-                  dangerouslySetInnerHTML={createMarkup(
-                    allSlides[2]?.description
-                  )}></p>
-              </div>
             </div>
+
             <div
               className="banner_section item"
               onClick={() => {
                 window.location.href = allSlides[3]?.url
                   ? allSlides[3]?.url
                   : "https://starimporters.com/app/home";
-              }}>
+              }}
+            >
               <img
                 src={
                   allSlides[3]?.banner
@@ -523,47 +499,16 @@ const Homepage = () => {
                 className="d-block w-100 "
                 alt="Loading..."
               />
-              <div
-                className={
-                  (allSlides[3]?.position === "One" && "carousel-caption ") ||
-                  (allSlides[3]?.position === "Two" &&
-                    "carousel-caption banner-titles mx-3") ||
-                  (allSlides[3]?.position === "Three" &&
-                    "carousel-caption bannerTitle2")
-                }>
-                <h5
-                  className={
-                    (allSlides[3]?.position === "One" &&
-                      "text-start bannerTxt") ||
-                    (allSlides[3]?.position === "Two" &&
-                      " text-center  Bannertext") ||
-                    (allSlides[3]?.position === "Three" &&
-                      " text-end bannerTxt")
-                  }
-                  dangerouslySetInnerHTML={createMarkup(
-                    allSlides[3]?.title
-                  )}></h5>
-                <p
-                  className={
-                    (allSlides[3]?.position === "One" &&
-                      " text-start fs-6 bannerTxt") ||
-                    (allSlides[3]?.position === "Two" &&
-                      "d-flex text-center fs-6 bannerTxt") ||
-                    (allSlides[3]?.position === "Three" &&
-                      "d-flex text-end fs-6 bannerTxt")
-                  }
-                  dangerouslySetInnerHTML={createMarkup(
-                    allSlides[3]?.description
-                  )}></p>
-              </div>
             </div>
+
             <div
               className="banner_section item "
               onClick={() => {
                 window.location.href = allSlides[4]?.url
                   ? allSlides[4]?.url
                   : "https://starimporters.com/app/home";
-              }}>
+              }}
+            >
               <img
                 src={
                   allSlides[4]?.banner
@@ -573,48 +518,16 @@ const Homepage = () => {
                 className="d-block w-100 "
                 alt="Loading..."
               />
-              <div
-                className={
-                  (allSlides[4]?.position === "One" &&
-                    "carousel-caption mt-3") ||
-                  (allSlides[4]?.position === "Two" &&
-                    "carousel-caption banner-titles mx-3") ||
-                  (allSlides[4]?.position === "Three" &&
-                    "carousel-caption bannerTitle2")
-                }>
-                <h5
-                  className={
-                    (allSlides[4]?.position === "One" &&
-                      "text-start bannerTxt") ||
-                    (allSlides[4]?.position === "Two" &&
-                      " text-center  Bannertext") ||
-                    (allSlides[4]?.position === "Three" &&
-                      " text-end bannerTxt")
-                  }
-                  dangerouslySetInnerHTML={createMarkup(
-                    allSlides[4]?.title
-                  )}></h5>
-                <p
-                  className={
-                    (allSlides[4]?.position === "One" &&
-                      " text-start fs-6 bannerTxt") ||
-                    (allSlides[4]?.position === "Two" &&
-                      "d-flex text-center fs-6 bannerTxt") ||
-                    (allSlides[4]?.position === "Three" &&
-                      "d-flex text-end fs-6 bannerTxt")
-                  }
-                  dangerouslySetInnerHTML={createMarkup(
-                    allSlides[4]?.description
-                  )}></p>
-              </div>
             </div>
+
             <div
               className="banner_section item"
               onClick={() => {
                 window.location.href = allSlides[5]?.url
                   ? allSlides[5]?.url
                   : "https://starimporters.com/app/home";
-              }}>
+              }}
+            >
               <img
                 src={
                   allSlides[5]?.banner
@@ -624,45 +537,202 @@ const Homepage = () => {
                 className="d-block w-100 "
                 alt="Loading..."
               />
-              <div
-                className={
-                  (allSlides[5]?.position === "One" &&
-                    "carousel-caption mt-3") ||
-                  (allSlides[5]?.position === "Two" &&
-                    "carousel-caption banner-titles mx-5 mt-3") ||
-                  (allSlides[5]?.position === "Three" &&
-                    "carousel-caption bannerTitle2 mt-3")
-                }>
-                <h5
-                  className={
-                    (allSlides[5]?.position === "One" &&
-                      "text-start bannerTxt") ||
-                    (allSlides[5]?.position === "Two" &&
-                      " text-center  Bannertext") ||
-                    (allSlides[5]?.position === "Three" &&
-                      " text-end bannerTxt")
-                  }
-                  dangerouslySetInnerHTML={createMarkup(
-                    allSlides[5]?.title
-                  )}></h5>
-                <p
-                  className={
-                    (allSlides[5]?.position === "One" &&
-                      " text-start fs-6 bannerTxt") ||
-                    (allSlides[5]?.position === "Two" &&
-                      "d-flex text-center fs-6 bannerTxt") ||
-                    (allSlides[5]?.position === "Three" &&
-                      "d-flex text-end fs-6 bannerTxt")
-                  }
-                  dangerouslySetInnerHTML={createMarkup(
-                    allSlides[5]?.description
-                  )}></p>
-              </div>
             </div>
           </OwlCarousel>
 
+          {NewArrival?.length > 0 && (
+            <section className="featuredproduct shadow bg-light">
+              <div className="container">
+                <div className="row featuredproduct_slider">
+                  <a
+                    className="view_all "
+                    onClick={() =>
+                      navigate("/app/new-arrivals-products", { state: "hii" })
+                    }
+                  >
+                    View All{" "}
+                    <img
+                      style={{
+                        height: "21px",
+                      }}
+                      class="ms-2"
+                      src={require("../../assets/img/arrow_colr.png")}
+                      alt=""
+                    ></img>
+                  </a>
+                  <div className="col-12 mb-1">
+                    <div className="comn_heads mb-5">
+                      {/* <h2
+                      dangerouslySetInnerHTML={createMarkup(
+                        allHeaders?.featuredTitle
+                      )}></h2> */}
+                      <h2>New Arrivals</h2>
+                    </div>
+                  </div>
+
+                  <div className="row mt-4">
+                    <Swiper
+                      slidesPerView={width <= 1400 ? 3 : 4}
+                      spaceBetween={30}
+                      // navigation={true}
+                      pagination={pagination}
+                      autoplay={{
+                        delay: 4000,
+                        disableOnInteraction: true,
+                        reverseDirection: true,
+                        waitForTransition: true,
+                      }}
+                      loop={true}
+                      modules={[FreeMode, Pagination, Autoplay, Navigation]}
+                      className="mySwiper"
+                    >
+                      {(NewArrival || [])?.map((item, index) => (
+                        <SwiperSlide key={index} className="pb-5">
+                          <div className=" mb-3">
+                            <div className="product-grid ">
+                              <div
+                                className="product-image border mt-1
+                          "
+                              >
+                                <a
+                                  className="image
+                            
+                            "
+                                  onClick={() => {
+                                    navigate(
+                                      `/AllProducts/Product/${item?.productId?.slug}`,
+                                      {
+                                        state: {
+                                          type: item?.productId?.type,
+                                          offer: item?.price,
+                                        },
+                                      }
+                                    );
+                                  }}
+                                >
+                                  <img
+                                    className="pic-1"
+                                    src={
+                                      item?.productId?.productImage
+                                        ? item?.productId?.productImage
+                                        : require("../../assets/img/product.jpg")
+                                    }
+                                  />
+                                  <img
+                                    className="pic-2"
+                                    src={
+                                      item?.productId?.type?.flavourImage
+                                        ? item?.productId?.type?.flavourImage
+                                        : item?.productId?.productImage ||
+                                          require("../../assets/img/product.jpg")
+                                    }
+                                  />
+                                </a>
+                                <span
+                                  className={
+                                    item?.price
+                                      ? "product-Featured-label"
+                                      : "d-none"
+                                  }
+                                >
+                                  Price -{" "}
+                                  {item?.price ? "$" + item.price : ""}
+                                </span>
+                                <ul className="product-links">
+                                  <li>
+                                    <a
+                                      data-tip="Add to Wishlist"
+                                      onClick={() => {
+                                        addToFav(
+                                          item?.productId?._id,
+                                          item?.productId?.type
+                                        );
+                                      }}
+                                    >
+                                      <i className="far fa-heart" />
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a
+                                      data-tip="Add to Cart"
+                                      onClick={() => {
+                                        AddtoCart(
+                                          item?.productId?._id,
+                                          item?.productId?.type,
+                                          item?.productId?.slug,
+                                          item?.price
+                                        );
+                                      }}
+                                    >
+                                      {" "}
+                                      <i className="fas fa-shopping-cart" />
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a
+                                      data-tip="Quick View"
+                                      onClick={() => {
+                                        navigate(
+                                          `/AllProducts/Product/${item?.productId?.slug}`,
+                                          {
+                                            state: {
+                                              type: item?.productId?.type,
+                                              offer: item?.price,
+                                            },
+                                          }
+                                        );
+                                      }}
+                                    >
+                                      <i className="fa fa-search" />
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                              <div className="product-content ">
+                                <a
+                                  className="add-to-cart text-decoration-none"
+                                  onClick={() => {
+                                    navigate(
+                                      `/AllProducts/Product/${item?.productId?.slug}`,
+                                      {
+                                        state: {
+                                          type: item?.productId?.type,
+                                          offer: item?.price,
+                                        },
+                                      }
+                                    );
+                                  }}
+                                >
+                                  <small
+                                    style={{
+                                      fontSize: "12px",
+                                    }}
+                                  >
+                                    {item?.productId?.type?.flavour
+                                      ? item?.productId?.type?.flavour
+                                      : item?.productId?.unitName}
+                                  </small>
+                                </a>
+                                <h3 className="title ">
+                                  <a className="text-decoration-none">
+                                    {item?.productId?.unitName}
+                                  </a>
+                                 
+                                </h3>
+                              </div>
+                            </div>
+                          </div>
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+
           {monthly?.length > 0 && (
-            <section className="p-4 container mt-4">
+            <section className="p-4 container ">
               <div className=" ">
                 <div className="row featuredproduct_slider">
                   <div className="col-12 mb-2 mt-5 ">
@@ -672,12 +742,14 @@ const Homepage = () => {
                         className="view_all "
                         onClick={() =>
                           navigate("/app/monthly-products", { state: "hii" })
-                        }>
+                        }
+                      >
                         View All{" "}
                         <img
                           class="ms-2"
                           src={require("../../assets/img/arrow_colr.png")}
-                          alt=""></img>
+                          alt=""
+                        ></img>
                       </a>
                     </div>
                   </div>
@@ -695,7 +767,8 @@ const Homepage = () => {
                       loop={true}
                       style={{ padding: "30px" }}
                       modules={[FreeMode, Pagination, Autoplay, Navigation]}
-                      className="mySwiper pt-5">
+                      className="mySwiper pt-5"
+                    >
                       {(monthly || [])?.map((item, index) => (
                         <SwiperSlide key={index} className="px-3 main_hot">
                           <div className="col-md-12 col-lg-12 px-2">
@@ -714,7 +787,8 @@ const Homepage = () => {
                                   maxHeight: "15rem",
                                   position: "relative",
                                   top: "2.8rem",
-                                }}>
+                                }}
+                              >
                                 <span className="offer2">
                                   Ends on :{moment(item?.expireIn).format("L")}
                                   {/* <Countdown
@@ -734,7 +808,8 @@ const Homepage = () => {
                                         },
                                       }
                                     );
-                                  }}></div>
+                                  }}
+                                ></div>
                               </div>
                               <div className="item-content text-center mt-4 fw-bold">
                                 <h3
@@ -749,7 +824,8 @@ const Homepage = () => {
                                         },
                                       }
                                     );
-                                  }}>
+                                  }}
+                                >
                                   {" "}
                                   {item?.productId?.unitName?.slice(0, 35)}
                                 </h3>{" "}
@@ -777,7 +853,8 @@ const Homepage = () => {
                                         },
                                       }
                                     );
-                                  }}>
+                                  }}
+                                >
                                   {" "}
                                   <i className="fas fa-eye" />
                                 </a>{" "}
@@ -787,7 +864,8 @@ const Homepage = () => {
                                       item?.productId?._id,
                                       item?.productId?.type
                                     );
-                                  }}>
+                                  }}
+                                >
                                   {" "}
                                   <i className="fas fa-heart" />
                                 </a>{" "}
@@ -799,7 +877,8 @@ const Homepage = () => {
                                       item?.productId?.slug,
                                       item?.price
                                     );
-                                  }}>
+                                  }}
+                                >
                                   {" "}
                                   <i className="fas fa-shopping-cart" />
                                 </a>{" "}
@@ -826,12 +905,14 @@ const Homepage = () => {
                         className="view_all "
                         onClick={() =>
                           navigate("/app/CloseOut-products", { state: "hii" })
-                        }>
+                        }
+                      >
                         View All{" "}
                         <img
                           class="ms-2"
                           src={require("../../assets/img/arrow_colr.png")}
-                          alt=""></img>
+                          alt=""
+                        ></img>
                       </a>
                     </div>
                   </div>
@@ -849,7 +930,8 @@ const Homepage = () => {
                       loop={true}
                       style={{ padding: "30px" }}
                       modules={[FreeMode, Pagination, Autoplay, Navigation]}
-                      className="mySwiper pt-5">
+                      className="mySwiper pt-5"
+                    >
                       {(closeOut || [])?.map((item, index) => (
                         <SwiperSlide key={index} className="px-3 main_hot">
                           <div className="col-md-12 col-lg-12 px-2">
@@ -868,7 +950,8 @@ const Homepage = () => {
                                   maxHeight: "15rem",
                                   position: "relative",
                                   top: "2.8rem",
-                                }}>
+                                }}
+                              >
                                 <span className="offer2">
                                   Ends on :{moment(item?.expireIn).format("L")}
                                   {/* <Countdown
@@ -888,7 +971,8 @@ const Homepage = () => {
                                         },
                                       }
                                     );
-                                  }}></div>
+                                  }}
+                                ></div>
                               </div>
                               <div className="item-content text-center mt-4  fw-bold">
                                 <h3 className="fw-bold">
@@ -929,7 +1013,8 @@ const Homepage = () => {
                                         },
                                       }
                                     );
-                                  }}>
+                                  }}
+                                >
                                   {" "}
                                   <i className="fas fa-eye" />
                                 </a>{" "}
@@ -939,7 +1024,8 @@ const Homepage = () => {
                                       item?.productId?._id,
                                       item?.productId?.type
                                     );
-                                  }}>
+                                  }}
+                                >
                                   {" "}
                                   <i className="fas fa-heart" />
                                 </a>{" "}
@@ -951,7 +1037,8 @@ const Homepage = () => {
                                       item?.productId?.slug,
                                       item?.price
                                     );
-                                  }}>
+                                  }}
+                                >
                                   {" "}
                                   <i className="fas fa-shopping-cart" />
                                 </a>{" "}
@@ -967,181 +1054,193 @@ const Homepage = () => {
             </section>
           )}
 
-          <section className="featuredproduct shadow bg-light">
-            <div className="container">
-              <div className="row featuredproduct_slider">
-                <a
-                  className="view_all "
-                  onClick={() =>
-                    navigate("/app/featured-products", { state: "hii" })
-                  }>
-                  View All{" "}
-                  <img
-                    style={{
-                      height: "21px",
-                    }}
-                    class="ms-2"
-                    src={require("../../assets/img/arrow_colr.png")}
-                    alt=""></img>
-                </a>
-                <div className="col-12 mb-1">
-                  <div className="comn_heads mb-5">
-                    {/* <h2
+          {featured?.length > 0 && (
+            <section className="featuredproduct shadow bg-light">
+              <div className="container">
+                <div className="row featuredproduct_slider">
+                  <a
+                    className="view_all "
+                    onClick={() =>
+                      navigate("/app/featured-products", { state: "hii" })
+                    }
+                  >
+                    View All{" "}
+                    <img
+                      style={{
+                        height: "21px",
+                      }}
+                      class="ms-2"
+                      src={require("../../assets/img/arrow_colr.png")}
+                      alt=""
+                    ></img>
+                  </a>
+                  <div className="col-12 mb-1">
+                    <div className="comn_heads mb-5">
+                      {/* <h2
                       dangerouslySetInnerHTML={createMarkup(
                         allHeaders?.featuredTitle
                       )}></h2> */}
-                    <h2>Featured Products</h2>
+                      <h2>Featured Products</h2>
+                    </div>
                   </div>
-                </div>
 
-                <div className="row mt-4">
-                  <Swiper
-                    slidesPerView={width <= 1400 ? 3 : 4}
-                    spaceBetween={30}
-                    // navigation={true}
-                    pagination={pagination}
-                    autoplay={{
-                      delay: 4000,
-                      disableOnInteraction: true,
-                      reverseDirection: true,
-                      waitForTransition: true,
-                    }}
-                    loop={true}
-                    modules={[FreeMode, Pagination, Autoplay, Navigation]}
-                    className="mySwiper">
-                    {(featured || [])?.map((item, index) => (
-                      <SwiperSlide key={index} className="pb-5">
-                        <div className=" mb-3">
-                          <div className="product-grid ">
-                            <div
-                              className="product-image
-                          ">
-                              <a
-                                className="image
+                  <div className="row mt-4">
+                    <Swiper
+                      slidesPerView={width <= 1400 ? 3 : 4}
+                      spaceBetween={30}
+                      // navigation={true}
+                      pagination={pagination}
+                      autoplay={{
+                        delay: 4000,
+                        disableOnInteraction: true,
+                        reverseDirection: true,
+                        waitForTransition: true,
+                      }}
+                      loop={true}
+                      modules={[FreeMode, Pagination, Autoplay, Navigation]}
+                      className="mySwiper"
+                    >
+                      {(featured || [])?.map((item, index) => (
+                        <SwiperSlide key={index} className="pb-5">
+                          <div className=" mb-3">
+                            <div className="product-grid ">
+                              <div
+                                className="product-image
+                          "
+                              >
+                                <a
+                                  className="image
                             
                             "
-                                onClick={() => {
-                                  navigate(
-                                    `/AllProducts/Product/${item?.productId?.slug}`,
-                                    {
-                                      state: {
-                                        type: item?.productId?.type,
-                                        offer: item?.price,
-                                      },
+                                  onClick={() => {
+                                    navigate(
+                                      `/AllProducts/Product/${item?.productId?.slug}`,
+                                      {
+                                        state: {
+                                          type: item?.productId?.type,
+                                          offer: item?.price,
+                                        },
+                                      }
+                                    );
+                                  }}
+                                >
+                                  <img
+                                    className="pic-1"
+                                    src={
+                                      item?.productId?.productImage
+                                        ? item?.productId?.productImage
+                                        : require("../../assets/img/product.jpg")
                                     }
-                                  );
-                                }}>
-                                <img
-                                  className="pic-1"
-                                  src={
-                                    item?.productId?.productImage
-                                      ? item?.productId?.productImage
-                                      : require("../../assets/img/product.jpg")
-                                  }
-                                />
-                                <img
-                                  className="pic-2"
-                                  src={
-                                    item?.productId?.type?.flavourImage
-                                      ? item?.productId?.type?.flavourImage
-                                      : item?.productId?.productImage ||
-                                        require("../../assets/img/product.jpg")
-                                  }
-                                />
-                              </a>
-                              {item?.price?.lenghh > 1 && (
-                                <span className="product-hot-label">
-                                  <span className=" mx-1  fs-5 fw-bold">
-                                    {item?.price ? "$" + item.price : ""}
-                                  </span>
-                                </span>
-                              )}
-                              <ul className="product-links">
-                                <li>
-                                  <a
-                                    data-tip="Add to Wishlist"
-                                    onClick={() => {
-                                      addToFav(
-                                        item?.productId?._id,
-                                        item?.productId?.type
-                                      );
-                                    }}>
-                                    <i className="far fa-heart" />
-                                  </a>
-                                </li>
-                                <li>
-                                  <a
-                                    data-tip="Add to Cart"
-                                    onClick={() => {
-                                      AddtoCart(
-                                        item?.productId?._id,
-                                        item?.productId?.type,
-                                        item?.productId?.slug,
-                                        item?.price
-                                      );
-                                    }}>
-                                    {" "}
-                                    <i className="fas fa-shopping-cart" />
-                                  </a>
-                                </li>
-                                <li>
-                                  <a
-                                    data-tip="Quick View"
-                                    onClick={() => {
-                                      navigate(
-                                        `/AllProducts/Product/${item?.productId?.slug}`,
-                                        {
-                                          state: {
-                                            type: item?.productId?.type,
-                                            offer: item?.price,
-                                          },
-                                        }
-                                      );
-                                    }}>
-                                    <i className="fa fa-search" />
-                                  </a>
-                                </li>
-                              </ul>
-                            </div>
-                            <div className="product-content ">
-                              <a
-                                className="add-to-cart text-decoration-none"
-                                onClick={() => {
-                                  navigate(
-                                    `/AllProducts/Product/${item?.productId?.slug}`,
-                                    {
-                                      state: {
-                                        type: item?.productId?.type,
-                                        offer: item?.price,
-                                      },
+                                  />
+                                  <img
+                                    className="pic-2"
+                                    src={
+                                      item?.productId?.type?.flavourImage
+                                        ? item?.productId?.type?.flavourImage
+                                        : item?.productId?.productImage ||
+                                          require("../../assets/img/product.jpg")
                                     }
-                                  );
-                                }}>
-                                <small
-                                  style={{
-                                    fontSize: "0.9rem",
-                                  }}>
-                                  {item?.productId?.type?.flavour
-                                    ? item?.productId?.type?.flavour
-                                    : item?.productId?.unitName?.slice(0, 30)}
-                                  ..
-                                </small>
-                              </a>
-                              <h3 className="title ">
-                                <a className="text-decoration-none">
-                                  {item?.productId?.unitName?.slice(0, 30)}...
+                                  />
                                 </a>
-                              </h3>
+                                {item?.price?.lenghh > 1 && (
+                                  <span className="product-hot-label">
+                                    <span className=" mx-1  fs-5 fw-bold">
+                                      {item?.price ? "$" + item.price : ""}
+                                    </span>
+                                  </span>
+                                )}
+                                <ul className="product-links">
+                                  <li>
+                                    <a
+                                      data-tip="Add to Wishlist"
+                                      onClick={() => {
+                                        addToFav(
+                                          item?.productId?._id,
+                                          item?.productId?.type
+                                        );
+                                      }}
+                                    >
+                                      <i className="far fa-heart" />
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a
+                                      data-tip="Add to Cart"
+                                      onClick={() => {
+                                        AddtoCart(
+                                          item?.productId?._id,
+                                          item?.productId?.type,
+                                          item?.productId?.slug,
+                                          item?.price
+                                        );
+                                      }}
+                                    >
+                                      {" "}
+                                      <i className="fas fa-shopping-cart" />
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a
+                                      data-tip="Quick View"
+                                      onClick={() => {
+                                        navigate(
+                                          `/AllProducts/Product/${item?.productId?.slug}`,
+                                          {
+                                            state: {
+                                              type: item?.productId?.type,
+                                              offer: item?.price,
+                                            },
+                                          }
+                                        );
+                                      }}
+                                    >
+                                      <i className="fa fa-search" />
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                              <div className="product-content ">
+                                <a
+                                  className="add-to-cart text-decoration-none"
+                                  onClick={() => {
+                                    navigate(
+                                      `/AllProducts/Product/${item?.productId?.slug}`,
+                                      {
+                                        state: {
+                                          type: item?.productId?.type,
+                                          offer: item?.price,
+                                        },
+                                      }
+                                    );
+                                  }}
+                                >
+                                  <small
+                                    style={{
+                                      fontSize: "0.9rem",
+                                    }}
+                                  >
+                                    {item?.productId?.type?.flavour
+                                      ? item?.productId?.type?.flavour
+                                      : item?.productId?.unitName?.slice(0, 30)}
+                                    ..
+                                  </small>
+                                </a>
+                                <h3 className="title ">
+                                  <a className="text-decoration-none">
+                                    {item?.productId?.unitName?.slice(0, 30)}...
+                                  </a>
+                                </h3>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
+          )}
 
           <section
             className="product_show_home"
@@ -1150,14 +1249,18 @@ const Homepage = () => {
               backgroundImage: `url(${
                 allHeaders?.bottomImage ? allHeaders?.bottomImage : image
               })`,
-            }}>
+            }}
+          >
             <div className="container">
               <div className="row justify-content-center">
                 <div className="col-12">
                   <div className="w-100 mb-5">
                     <img
-                      className="border rounded border-dark"
-                      src={allHeaders?.foreground}
+                      className="border rounded b"
+                      src={
+                        allHeaders?.foreground ??
+                        require("../../assets/img/logo.png")
+                      }
                       alt=""
                     />
                   </div>
@@ -1165,7 +1268,8 @@ const Homepage = () => {
                     className="comman_btn2"
                     to={`/app/ProductSearch/${"sugar" + " " + "daddy"}`}
                     state={"loo"}
-                    targe="">
+                    targe=""
+                  >
                     Shop Now
                   </Link>
                 </div>
@@ -1173,134 +1277,212 @@ const Homepage = () => {
             </div>
           </section>
 
-          <section className="p-4 container ">
-            <div className=" ">
-              <div className="row featuredproduct_slider">
-                <div className="col-12 mb-2 mt-4">
-                  <div className="comn_heads mb-5">
-                    <h2>Hot selling products</h2>
+          {hotSell?.length > 0 && (
+            <section className="p-4 container ">
+              <div className=" ">
+                <div className="row featuredproduct_slider">
+                  <div className="col-12 mb-2 mt-4">
+                    <div className="comn_heads mb-5">
+                      <h2>Hot selling products</h2>
 
-                    <a
-                      className="view_all mb-5"
-                      onClick={() =>
-                        navigate("/app/HotSelling-products", { state: "hii" })
-                      }>
-                      View All
-                      <img
-                        class="ms-2"
-                        src={require("../../assets/img/arrow_colr.png")}
-                        alt=""></img>
-                    </a>
+                      <a
+                        className="view_all mb-5"
+                        onClick={() =>
+                          navigate("/app/HotSelling-products", { state: "hii" })
+                        }
+                      >
+                        View All
+                        <img
+                          class="ms-2"
+                          src={require("../../assets/img/arrow_colr.png")}
+                          alt=""
+                        ></img>
+                      </a>
+                    </div>
                   </div>
-                </div>
-                <div className="">
-                  <Swiper
-                    slidesPerView={width <= 1400 ? 3 : 4}
-                    spaceBetween={30}
-                    navigation={true}
-                    autoplay={{
-                      delay: 5000,
-                      disableOnInteraction: true,
-                      reverseDirection: true,
-                      waitForTransition: true,
-                    }}
-                    loop={true}
-                    style={{ padding: "30px" }}
-                    modules={[FreeMode, Pagination, Autoplay, Navigation]}
-                    className="mySwiper pt-5">
-                    {(hotSell || [])?.map((item, index) => (
-                      <SwiperSlide key={index} className="px-3 main_hot">
-                        <div className="col-md-12 col-lg-12 px-2">
-                          <div className="card_hot shadow">
-                            <div
-                              style={{
-                                backgroundImage: `url(${
-                                  item?.productId?.type?.flavourImage
-                                    ? item?.productId?.type?.flavourImage
-                                    : item?.productId?.productImage ||
-                                      require("../../assets/img/product.jpg")
-                                })`,
-                                backgroundPosition: "center",
-                                opacity: "unset",
-                                backgroundSize: "cover",
-                                maxHeight: "18rem",
-                                height: "14rem",
-                                position: "relative",
-                                top: "1rem",
-                              }}>
+                  <div className="">
+                    <Swiper
+                      slidesPerView={width <= 1400 ? 3 : 4}
+                      spaceBetween={30}
+                      navigation={true}
+                      autoplay={{
+                        delay: 5000,
+                        disableOnInteraction: true,
+                        reverseDirection: true,
+                        waitForTransition: true,
+                      }}
+                      loop={true}
+                      style={{ padding: "30px" }}
+                      modules={[FreeMode, Pagination, Autoplay, Navigation]}
+                      className="mySwiper pt-5"
+                    >
+                      {(hotSell || [])?.map((item, index) => (
+                        <SwiperSlide key={index} className="px-3 main_hot">
+                          <div className="col-md-12 col-lg-12 px-2">
+                            <div className="card_hot shadow">
                               <div
-                                className="item-image"
-                                onClick={() => {
-                                  navigate(
-                                    `/AllProducts/Product/${item?.productId?.slug}`,
-                                    {
-                                      state: {
-                                        type: item?.productId?.type,
-                                        offer: item?.price,
-                                      },
-                                    }
-                                  );
-                                }}></div>
-                            </div>
-                            <div className="item-content text-center mt-0 fw-bold">
-                              <h3 className="fw-bold">
-                                {" "}
-                                {item?.productId?.unitName?.slice(0, 35)}
-                                {/* <p className="">
+                                style={{
+                                  backgroundImage: `url(${
+                                    item?.productId?.type?.flavourImage
+                                      ? item?.productId?.type?.flavourImage
+                                      : item?.productId?.productImage ||
+                                        require("../../assets/img/product.jpg")
+                                  })`,
+                                  backgroundPosition: "center",
+                                  opacity: "unset",
+                                  backgroundSize: "cover",
+                                  maxHeight: "18rem",
+                                  height: "14rem",
+                                  position: "relative",
+                                  top: "1rem",
+                                }}
+                              >
+                                <div
+                                  className="item-image"
+                                  onClick={() => {
+                                    navigate(
+                                      `/AllProducts/Product/${item?.productId?.slug}`,
+                                      {
+                                        state: {
+                                          type: item?.productId?.type,
+                                          offer: item?.price,
+                                        },
+                                      }
+                                    );
+                                  }}
+                                ></div>
+                              </div>
+                              <div className="item-content text-center mt-0 fw-bold">
+                                <h3 className="fw-bold">
+                                  {" "}
+                                  {item?.productId?.unitName?.slice(0, 35)}
+                                  {/* <p className="">
                                   {item?.productId?.type?.flavour?.slice(0, 30)}
                                   ..
                                 </p> */}
-                              </h3>{" "}
-                              <p className="mb-4">
+                                </h3>{" "}
+                                <p className="mb-4">
+                                  {" "}
+                                  {item?.price ? "Offer price:" : ""}
+                                  <span className=" mx-1 text-danger  fs-6 fw-bolder">
+                                    {item?.price ? "$" + item.price : ""}
+                                  </span>
+                                </p>{" "}
+                              </div>
+                            </div>
+                            <div className="product-action">
+                              {" "}
+                              <div className="product-action-style">
                                 {" "}
-                                {item?.price ? "Offer price:" : ""}
-                                <span className=" mx-1 text-danger  fs-6 fw-bolder">
-                                  {item?.price ? "$" + item.price : ""}
-                                </span>
-                              </p>{" "}
+                                <a
+                                  onClick={() =>
+                                    navigate(
+                                      `/AllProducts/Product/${item?.productId?.slug}`,
+                                      {
+                                        state: {
+                                          type: item?.productId?.type,
+                                          offer: item?.price,
+                                        },
+                                      }
+                                    )
+                                  }
+                                >
+                                  {" "}
+                                  <i className="fas fa-eye" />
+                                </a>{" "}
+                                <a
+                                  onClick={() => {
+                                    addToFav(
+                                      item?.productId?._id,
+                                      item?.productId?.type
+                                    );
+                                  }}
+                                >
+                                  <i className="fas fa-heart" />
+                                </a>
+                                <a
+                                  onClick={() => {
+                                    AddtoCart(
+                                      item?.productId?._id,
+                                      item?.productId?.type,
+                                      item?.productId?.slug,
+                                      item?.price
+                                    );
+                                  }}
+                                >
+                                  {" "}
+                                  <i className="fas fa-shopping-cart" />
+                                </a>{" "}
+                              </div>{" "}
                             </div>
                           </div>
-                          <div className="product-action">
-                            {" "}
-                            <div className="product-action-style">
-                              {" "}
-                              <a
-                                onClick={() =>
-                                  navigate(
-                                    `/AllProducts/Product/${item?.productId?.slug}`,
-                                    {
-                                      state: {
-                                        type: item?.productId?.type,
-                                        offer: item?.price,
-                                      },
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+          {hotSell?.length > 0 && (
+            <section className="category_newdesign">
+              <div className="container">
+                <div className="row newdesign_main bg-white">
+                  <a
+                    className="view_all"
+                    onClick={() => navigate("/app/brands", { state: "hii" })}
+                  >
+                    View All{" "}
+                    <img
+                      style={{
+                        height: "21px",
+                      }}
+                      class="ms-2"
+                      src={require("../../assets/img/arrow_colr.png")}
+                      alt=""
+                    ></img>
+                  </a>
+
+                  <div className="col-12 mb-3">
+                    <div className="comn_heads mb-5">
+                      <h2
+                        dangerouslySetInnerHTML={createMarkup(
+                          allHeaders?.brandTitle
+                        )}
+                      ></h2>
+                    </div>
+                  </div>
+                  <Swiper
+                    slidesPerView={4}
+                    spaceBetween={30}
+                    navigation={true}
+                    autoplay={true}
+                    loop={true}
+                    modules={[FreeMode, Pagination, Autoplay, Navigation]}
+                    className="mySwiper px-4 py-2"
+                  >
+                    {(brands || [])?.map((item, index) => (
+                      <SwiperSlide key={index}>
+                        <div className="col-12 px-4">
+                          <div className="categorynew_slider sliderbtns_design">
+                            <a className="categorynew_box">
+                              <div className="categorynew_img p-2">
+                                <Link
+                                  to={`/app/productBrands/${item?.slug}`}
+                                  state={{ name: item?.brandName }}
+                                >
+                                  <img
+                                    src={
+                                      item?.brandImage
+                                        ? item?.brandImage
+                                        : require("./../../assets/img/product.jpg")
                                     }
-                                  )
-                                }>
-                                {" "}
-                                <i className="fas fa-eye" />
-                              </a>{" "}
-                              <a
-                                onClick={() => {
-                                  addToFav(
-                                    item?.productId?._id,
-                                    item?.productId?.type
-                                  );
-                                }}>
-                                <i className="fas fa-heart" />
-                              </a>
-                              <a
-                                onClick={() => {
-                                  AddtoCart(
-                                    item?.productId?._id,
-                                    item?.productId?.type,
-                                    item?.productId?.slug,
-                                    item?.price
-                                  );
-                                }}>
-                                {" "}
-                                <i className="fas fa-shopping-cart" />
-                              </a>{" "}
-                            </div>{" "}
+                                    alt=""
+                                  />
+                                </Link>
+                              </div>
+                              <span> {item?.brandName}</span>
+                            </a>
                           </div>
                         </div>
                       </SwiperSlide>
@@ -1308,70 +1490,8 @@ const Homepage = () => {
                   </Swiper>
                 </div>
               </div>
-            </div>
-          </section>
-
-          <section className="category_newdesign">
-            <div className="container">
-              <div className="row newdesign_main bg-white">
-                <a
-                  className="view_all"
-                  onClick={() => navigate("/app/brands", { state: "hii" })}>
-                  View All{" "}
-                  <img
-                    style={{
-                      height: "21px",
-                    }}
-                    class="ms-2"
-                    src={require("../../assets/img/arrow_colr.png")}
-                    alt=""></img>
-                </a>
-                <div className="col-12 mb-3">
-                  <div className="comn_heads mb-5">
-                    <h2
-                      dangerouslySetInnerHTML={createMarkup(
-                        allHeaders?.brandTitle
-                      )}></h2>
-                  </div>
-                </div>
-                <Swiper
-                  slidesPerView={4}
-                  spaceBetween={30}
-                  navigation={true}
-                  autoplay={true}
-                  loop={true}
-                  modules={[FreeMode, Pagination, Autoplay, Navigation]}
-                  className="mySwiper px-4 py-2">
-                  {(brands || [])?.map((item, index) => (
-                    <SwiperSlide key={index}>
-                      <div className="col-12 px-4">
-                        <div className="categorynew_slider sliderbtns_design">
-                          <a className="categorynew_box">
-                            <div className="categorynew_img p-2">
-                              <Link
-                                to={`/app/productBrands/${item?.slug}`}
-                                state={{ name: item?.brandName }}>
-                                <img
-                                  src={
-                                    item?.brandImage
-                                      ? item?.brandImage
-                                      : require("./../../assets/img/product.jpg")
-                                  }
-                                  alt=""
-                                />
-                              </Link>
-                            </div>
-                            <span> {item?.brandName}</span>
-                          </a>
-                        </div>
-                      </div>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              </div>
-            </div>
-          </section>
-
+            </section>
+          )}
           <Footer />
 
           <button
@@ -1379,7 +1499,8 @@ const Homepage = () => {
             id="age_modal"
             className="btn btn-primary d-none"
             data-bs-toggle="modal"
-            data-bs-target="#exampleModal">
+            data-bs-target="#exampleModal"
+          >
             Launch demo modal
           </button>
 
@@ -1388,7 +1509,8 @@ const Homepage = () => {
             id="exampleModal"
             // tabindex="-1"
             aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+            aria-hidden="true"
+          >
             <div className="modal-dialog  modal-fullscreen">
               <div className="modal-content">
                 <div className="modal-header modalHeadBg">
@@ -1397,7 +1519,8 @@ const Homepage = () => {
                       src={require("../../assets/img/logo.png")}
                       width="170"
                       height="80"
-                      alt="Brand"></img>
+                      alt="Brand"
+                    ></img>
                   </h2>
 
                   <button
@@ -1405,7 +1528,8 @@ const Homepage = () => {
                     className="btn-close fs-2 bg-white mx-0 d-none"
                     id="age_close"
                     data-bs-dismiss="modal"
-                    aria-label="Close"></button>
+                    aria-label="Close"
+                  ></button>
                 </div>
                 <div className="modalContent">
                   <AgeVerification ModalClose={ModalClose} />
@@ -1423,7 +1547,8 @@ const Homepage = () => {
           setRows(0);
         }}
         size="lg"
-        position="center">
+        position="center"
+      >
         <Modal.Header>
           {/* <Modal.Title>Modal Title</Modal.Title> */}
         </Modal.Header>

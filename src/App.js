@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useEffect, useState } from "react";import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -136,6 +135,8 @@ import StarCate from "./AdminComponent/StarCate";
 import CreateCatalog from "./AdminComponent/AdminDashboard/Catalog&Flyers/CreateCatalog";
 import PreviewCate from "./AdminComponent/AdminDashboard/Catalog&Flyers/PreviewCate";
 import ConsentForm from "./buyerComponent/Contact/ConsentForm";
+import NewArrivals from "./buyerComponent/AllProducts/NewArrivals";
+import AppNewArrivalsList from "./pwaComponents/homeComponent/appNewArrivalsList";
 
 function App() {
   const [apiData, setApiData] = useState([]);
@@ -299,6 +300,10 @@ function App() {
             <Route
               path="/app/events/catelog&flyer"
               element={width < 999 ? <AppCatalogFlyer /> : <Catelogues />}
+            />
+            <Route
+              path="/app/new-arrivals-products"
+              element={<NewArrivals />}
             />
             <Route path="/Dashboard/UserDetails" element={<UserDetails />} />
             <Route path="/Cart/Checkout" element={<Checkout />} />
@@ -497,6 +502,7 @@ function App() {
               element={width < 999 ? <AppProductBrands /> : <AllBrands />}
             />
             <Route path="/app/product-list" element={<AppProductList />} />
+            <Route path="/app/new-arrival-list" element={<AppNewArrivalsList />} />
             <Route
               path="/app/product-list/Hot-Deal"
               element={<AppHotDealList />}
@@ -537,7 +543,7 @@ function App() {
               path="/app/contact-us"
               element={width < 999 ? <AppContactUs /> : <Contact />}
             />
-                <Route
+            <Route
               path="/app/consent-form"
               element={width < 999 ? <AppContactUs /> : <ConsentForm />}
             />
