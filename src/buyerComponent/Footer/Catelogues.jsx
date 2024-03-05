@@ -47,7 +47,7 @@ const Catelogues = () => {
       <div className="">
         <Navbar />
         
-        <section className="marginTop">
+        <section className="marginTopSec">
           <>
             {loader ? (
               <div id="loader-wrapper">

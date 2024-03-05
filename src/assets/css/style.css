@@ -380,7 +380,7 @@
     margin-bottom: 0;
   }
   .marginTop {
-    margin-top: 0rem !important;
+    margin-top: 8rem;
   }
   .marginTopLog {
     margin-top: 0rem !important;
@@ -1735,9 +1735,7 @@
     color: #fff;
     font-size: 35px;
   }
-  .marginTopSec {
-    margin-top: 0rem !important;
-  }
+ 
   .breadcrumb li a,
   .breadcrumb li {
     color: #fff;
