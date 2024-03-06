@@ -99,8 +99,8 @@
     display: inline-flex;
   }
   .comman_btn:hover {
-    background-color: #eb3237;
-    color: #fff;
+    background-color: #eb3237 !important;
+    color: #fff !important;
   }
   /* welcome screeen */
   .welcome {
@@ -5023,24 +5023,7 @@ background-color: #3e4093;
 # Login css
 --------------------------------------------------------------*/
 
-  .comman_btn {
-    background-color: #eb3237;
-    color: #fff !important;
-    border: 1px dashed #eb3237;
-    transition: 0.3s all;
-    font-size: 14px !important;
-    font-weight: 600;
-    padding: 12px 25px !important;
-    display: inline-block;
-    border-radius: 50px;
-    text-decoration: none;
-  }
-
-  .comman_btn:hover {
-    background-color: #fff;
-    border-color: #eb3237;
-    color: #eb3237;
-  }
+ 
   .sort_btn {
     background-color: #3e4093 !important;
     color: #fff;
@@ -6213,6 +6196,7 @@ background-color: #3e4093;
   }
   /* Admin Finish */
 }
+
 
 @media screen and (min-device-width: 200px) and (max-device-width: 999px) {
   /* Reboot CSS */
@@ -8100,22 +8084,6 @@ background-color: #3e4093;
   }
 
   /* Welcome Page CSS */
-  .comman_btn {
-    display: flex;
-    background-color: #eb3237;
-    border-radius: 4px;
-    padding: 11px 20px;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    text-transform: capitalize;
-    font-size: 15px;
-    border: 0;
-    width: 100%;
-    outline: 0;
-    font-weight: 500;
-  }
   .comman_btn2 {
     display: flex;
     background-color: #3e4093;
@@ -8246,6 +8214,7 @@ background-color: #3e4093;
     left: 0;
     z-index: 10;
   }
+
 
   .owl-carousel .owl-item img {
     display: block;
@@ -16912,11 +16881,11 @@ figure.effect-ming:hover img {
   }
   .banner_section img {
     width: 100% !important;
-    max-height: 450px !important;
+    max-height: 560px !important;
   }
   .banner_section video {
     width: 100% !important;
-    max-height: 450px !important;
+    max-height: 560px !important;
   }
 
   .banner_section {

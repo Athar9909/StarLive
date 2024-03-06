@@ -541,7 +541,7 @@ const Homepage = () => {
           </OwlCarousel>
 
           {NewArrival?.length > 0 && (
-            <section className="featuredproduct shadow bg-light">
+            <section className="featuredproduct shadow bg-light mt-5">
               <div className="container">
                 <div className="row featuredproduct_slider">
                   <a
